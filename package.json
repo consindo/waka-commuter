@@ -1,0 +1,20 @@
+{
+  "name": "statsnz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mapbox-gl": "^1.11.0",
+    "parcel": "^1.12.4"
+  },
+  "devDependencies": {
+    "csv-parser": "^2.3.3",
+    "prettier": "^2.0.5"
+  }
+}
