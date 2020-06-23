@@ -10,7 +10,9 @@ const combineFile = (filename, subkey, subkey2) => {
 
   Object.keys(data).forEach((key) => {
     if (finalResult[key] === undefined) {
-      finalResult[key] = {}
+      finalResult[key] = {
+        id: key,
+      }
     }
 
     // if we want everything in a subkey, set that up

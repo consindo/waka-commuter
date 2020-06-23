@@ -19,10 +19,11 @@ const parse = (inputFilename, outputFilename) => {
   fs.createReadStream(inputFilename)
     .pipe(csv())
     .on('data', (data) => {
-      const homeAddress = data['SA2_name_usual_residence_address']
-      const workAddress =
+      const homeAddress = data['SA2_name_usual_residence_address'].trim()
+      const workAddress = (
         data['SA2_name_workplace_address'] ||
         data['SA2_name_educational_address']
+      ).trim()
       const total = parseInt(data['Total'], 10)
 
       if (results[homeAddress] === undefined) {

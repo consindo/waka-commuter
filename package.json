@@ -5,6 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
+    "build": "npm run build:js && npm run process",
+    "build:js": "parcel build src/index.html",
+    "process": "npm run process:area && npm run process:travel && npm run process:combine && npm run process:copy",
+    "process:area": "node data_sources/parsers/area-to-area-parser.js",
+    "process:travel": "node data_sources/parsers/workplace-travel-split-parser.js",
+    "process:combine": "node data_sources/parsers/combine-files.js",
+    "process:copy": "node data_sources/parsers/split-regions.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

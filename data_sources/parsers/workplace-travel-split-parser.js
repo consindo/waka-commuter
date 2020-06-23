@@ -28,14 +28,20 @@ const parse = (inputFilename, outputFilename) => {
     .pipe(csv())
     .on('data', (data) => {
       // doing a big aggregate
-      if (results[data['Area']] === undefined) {
-        results[data['Area']] = {}
+      if (results[data['Area'].trim()] === undefined) {
+        results[data['Area'].trim()] = {}
       }
 
-      results[data['Area']][
+      let key =
         data['Main means of travel to work'] ||
-          data['Main means of travel to education']
-      ] = parseInt(data['Value'], 10)
+        data['Main means of travel to education']
+
+      // because in the data set it's "Total people - main means of travel to education/work"
+      if (key.includes('Total')) {
+        key = 'Total'
+      }
+
+      results[data['Area'].trim()][key] = parseInt(data['Value'], 10)
     })
     .on('end', () => {
       fs.writeFileSync(outputFilename, JSON.stringify(results, '', 2))

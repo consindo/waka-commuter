@@ -1,9 +1,16 @@
-const sa2File = require('/shapes/sa2.geojson')
-
-const workers = require('../data_sources/outputs/workplace-commute-in.json')
-const residents = require('../data_sources/outputs/workplace-commute-out.json')
+// const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
+const sa2File = require('./shapes/sa2.geojson')
 
 console.log(sa2File)
+
+const transformFilename = (name) => {
+  return name
+    .trim()
+    .toLowerCase()
+    .split(' ')
+    .join('-')
+    .replace(/[()\/]/g, '')
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   mapboxgl.accessToken = token
@@ -59,16 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const regionName = meshblock.properties.SA22018__1
         document.getElementById('label').innerText = regionName
 
-        document.getElementById('residents').innerText = JSON.stringify(
-          residents[regionName],
-          '',
-          2
-        )
-        document.getElementById('workers').innerText = JSON.stringify(
-          workers[regionName],
-          '',
-          2
-        )
+        fetch(`/data/regions/${transformFilename(regionName)}.json`)
+          .then((res) => res.json())
+          .then((data) => {
+            document.getElementById('data').innerText = JSON.stringify(
+              data,
+              '',
+              2
+            )
+          })
       }
     })
   })
