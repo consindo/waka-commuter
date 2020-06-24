@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <!-- Create a div where the graph will take place -->
+    <div id="my_dataviz"></div>
+
+    <style>
+      .node:hover {
+        stroke-width: 7px !important;
+        opacity: 1 !important;
+      }
+      .tooltip {
+        position: absolute;
+        pointer-events: none;
+      }
+    </style>
+
+    <script>
+      let data = {
+        'Takapuna Central': 200,
+        // "Murrays Bay East": 33,
+        'Birkdale North': 200,
+        Balmoral: 24,
+        // "Wesley West": 6,
+        // "Royal Oak West (Auckland)": 9,
+        // "Onetangi": 6,
+        // "Northcote Central (Auckland)": 24,
+        // "Totara Vale South": 60,
+        // "Wynyard-Viaduct": 6,
+        // "Glenfield West": 42,
+        // "Beach Haven West": 60,
+        // "Greenlane North": 12,
+        // "Glen Eden Rosier": 6,
+        'Silverdale South (Auckland)': 9,
+        'Eden Terrace': 24,
+      }
+
+      let map = {
+        Balmoral: [-36.886, 174.747],
+        'Eden Terrace': [-36.862, 174.75],
+        'Takapuna Central': [-36.788, 174.77],
+        'Birkdale North': [-36.797, 174.701],
+        'Silverdale South (Auckland)': [-36.621, 174.669],
+      }
+
+      // set the dimensions and margins of the graph
+      var width = 460
+      var height = 460
+
+      // append the svg object to the body of the page
+      var svg = d3
+        .select('#my_dataviz')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+
+      // Read data
+      console.log(data)
+
+      data = Object.keys(data)
+        .map((i) => {
+          return {
+            key: i,
+            value: data[i],
+            x: map[i][1] * 10,
+            y: map[i][0] * -10,
+          }
+        })
+        .sort((a, b) => {
+          return b.value - a.value
+        })
+        .slice(0, 20)
+
+      // Filter a bit the data -> more than 1 million inhabitants
+      // data = data
+      //   .filter(function (d) {
+      //     return d.region === 'Oceania'
+      //   })
+      //   .map((i) => {
+      //     if (i.key === 'New Zealand') {
+      //       i.x = 0
+      //       i.y = 50
+      //     }
+      //     return i
+      //   })
+
+      // Color palette for continents?
+      var color = d3
+        .scaleOrdinal()
+        .domain(['Takapuna Central', 'Europe', 'Africa', 'Oceania', 'Americas'])
+        .range(d3.schemeSet1)
+
+      // Size scale for countries
+      var size = d3.scaleLinear().domain([0, 500]).range([10, 60]) // circle will be between 7 and 55 px wide
+
+      // create a tooltip
+      var Tooltip = d3
+        .select('#my_dataviz')
+        .append('div')
+        .style('opacity', 0)
+        .attr('class', 'tooltip')
+        .style('background-color', 'white')
+        .style('border', 'solid')
+        .style('border-width', '2px')
+        .style('border-radius', '5px')
+        .style('padding', '5px')
+        .style('top', 0)
+        .style('left', 0)
+
+      // Three function that change the tooltip when user hover / move / leave a cell
+      var mouseover = function (d) {
+        Tooltip.style('opacity', 1)
+      }
+      var mousemove = function (d) {
+        console.log()
+
+        Tooltip.html(
+          '<u>' + d.key + '</u>' + '<br>' + d.value + ' inhabitants'
+        ).style(
+          'transform',
+          `translate(${d3.event.pageX + 20}px, ${d3.event.pageY}px)`
+        )
+      }
+      var mouseleave = function (d) {
+        Tooltip.style('opacity', 0)
+      }
+
+      // Initialize the circle: all located at the center of the svg area
+      var node = svg
+        .append('g')
+        .selectAll('circle')
+        .data(data)
+        .enter()
+        .append('g')
+        .attr('transform', `translate(${width / 2}, ${height / 2})`)
+        .on('mouseover', mouseover) // What to do when hovered
+        .on('mousemove', mousemove)
+        .on('mouseleave', mouseleave)
+
+      var circle = node
+        .append('circle')
+        .attr('class', 'node')
+        .attr('r', function (d) {
+          return size(d.value)
+        })
+        .style('fill', '#bada55')
+        .style('fill-opacity', 0.8)
+        .attr('stroke', 'black')
+        .style('stroke-width', 1)
+
+      var label = node
+        .append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '.35em')
+        .style('font-family', 'sans-serif')
+        .style('font-size', '10px')
+        .style('pointer-events', 'none')
+        .text(function (d) {
+          return d.key
+        })
+
+      // Features of the forces applied to the nodes:
+      var simulation = d3
+        .forceSimulation()
+        .force('center', d3.forceCenter(width / 2, height / 2)) // Attraction to the center of the svg area
+        .force('charge', d3.forceManyBody().strength(0.1)) // Nodes are attracted one each other of value is > 0
+        .force(
+          'collide',
+          d3
+            .forceCollide()
+            .strength(0.2)
+            .radius(function (d) {
+              return size(d.value) + 3
+            })
+            .iterations(1)
+        ) // Force that avoids circle overlapping
+
+      // Apply these forces to the nodes and update their positions.
+      // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
+      simulation.nodes(data).on('tick', function (d) {
+        node.attr('transform', function (d) {
+          return `translate(${d.x}, ${d.y})`
+        })
+      })
+    </script>
+  </body>
+</html>
