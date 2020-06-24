@@ -1,4 +1,5 @@
 // const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
+import './js/population-bubbles.js'
 const sa2File = require('./shapes/sa2.geojson')
 
 console.log(sa2File)
