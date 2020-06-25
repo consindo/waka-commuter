@@ -3,15 +3,15 @@ import { LitElement } from 'lit-element'
 class PopulationBubbles extends LitElement {
   static get properties() {
     return {
-      data: { type: Object },
+      data: { type: Array },
     }
   }
 
   constructor(props) {
     super(props)
 
-    this.width = 300
-    this.height = 300
+    this.width = 500
+    this.height = 500
   }
 
   getElement() {
@@ -58,22 +58,22 @@ class PopulationBubbles extends LitElement {
 
     const rawData = this.data
     const mapData = this.getMap()
-    const data = Object.keys(rawData)
-      .map((i) => {
-        // will make this more robust
-        if (mapData[i]) {
-          return {
-            key: i,
-            value: rawData[i],
-            x: mapData[i][1] * 10,
-            y: mapData[i][0] * -10,
-          }
-        }
-        return {
-          key: i,
-          value: rawData[i],
-        }
-      })
+    const data = rawData
+      // .map((i) => {
+      //   // will make this more robust
+      //   if (mapData[i]) {
+      //     return {
+      //       key: i,
+      //       value: rawData[i],
+      //       x: mapData[i][1] * 10,
+      //       y: mapData[i][0] * -10,
+      //     }
+      //   }
+      //   return {
+      //     key: i,
+      //     value: rawData[i],
+      //   }
+      // })
       .sort((a, b) => {
         return b.value - a.value
       })
