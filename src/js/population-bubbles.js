@@ -1,6 +1,12 @@
 import { LitElement } from 'lit-element'
 
 class PopulationBubbles extends LitElement {
+  static get properties() {
+    return {
+      data: { type: Object },
+    }
+  }
+
   constructor(props) {
     super(props)
 
@@ -16,16 +22,6 @@ class PopulationBubbles extends LitElement {
       .attr('width', this.width)
       .attr('height', this.height)
     return [container, svg]
-  }
-
-  getData() {
-    return {
-      'Takapuna Central': 200,
-      'Birkdale North': 200,
-      Balmoral: 24,
-      'Silverdale South (Auckland)': 9,
-      'Eden Terrace': 24,
-    }
   }
 
   getMap() {
@@ -56,18 +52,26 @@ class PopulationBubbles extends LitElement {
   }
 
   render() {
+    console.log(this.data)
     const [svgContainer, svg] = this.getElement()
     const [tooltipContainer, tooltip] = this.getTooltip()
 
-    const rawData = this.getData()
+    const rawData = this.data
     const mapData = this.getMap()
     const data = Object.keys(rawData)
       .map((i) => {
+        // will make this more robust
+        if (mapData[i]) {
+          return {
+            key: i,
+            value: rawData[i],
+            x: mapData[i][1] * 10,
+            y: mapData[i][0] * -10,
+          }
+        }
         return {
           key: i,
           value: rawData[i],
-          x: mapData[i][1] * 10,
-          y: mapData[i][0] * -10,
         }
       })
       .sort((a, b) => {

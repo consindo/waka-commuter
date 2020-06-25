@@ -70,11 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`/data/regions/${transformFilename(regionName)}.json`)
           .then((res) => res.json())
           .then((data) => {
-            document.getElementById('data').innerText = JSON.stringify(
-              data,
-              '',
-              2
+            const arriveFrom = document.createElement('population-bubbles')
+            arriveFrom.setAttribute(
+              'data',
+              JSON.stringify(data.workplace.arriveFrom)
             )
+            document.getElementById('arrive-from').innerHTML = ''
+            document.getElementById('arrive-from').appendChild(arriveFrom)
+
+            const departTo = document.createElement('population-bubbles')
+            departTo.setAttribute(
+              'data',
+              JSON.stringify(data.workplace.departTo)
+            )
+            document.getElementById('depart-to').innerHTML = ''
+            document.getElementById('depart-to').appendChild(departTo)
           })
       }
     })
