@@ -40,6 +40,7 @@ class PopulationBubbles extends LitElement {
       .select(container)
       .style('opacity', 0)
       .attr('class', 'tooltip')
+      .style('color', '#000')
       .style('background-color', 'white')
       .style('border', 'solid')
       .style('border-width', '2px')
@@ -59,21 +60,6 @@ class PopulationBubbles extends LitElement {
     const rawData = this.data
     const mapData = this.getMap()
     const data = rawData
-      // .map((i) => {
-      //   // will make this more robust
-      //   if (mapData[i]) {
-      //     return {
-      //       key: i,
-      //       value: rawData[i],
-      //       x: mapData[i][1] * 10,
-      //       y: mapData[i][0] * -10,
-      //     }
-      //   }
-      //   return {
-      //     key: i,
-      //     value: rawData[i],
-      //   }
-      // })
       .sort((a, b) => {
         return b.value - a.value
       })

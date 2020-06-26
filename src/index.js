@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [175, -37],
+    style: 'mapbox://styles/mapbox/dark-v10',
+    center: [173, -40],
     zoom: 5,
   })
 
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return {
               key: i,
               value: data[i],
-              x: (coords.lng - baselng) * 700, // lng requires more scaling that lat
-              y: (coords.lat - baselat) * -400, // make it positive so it works the same way
+              x: (coords.lng - baselng) * 400, // lng requires more scaling that lat
+              y: (coords.lat - baselat) * -300, // make it positive so it works the same way
             }
           })
         )
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (meshblock != null) {
           const regionName = meshblock.properties.name
-          document.getElementById('label').innerText = regionName
+          document.getElementById('location-header').innerText = regionName
 
           fetch(`/data/regions/${transformFilename(regionName)}.json`)
             .then((res) => res.json())
