@@ -22,12 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
     center: [173, -40],
     zoom: 5,
   })
+  map.getCanvas().style.cursor = 'default'
+  map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+  map.addControl(new mapboxgl.GeolocateControl(), 'bottom-left')
 
   map.on('load', () => {
     sa2Data.then((data) => {
       map.addSource('sa2', {
         type: 'geojson',
         data,
+        promoteId: 'name',
       })
 
       map.addLayer({
@@ -50,7 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
         source: 'sa2',
         paint: {
           'fill-outline-color': 'rgba(0,0,0,0)',
-          'fill-color': 'rgba(0,0,0,0)',
+          'fill-color': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            'rgba(255,255,255,0.25)',
+            'rgba(0,0,0,0)',
+          ],
         },
       })
 
@@ -84,17 +93,47 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         )
 
-      map.on('click', (e) => {
-        // doesn't need to 5px around?
-        const bbox = [
-          [e.point.x - 5, e.point.y + 5],
-          [e.point.x - 5, e.point.y + 5],
-        ]
+      let activeBlock = null
+      map.on('mousemove', 'sa2-fill', (e) => {
+        const meshblock = e.features[0]
+        if (meshblock != null && activeBlock !== meshblock.id) {
+          map.setFeatureState(
+            {
+              source: 'sa2',
+              id: activeBlock,
+            },
+            {
+              hover: false,
+            }
+          )
+          activeBlock = meshblock.id
+          map.setFeatureState(
+            {
+              source: 'sa2',
+              id: meshblock.id,
+            },
+            {
+              hover: true,
+            }
+          )
+        }
+      })
 
-        const meshblock = map.queryRenderedFeatures(bbox, {
-          layers: ['sa2-fill'],
-        })[0]
+      map.on('mouseleave', 'sa2-fill', (e) => {
+        map.setFeatureState(
+          {
+            source: 'sa2',
+            id: activeBlock,
+          },
+          {
+            hover: false,
+          }
+        )
+        activeBlock = null
+      })
 
+      map.on('click', 'sa2-fill', (e) => {
+        const meshblock = e.features[0]
         if (meshblock != null) {
           const regionName = meshblock.properties.name
           document.getElementById('location-header').innerText = regionName
