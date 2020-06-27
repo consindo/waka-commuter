@@ -1,3 +1,31 @@
+const transformFilename = (name) => {
+  return name
+    .trim()
+    .toLowerCase()
+    .split(' ')
+    .join('-')
+    .replace(/[()\/]/g, '')
+}
+
+// allows to get multiple locations, with a cache for speed
+let locationCache = {}
+export const getData = (locations) =>
+  Promise.all(
+    locations.map((location) => {
+      const url = `/data/regions/${transformFilename(location)}.json`
+      if (locationCache[url] === undefined) {
+        return fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            locationCache[url] = data
+            return data
+          })
+      } else {
+        return Promise.resolve(locationCache[url])
+      }
+    })
+  )
+
 // finds the mid point of a geojson feature
 export const getLocation = (features, name) => {
   let geometry

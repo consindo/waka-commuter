@@ -1,18 +1,8 @@
 // const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
 import './js/population-bubbles.js'
 const sa2File = require('./shapes/sa2.geojson')
-import { getLocation, transformData } from './js/data.js'
+import { getData, getLocation, transformData } from './js/data.js'
 
-console.log(sa2File)
-
-const transformFilename = (name) => {
-  return name
-    .trim()
-    .toLowerCase()
-    .split(' ')
-    .join('-')
-    .replace(/[()\/]/g, '')
-}
 
 const sa2Data = fetch(sa2File).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,12 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const setDetails = (data) => {
         const arriveFrom = document.createElement('population-bubbles')
-        const locationLatLng = getLocation(features, data.id)
+        const locationLatLng = getLocation(features, data[0].id)
+        const dataSources = data
+          .map((source) => [source.workplace, source.education])
+          .flat()
+        console.log(data, dataSources)
+
         arriveFrom.setAttribute(
           'data',
           transformData(
             features,
-            [data.workplace, data.education],
+            dataSources,
             'arriveFrom',
             locationLatLng.lat,
             locationLatLng.lng
@@ -125,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'data',
           transformData(
             features,
-            [data.workplace, data.education],
+            dataSources,
             'departTo',
             locationLatLng.lat,
             locationLatLng.lng
@@ -145,12 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const regionName = meshblock.properties.name
           document.getElementById('location-header').innerText = regionName
 
-          fetch(`/data/regions/${transformFilename(regionName)}.json`)
-            .then((res) => res.json())
-            .then((data) => {
-              setDetails(data)
-              setMap(data)
-            })
+          getData([regionName]).then((data) => {
+            setMap(data)
+            setDetails(data)
+          })
 
           window.jono = map
         }
