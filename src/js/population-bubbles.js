@@ -53,7 +53,6 @@ class PopulationBubbles extends LitElement {
   }
 
   render() {
-    console.log(this.data)
     const [svgContainer, svg] = this.getElement()
     const [tooltipContainer, tooltip] = this.getTooltip()
 

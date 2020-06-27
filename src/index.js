@@ -1,6 +1,7 @@
 // const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
 import './js/population-bubbles.js'
 const sa2File = require('./shapes/sa2.geojson')
+import { getLocation, transformData } from './js/data.js'
 
 console.log(sa2File)
 
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   map.on('load', () => {
     sa2Data.then((data) => {
+      const features = data.features
       map.addSource('sa2', {
         type: 'geojson',
         data,
@@ -62,36 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
           ],
         },
       })
-
-      const getLocation = (name) => {
-        let coords
-        try {
-          coords = data.features.find((i) => i.properties.name === name)
-            .geometry.coordinates[0]
-        } catch (err) {
-          console.error('Could not find', name, err)
-          return { lat: 0, lng: 0 }
-        }
-
-        // urgh hack
-        if (coords.length === 1) {
-          coords = coords[0]
-        }
-        return mapboxgl.LngLatBounds.convert(coords).getCenter()
-      }
-
-      const transformData = (data, baselat = 0, baselng = 0) =>
-        JSON.stringify(
-          Object.keys(data).map((i) => {
-            const coords = getLocation(i)
-            return {
-              key: i,
-              value: data[i],
-              x: (coords.lng - baselng) * 400, // lng requires more scaling that lat
-              y: (coords.lat - baselat) * -300, // make it positive so it works the same way
-            }
-          })
-        )
 
       let activeBlock = null
       map.on('mousemove', 'sa2-fill', (e) => {
@@ -132,6 +104,41 @@ document.addEventListener('DOMContentLoaded', () => {
         activeBlock = null
       })
 
+      const setDetails = (data) => {
+        const arriveFrom = document.createElement('population-bubbles')
+        const locationLatLng = getLocation(features, data.id)
+        arriveFrom.setAttribute(
+          'data',
+          transformData(
+            features,
+            [data.workplace, data.education],
+            'arriveFrom',
+            locationLatLng.lat,
+            locationLatLng.lng
+          )
+        )
+        document.getElementById('arrive-from').innerHTML = ''
+        document.getElementById('arrive-from').appendChild(arriveFrom)
+
+        const departTo = document.createElement('population-bubbles')
+        departTo.setAttribute(
+          'data',
+          transformData(
+            features,
+            [data.workplace, data.education],
+            'departTo',
+            locationLatLng.lat,
+            locationLatLng.lng
+          )
+        )
+        document.getElementById('depart-to').innerHTML = ''
+        document.getElementById('depart-to').appendChild(departTo)
+      }
+
+      const setMap = (data) => {
+        console.log(data)
+      }
+
       map.on('click', 'sa2-fill', (e) => {
         const meshblock = e.features[0]
         if (meshblock != null) {
@@ -141,26 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
           fetch(`/data/regions/${transformFilename(regionName)}.json`)
             .then((res) => res.json())
             .then((data) => {
-              const arriveFrom = document.createElement('population-bubbles')
-              const locationLatLng = getLocation(regionName)
-              arriveFrom.setAttribute(
-                'data',
-                transformData(
-                  data.workplace.arriveFrom,
-                  locationLatLng.lat,
-                  locationLatLng.lng
-                )
-              )
-              document.getElementById('arrive-from').innerHTML = ''
-              document.getElementById('arrive-from').appendChild(arriveFrom)
-
-              const departTo = document.createElement('population-bubbles')
-              departTo.setAttribute(
-                'data',
-                transformData(data.workplace.departTo)
-              )
-              document.getElementById('depart-to').innerHTML = ''
-              document.getElementById('depart-to').appendChild(departTo)
+              setDetails(data)
+              setMap(data)
             })
 
           window.jono = map
