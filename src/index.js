@@ -40,6 +40,24 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       })
 
+      const colors = [
+        'interpolate-hcl',
+        ['linear'],
+        ['feature-state', 'population'],
+        0,
+        'rgba(33,102,172,0)',
+        25,
+        'rgb(103,169,207)',
+        50,
+        'rgb(209,229,240)',
+        100,
+        'rgb(253,219,199)',
+        200,
+        'rgb(239,138,98)',
+        400,
+        'rgb(178,24,43)',
+      ]
+
       map.addLayer({
         id: 'sa2-fill',
         type: 'fill',
@@ -50,7 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'case',
             ['boolean', ['feature-state', 'hover'], false],
             'rgba(255,255,255,0.25)',
-            'rgba(0,0,0,0)',
+            [
+              'case',
+              ['!=', ['feature-state', 'population'], null],
+              colors,
+              'rgba(0,0,0,0)',
+            ],
           ],
         },
       })
@@ -101,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
           features: [],
         },
       })
+      // hack for now
+      colors[2] = ['get', 'population']
       map.addLayer({
         id: 'points',
         type: 'circle',
@@ -117,23 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['interpolate', ['linear'], ['get', 'population'], 1, 5, 6, 50],
           ],
           // Color circle by earthquake magnitude
-          'circle-color': [
-            'interpolate',
-            ['linear'],
-            ['get', 'population'],
-            10,
-            'rgba(33,102,172,0)',
-            25,
-            'rgb(103,169,207)',
-            50,
-            'rgb(209,229,240)',
-            100,
-            'rgb(253,219,199)',
-            200,
-            'rgb(239,138,98)',
-            400,
-            'rgb(178,24,43)',
-          ],
+          'circle-color': colors,
           'circle-stroke-color': 'white',
           'circle-stroke-width': 1,
           // Transition from heatmap to circle layer by zoom level
@@ -156,7 +165,34 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('depart-to').appendChild(departTo)
       }
 
+      let selectedAreas = []
       const setMap = (data) => {
+        selectedAreas.forEach((i) => {
+          map.setFeatureState(
+            {
+              source: 'sa2',
+              id: i,
+            },
+            {
+              population: 0,
+            }
+          )
+        })
+        selectedAreas = []
+
+        data.forEach((i) => {
+          selectedAreas.push(i.key)
+          map.setFeatureState(
+            {
+              source: 'sa2',
+              id: i.key,
+            },
+            {
+              population: i.value,
+            }
+          )
+        })
+
         map.getSource('points').setData({
           type: 'FeatureCollection',
           features: data.map((i) => ({
