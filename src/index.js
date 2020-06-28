@@ -94,50 +94,83 @@ document.addEventListener('DOMContentLoaded', () => {
         activeBlock = null
       })
 
-      const setDetails = (data) => {
-        const arriveFrom = document.createElement('population-bubbles')
-        const locationLatLng = getLocation(features, data[0].id)
-        const dataSources = data
-          .map((source) => [source.workplace, source.education])
-          .flat()
-        console.log(data, dataSources)
+      map.addSource('points', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [],
+        },
+      })
+      map.addLayer({
+        id: 'points',
+        type: 'circle',
+        source: 'points',
+        paint: {
+          // Size circle radius by earthquake magnitude and zoom level
+          'circle-radius': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            10,
+            ['interpolate', ['linear'], ['get', 'population'], 1, 1, 6, 4],
+            50,
+            ['interpolate', ['linear'], ['get', 'population'], 1, 5, 6, 50],
+          ],
+          // Color circle by earthquake magnitude
+          'circle-color': [
+            'interpolate',
+            ['linear'],
+            ['get', 'population'],
+            10,
+            'rgba(33,102,172,0)',
+            25,
+            'rgb(103,169,207)',
+            50,
+            'rgb(209,229,240)',
+            100,
+            'rgb(253,219,199)',
+            200,
+            'rgb(239,138,98)',
+            400,
+            'rgb(178,24,43)',
+          ],
+          'circle-stroke-color': 'white',
+          'circle-stroke-width': 1,
+          // Transition from heatmap to circle layer by zoom level
+          'circle-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0, 8, 1],
+        },
+      })
 
-        arriveFrom.setAttribute(
-          'data',
-          transformData(
-            features,
-            dataSources,
-            'arriveFrom',
-            locationLatLng.lat,
-            locationLatLng.lng
-          )
-        )
+      const setDetails = (initialLocation, arriveData, departData) => {
+        const arriveFrom = document.createElement('population-bubbles')
+
+        arriveFrom.setAttribute('scale', JSON.stringify(initialLocation))
+        arriveFrom.setAttribute('data', JSON.stringify(arriveData))
         document.getElementById('arrive-from').innerHTML = ''
         document.getElementById('arrive-from').appendChild(arriveFrom)
 
         const departTo = document.createElement('population-bubbles')
-        departTo.setAttribute(
-          'data',
-          transformData(
-            features,
-            dataSources,
-            'departTo',
-            locationLatLng.lat,
-            locationLatLng.lng
-          )
-        )
+        departTo.setAttribute('scale', JSON.stringify(initialLocation))
+        departTo.setAttribute('data', JSON.stringify(departData))
         document.getElementById('depart-to').innerHTML = ''
         document.getElementById('depart-to').appendChild(departTo)
       }
 
       const setMap = (data) => {
-        console.log(data)
-
-        const locationLatLng = getLocation(features, data[0].id)
-
-        var marker = new mapboxgl.Marker()
-          .setLngLat([locationLatLng.lng, locationLatLng.lat])
-          .addTo(map)
+        map.getSource('points').setData({
+          type: 'FeatureCollection',
+          features: data.map((i) => ({
+            type: 'Feature',
+            properties: {
+              title: i.key,
+              population: i.value,
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [i.x, i.y],
+            },
+          })),
+        })
       }
 
       map.on('click', 'sa2-fill', (e) => {
@@ -147,8 +180,15 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('location-header').innerText = regionName
 
           getData([regionName]).then((data) => {
-            setMap(data)
-            setDetails(data)
+            const sources = data
+              .map((source) => [source.workplace, source.education])
+              .flat()
+            const initialLocation = getLocation(features, regionName)
+            const arriveData = transformData(features, sources, 'arriveFrom')
+            const departData = transformData(features, sources, 'departTo')
+
+            setMap(arriveData, departData)
+            setDetails(initialLocation, arriveData, departData)
           })
 
           window.jono = map

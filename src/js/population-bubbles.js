@@ -4,6 +4,7 @@ class PopulationBubbles extends LitElement {
   static get properties() {
     return {
       data: { type: Array },
+      scale: { type: Object },
     }
   }
 
@@ -59,6 +60,11 @@ class PopulationBubbles extends LitElement {
     const rawData = this.data
     const mapData = this.getMap()
     const data = rawData
+      .map((i) => ({
+        ...i,
+        x: (i.x - this.scale.lng) * 400,
+        y: (i.y - this.scale.lat) * -300,
+      }))
       .sort((a, b) => {
         return b.value - a.value
       })

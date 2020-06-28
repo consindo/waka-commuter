@@ -48,13 +48,7 @@ export const getLocation = (features, name) => {
 
 // converts the data from the raw json
 // does aggregation and latlng mapping
-export const transformData = (
-  features,
-  dataSources,
-  category,
-  baselat = 0,
-  baselng = 0
-) => {
+export const transformData = (features, dataSources, category) => {
   // sums the total values together
   const combinedSource = {}
   dataSources.forEach((source) => {
@@ -67,15 +61,13 @@ export const transformData = (
       combinedSource[location] += source[category][location]
     })
   })
-  return JSON.stringify(
-    Object.keys(combinedSource).map((i) => {
-      const coords = getLocation(features, i)
-      return {
-        key: i,
-        value: combinedSource[i],
-        x: (coords.lng - baselng) * 400, // lng requires more scaling that lat
-        y: (coords.lat - baselat) * -300, // make it positive so it works the same way
-      }
-    })
-  )
+  return Object.keys(combinedSource).map((i) => {
+    const coords = getLocation(features, i)
+    return {
+      key: i,
+      value: combinedSource[i],
+      x: coords.lng, // lng requires more scaling that lat
+      y: coords.lat, // make it positive so it works the same way
+    }
+  })
 }

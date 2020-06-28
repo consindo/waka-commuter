@@ -23,6 +23,7 @@ html {
 #details {
   flex: 1;
   border-left: 1px solid #333;
+  overflow-y: auto;
 }
 
 .nav-header h2 {
