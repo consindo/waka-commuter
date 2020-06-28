@@ -63,7 +63,6 @@ class PopulationBubbles extends LitElement {
         return b.value - a.value
       })
       .slice(0, 20)
-    console.log(data)
 
     // defines the size of the circles
     const size = d3.scaleLinear().domain([0, 500]).range([10, 60])

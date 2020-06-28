@@ -1,3 +1,5 @@
+import polylabel from 'polylabel'
+
 const transformFilename = (name) => {
   return name
     .trim()
@@ -36,12 +38,12 @@ export const getLocation = (features, name) => {
     return { lat: 0, lng: 0 }
   }
 
-  let coords = geometry.coordinates[0]
-  if (geometry.type === 'MultiPolygon') {
-    coords = geometry.coordinates[0][0]
-  }
-
-  return mapboxgl.LngLatBounds.convert(coords).getCenter()
+  const center = polylabel(
+    geometry.type === 'MultiPolygon'
+      ? geometry.coordinates[0]
+      : geometry.coordinates
+  )
+  return { lng: center[0], lat: center[1] }
 }
 
 // converts the data from the raw json

@@ -132,6 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const setMap = (data) => {
         console.log(data)
+
+        const locationLatLng = getLocation(features, data[0].id)
+
+        var marker = new mapboxgl.Marker()
+          .setLngLat([locationLatLng.lng, locationLatLng.lat])
+          .addTo(map)
       }
 
       map.on('click', 'sa2-fill', (e) => {
