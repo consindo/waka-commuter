@@ -64,14 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
         source: 'sa2',
         paint: {
           'fill-outline-color': 'rgba(0,0,0,0)',
-          'fill-color': [
+          'fill-opacity': [
             'case',
             ['boolean', ['feature-state', 'hover'], false],
-            'rgba(255,255,255,0.25)',
+            0.75,
+            1,
+          ],
+          'fill-color': [
+            'case',
+            ['!=', ['feature-state', 'population'], null],
+            colors,
             [
               'case',
-              ['!=', ['feature-state', 'population'], null],
-              colors,
+              ['boolean', ['feature-state', 'hover'], false],
+              'rgba(255,255,255,0.4)',
               'rgba(0,0,0,0)',
             ],
           ],
