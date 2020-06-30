@@ -44,18 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'interpolate-hcl',
         ['linear'],
         ['feature-state', 'population'],
+        -100,
+        '#00f',
         0,
-        'rgba(33,102,172,0)',
-        25,
-        'rgb(103,169,207)',
-        50,
-        'rgb(209,229,240)',
+        '#fff',
         100,
-        'rgb(253,219,199)',
-        200,
-        'rgb(239,138,98)',
-        400,
-        'rgb(178,24,43)',
+        '#f00',
       ]
 
       map.addLayer({
@@ -68,7 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
             'case',
             ['boolean', ['feature-state', 'hover'], false],
             0.75,
-            1,
+            [
+              'interpolate',
+              ['linear'],
+              ['feature-state', 'magnitude'],
+              0,
+              0,
+              50,
+              0.8,
+              200,
+              0.95,
+              500,
+              1,
+            ],
           ],
           'fill-color': [
             'case',
@@ -77,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             [
               'case',
               ['boolean', ['feature-state', 'hover'], false],
-              'rgba(255,255,255,0.4)',
+              'rgba(255,255,255,0.45)',
               'rgba(0,0,0,0)',
             ],
           ],
@@ -130,8 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
           features: [],
         },
       })
-      // hack for now
-      colors[2] = ['get', 'population']
       map.addLayer({
         id: 'points',
         type: 'circle',
@@ -141,14 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
           'circle-radius': [
             'interpolate',
             ['linear'],
-            ['zoom'],
-            10,
-            ['interpolate', ['linear'], ['get', 'population'], 1, 1, 6, 4],
-            50,
-            ['interpolate', ['linear'], ['get', 'population'], 1, 5, 6, 50],
+            ['get', 'magnitude'],
+            1,
+            1,
+            1000,
+            30,
           ],
-          // Color circle by earthquake magnitude
-          'circle-color': colors,
+
+          'circle-color': 'rgba(255,255,255,0.1)',
           'circle-stroke-color': 'white',
           'circle-stroke-width': 1,
           // Transition from heatmap to circle layer by zoom level
@@ -172,7 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       let selectedAreas = []
-      const setMap = (data) => {
+      const setMap = (arriveData, departData) => {
+        // turns off all the old areas
         selectedAreas.forEach((i) => {
           map.setFeatureState(
             {
@@ -180,36 +185,62 @@ document.addEventListener('DOMContentLoaded', () => {
               id: i,
             },
             {
-              population: 0,
+              population: null,
+              magnitude: null,
             }
           )
         })
         selectedAreas = []
 
-        data.forEach((i) => {
-          selectedAreas.push(i.key)
+        // combine arrive and depart data
+        const combinedObject = {}
+
+        ;[arriveData, departData].forEach((dataset, idx) => {
+          let sign = 1
+          if (dataset === arriveData) {
+            // arriveFrom is negative
+            sign = -1
+          }
+          dataset.forEach((i) => {
+            if (combinedObject[i.key] === undefined) {
+              combinedObject[i.key] = {
+                x: i.x,
+                y: i.y,
+                population: 0,
+                magnitude: 0,
+              }
+            }
+            combinedObject[i.key].population += i.value * sign
+            combinedObject[i.key].magnitude += i.value
+          })
+        })
+
+        Object.keys(combinedObject).forEach((i) => {
+          selectedAreas.push(i)
           map.setFeatureState(
             {
               source: 'sa2',
-              id: i.key,
+              id: i,
             },
             {
-              population: i.value,
+              population: combinedObject[i].population,
+              magnitude: combinedObject[i].magnitude,
             }
           )
         })
 
         map.getSource('points').setData({
           type: 'FeatureCollection',
-          features: data.map((i) => ({
+          features: Object.keys(combinedObject).map((i) => ({
             type: 'Feature',
             properties: {
-              title: i.key,
-              population: i.value,
+              title: i,
+              population: combinedObject[i].population,
+              magnitude: combinedObject[i].magnitude,
             },
             geometry: {
               type: 'Point',
-              coordinates: [i.x, i.y],
+              coordinates: [combinedObject[i].x, combinedObject[i].y],
             },
           })),
         })
