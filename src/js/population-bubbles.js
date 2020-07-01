@@ -82,14 +82,14 @@ class PopulationBubbles extends LitElement {
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`)
       .on('mouseover', () => tooltip.style('opacity', 1))
       .on('mouseleave', () => tooltip.style('opacity', 0))
-      .on('mousemove', (d) =>
-        tooltip
-          .html(`<u>${d.key}</u><br>${d.value} inhabitants`)
-          .style(
-            'transform',
-            `translate(${d3.event.pageX + 20}px, ${d3.event.pageY}px)`
-          )
-      )
+      .on('mousemove', (d) => {
+        const pos = `translate(${d3.event.pageX + 20}px, ${d3.event.pageY}px)`
+        requestAnimationFrame(() => {
+          tooltip
+            .html(`<u>${d.key}</u><br>${d.value} inhabitants`)
+            .style('transform', pos)
+        })
+      })
 
     const circle = node
       .append('circle')

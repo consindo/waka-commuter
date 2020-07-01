@@ -8,7 +8,7 @@ const sa2Data = fetch(sa2File).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
-    container: 'map',
+    container: 'map-content',
     style: 'mapbox://styles/mapbox/dark-v10',
     center: [173, -40],
     zoom: 5,
@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         '#0D47A1',
         -50,
         '#2196F3',
-        -1,
+        -10,
         '#E3F2FD',
         0,
         '#fff',
-        1,
+        10,
         '#FFEBEE',
         50,
         '#F44336',
@@ -101,6 +101,51 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       let activeBlock = null
+
+      const tooltipElement = document.getElementById('map-tooltip')
+      let tooltipData = {
+        currentRegions: [],
+      }
+      const setTooltipData = (currentRegions, arriveData, departData, mode) => {
+        tooltipData = {
+          currentRegions,
+          mode,
+          arriveData: {},
+          departData: {},
+        }
+        arriveData.forEach((r) => (tooltipData.arriveData[r.key] = r.value))
+        departData.forEach((r) => (tooltipData.departData[r.key] = r.value))
+      }
+      const updateTooltip = (id, loading) => {
+        let finalText = `<strong>${id}</strong>${
+          loading ? '<br>Loading...' : ''
+        }`
+        if (tooltipData.currentRegions.length === 0 || loading) {
+          tooltipElement.innerHTML = finalText
+          return
+        }
+
+        const regions = tooltipData.currentRegions.join(' & ')
+        const departCount = tooltipData.departData[id] || 0
+        const arrivalCount = tooltipData.arriveData[id] || 0
+
+        if (departCount === 0 && arrivalCount === 0) {
+          finalText += `<br>No ${
+            tooltipData.mode.length === 2 ? '' : tooltipData.mode[0]
+          } travel to/from ${regions}`
+        } else if (departCount === arrivalCount) {
+          finalText += `<br>${departCount} live & ${tooltipData.mode.join(
+            '/'
+          )} in ${id}`
+        } else {
+          // this seems wrong... but it's right. it's just all very confusing
+          const departText = `<span class="departures">${departCount} arrivals</span> &larr; from ${regions}`
+          const arrivalsText = `<span class="arrivals">${arrivalCount} departures</span> &rarr; to ${regions}`
+          finalText += `<br>${departText}<br>${arrivalsText}`
+        }
+        tooltipElement.innerHTML = finalText
+      }
+
       map.on('mousemove', 'sa2-fill', (e) => {
         const meshblock = e.features[0]
         if (meshblock != null && activeBlock !== meshblock.id) {
@@ -123,7 +168,25 @@ document.addEventListener('DOMContentLoaded', () => {
               hover: true,
             }
           )
+
+          updateTooltip(meshblock.id)
+          tooltipElement.style.opacity = 1
         }
+        const pos = `translate(${e.originalEvent.pageX + 20}px, ${
+          e.originalEvent.pageY
+        }px)`
+        requestAnimationFrame(() => {
+          tooltipElement.style.transform = pos
+        })
+      })
+
+      map.on('drag', (e) => {
+        const pos = `translate(${e.originalEvent.pageX + 20}px, ${
+          e.originalEvent.pageY
+        }px)`
+        requestAnimationFrame(() => {
+          tooltipElement.style.transform = pos
+        })
       })
 
       map.on('mouseleave', 'sa2-fill', (e) => {
@@ -137,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         )
         activeBlock = null
+        tooltipElement.style.opacity = 0
       })
 
       map.addSource('points', {
@@ -262,6 +326,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const regionName = meshblock.properties.name
           document.getElementById('location-header').innerText = regionName
 
+          // loading...
+          updateTooltip(meshblock.id, true)
           getData([regionName]).then((data) => {
             const sources = data
               .map((source) => [source.workplace, source.education])
@@ -272,6 +338,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setMap(arriveData, departData)
             setDetails(initialLocation, arriveData, departData)
+            setTooltipData([regionName], arriveData, departData, [
+              'work',
+              'study',
+            ])
+            updateTooltip(meshblock.id)
           })
 
           window.jono = map

@@ -1,13 +1,12 @@
 import polylabel from 'polylabel'
 
-const transformFilename = (name) => {
-  return name
+const transformFilename = (name) =>
+  name
     .trim()
     .toLowerCase()
     .split(' ')
     .join('-')
     .replace(/[()\/]/g, '')
-}
 
 // allows to get multiple locations, with a cache for speed
 let locationCache = {}
