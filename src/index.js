@@ -26,30 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
         promoteId: 'name',
       })
 
-      map.addLayer({
-        id: 'sa2-lines',
-        type: 'line',
-        source: 'sa2',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
-        },
-        paint: {
-          'line-color': '#888',
-          'line-width': 1,
-        },
-      })
-
       const colors = [
         'interpolate-hcl',
         ['linear'],
         ['feature-state', 'population'],
-        -100,
-        '#00f',
+        -250,
+        '#0D47A1',
+        -50,
+        '#2196F3',
+        -1,
+        '#E3F2FD',
         0,
         '#fff',
-        100,
-        '#f00',
+        1,
+        '#FFEBEE',
+        50,
+        '#F44336',
+        250,
+        '#B71C1C',
       ]
 
       map.addLayer({
@@ -68,8 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
               ['feature-state', 'magnitude'],
               0,
               0,
-              50,
+              25,
               0.8,
+              100,
+              0.9,
               200,
               0.95,
               500,
@@ -87,6 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
               'rgba(0,0,0,0)',
             ],
           ],
+        },
+      })
+
+      map.addLayer({
+        id: 'sa2-lines',
+        type: 'line',
+        source: 'sa2',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': '#777',
+          'line-width': 1,
         },
       })
 
