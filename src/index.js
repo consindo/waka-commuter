@@ -2,10 +2,15 @@
 import './js/population-bubbles.js'
 const sa2File = require('./shapes/sa2.geojson')
 import { getData, getLocation, transformData } from './js/data.js'
+import { areaFill, lineFill, pointsFill } from './js/map-styles.js'
+import { bindDetailsEvents } from './js/details-events.js'
+import Dispatcher from './js/dispatcher.js'
 
 
 const sa2Data = fetch(sa2File).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
+  bindDetailsEvents()
+
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
     container: 'map-content',
@@ -26,64 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         promoteId: 'name',
       })
 
-      const colors = [
-        'interpolate-hcl',
-        ['linear'],
-        ['feature-state', 'population'],
-        -250,
-        '#0D47A1',
-        -50,
-        '#2196F3',
-        -10,
-        '#E3F2FD',
-        0,
-        '#fff',
-        10,
-        '#FFEBEE',
-        50,
-        '#F44336',
-        250,
-        '#B71C1C',
-      ]
-
       map.addLayer({
         id: 'sa2-fill',
         type: 'fill',
         source: 'sa2',
-        paint: {
-          'fill-outline-color': 'rgba(0,0,0,0)',
-          'fill-opacity': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            0.75,
-            [
-              'interpolate',
-              ['linear'],
-              ['feature-state', 'magnitude'],
-              0,
-              0,
-              25,
-              0.8,
-              100,
-              0.9,
-              200,
-              0.95,
-              500,
-              1,
-            ],
-          ],
-          'fill-color': [
-            'case',
-            ['!=', ['feature-state', 'population'], null],
-            colors,
-            [
-              'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              'rgba(255,255,255,0.45)',
-              'rgba(0,0,0,0)',
-            ],
-          ],
-        },
+        paint: areaFill,
       })
 
       map.addLayer({
@@ -94,10 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'line-join': 'round',
           'line-cap': 'round',
         },
-        paint: {
-          'line-color': '#777',
-          'line-width': 1,
-        },
+        paint: lineFill,
       })
 
       let activeBlock = null
@@ -133,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
           finalText += `<br>No ${
             tooltipData.mode.length === 2 ? '' : tooltipData.mode[0]
           } travel to/from ${regions}`
-        } else if (departCount === arrivalCount) {
+        } else if (regions === id) {
           finalText += `<br>${departCount} live & ${tooltipData.mode.join(
             '/'
           )} in ${id}`
@@ -169,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           )
 
-          updateTooltip(meshblock.id)
+          Dispatcher.setTooltipId(meshblock.id)
           tooltipElement.style.opacity = 1
         }
         const pos = `translate(${e.originalEvent.pageX + 20}px, ${
@@ -214,24 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         id: 'points',
         type: 'circle',
         source: 'points',
-        paint: {
-          // Size circle radius by earthquake magnitude and zoom level
-          'circle-radius': [
-            'interpolate',
-            ['linear'],
-            ['get', 'magnitude'],
-            1,
-            1,
-            1000,
-            30,
-          ],
-
-          'circle-color': 'rgba(255,255,255,0.1)',
-          'circle-stroke-color': 'white',
-          'circle-stroke-width': 1,
-          // Transition from heatmap to circle layer by zoom level
-          'circle-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0, 8, 1],
-        },
+        paint: pointsFill,
       })
 
       const setDetails = (initialLocation, arriveData, departData) => {
@@ -323,30 +255,61 @@ document.addEventListener('DOMContentLoaded', () => {
       map.on('click', 'sa2-fill', (e) => {
         const meshblock = e.features[0]
         if (meshblock != null) {
-          const regionName = meshblock.properties.name
-          document.getElementById('location-header').innerText = regionName
+          Dispatcher.setTooltipId(meshblock.id, true)
+          Dispatcher.setRegions([meshblock.id])
+        }
+      })
 
-          // loading...
-          updateTooltip(meshblock.id, true)
-          getData([regionName]).then((data) => {
-            const sources = data
-              .map((source) => [source.workplace, source.education])
-              .flat()
-            const initialLocation = getLocation(features, regionName)
-            const arriveData = transformData(features, sources, 'arriveFrom')
-            const departData = transformData(features, sources, 'departTo')
+      Dispatcher.bind('load-blocks', (regionName, direction, segment) => {
+        document.getElementById('location-header').innerText = regionName.join(
+          ' & '
+        )
 
+        getData(regionName).then((data) => {
+          // depending on the toggle, filter out workspace or education data
+          const sources = data
+            .map((source) => {
+              if (segment === 'all') {
+                return [source.workplace, source.education]
+              } else if (segment === 'workplace') {
+                return [source.workplace]
+              } else if (segment === 'education') {
+                return [source.education]
+              }
+            })
+            .flat()
+
+          const initialLocation = getLocation(features, regionName[0])
+          const arriveData = transformData(features, sources, 'arriveFrom')
+          const departData = transformData(features, sources, 'departTo')
+
+          // only really want to toggle the map data for direction
+          if (direction === 'all') {
             setMap(arriveData, departData)
-            setDetails(initialLocation, arriveData, departData)
-            setTooltipData([regionName], arriveData, departData, [
+          } else if (direction === 'arrivals') {
+            setMap(arriveData, [])
+          } else if (direction === 'departures') {
+            setMap([], departData)
+          }
+
+          setDetails(initialLocation, arriveData, departData)
+
+          if (segment === 'all') {
+            setTooltipData(regionName, arriveData, departData, [
               'work',
               'study',
             ])
-            updateTooltip(meshblock.id)
-          })
+          } else if (segment === 'workplace') {
+            setTooltipData(regionName, arriveData, departData, ['work'])
+          } else if (segment === 'education') {
+            setTooltipData(regionName, arriveData, departData, ['study'])
+          }
+          Dispatcher.setTooltipId(Dispatcher.getTooltipId())
+        })
+      })
 
-          window.jono = map
-        }
+      Dispatcher.bind('update-tooltip-id', (id, loading) => {
+        updateTooltip(id, loading)
       })
     })
   })
