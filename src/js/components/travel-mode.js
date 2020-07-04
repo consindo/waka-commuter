@@ -10,21 +10,21 @@ class TravelMode extends LitElement {
   categorizeData(level) {
     // our super high level categories
     let categories = {
-      'Private Transport': ['car'],
-      'Public Transport': ['public bus', 'school bus', 'train', 'ferry'],
-      'Active Modes': ['walk', 'bicycle'],
-      Other: [],
+      '🚗': ['car'],
+      '🚌': ['public bus', 'school bus', 'train', 'ferry'],
+      '🏃‍♀️': ['walk', 'bicycle'],
+      '🏠': [],
     }
     if (level === 2) {
       categories = {
-        Drive: ['drive'],
-        Passenger: ['passenger'],
-        Bus: ['public bus', 'school bus'],
-        Train: ['train'],
-        Ferry: ['ferry'],
-        Walk: ['walk'],
-        Cycle: ['bicycle'],
-        Other: [],
+        '🚗': ['drive'],
+        '👥': ['passenger'],
+        '🚌': ['public bus', 'school bus'],
+        '🚄': ['train'],
+        '⛴️': ['ferry'],
+        '🏃‍♀️': ['walk'],
+        '🚲': ['bicycle'],
+        '🏠': [],
       }
     }
 
@@ -44,7 +44,7 @@ class TravelMode extends LitElement {
     Object.keys(this.data).forEach((category) => {
       buckets[category] = Object.assign({}, categories)
       Object.keys(this.data[category]).forEach((row) => {
-        let finalCategory = 'Other'
+        let finalCategory = '🏠'
         Object.keys(categoryMap).forEach((c) => {
           if (row.toLowerCase().includes(c)) {
             finalCategory = categoryMap[c]
@@ -72,7 +72,7 @@ class TravelMode extends LitElement {
       overall.category = category
       return overall
     })
-    rows.sort((a, b) => b.total - a.total)
+    rows.sort((a, b) => a.total - b.total)
     return rows
   }
 
@@ -84,12 +84,13 @@ class TravelMode extends LitElement {
       .attr('width', 300)
       .attr('height', 300)
       .append('g')
+      .attr('transform', 'translate(50, 50)')
     return [container, svg]
   }
 
   render() {
-    //      hardcode to level 2 for now
-    const buckets = this.categorizeData(1)
+    const categorizationLevel = 1
+    const buckets = this.categorizeData(categorizationLevel)
     const bucket = buckets.Total
     //
     const [svgContainer, svg] = this.getElement()
@@ -97,17 +98,23 @@ class TravelMode extends LitElement {
       .map((i) => Object.keys(bucket[i]))
       .flat()
     const rows = this.convertToRows(bucket, keys)
-    //     console.log(keys, rows)
-    //     const dataset = d3.stack().keys(keys)(d3.transpose(rows))
 
     const width = 200
     const height = 200
 
-    // set x scale
-    var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05).align(0.1)
+    // set x & y scale
+    const x = d3
+      .scaleLinear()
+      .range([0, width])
+      .domain([0, d3.max(rows, (d) => d.total)])
+      .nice()
 
-    // set y scale
-    var y = d3.scaleLinear().rangeRound([height, 0])
+    const y = d3
+      .scaleBand()
+      .range([height, 0])
+      .paddingInner(0.05)
+      .align(0.1)
+      .domain(rows.map((d) => d.category))
 
     // set the colors
     var z = d3
@@ -121,19 +128,7 @@ class TravelMode extends LitElement {
         '#d0743c',
         '#ff8c00',
       ])
-
-    x.domain(
-      rows.map(function (d) {
-        return d.category
-      })
-    )
-    y.domain([
-      0,
-      d3.max(rows, function (d) {
-        return d.total
-      }),
-    ]).nice()
-    z.domain(keys)
+      .domain(keys)
 
     var g = svg.append('g')
 
@@ -142,25 +137,15 @@ class TravelMode extends LitElement {
       .data(d3.stack().keys(keys)(rows))
       .enter()
       .append('g')
-      .attr('fill', function (d) {
-        return z(d.key)
-      })
+      .attr('fill', (d) => z(d.key))
       .selectAll('rect')
-      .data(function (d) {
-        return d
-      })
+      .data((d) => d)
       .enter()
       .append('rect')
-      .attr('x', function (d) {
-        return x(d.data.category)
-      })
-      .attr('y', function (d) {
-        return y(d[1])
-      })
-      .attr('height', function (d) {
-        return y(d[0]) - y(d[1])
-      })
-      .attr('width', x.bandwidth())
+      .attr('x', (d) => x(d[0]))
+      .attr('y', (d) => y(d.data.category))
+      .attr('height', y.bandwidth())
+      .attr('width', (d) => x(d[1]) - x(d[0]))
       .on('mouseover', function () {
         tooltip.style('opacity', 1)
       })
@@ -182,18 +167,13 @@ class TravelMode extends LitElement {
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', 'translate(0,' + height + ')')
-      .call(d3.axisBottom(x))
+      .call(d3.axisBottom(x).ticks(5, 's'))
 
     g.append('g')
       .attr('class', 'axis')
-      .call(d3.axisLeft(y).ticks(null, 's'))
-      .append('text')
-      .attr('x', 2)
-      .attr('y', y(y.ticks().pop()) + 0.5)
-      .attr('dy', '0.32em')
-      .attr('fill', '#000')
-      .attr('font-weight', 'bold')
-      .attr('text-anchor', 'start')
+      .call(d3.axisLeft(y).tickSize(0))
+      .selectAll('text')
+      .style('font-size', categorizationLevel === 1 ? '1.5rem' : '1.2rem')
 
     var tooltip = svg
       .append('g')
