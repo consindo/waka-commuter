@@ -60,6 +60,7 @@ export const transformData = (features, dataSources, category) => {
       combinedSource[location] += source[category][location]
     })
   })
+
   return Object.keys(combinedSource).map((i) => {
     const coords = getLocation(features, i)
     return {
@@ -69,4 +70,29 @@ export const transformData = (features, dataSources, category) => {
       y: coords.lat, // make it positive so it works the same way
     }
   })
+}
+
+export const transformModeData = (dataSources, sourceKeys, category) => {
+  const combinedSource = {}
+  sourceKeys.forEach((key, index) => {
+    // sets up combined object
+    const keyArr = ['Total', key.split(':')[0], key]
+    keyArr.forEach((k) => {
+      if (combinedSource[k] === undefined) {
+        combinedSource[k] = {}
+      }
+    })
+
+    Object.keys(dataSources[index][category]).forEach((c) => {
+      // don't care about the aggregated totals in the json
+      if (c === 'Total') return
+      keyArr.forEach((k) => {
+        if (combinedSource[k][c] === undefined) {
+          combinedSource[k][c] = 0
+        }
+        combinedSource[k][c] += dataSources[index][category][c]
+      })
+    })
+  })
+  return combinedSource
 }

@@ -41,6 +41,25 @@ const parse = (inputFilename, outputFilename) => {
         key = 'Total'
       }
 
+      // these are basically the same
+      if (
+        key === 'Passenger in a car, truck, van or company bus' ||
+        key === 'Passenger in a car, truck or van'
+      ) {
+        key = 'Passenger in a car, truck, van, or company bus'
+      }
+
+      // assume that all the education cars are private, just so we can group better
+      // at least i hope no educational institution gives you a car
+      if (key === 'Drive a car, truck or van') {
+        key = 'Drive a private car, truck or van'
+      }
+
+      // again, better grouping
+      if (key === 'Study at home') {
+        key = 'Work at home'
+      }
+
       results[data['Area'].trim()][key] = parseInt(data['Value'], 10)
     })
     .on('end', () => {

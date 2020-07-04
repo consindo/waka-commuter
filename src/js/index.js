@@ -1,5 +1,10 @@
 // const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-import { getData, getLocation, transformData } from './data.js'
+import {
+  getData,
+  getLocation,
+  transformData,
+  transformModeData,
+} from './data.js'
 import { areaFill, lineFill, pointsFill } from './views/map-styles.js'
 import { bindDetailsEvents } from './views/details-events.js'
 import { setDetails } from './views/details-render.js'
@@ -217,10 +222,47 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .flat()
 
-          const initialLocation = getLocation(features, regionName[0])
+          const sourceKeys = regionName
+            .map((i) => {
+              if (segment === 'all') {
+                return [[i, 'workplace'].join(':'), [i, 'education'].join(':')]
+              } else if (segment === 'workplace') {
+                return [[i, 'workplace'].join(':')]
+              } else if (segment === 'education') {
+                return [i, 'education'].join(':')
+              }
+            })
+            .flat()
+
           const arriveData = transformData(features, sources, 'arriveFrom')
           const departData = transformData(features, sources, 'departTo')
+          const arriveModeData = transformModeData(
+            sources,
+            sourceKeys,
+            'arrivalModes'
+          )
+          const departureModeData = transformModeData(
+            sources,
+            sourceKeys,
+            'departureModes'
+          )
 
+          Dispatcher.trigger('update-blocks', {
+            regionName,
+            direction,
+            segment,
+            arriveData,
+            departData,
+            arriveModeData,
+            departureModeData,
+          })
+        })
+      })
+
+      // map
+      Dispatcher.bind(
+        'update-blocks',
+        ({ direction, arriveData, departData }) => {
           // only really want to toggle the map data for direction
           if (direction === 'all') {
             setMap(arriveData, departData)
@@ -229,9 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
           } else if (direction === 'departures') {
             setMap([], departData)
           }
+        }
+      )
 
-          setDetails(initialLocation, arriveData, departData)
-
+      // tooltip
+      Dispatcher.bind(
+        'update-blocks',
+        ({ regionName, segment, arriveData, departData }) => {
           const tooltipData = {
             currentRegions: regionName,
             arriveData,
@@ -245,8 +291,29 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           mapTooltip.setAttribute('data', JSON.stringify(tooltipData))
           mapTooltip.removeAttribute('loading')
-        })
-      })
+        }
+      )
+
+      // details
+      Dispatcher.bind(
+        'update-blocks',
+        ({
+          regionName,
+          arriveData,
+          departData,
+          arriveModeData,
+          departureModeData,
+        }) => {
+          const initialLocation = getLocation(features, regionName[0])
+          setDetails(
+            initialLocation,
+            arriveData,
+            departData,
+            arriveModeData,
+            departureModeData
+          )
+        }
+      )
     })
   })
 })
