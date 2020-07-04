@@ -16,6 +16,26 @@ html {
   height: 100%;
 }
 
+#branding {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-image: url('./icon.png');
+  background-repeat: no-repeat;
+  background-position: 0.75rem 0.75rem;
+  background-size: 2.5rem 2.5rem;
+  margin: 0;
+  line-height: 2.5rem;
+  padding: 0.75rem;
+  text-indent: 3rem;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  font-size: 1.65rem;
+  user-select: none;
+  letter-spacing: -0.5px;
+}
+
 #map {
   flex: 1;
 }
