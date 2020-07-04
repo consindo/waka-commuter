@@ -25,33 +25,6 @@ html {
   height: 100%;
 }
 
-#map-tooltip {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.95);
-  color: #fff;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  pointer-events: none;
-  opacity: 0;
-}
-
-#map-tooltip strong {
-  font-size: 1.2rem;
-}
-
-#map-tooltip .departures {
-  color: #f44336;
-  font-weight: bold;
-}
-
-#map-tooltip .arrivals {
-  color: #90caf9;
-  font-weight: bold;
-}
-
 #details {
   flex: 1;
   border-left: 1px solid #333;

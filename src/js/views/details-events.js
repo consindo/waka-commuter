@@ -1,5 +1,10 @@
-import Dispatcher from './dispatcher.js'
+import Dispatcher from '../dispatcher.js'
 
+// actions
+const toggleDirection = (direction) => (e) => Dispatcher.setDirection(direction)
+const toggleSegment = (segment) => (e) => Dispatcher.setSegment(segment)
+
+// events
 export const bindDetailsEvents = () => {
   document
     .querySelector('.btn-direction-all')
@@ -20,12 +25,4 @@ export const bindDetailsEvents = () => {
   document
     .querySelector('.btn-segment-education')
     .addEventListener('click', toggleSegment('education'))
-}
-
-const toggleDirection = (direction) => (e) => {
-  Dispatcher.setDirection(direction)
-}
-
-const toggleSegment = (segment) => (e) => {
-  Dispatcher.setSegment(segment)
 }

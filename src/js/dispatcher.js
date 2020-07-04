@@ -39,14 +39,6 @@ class Dispatcher extends Events {
     )
   }
 
-  setTooltipId = (regionName, loading = false) => {
-    // don't really need to store any of this...
-    this.tooltipId = regionName
-    this.trigger('update-tooltip-id', this.tooltipId, loading)
-  }
-
-  getTooltipId = () => this.tooltipId
-
   setRegions = (regionName) => {
     this.currentRegion = regionName
     this.loadBlocks()

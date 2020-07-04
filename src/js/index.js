@@ -1,15 +1,19 @@
 // const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-import './js/population-bubbles.js'
-const sa2File = require('./shapes/sa2.geojson')
-import { getData, getLocation, transformData } from './js/data.js'
-import { areaFill, lineFill, pointsFill } from './js/map-styles.js'
-import { bindDetailsEvents } from './js/details-events.js'
-import Dispatcher from './js/dispatcher.js'
+import { getData, getLocation, transformData } from './data.js'
+import { areaFill, lineFill, pointsFill } from './views/map-styles.js'
+import { bindDetailsEvents } from './views/details-events.js'
+import { setDetails } from './views/details-render.js'
+import Dispatcher from './dispatcher.js'
+import './components/map-tooltip.js'
 
+const sa2File = require('../shapes/sa4.geojson')
+const token = ''
 
 const sa2Data = fetch(sa2File).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
   bindDetailsEvents()
+  const mapTooltip = document.createElement('map-tooltip')
+  document.getElementById('map').appendChild(mapTooltip)
 
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
@@ -51,50 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let activeBlock = null
 
-      const tooltipElement = document.getElementById('map-tooltip')
-      let tooltipData = {
-        currentRegions: [],
-      }
-      const setTooltipData = (currentRegions, arriveData, departData, mode) => {
-        tooltipData = {
-          currentRegions,
-          mode,
-          arriveData: {},
-          departData: {},
-        }
-        arriveData.forEach((r) => (tooltipData.arriveData[r.key] = r.value))
-        departData.forEach((r) => (tooltipData.departData[r.key] = r.value))
-      }
-      const updateTooltip = (id, loading) => {
-        let finalText = `<strong>${id}</strong>${
-          loading ? '<br>Loading...' : ''
-        }`
-        if (tooltipData.currentRegions.length === 0 || loading) {
-          tooltipElement.innerHTML = finalText
-          return
-        }
-
-        const regions = tooltipData.currentRegions.join(' & ')
-        const departCount = tooltipData.departData[id] || 0
-        const arrivalCount = tooltipData.arriveData[id] || 0
-
-        if (departCount === 0 && arrivalCount === 0) {
-          finalText += `<br>No ${
-            tooltipData.mode.length === 2 ? '' : tooltipData.mode[0]
-          } travel to/from ${regions}`
-        } else if (regions === id) {
-          finalText += `<br>${departCount} live & ${tooltipData.mode.join(
-            '/'
-          )} in ${id}`
-        } else {
-          // this seems wrong... but it's right. it's just all very confusing
-          const departText = `<span class="departures">${departCount} arrivals</span> &larr; from ${regions}`
-          const arrivalsText = `<span class="arrivals">${arrivalCount} departures</span> &rarr; to ${regions}`
-          finalText += `<br>${departText}<br>${arrivalsText}`
-        }
-        tooltipElement.innerHTML = finalText
-      }
-
       map.on('mousemove', 'sa2-fill', (e) => {
         const meshblock = e.features[0]
         if (meshblock != null && activeBlock !== meshblock.id) {
@@ -118,24 +78,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           )
 
-          Dispatcher.setTooltipId(meshblock.id)
-          tooltipElement.style.opacity = 1
+          mapTooltip.setAttribute('id', meshblock.id)
+          mapTooltip.setAttribute('opacity', 1)
         }
-        const pos = `translate(${e.originalEvent.pageX + 20}px, ${
-          e.originalEvent.pageY
-        }px)`
-        requestAnimationFrame(() => {
-          tooltipElement.style.transform = pos
-        })
+
+        mapTooltip.setAttribute('x', e.originalEvent.pageX)
+        mapTooltip.setAttribute('y', e.originalEvent.pageY)
       })
 
       map.on('drag', (e) => {
-        const pos = `translate(${e.originalEvent.pageX + 20}px, ${
-          e.originalEvent.pageY
-        }px)`
-        requestAnimationFrame(() => {
-          tooltipElement.style.transform = pos
-        })
+        mapTooltip.setAttribute('x', e.originalEvent.pageX)
+        mapTooltip.setAttribute('y', e.originalEvent.pageY)
       })
 
       map.on('mouseleave', 'sa2-fill', (e) => {
@@ -149,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         )
         activeBlock = null
-        tooltipElement.style.opacity = 0
+        mapTooltip.setAttribute('opacity', 0)
       })
 
       map.addSource('points', {
@@ -165,21 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         source: 'points',
         paint: pointsFill,
       })
-
-      const setDetails = (initialLocation, arriveData, departData) => {
-        const arriveFrom = document.createElement('population-bubbles')
-
-        arriveFrom.setAttribute('scale', JSON.stringify(initialLocation))
-        arriveFrom.setAttribute('data', JSON.stringify(arriveData))
-        document.getElementById('arrive-from').innerHTML = ''
-        document.getElementById('arrive-from').appendChild(arriveFrom)
-
-        const departTo = document.createElement('population-bubbles')
-        departTo.setAttribute('scale', JSON.stringify(initialLocation))
-        departTo.setAttribute('data', JSON.stringify(departData))
-        document.getElementById('depart-to').innerHTML = ''
-        document.getElementById('depart-to').appendChild(departTo)
-      }
 
       let selectedAreas = []
       const setMap = (arriveData, departData) => {
@@ -255,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
       map.on('click', 'sa2-fill', (e) => {
         const meshblock = e.features[0]
         if (meshblock != null) {
-          Dispatcher.setTooltipId(meshblock.id, true)
+          mapTooltip.setAttribute('loading', true)
           Dispatcher.setRegions([meshblock.id])
         }
       })
@@ -294,22 +232,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
           setDetails(initialLocation, arriveData, departData)
 
-          if (segment === 'all') {
-            setTooltipData(regionName, arriveData, departData, [
-              'work',
-              'study',
-            ])
-          } else if (segment === 'workplace') {
-            setTooltipData(regionName, arriveData, departData, ['work'])
-          } else if (segment === 'education') {
-            setTooltipData(regionName, arriveData, departData, ['study'])
+          const tooltipData = {
+            currentRegions: regionName,
+            arriveData,
+            departData,
+            mode: ['work', 'study'],
           }
-          Dispatcher.setTooltipId(Dispatcher.getTooltipId())
+          if (segment === 'workplace') {
+            tooltipData.mode = ['work']
+          } else if (segment === 'education') {
+            tooltipData.mode = ['study']
+          }
+          mapTooltip.setAttribute('data', JSON.stringify(tooltipData))
+          mapTooltip.removeAttribute('loading')
         })
-      })
-
-      Dispatcher.bind('update-tooltip-id', (id, loading) => {
-        updateTooltip(id, loading)
       })
     })
   })

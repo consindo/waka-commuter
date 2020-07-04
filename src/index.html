@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>stats test</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
       rel="stylesheet"
@@ -13,7 +13,7 @@
     />
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
   </head>
   <body>
     <div id="app">
@@ -36,9 +36,15 @@
           <button class="btn-segment-education">Education</button>
         </nav>
         <h3>Arrive From</h3>
-        <div id="arrive-from"></div>
+        <div class="arrive-from">
+          <div class="location"></div>
+          <div class="mode"></div>
+        </div>
         <h3>Depart To</h3>
-        <div id="depart-to"></div>
+        <div class="depart-to">
+          <div class="location"></div>
+          <div class="mode"></div>
+        </div>
       </div>
     </div>
   </body>
