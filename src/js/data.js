@@ -1,6 +1,6 @@
 import polylabel from 'polylabel'
 
-const transformFilename = (name) =>
+export const transformFilename = (name) =>
   name
     .trim()
     .toLowerCase()
@@ -88,7 +88,6 @@ export const transformModeData = (dataSources, sourceKeys, category) => {
 
     Object.keys(dataSources[index][category]).forEach((c) => {
       // don't care about the aggregated totals in the json
-      if (c === 'Total') return
       keyArr.forEach((k) => {
         if (combinedSource[k][c] === undefined) {
           combinedSource[k][c] = 0

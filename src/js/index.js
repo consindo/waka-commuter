@@ -1,9 +1,9 @@
-// const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
 import {
   getData,
   getLocation,
   transformData,
   transformModeData,
+  transformFilename,
 } from './data.js'
 import { areaFill, lineFill, pointsFill } from './views/map-styles.js'
 import { bindDetailsEvents } from './views/details-events.js'
@@ -235,6 +235,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('location-header').innerText = regionName.join(
           ' & '
         )
+        document
+          .querySelector('.population-link')
+          .setAttribute(
+            'href',
+            `https://www.stats.govt.nz/tools/2018-census-place-summaries/${transformFilename(
+              regionName[0]
+            )}#population-and-dwellings`
+          )
 
         getData(regionName).then((data) => {
           // depending on the toggle, filter out workspace or education data

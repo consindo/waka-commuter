@@ -10,7 +10,10 @@ class TravelMode extends LitElement {
   static get styles() {
     return css`
       .axis {
-        color: #ccc;
+        color: #ddd;
+      }
+      .grid {
+        color: #555;
       }
     `
   }
@@ -64,6 +67,8 @@ class TravelMode extends LitElement {
         if (buckets[category][finalCategory][row] === undefined) {
           buckets[category][finalCategory][row] = 0
         }
+        // don't care about the totals
+        if (row === 'Total') return
         buckets[category][finalCategory][row] += this.data[category][row]
       })
     })
@@ -92,8 +97,9 @@ class TravelMode extends LitElement {
     const svg = d3
       .select(container)
       .append('svg')
+      .style('display', 'block')
+      .attr('width', this.width)
       .attr('height', this.height)
-      .attr('preserveAspectRatio', 'xMidYMid meet')
       .attr('viewbox', `0 0 ${this.width} ${this.height}`)
       .append('g')
       .attr('transform', 'translate(50, 0)')

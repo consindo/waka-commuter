@@ -10,6 +10,9 @@ const setBubble = (container, location, data, tooltipData, showOnly) => {
   bubble.setAttribute('showOnly', showOnly)
 
   const locationContainer = container.querySelector('.location')
+  bubble.setAttribute('width', '600')
+  bubble.setAttribute('height', '400')
+
   locationContainer.innerHTML = ''
   locationContainer.appendChild(bubble)
 }
@@ -33,6 +36,8 @@ export const setDetails = (
 ) => {
   const arriveContainer = document.querySelector('.arrive-from')
   const departContainer = document.querySelector('.depart-to')
+  document.querySelector('.population-count').innerText =
+    departModeData.Total.Total
 
   setBubble(arriveContainer, location, arriveData, tooltipData, 'arrivals')
   setBubble(departContainer, location, departData, tooltipData, 'departures')

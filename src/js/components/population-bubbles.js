@@ -1,4 +1,4 @@
-import { LitElement } from 'lit-element'
+import { LitElement, css } from 'lit-element'
 import './map-tooltip.js'
 
 class PopulationBubbles extends LitElement {
@@ -8,13 +8,13 @@ class PopulationBubbles extends LitElement {
       scale: { type: Object },
       tooltipData: { type: Object },
       showOnly: { type: String },
+      width: { type: Number },
+      height: { type: Number },
     }
   }
 
   constructor(props) {
     super(props)
-    this.width = 500
-    this.height = 500
   }
 
   getElement() {
@@ -22,6 +22,7 @@ class PopulationBubbles extends LitElement {
     const svg = d3
       .select(container)
       .append('svg')
+      .style('display', 'block')
       .attr('width', this.width)
       .attr('height', this.height)
     return [container, svg]
@@ -57,7 +58,7 @@ class PopulationBubbles extends LitElement {
       .sort((a, b) => {
         return b.percentage - a.percentage
       })
-      .slice(0, 25)
+      .slice(0, 30)
 
     // defines the size of the circles
     const size = d3.scaleSqrt().domain([0, 1]).range([25, 85])

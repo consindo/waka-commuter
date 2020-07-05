@@ -1,5 +1,6 @@
 :root {
   --sidebar-padding: 1.25rem;
+  --border: 1px solid #000;
 }
 
 body,
@@ -47,39 +48,76 @@ html {
 }
 
 #details {
-  flex: 1;
-  border-left: 1px solid #333;
+  width: 900px;
+  border-left: var(--border);
   overflow-y: auto;
 }
 
+.nav-header {
+  padding: 1.75rem var(--sidebar-padding) 1.5rem;
+  background: #222;
+  border-bottom: var(--border);
+}
+
 .nav-header h2 {
-  margin: 2.5rem var(--sidebar-padding) 2rem;
+  margin: 0;
   font-size: 2rem;
+  line-height: 1.2;
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.nav-header a {
+  color: #ddd;
+  text-decoration: none;
+}
+.nav-header a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.nav-header p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+nav {
+  display: none;
+}
+
 h3 {
-  margin: 0 var(--sidebar-padding);
+  margin: 0 var(--sidebar-padding) 0.75rem;
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
 }
 
 .graph-container {
   display: flex;
 }
-.location-container {
-  flex: 1;
+
+.location-inner {
+  background: #222;
+  border-radius: 0 10px 10px 0;
+  border: var(--border);
+  border-left: 0;
+  margin-bottom: 2rem;
 }
+
 .mode-container {
   width: 300px;
+  overflow-x: hidden;
 }
+
 .mode-inner {
-  background: #222;
   box-sizing: border-box;
   padding: 1.5rem 0;
   border-radius: 5px 0 0 5px;
+  height: 100%;
 }
-.mode-container h3 {
+
+.mode-container h4 {
+  color: #fff;
   margin: 0 1.25rem 1.25rem;
+  font-size: 1rem;
 }
