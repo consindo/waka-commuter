@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       let activeBlock = null
-
+      let needFrame = true
       map.on('mousemove', 'sa2-fill', (e) => {
         const meshblock = e.features[0]
         if (meshblock != null && activeBlock !== meshblock.id) {
@@ -87,13 +87,27 @@ document.addEventListener('DOMContentLoaded', () => {
           mapTooltip.setAttribute('opacity', 1)
         }
 
-        mapTooltip.setAttribute('x', e.originalEvent.pageX)
-        mapTooltip.setAttribute('y', e.originalEvent.pageY)
+        if (needFrame) {
+          needFrame = false
+          const { pageX, pageY } = e.originalEvent
+          requestAnimationFrame(() => {
+            needFrame = true
+            mapTooltip.setAttribute('x', pageX)
+            mapTooltip.setAttribute('y', pageY)
+          })
+        }
       })
 
       map.on('drag', (e) => {
-        mapTooltip.setAttribute('x', e.originalEvent.pageX)
-        mapTooltip.setAttribute('y', e.originalEvent.pageY)
+        if (needFrame) {
+          needFrame = false
+          const { pageX, pageY } = e.originalEvent
+          requestAnimationFrame(() => {
+            needFrame = true
+            mapTooltip.setAttribute('x', pageX)
+            mapTooltip.setAttribute('y', pageY)
+          })
+        }
       })
 
       map.on('mouseleave', 'sa2-fill', (e) => {
@@ -288,10 +302,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       )
 
-      // tooltip
+      // details
       Dispatcher.bind(
         'update-blocks',
-        ({ regionName, segment, arriveData, departData }) => {
+        ({
+          regionName,
+          arriveData,
+          departData,
+          arriveModeData,
+          departureModeData,
+          segment,
+        }) => {
           const tooltipData = {
             currentRegions: regionName,
             arriveData,
@@ -303,28 +324,19 @@ document.addEventListener('DOMContentLoaded', () => {
           } else if (segment === 'education') {
             tooltipData.mode = ['study']
           }
-          mapTooltip.setAttribute('data', JSON.stringify(tooltipData))
+          const tooltipJSON = JSON.stringify(tooltipData)
+          mapTooltip.setAttribute('data', tooltipJSON)
           mapTooltip.removeAttribute('loading')
-        }
-      )
 
-      // details
-      Dispatcher.bind(
-        'update-blocks',
-        ({
-          regionName,
-          arriveData,
-          departData,
-          arriveModeData,
-          departureModeData,
-        }) => {
+          // also consuming the tooltip data in the population bubbles
           const initialLocation = getLocation(features, regionName[0])
           setDetails(
             initialLocation,
             arriveData,
             departData,
             arriveModeData,
-            departureModeData
+            departureModeData,
+            tooltipJSON
           )
         }
       )

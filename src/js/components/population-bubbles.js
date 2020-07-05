@@ -1,16 +1,17 @@
 import { LitElement } from 'lit-element'
+import './map-tooltip.js'
 
 class PopulationBubbles extends LitElement {
   static get properties() {
     return {
       data: { type: Array },
       scale: { type: Object },
+      tooltipData: { type: Object },
     }
   }
 
   constructor(props) {
     super(props)
-
     this.width = 500
     this.height = 500
   }
@@ -25,40 +26,12 @@ class PopulationBubbles extends LitElement {
     return [container, svg]
   }
 
-  getMap() {
-    return {
-      Balmoral: [-36.886, 174.747],
-      'Eden Terrace': [-36.862, 174.75],
-      'Takapuna Central': [-36.788, 174.77],
-      'Birkdale North': [-36.797, 174.701],
-      'Silverdale South (Auckland)': [-36.621, 174.669],
-    }
-  }
-
-  getTooltip() {
-    const container = document.createElement('div')
-    const tooltip = d3
-      .select(container)
-      .style('opacity', 0)
-      .attr('class', 'tooltip')
-      .style('color', '#000')
-      .style('background-color', 'white')
-      .style('border', 'solid')
-      .style('border-width', '2px')
-      .style('border-radius', '5px')
-      .style('padding', '5px')
-      .style('position', 'absolute')
-      .style('top', 0)
-      .style('left', 0)
-    return [container, tooltip]
-  }
-
   render() {
     const [svgContainer, svg] = this.getElement()
-    const [tooltipContainer, tooltip] = this.getTooltip()
+    const mapTooltip = document.createElement('map-tooltip')
+    mapTooltip.setAttribute('data', JSON.stringify(this.tooltipData))
 
     const rawData = this.data
-    const mapData = this.getMap()
     const data = rawData
       .map((i) => ({
         ...i,
@@ -73,6 +46,7 @@ class PopulationBubbles extends LitElement {
     // defines the size of the circles
     const size = d3.scaleLinear().domain([0, 500]).range([10, 60])
 
+    let needFrame = true
     const node = svg
       .append('g')
       .selectAll('circle')
@@ -80,15 +54,21 @@ class PopulationBubbles extends LitElement {
       .enter()
       .append('g')
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`)
-      .on('mouseover', () => tooltip.style('opacity', 1))
-      .on('mouseleave', () => tooltip.style('opacity', 0))
+      .on('mouseover', () => mapTooltip.setAttribute('opacity', 1))
+      .on('mouseleave', () => mapTooltip.setAttribute('opacity', 0))
       .on('mousemove', (d) => {
-        const pos = `translate(${d3.event.pageX + 20}px, ${d3.event.pageY}px)`
-        requestAnimationFrame(() => {
-          tooltip
-            .html(`<u>${d.key}</u><br>${d.value} inhabitants`)
-            .style('transform', pos)
-        })
+        if (needFrame) {
+          needFrame = false
+          const x = d3.event.pageX
+          const y = d3.event.pageY
+          const id = d.key
+          requestAnimationFrame(() => {
+            needFrame = true
+            mapTooltip.setAttribute('id', id)
+            mapTooltip.setAttribute('x', x)
+            mapTooltip.setAttribute('y', y)
+          })
+        }
       })
 
     const circle = node
@@ -126,7 +106,7 @@ class PopulationBubbles extends LitElement {
       node.attr('transform', (e) => `translate(${e.x}, ${e.y})`)
     })
 
-    svgContainer.appendChild(tooltipContainer)
+    svgContainer.appendChild(mapTooltip)
     return svgContainer
   }
 }

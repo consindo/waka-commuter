@@ -9,6 +9,7 @@ html {
   background: #111;
   color: #fff;
   font-family: 'Fira Sans', sans-serif;
+  overflow-x: hidden;
 }
 
 #app {
