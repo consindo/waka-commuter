@@ -11,8 +11,8 @@ import { setDetails } from './views/details-render.js'
 import Dispatcher from './dispatcher.js'
 import './components/map-tooltip.js'
 
-const sa2File = require('../shapes/sa4.geojson')
 const token = ''
+const sa2File = require('../shapes/sa2-optimized.geojson')
 
 const sa2Data = fetch(sa2File).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {

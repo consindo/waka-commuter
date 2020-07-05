@@ -1,5 +1,5 @@
 const fs = require('fs')
-const geojson = JSON.parse(fs.readFileSync('./sa3.geojson'))
+const geojson = JSON.parse(fs.readFileSync('./sa2.geojson'))
 
 const transformFilename = (name) => {
   return name
@@ -10,12 +10,25 @@ const transformFilename = (name) => {
     .replace(/[()\/]/g, '')
 }
 
+const truncator = (num) => {
+  if (typeof num === 'number') {
+    return parseFloat(num.toFixed(5))
+  }
+  return num.map(truncator)
+}
+
 geojson.features = geojson.features
-  .map((i) => ({
-    type: i.type,
-    geometry: i.geometry,
-    properties: { name: i.properties.SA22018__1 },
-  }))
+  .filter((i) => i.geometry !== null)
+  .map((i) => {
+    return {
+      type: i.type,
+      geometry: {
+        ...i.geometry,
+        coordinates: i.geometry['coordinates'].map(truncator),
+      },
+      properties: { name: i.properties.SA22018__1 },
+    }
+  })
   .filter((i) => {
     const data = JSON.parse(
       fs.readFileSync(
@@ -40,5 +53,5 @@ geojson.features = geojson.features
     return !(isEmpty && isWater)
   })
 
-fs.writeFileSync('./sa4.geojson', JSON.stringify(geojson))
+fs.writeFileSync('./sa2-optimized.geojson', JSON.stringify(geojson))
 console.log('Processed!')
