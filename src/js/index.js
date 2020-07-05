@@ -344,7 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
             departData,
             arriveModeData,
             departureModeData,
-            tooltipJSON
+            tooltipJSON,
+            segment
           )
         }
       )

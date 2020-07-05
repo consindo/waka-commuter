@@ -1,15 +1,21 @@
 import Dispatcher from '../dispatcher.js'
 
 // actions
-const toggleDirection = (direction) => (e) => Dispatcher.setDirection(direction)
-const toggleSegment = (segment) => (e) => {
-  // this is gross... don't usually do this
-  // but this is competition code, so don't have time to make it good
+// this is gross... don't usually do this
+// but this is competition code, so don't have time to make it good
+const linkHack = (e) => {
   e.preventDefault()
   e.currentTarget.parentElement
     .querySelector('.selected')
     .classList.remove('selected')
   e.currentTarget.classList.add('selected')
+}
+const toggleDirection = (direction) => (e) => {
+  linkHack(e)
+  Dispatcher.setDirection(direction)
+}
+const toggleSegment = (segment) => (e) => {
+  linkHack(e)
   Dispatcher.setSegment(segment)
 }
 

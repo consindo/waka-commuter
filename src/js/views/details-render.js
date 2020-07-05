@@ -32,12 +32,22 @@ export const setDetails = (
   departData,
   arriveModeData,
   departModeData,
-  tooltipData
+  tooltipData,
+  segment
 ) => {
   const arriveContainer = document.querySelector('.arrive-from')
   const departContainer = document.querySelector('.depart-to')
   document.querySelector('.population-count').innerText =
     departModeData.Total.Total
+
+  const populationLabel = document.querySelector('.population-label')
+  if (segment === 'all') {
+    populationLabel.innerText = 'Resident Workers & Students:'
+  } else if (segment === 'workplace') {
+    populationLabel.innerText = 'Resident Workers:'
+  } else if (segment === 'education') {
+    populationLabel.innerText = 'Resident Students:'
+  }
 
   setBubble(arriveContainer, location, arriveData, tooltipData, 'arrivals')
   setBubble(departContainer, location, departData, tooltipData, 'departures')
