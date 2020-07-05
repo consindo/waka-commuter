@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       let selectedAreas = []
-      const setMap = (arriveData, departData) => {
+      const setMap = (arriveData, departData, regionName) => {
         // turns off all the old areas
         selectedAreas.forEach((i) => {
           map.setFeatureState(
@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
               id: i,
             },
             {
+              selected: null,
               population: null,
               magnitude: null,
             }
@@ -144,6 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // combine arrive and depart data
         const combinedObject = {}
 
+        // add the selected regions just in case they're undefined
+        regionName.forEach((name) => {
+          combinedObject[name] = {
+            x: 0,
+            y: 0,
+            population: 0,
+            magnitude: 0,
+          }
+        })
         ;[arriveData, departData].forEach((dataset, idx) => {
           let sign = 1
           if (dataset === arriveData) {
@@ -159,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 magnitude: 0,
               }
             }
+
             combinedObject[i.key].population += i.value * sign
             combinedObject[i.key].magnitude += i.value
           })
@@ -166,12 +177,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         Object.keys(combinedObject).forEach((i) => {
           selectedAreas.push(i)
+          // should probably always stand out if it's the selected area...
+          const isSelected = regionName.includes(i) ? regionName.length : null
           map.setFeatureState(
             {
               source: 'sa2',
               id: i,
             },
             {
+              selected: isSelected ? regionName.length : null,
               population: combinedObject[i].population,
               magnitude: combinedObject[i].magnitude,
             }
@@ -262,14 +276,14 @@ document.addEventListener('DOMContentLoaded', () => {
       // map
       Dispatcher.bind(
         'update-blocks',
-        ({ direction, arriveData, departData }) => {
+        ({ regionName, direction, arriveData, departData }) => {
           // only really want to toggle the map data for direction
           if (direction === 'all') {
-            setMap(arriveData, departData)
+            setMap(arriveData, departData, regionName)
           } else if (direction === 'arrivals') {
-            setMap(arriveData, [])
+            setMap(arriveData, [], regionName)
           } else if (direction === 'departures') {
-            setMap([], departData)
+            setMap([], departData, regionName)
           }
         }
       )

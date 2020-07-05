@@ -26,16 +26,21 @@ class MapTooltip extends LitElement {
         pointer-events: none;
         opacity: 0;
       }
-      strong {
+      h4 {
+        margin: 0;
         font-size: 1.2rem;
+      }
+      .none {
+        color: #999;
+      }
+      .wfh {
+        color: #badc58;
       }
       .departures {
         color: #f44336;
-        font-weight: bold;
       }
       .arrivals {
         color: #90caf9;
-        font-weight: bold;
       }
     `
   }
@@ -72,24 +77,30 @@ class MapTooltip extends LitElement {
     const arrivalCount = this.parsedData.arriveData[this.id] || 0
 
     let subText = html`
-      <br /><span class="departures">${departCount} arrivals</span> &larr; from
-      ${regions} <br /><span class="arrivals">${arrivalCount} departures</span>
+      <strong class="departures">${departCount} arrivals</strong> &larr; from
+      ${regions} <br /><strong class="arrivals"
+        >${arrivalCount} departures</strong
+      >
       &rarr; to ${regions}
     `
-    if (departCount === 0 && arrivalCount === 0) {
-      subText = html`<br />No ${mode.length === 2 ? '' : mode[0]} travel to/from
-        ${regions}`
-    } else if (regions === this.id) {
-      subText = html`<br />${departCount} live & ${mode.join('/')} in ${this.id}`
+    if (regions === this.id) {
+      subText = html`<strong class="wfh"
+          >${departCount} live & ${mode.join('/')}</strong
+        >
+        in ${this.id}`
+    } else if (departCount === 0 && arrivalCount === 0) {
+      subText = html`<strong class="none"
+          >No ${mode.length === 2 ? '' : mode[0]} travel</strong
+        >
+        to/from ${regions}`
     }
-
     return html`
       <div
         style="opacity: ${this.opacity}; transform: translate(${this.x +
         20}px, ${this.y}px);"
       >
-        <strong>${this.id}</strong>
-        ${loading ? html`<br />Loading...` : ''}
+        <h4>${this.id}</h4>
+        ${loading ? html`<strong class="none">Loading...</strong>` : ''}
         ${this.parsedData.currentRegions.length !== 0 && !loading
           ? subText
           : ''}
