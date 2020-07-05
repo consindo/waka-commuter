@@ -28,6 +28,16 @@ class PopulationBubbles extends LitElement {
   }
 
   render() {
+    const color = d3
+      .scaleLinear()
+      .domain([0, 10, 50, 250, 1000])
+      .range(
+        this.showOnly === 'arrivals'
+          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#000022']
+          : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#220000']
+      )
+      .interpolate(d3.interpolateHcl)
+
     const [svgContainer, svg] = this.getElement()
     const mapTooltip = document.createElement('map-tooltip')
     mapTooltip.setAttribute('data', JSON.stringify(this.tooltipData))
@@ -39,12 +49,13 @@ class PopulationBubbles extends LitElement {
     const data = rawData
       .map((i) => ({
         key: i.key,
-        value: i.percentage,
+        value: i.value,
+        percentage: i.percentage,
         x: (i.x - this.scale.lng) * 400,
         y: (i.y - this.scale.lat) * -300,
       }))
       .sort((a, b) => {
-        return b.value - a.value
+        return b.percentage - a.percentage
       })
       .slice(0, 25)
 
@@ -79,11 +90,9 @@ class PopulationBubbles extends LitElement {
     const circle = node
       .append('circle')
       .attr('class', 'node')
-      .attr('r', (d) => size(d.value))
-      .style('fill', '#bada55')
+      .attr('r', (d) => size(d.percentage))
+      .style('fill', (d) => color(d.value))
       .style('fill-opacity', 0.8)
-
-    const lineHeight = 14
 
     // removes the "(Auckland)" off labels
     const labelTransform = (t) =>
@@ -93,14 +102,19 @@ class PopulationBubbles extends LitElement {
         .join('- ')
         .split(' ')
 
+    const lineHeight = 14
     const label = node
       .append('text')
       .attr('text-anchor', 'middle')
-      .style('fill', '#111')
+      .style('fill', (d) => (d3.hsl(color(d.value)).l > 0.6 ? '#111' : '#fff'))
+      .style('text-shadow', (d) =>
+        d3.hsl(color(d.value)).l > 0.6
+          ? '0 1px 0 rgba(255,255,255,0.25)'
+          : '0 1px 0 rgba(0,0,0,0.4)'
+      )
       .style('font-size', '11px')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
       .style('letter-spacing', '-0.15px')
-      .style('text-shadow', '0 1px 0 rgba(255,255,255,0.25)')
       .style('pointer-events', 'none')
       .attr('y', (d) => labelTransform(d.key).length * lineHeight * -0.5 - 3)
 
@@ -123,7 +137,7 @@ class PopulationBubbles extends LitElement {
         d3
           .forceCollide()
           .strength(0.2)
-          .radius((d) => size(d.value) + 3)
+          .radius((d) => size(d.percentage) + 3)
           .iterations(1)
       )
 
