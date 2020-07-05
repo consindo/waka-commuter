@@ -31,12 +31,16 @@ class Dispatcher extends Events {
   dataSegment = 'all'
 
   loadBlocks = () => {
-    this.trigger(
-      'load-blocks',
-      this.currentRegion,
-      this.dataDirection,
-      this.dataSegment
-    )
+    if (this.currentRegion.length === 0) {
+      this.trigger('clear-blocks')
+    } else {
+      this.trigger(
+        'load-blocks',
+        this.currentRegion,
+        this.dataDirection,
+        this.dataSegment
+      )
+    }
   }
 
   setRegions = (regionName) => {

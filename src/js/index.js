@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     container: 'map-content',
     style: 'mapbox://styles/mapbox/dark-v10',
     center: [173, -40],
-    zoom: 5,
+    zoom: 5.5,
   })
   map.getCanvas().style.cursor = 'default'
   map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
@@ -229,6 +229,10 @@ document.addEventListener('DOMContentLoaded', () => {
           mapTooltip.setAttribute('loading', true)
           Dispatcher.setRegions([meshblock.id])
         }
+      })
+
+      Dispatcher.bind('clear-blocks', () => {
+        setMap([], [], [])
       })
 
       Dispatcher.bind('load-blocks', (regionName, direction, segment) => {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Commuter - Waka</title>
+    <title>Waka Commuter</title>
     <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
@@ -27,22 +27,25 @@
           href="#"
           title="Show both arrivals & departures on map"
           class="btn-direction-all selected"
-          >All</a
         >
+          All
+        </a>
         &middot;
         <a
           href="#"
           title="Only show places where people arrive from"
           class="btn-direction-arrivals"
-          >Arrivals</a
         >
+          Arrivals
+        </a>
         &middot;
         <a
           href="#"
           title="Only show places where people depart to"
           class="btn-direction-departures"
-          >Departures</a
         >
+          Departures
+        </a>
       </nav>
     </div>
     <div id="app">
@@ -50,71 +53,76 @@
         <div id="map-content"></div>
       </div>
       <div id="details">
-        <div class="nav-header">
-          <div class="title">
-            <h2 id="location-header"></h2>
+        <div class="details-splash">
+          <h2>Kia Ora! Welcome to Waka Commuter</h2>
+        </div>
+        <div class="details-location hidden">
+          <div class="nav-header">
+            <div class="title">
+              <h2 id="location-header"></h2>
 
-            <p title="Resident Population">
-              <a
-                class="population-link"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <strong class="population-label"></strong>
-                <span class="population-count"></span>
-              </a>
-            </p>
-          </div>
-          <nav class="controls">
-            <button title="Close Location" class="btn-close">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                viewBox="0 0 24 24"
-                width="24"
-                alt="Close Location"
-                fill="#fff"
-              >
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
-            </button>
-            <div>
-              <a href="#" class="btn-segment-all selected">All</a> &middot;
-              <a href="#" class="btn-segment-workplace">Workplace</a> &middot;
-              <a href="#" class="btn-segment-education">Education</a>
+              <p title="Resident Population">
+                <a
+                  class="population-link"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong class="population-label"></strong>
+                  <span class="population-count"></span>
+                </a>
+              </p>
             </div>
-          </nav>
-        </div>
-        <br /><br /><br />
-        <h3>Arrive From</h3>
-        <div class="arrive-from graph-container">
-          <div class="location-container">
-            <div class="location-inner">
-              <div class="location"></div>
-            </div>
+            <nav class="controls">
+              <button title="Close Location" class="btn-close">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  alt="Close Location"
+                  fill="#fff"
+                >
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </button>
+              <div>
+                <a href="#" class="btn-segment-all selected">All</a> &middot;
+                <a href="#" class="btn-segment-workplace">Workplace</a> &middot;
+                <a href="#" class="btn-segment-education">Education</a>
+              </div>
+            </nav>
           </div>
-          <div class="mode-container">
-            <div class="mode-inner">
-              <h4>Arrival Modes</h4>
-              <div class="mode"></div>
+          <br /><br /><br />
+          <h3>Arrive From</h3>
+          <div class="arrive-from graph-container">
+            <div class="location-container">
+              <div class="location-inner">
+                <div class="location"></div>
+              </div>
             </div>
-          </div>
-        </div>
-        <h3>Depart To</h3>
-        <div class="depart-to graph-container">
-          <div class="location-container">
-            <div class="location-inner">
-              <div class="location"></div>
+            <div class="mode-container">
+              <div class="mode-inner">
+                <h4>Arrival Modes</h4>
+                <div class="mode"></div>
+              </div>
             </div>
           </div>
-          <div class="mode-container">
-            <div class="mode-inner">
-              <h4>Departure Modes</h4>
-              <div class="mode"></div>
+          <h3>Depart To</h3>
+          <div class="depart-to graph-container">
+            <div class="location-container">
+              <div class="location-inner">
+                <div class="location"></div>
+              </div>
+            </div>
+            <div class="mode-container">
+              <div class="mode-inner">
+                <h4>Departure Modes</h4>
+                <div class="mode"></div>
+              </div>
             </div>
           </div>
         </div>

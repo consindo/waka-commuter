@@ -20,11 +20,16 @@ html {
 
 @import './map.css';
 @import './nav.css';
+@import './splash.css';
 
 #details {
   width: 900px;
   border-left: var(--border);
   overflow-y: auto;
+}
+
+.hidden {
+  display: none;
 }
 
 h3 {

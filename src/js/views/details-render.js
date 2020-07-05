@@ -35,6 +35,8 @@ export const setDetails = (
   tooltipData,
   segment
 ) => {
+  document.querySelector('.details-splash').classList.add('hidden')
+  document.querySelector('.details-location').classList.remove('hidden')
   const arriveContainer = document.querySelector('.arrive-from')
   const departContainer = document.querySelector('.depart-to')
   document.querySelector('.population-count').innerText =
