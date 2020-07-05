@@ -9,6 +9,7 @@ class MapTooltip extends LitElement {
       y: { type: Number },
       opacity: { type: Number },
       loading: { type: Boolean },
+      locationContext: { type: String },
     }
   }
 
@@ -75,23 +76,27 @@ class MapTooltip extends LitElement {
     const regions = this.parsedData.currentRegions.join(' & ')
     const departCount = this.parsedData.departData[this.id] || 0
     const arrivalCount = this.parsedData.arriveData[this.id] || 0
+    const singleContext = this.locationContext !== 'single'
 
     let subText = html`
-      <strong class="departures">${departCount} arrivals</strong> &larr; from
-      ${regions} <br /><strong class="arrivals"
-        >${arrivalCount} departures</strong
-      >
-      &rarr; to ${regions}
+      <strong class="departures">
+        ${departCount} departures
+      </strong>
+      ${singleContext ? html` &larr; from ${regions}` : ''}<br />
+      <strong class="arrivals">
+        ${arrivalCount} arrivals
+      </strong>
+      ${singleContext ? html`&rarr; to ${regions}` : ''}
     `
     if (regions === this.id) {
-      subText = html`<strong class="wfh"
-          >${departCount} live & ${mode.join('/')}</strong
-        >
+      subText = html` <strong class="wfh">
+          ${departCount} live & ${mode.join('/')}
+        </strong>
         in ${this.id}`
     } else if (departCount === 0 && arrivalCount === 0) {
-      subText = html`<strong class="none"
-          >No ${mode.length === 2 ? '' : mode[0]} travel</strong
-        >
+      subText = html`<strong class="none">
+          No ${mode.length === 2 ? '' : mode[0]} travel
+        </strong>
         to/from ${regions}`
     }
     return html`

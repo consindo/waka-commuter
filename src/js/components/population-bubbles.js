@@ -30,6 +30,7 @@ class PopulationBubbles extends LitElement {
     const [svgContainer, svg] = this.getElement()
     const mapTooltip = document.createElement('map-tooltip')
     mapTooltip.setAttribute('data', JSON.stringify(this.tooltipData))
+    mapTooltip.setAttribute('locationContext', 'single')
 
     const rawData = this.data
     const data = rawData
