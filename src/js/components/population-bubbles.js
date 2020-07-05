@@ -7,6 +7,7 @@ class PopulationBubbles extends LitElement {
       data: { type: Array },
       scale: { type: Object },
       tooltipData: { type: Object },
+      showOnly: { type: String },
     }
   }
 
@@ -32,6 +33,7 @@ class PopulationBubbles extends LitElement {
     mapTooltip.setAttribute('data', JSON.stringify(this.tooltipData))
     mapTooltip.setAttribute('locationContext', 'single')
     mapTooltip.setAttribute('percentage', 'true')
+    mapTooltip.setAttribute('showOnly', this.showOnly)
 
     const rawData = this.data
     const data = rawData

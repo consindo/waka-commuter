@@ -2,11 +2,12 @@
 import '../components/population-bubbles.js'
 import '../components/travel-mode.js'
 
-const setBubble = (container, location, data, tooltipData) => {
+const setBubble = (container, location, data, tooltipData, showOnly) => {
   const bubble = document.createElement('population-bubbles')
   bubble.setAttribute('scale', JSON.stringify(location))
   bubble.setAttribute('data', JSON.stringify(data))
   bubble.setAttribute('tooltipData', tooltipData)
+  bubble.setAttribute('showOnly', showOnly)
 
   const locationContainer = container.querySelector('.location')
   locationContainer.innerHTML = ''
@@ -33,8 +34,8 @@ export const setDetails = (
   const arriveContainer = document.querySelector('.arrive-from')
   const departContainer = document.querySelector('.depart-to')
 
-  setBubble(arriveContainer, location, arriveData, tooltipData)
-  setBubble(departContainer, location, departData, tooltipData)
+  setBubble(arriveContainer, location, arriveData, tooltipData, 'arrivals')
+  setBubble(departContainer, location, departData, tooltipData, 'departures')
   setMode(arriveContainer, arriveModeData)
   setMode(departContainer, departModeData)
 }
