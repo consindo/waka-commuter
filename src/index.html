@@ -27,29 +27,44 @@
       </div>
       <div id="details">
         <div class="nav-header">
-          <h2 id="location-header"></h2>
-          <a
-            class="population-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <div class="title">
+            <h2 id="location-header"></h2>
+
             <p title="Resident Population">
-              <strong>Population:</strong>
-              <span class="population-count"></span>
+              <a
+                class="population-link"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <strong>Population:</strong>
+                <span class="population-count"></span>
+              </a>
             </p>
-          </a>
+          </div>
+          <nav class="controls">
+            <button title="Close Location" class="btn-close">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                alt="Close Location"
+                fill="#fff"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </button>
+            <div>
+              <a href="#" class="btn-segment-all selected">All</a> &middot;
+              <a href="#" class="btn-segment-workplace">Workplace</a> &middot;
+              <a href="#" class="btn-segment-education">Education</a>
+            </div>
+          </nav>
         </div>
-        <nav>
-          <button class="btn-direction-all">All</button>
-          <button class="btn-direction-arrivals">Arrivals</button>
-          <button class="btn-direction-departures">Departures</button>
-        </nav>
-        <nav>
-          <button class="btn-segment-all">All</button>
-          <button class="btn-segment-workplace">Workplace</button>
-          <button class="btn-segment-education">Education</button>
-        </nav>
         <br /><br /><br />
         <h3>Arrive From</h3>
         <div class="arrive-from graph-container">
@@ -79,6 +94,11 @@
             </div>
           </div>
         </div>
+        <nav>
+          <button class="btn-direction-all">All</button>
+          <button class="btn-direction-arrivals">Arrivals</button>
+          <button class="btn-direction-departures">Departures</button>
+        </nav>
       </div>
     </div>
   </body>

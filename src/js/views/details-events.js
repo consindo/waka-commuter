@@ -2,7 +2,16 @@ import Dispatcher from '../dispatcher.js'
 
 // actions
 const toggleDirection = (direction) => (e) => Dispatcher.setDirection(direction)
-const toggleSegment = (segment) => (e) => Dispatcher.setSegment(segment)
+const toggleSegment = (segment) => (e) => {
+  // this is gross... don't usually do this
+  // but this is competition code, so don't have time to make it good
+  e.preventDefault()
+  e.currentTarget.parentElement
+    .querySelector('.selected')
+    .classList.remove('selected')
+  e.currentTarget.classList.add('selected')
+  Dispatcher.setSegment(segment)
+}
 
 // events
 export const bindDetailsEvents = () => {

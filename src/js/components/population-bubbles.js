@@ -23,6 +23,7 @@ class PopulationBubbles extends LitElement {
       .select(container)
       .append('svg')
       .style('display', 'block')
+      .style('margin', '0 auto')
       .attr('width', this.width)
       .attr('height', this.height)
     return [container, svg]

@@ -1,0 +1,80 @@
+.nav-header {
+  padding: 1.5rem var(--sidebar-padding) 1.5rem;
+  background: #222;
+  border-bottom: var(--border);
+  position: sticky;
+  top: 0;
+  display: flex;
+}
+
+.nav-header .title {
+  flex: 1;
+}
+
+.nav-header h2 {
+  margin: 0.25rem 0 0;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-header a {
+  color: #ddd;
+  text-decoration: none;
+}
+.nav-header a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.nav-header p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.nav-header .controls {
+  text-align: right;
+}
+
+.nav-header button {
+  border: 0;
+  background: transparent;
+  color: #ddd;
+  font-family: inherit;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.nav-header button.btn-close {
+  text-align: center;
+  padding: 0.25rem;
+  margin-bottom: 0.55rem;
+  background: #111;
+  border-radius: 50%;
+}
+
+.nav-header button.btn-close:hover {
+  background: #000;
+}
+
+.nav-header button.btn-close:active {
+  background: #333;
+}
+
+.nav-header button.btn-close svg {
+  vertical-align: top;
+}
+
+.nav-header .controls a {
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 0 0.25rem;
+}
+
+.nav-header a.selected {
+  color: #fff;
+  font-weight: bold;
+}

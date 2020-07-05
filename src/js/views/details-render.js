@@ -10,7 +10,7 @@ const setBubble = (container, location, data, tooltipData, showOnly) => {
   bubble.setAttribute('showOnly', showOnly)
 
   const locationContainer = container.querySelector('.location')
-  bubble.setAttribute('width', '600')
+  bubble.setAttribute('width', '580')
   bubble.setAttribute('height', '400')
 
   locationContainer.innerHTML = ''
