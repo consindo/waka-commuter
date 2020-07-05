@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element'
+import { LitElement, html, css } from 'lit-element'
 
 class TravelMode extends LitElement {
   static get properties() {
@@ -6,6 +6,17 @@ class TravelMode extends LitElement {
       data: { type: Object },
     }
   }
+
+  static get styles() {
+    return css`
+      .axis {
+        color: #ccc;
+      }
+    `
+  }
+
+  width = 300
+  height = 300
 
   categorizeData(level) {
     // our super high level categories
@@ -81,15 +92,16 @@ class TravelMode extends LitElement {
     const svg = d3
       .select(container)
       .append('svg')
-      .attr('width', 300)
-      .attr('height', 300)
+      .attr('height', this.height)
+      .attr('preserveAspectRatio', 'xMidYMid meet')
+      .attr('viewbox', `0 0 ${this.width} ${this.height}`)
       .append('g')
-      .attr('transform', 'translate(50, 50)')
+      .attr('transform', 'translate(50, 0)')
     return [container, svg]
   }
 
   render() {
-    const categorizationLevel = 1
+    const categorizationLevel = 2
     const buckets = this.categorizeData(categorizationLevel)
     const bucket = buckets.Total
     //
@@ -99,8 +111,8 @@ class TravelMode extends LitElement {
       .flat()
     const rows = this.convertToRows(bucket, keys)
 
-    const width = 200
-    const height = 200
+    const width = this.width - 75
+    const height = this.height - 25
 
     // set x & y scale
     const x = d3
