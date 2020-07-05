@@ -10,6 +10,7 @@ class MapTooltip extends LitElement {
       opacity: { type: Number },
       loading: { type: Boolean },
       locationContext: { type: String },
+      percentage: { type: Boolean },
     }
   }
 
@@ -62,8 +63,12 @@ class MapTooltip extends LitElement {
         arriveData: {},
         departData: {},
       }
-      arriveData.forEach((r) => (tooltipData.arriveData[r.key] = r.value))
-      departData.forEach((r) => (tooltipData.departData[r.key] = r.value))
+      arriveData.forEach(
+        (r) => (tooltipData.arriveData[r.key] = [r.value, r.percentage])
+      )
+      departData.forEach(
+        (r) => (tooltipData.departData[r.key] = [r.value, r.percentage])
+      )
 
       this.parsedData = tooltipData
       this.requestUpdate()
@@ -71,28 +76,43 @@ class MapTooltip extends LitElement {
   }
 
   render() {
+    const percentage = this.percentage === true
     const loading = this.loading === true
     const { mode } = this.parsedData
     const regions = this.parsedData.currentRegions.join(' & ')
-    const departCount = this.parsedData.departData[this.id] || 0
-    const arrivalCount = this.parsedData.arriveData[this.id] || 0
+    const departData = this.parsedData.departData[this.id] || []
+    const arriveData = this.parsedData.arriveData[this.id] || []
+
+    const departCount = departData[0] || 0
+    const arrivalCount = arriveData[0] || 0
+
+    const departPercentage = Math.round((departData[1] || 0) * 10000) / 100
+    const arrivalPercentage = Math.round((arriveData[1] || 0) * 10000) / 100
     const singleContext = this.locationContext !== 'single'
 
     let subText = html`
       <strong class="departures">
         ${departCount} departures
       </strong>
+      ${percentage ? `(${departPercentage}%)` : ''}
       ${singleContext ? html` &larr; from ${regions}` : ''}<br />
       <strong class="arrivals">
         ${arrivalCount} arrivals
       </strong>
+      ${percentage ? `(${arrivalPercentage}%)` : ''}
       ${singleContext ? html`&rarr; to ${regions}` : ''}
     `
     if (regions === this.id) {
       subText = html` <strong class="wfh">
           ${departCount} live & ${mode.join('/')}
         </strong>
-        in ${this.id}`
+        in ${this.id}
+        ${percentage
+          ? html`<br /><small
+                >(${departPercentage}% of departures)<br />
+                (${arrivalPercentage}% of arrivals)</small
+              >`
+          : ''}`
     } else if (departCount === 0 && arrivalCount === 0) {
       subText = html`<strong class="none">
           No ${mode.length === 2 ? '' : mode[0]} travel

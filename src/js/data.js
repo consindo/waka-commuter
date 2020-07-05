@@ -49,6 +49,7 @@ export const getLocation = (features, name) => {
 // does aggregation and latlng mapping
 export const transformData = (features, dataSources, category) => {
   // sums the total values together
+  let totalCount = 0
   const combinedSource = {}
   dataSources.forEach((source) => {
     // if the key doesn't exist, just skip iteration
@@ -58,6 +59,7 @@ export const transformData = (features, dataSources, category) => {
         combinedSource[location] = 0
       }
       combinedSource[location] += source[category][location]
+      totalCount += source[category][location]
     })
   })
 
@@ -66,8 +68,9 @@ export const transformData = (features, dataSources, category) => {
     return {
       key: i,
       value: combinedSource[i],
-      x: coords.lng, // lng requires more scaling that lat
-      y: coords.lat, // make it positive so it works the same way
+      percentage: combinedSource[i] / totalCount,
+      x: coords.lng,
+      y: coords.lat,
     }
   })
 }

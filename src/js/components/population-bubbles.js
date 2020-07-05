@@ -31,21 +31,23 @@ class PopulationBubbles extends LitElement {
     const mapTooltip = document.createElement('map-tooltip')
     mapTooltip.setAttribute('data', JSON.stringify(this.tooltipData))
     mapTooltip.setAttribute('locationContext', 'single')
+    mapTooltip.setAttribute('percentage', 'true')
 
     const rawData = this.data
     const data = rawData
       .map((i) => ({
-        ...i,
+        key: i.key,
+        value: i.percentage,
         x: (i.x - this.scale.lng) * 400,
         y: (i.y - this.scale.lat) * -300,
       }))
       .sort((a, b) => {
         return b.value - a.value
       })
-      .slice(0, 20)
+      .slice(0, 25)
 
     // defines the size of the circles
-    const size = d3.scaleLinear().domain([0, 500]).range([10, 60])
+    const size = d3.scaleSqrt().domain([0, 1]).range([25, 85])
 
     let needFrame = true
     const node = svg
@@ -78,17 +80,37 @@ class PopulationBubbles extends LitElement {
       .attr('r', (d) => size(d.value))
       .style('fill', '#bada55')
       .style('fill-opacity', 0.8)
-      .attr('stroke', 'black')
-      .style('stroke-width', 1)
+
+    const lineHeight = 14
+
+    // removes the "(Auckland)" off labels
+    const labelTransform = (t) =>
+      t
+        .replace(/ \(.*\)/, '')
+        .split('-')
+        .join('- ')
+        .split(' ')
 
     const label = node
       .append('text')
       .attr('text-anchor', 'middle')
-      .attr('dy', '.35em')
-      .style('font-family', 'sans-serif')
-      .style('font-size', '10px')
+      .style('fill', '#111')
+      .style('font-size', '11px')
+      .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
+      .style('letter-spacing', '-0.15px')
+      .style('text-shadow', '0 1px 0 rgba(255,255,255,0.25)')
       .style('pointer-events', 'none')
-      .text((d) => d.key)
+      .attr('y', (d) => labelTransform(d.key).length * lineHeight * -0.5 - 3)
+
+    label
+      .selectAll('text')
+      .data((d) => labelTransform(d.key))
+      .enter()
+      .append('tspan')
+      .text((d) => d)
+      .attr('x', 0)
+      .attr('dx', 0)
+      .attr('dy', lineHeight)
 
     const simulation = d3
       .forceSimulation()
