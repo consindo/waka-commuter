@@ -1,6 +1,7 @@
 // web components
 import '../components/population-bubbles.js'
 import '../components/travel-mode.js'
+import '../components/destination-blurb.js'
 
 const setBubble = (container, location, data, tooltipData, showOnly) => {
   const bubble = document.createElement('population-bubbles')
@@ -26,6 +27,26 @@ const setMode = (container, data) => {
   arriveModeContainer.appendChild(mode)
 }
 
+const setBlurb = (
+  selector,
+  currentRegions,
+  mode,
+  segment,
+  destinationData,
+  modeData
+) => {
+  const blurb = document.createElement('destination-blurb')
+  blurb.setAttribute('currentRegions', JSON.stringify(currentRegions))
+  blurb.setAttribute('mode', mode)
+  blurb.setAttribute('segment', segment)
+  blurb.setAttribute('destinationData', JSON.stringify(destinationData))
+  blurb.setAttribute('modeData', JSON.stringify(modeData))
+
+  const container = document.querySelector(selector)
+  container.innerHTML = ''
+  container.appendChild(blurb)
+}
+
 export const setDetails = (
   location,
   arriveData,
@@ -37,8 +58,8 @@ export const setDetails = (
 ) => {
   document.querySelector('.details-splash').classList.add('hidden')
   document.querySelector('.details-location').classList.remove('hidden')
-  const arriveContainer = document.querySelector('.arrive-from')
-  const departContainer = document.querySelector('.depart-to')
+  const arriveContainer = document.querySelector('.arrive-from.graph-container')
+  const departContainer = document.querySelector('.depart-to.graph-container')
   document.querySelector('.population-count').innerText =
     departModeData.Total.Total
 
@@ -51,6 +72,26 @@ export const setDetails = (
     populationLabel.innerText = 'Resident Students:'
   }
 
+  // hack
+  const currentRegions = JSON.parse(tooltipData).currentRegions
+
+  // do the html updates
+  setBlurb(
+    '.arrive-from.blurb-container',
+    currentRegions,
+    'arrivals',
+    segment,
+    arriveData,
+    arriveModeData
+  )
+  setBlurb(
+    '.depart-to.blurb-container',
+    currentRegions,
+    'departures',
+    segment,
+    departData,
+    departModeData
+  )
   setBubble(arriveContainer, location, arriveData, tooltipData, 'arrivals')
   setBubble(departContainer, location, departData, tooltipData, 'departures')
   setMode(arriveContainer, arriveModeData)
