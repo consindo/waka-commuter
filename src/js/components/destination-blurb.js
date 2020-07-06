@@ -29,8 +29,6 @@ class DestinationBlurb extends LitElement {
   }
 
   getVars() {
-    console.log(this.destinationData)
-
     const place = this.currentRegions.join(' & ')
 
     let regionCount = 0
@@ -72,9 +70,11 @@ class DestinationBlurb extends LitElement {
     const popularMode = Object.keys(searchObj)
       .filter((key) => key !== 'Total')
       .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b))
-    const popularPercentage = Math.round(
-      (searchObj[popularMode] / searchObj.Total) * 100
-    )
+
+    const popularPercentage =
+      searchObj.Total === 0
+        ? -1
+        : Math.round((searchObj[popularMode] / searchObj.Total) * 100)
 
     return {
       travellersCount,
@@ -117,10 +117,13 @@ class DestinationBlurb extends LitElement {
               ${vars.topRegion} (${vars.topRegionCount.toLocaleString()}
               people—${vars.topRegionPercentage}% of arrivals)</strong
             >.`}
-      The most popular way to arrive to ${vars.destination} is to
-      <strong>
-        ${vars.popularMode.toLowerCase()} (${vars.popularPercentage}%)</strong
-      >.`
+      ${vars.popularPercentage === -1
+        ? ''
+        : html`The most popular way to arrive to ${vars.destination} is to
+            <strong>
+              ${vars.popularMode.toLowerCase()}
+              (${vars.popularPercentage}%)</strong
+            >.`}`
   }
 
   getDepartureMessage() {
@@ -145,10 +148,13 @@ class DestinationBlurb extends LitElement {
               (${vars.topRegionPercentage}%)
             </strong>
             is the top destination outside of ${vars.place}.`}
-      To depart to ${vars.destination}, people in ${vars.place} mostly
-      <strong>
-        ${vars.popularMode.toLowerCase()} (${vars.popularPercentage}%)</strong
-      >.`
+      ${vars.popularPercentage === -1
+        ? ''
+        : html`To depart to ${vars.destination}, people in ${vars.place} mostly
+            <strong>
+              ${vars.popularMode.toLowerCase()}
+              (${vars.popularPercentage}%)</strong
+            >.`}`
   }
 
   render() {
