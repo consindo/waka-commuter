@@ -1,7 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Commuter - Waka</title>
+    <meta
+      name="description"
+      content="Discover how we get to work & school, using travel data from the New Zealand 2018 Census"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#111111" />
+
     <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
@@ -19,6 +26,36 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="js/index.js"></script>
+
+    <meta property="og:title" content="Waka Commuter" />
+    <meta
+      property="og:description"
+      content="Discover how we get to work & school, using travel data from the New Zealand 2018 Census"
+    />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@consindo" />
+    <meta name="twitter:title" content="Waka Commuter" />
+    <meta
+      name="twitter:description"
+      content="Discover how we get to work & school, using travel data from the New Zealand 2018 Census"
+    />
+
+    <!-- Hardcoded, because has to be an absolute URL! -->
+    <meta
+      property="og:image"
+      content="https://commuter.waka.app/splash.f36493d7.jpg"
+    />
+    <meta
+      name="twitter:image"
+      content="https://commuter.waka.app/splash.f36493d7.jpg"
+    />
+
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32 64x64" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
   </head>
   <body>
     <div class="branding">
@@ -124,6 +161,10 @@
             </div>
           </div>
           <div class="data-sources">
+            <noscript>
+              <h3>Sorry!</h3>
+              <p>This application requires JavaScript to be enabled.</p>
+            </noscript>
             <h3>Data Sources</h3>
             <p>
               This app is built with data from the 2018 Census. It primarily
