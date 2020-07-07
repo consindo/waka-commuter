@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element'
+import './graph-tooltip.js'
 
 class TravelMode extends LitElement {
   static get properties() {
@@ -10,10 +11,21 @@ class TravelMode extends LitElement {
   static get styles() {
     return css`
       .axis {
-        color: #ddd;
+        color: #eee;
+      }
+      .axis-y text {
+        transform: translate(-2px, 0);
+        user-select: none;
+      }
+      .axis-x text {
+        transform: translate(0, 4px);
+        user-select: none;
       }
       .grid {
         color: #555;
+      }
+      .grid .domain {
+        display: none;
       }
     `
   }
@@ -21,24 +33,41 @@ class TravelMode extends LitElement {
   width = 300
   height = 300
 
+  getColor(category) {
+    const colorMap = {
+      'Drive a private car, truck or van': '#EF6C00',
+      'Drive a company car, truck or van': '#FF9800',
+      'Passenger in a car, truck, van, or company bus': '#9C27B0',
+      'Public bus': '#FFC107',
+      'School bus': '#FFEB3B',
+      'Walk or jog': '#4CAF50',
+      Bicycle: '#CDDC39',
+      Train: '#3F51B5',
+      Ferry: '#2196F3',
+      'Work at home': '#607D8B',
+      Other: '#9E9E9E',
+    }
+    return colorMap[category] || '#888'
+  }
+
   categorizeData(level) {
     // our super high level categories
     let categories = {
-      '🚗': ['car'],
-      '🚌': ['public bus', 'school bus', 'train', 'ferry'],
-      '🏃‍♀️': ['walk', 'bicycle'],
-      '🏠': [],
+      Drive: ['car'],
+      Transit: ['public bus', 'school bus', 'train', 'ferry'],
+      Active: ['walk', 'bicycle'],
+      Other: [],
     }
     if (level === 2) {
       categories = {
-        '🚗': ['drive'],
-        '👥': ['passenger'],
-        '🚌': ['public bus', 'school bus'],
-        '🚄': ['train'],
-        '⛴️': ['ferry'],
-        '🏃‍♀️': ['walk'],
-        '🚲': ['bicycle'],
-        '🏠': [],
+        Drive: ['drive'],
+        Passenger: ['passenger'],
+        Bus: ['public bus', 'school bus'],
+        Train: ['train'],
+        Ferry: ['ferry'],
+        Walk: ['walk'],
+        Cycle: ['bicycle'],
+        Other: [],
       }
     }
 
@@ -58,7 +87,7 @@ class TravelMode extends LitElement {
     Object.keys(this.data).forEach((category) => {
       buckets[category] = Object.assign({}, categories)
       Object.keys(this.data[category]).forEach((row) => {
-        let finalCategory = '🏠'
+        let finalCategory = 'Other'
         Object.keys(categoryMap).forEach((c) => {
           if (row.toLowerCase().includes(c)) {
             finalCategory = categoryMap[c]
@@ -77,6 +106,7 @@ class TravelMode extends LitElement {
   }
 
   convertToRows(data, keys) {
+    let total = 0
     const rows = Object.keys(data).map((category) => {
       const overall = {
         total: 0,
@@ -84,12 +114,13 @@ class TravelMode extends LitElement {
       keys.forEach((i) => {
         overall[i] = data[category][i] || 0
         overall.total += overall[i]
+        total += overall[i]
       })
       overall.category = category
       return overall
     })
     rows.sort((a, b) => a.total - b.total)
-    return rows
+    return [rows, total]
   }
 
   getElement() {
@@ -102,7 +133,7 @@ class TravelMode extends LitElement {
       .attr('height', this.height)
       .attr('viewbox', `0 0 ${this.width} ${this.height}`)
       .append('g')
-      .attr('transform', 'translate(50, 0)')
+      .attr('transform', 'translate(60, 0)')
     return [container, svg]
   }
 
@@ -110,14 +141,20 @@ class TravelMode extends LitElement {
     const categorizationLevel = 2
     const buckets = this.categorizeData(categorizationLevel)
     const bucket = buckets.Total
-    //
-    const [svgContainer, svg] = this.getElement()
-    const keys = Object.keys(bucket)
-      .map((i) => Object.keys(bucket[i]))
-      .flat()
-    const rows = this.convertToRows(bucket, keys)
 
-    const width = this.width - 75
+    const [svgContainer, svg] = this.getElement()
+    const graphTooltip = document.createElement('graph-tooltip')
+
+    const keys = Object.keys(bucket)
+      .map((i) => {
+        const order = Object.keys(bucket[i])
+        order.sort((a, b) => bucket[i][b] - bucket[i][a])
+        return order
+      })
+      .flat()
+    const [rows, total] = this.convertToRows(bucket, keys)
+
+    const width = this.width - 85
     const height = this.height - 25
 
     // set x & y scale
@@ -134,87 +171,69 @@ class TravelMode extends LitElement {
       .align(0.1)
       .domain(rows.map((d) => d.category))
 
-    // set the colors
-    var z = d3
-      .scaleOrdinal()
-      .range([
-        '#98abc5',
-        '#8a89a6',
-        '#7b6888',
-        '#6b486b',
-        '#a05d56',
-        '#d0743c',
-        '#ff8c00',
-      ])
-      .domain(keys)
+    const g = svg.append('g')
 
-    var g = svg.append('g')
+    g.append('g')
+      .attr('class', 'axis axis-y')
+      .call(d3.axisLeft(y).tickSize(0))
+      .selectAll('text')
+      .style('font-size', '0.6875rem')
+      .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
 
+    g.append('g')
+      .attr('class', 'grid')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(d3.axisBottom(x).ticks(5).tickSize(-height).tickFormat(''))
+
+    let needFrame = true
     g.append('g')
       .selectAll('g')
       .data(d3.stack().keys(keys)(rows))
       .enter()
       .append('g')
-      .attr('fill', (d) => z(d.key))
+      .attr('fill', (d) => this.getColor(d.key))
       .selectAll('rect')
       .data((d) => d)
       .enter()
       .append('rect')
       .attr('x', (d) => x(d[0]))
       .attr('y', (d) => y(d.data.category))
-      .attr('height', y.bandwidth())
+      .attr('height', y.bandwidth() - 3)
       .attr('width', (d) => x(d[1]) - x(d[0]))
-      .on('mouseover', function () {
-        tooltip.style('opacity', 1)
-      })
-      .on('mouseout', function () {
-        tooltip.style('opacity', 0)
-      })
+      .on('mouseover', () => graphTooltip.setAttribute('opacity', 1))
+      .on('mouseleave', () => graphTooltip.setAttribute('opacity', 0))
       .on('mousemove', function (d) {
-        const keyName = d3.select(this.parentNode).datum().key
-        const keyValue = d.data[keyName]
-        var xPosition = d3.mouse(this)[0] - 5
-        var yPosition = d3.mouse(this)[1] - 5
-        tooltip.attr(
-          'transform',
-          'translate(' + xPosition + ',' + yPosition + ')'
-        )
-        tooltip.select('text').text(`${keyName}: ${keyValue}`)
+        if (needFrame) {
+          needFrame = false
+          const x = d3.event.pageX
+          const y = d3.event.pageY
+
+          const keyName = d3.select(this.parentNode).datum().key
+          const keyValue = d.data[keyName]
+          const content = [
+            keyName,
+            `${keyValue.toLocaleString()} (${Math.round(
+              (keyValue / total) * 100
+            )}%)`,
+          ]
+
+          requestAnimationFrame(() => {
+            needFrame = true
+            graphTooltip.setAttribute('content', JSON.stringify([content]))
+            graphTooltip.setAttribute('x', x)
+            graphTooltip.setAttribute('y', y)
+          })
+        }
       })
 
     g.append('g')
-      .attr('class', 'axis')
+      .attr('class', 'axis axis-x')
       .attr('transform', 'translate(0,' + height + ')')
       .call(d3.axisBottom(x).ticks(5, 's'))
+      .style('font-size', '0.6875rem')
+      .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
 
-    g.append('g')
-      .attr('class', 'axis')
-      .call(d3.axisLeft(y).tickSize(0))
-      .selectAll('text')
-      .style('font-size', categorizationLevel === 1 ? '1.5rem' : '1.2rem')
-
-    var tooltip = svg
-      .append('g')
-      .attr('class', 'tooltip')
-      .style('opacity', '0')
-      .style('pointer-events', 'none')
-
-    tooltip
-      .append('rect')
-      .attr('width', 100)
-      .attr('height', 20)
-      .attr('fill', '#000')
-      .style('opacity', 0.5)
-
-    tooltip
-      .append('text')
-      .attr('x', 30)
-      .attr('dy', '1.2em')
-      .attr('fill', 'white')
-      .style('text-anchor', 'middle')
-      .attr('font-size', '12px')
-      .attr('font-weight', 'bold')
-
+    svgContainer.appendChild(graphTooltip)
     return svgContainer
   }
 }
