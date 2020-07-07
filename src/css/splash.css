@@ -42,6 +42,12 @@
   vertical-align: top;
 }
 
+@media (max-width: 1500px) {
+  .region-option {
+    width: 50%;
+  }
+}
+
 .region-option h3 {
   height: 140px;
   padding: 0 0 0.5rem;

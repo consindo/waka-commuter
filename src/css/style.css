@@ -77,3 +77,20 @@ h3 {
   margin: 0 1.25rem 1.25rem;
   font-size: 1rem;
 }
+
+@media (max-width: 1500px) {
+  #details {
+    width: 600px;
+  }
+  .graph-container {
+    display: block;
+  }
+  .location-inner {
+    border-radius: 0;
+    border-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  .mode-inner {
+    margin-bottom: 1rem;
+  }
+}
