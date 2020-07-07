@@ -1,3 +1,128 @@
 .details-splash {
-  padding: var(--sidebar-padding);
+}
+
+.splash-bg {
+  background: linear-gradient(
+      120deg,
+      rgba(10, 0, 20, 0.8),
+      rgba(10, 0, 20, 0.2)
+    ),
+    url('./splash.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  height: 400px;
+  padding: 4rem 2.5rem;
+  box-sizing: border-box;
+}
+
+.splash-bg h2 {
+  font-size: 3rem;
+  margin: 3.5rem 0 1rem;
+  text-shadow: 0 1px 3px #000;
+}
+.splash-bg p {
+  font-size: 1.35rem;
+  text-shadow: 0 1px 2px #000;
+  max-width: 600px;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.region-options {
+  font-size: 0;
+  text-align: center;
+  padding: 0.75rem 0.25rem;
+}
+
+.region-option {
+  width: 33%;
+  display: inline-block;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.region-option h3 {
+  height: 140px;
+  padding: 0 0 0.5rem;
+  box-sizing: border-box;
+  line-height: 1;
+  font-size: 0.9rem;
+  text-align: center;
+  background-color: #222;
+  border-radius: 5px;
+  font-weight: 300;
+  margin: 0;
+  transition: 100ms ease transform;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  justify-content: flex-end;
+  background-size: cover;
+  text-shadow: 0 1px 1px #000, 0 0px 3px #000;
+}
+
+.region-option h3 span {
+  display: block;
+}
+
+.region-option h3 strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.region-option h3:hover {
+  transform: scale(1.02);
+}
+
+.region-option h3:active {
+  transform: scale(1);
+}
+
+.nz-akl {
+  background-image: url(./regions/nz-akl.jpg);
+}
+.nz-chc {
+  background-image: url(./regions/nz-chc.jpg);
+}
+.nz-wlg {
+  background-image: url(./regions/nz-wlg.jpg);
+}
+.nz-hlz {
+  background-image: url(./regions/nz-hlz.jpg);
+}
+.nz-trg {
+  background-image: url(./regions/nz-trg.jpg);
+}
+.nz-dud {
+  background-image: url(./regions/nz-dud.jpg);
+}
+
+.data-sources {
+  padding: 1rem 0 0.5rem;
+}
+
+.data-sources p {
+  padding: 0 var(--sidebar-padding);
+  line-height: 1.35;
+}
+
+.data-sources a {
+  color: #90caf9;
+  text-decoration: none;
+}
+
+.data-sources a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  padding: 0 var(--sidebar-padding) 3rem;
+}
+footer a {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.85rem;
 }

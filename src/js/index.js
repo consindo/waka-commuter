@@ -231,14 +231,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
 
+      const handleRegion = (e) => {
+        const lat = e.currentTarget.dataset.lat
+        const lng = e.currentTarget.dataset.lng
+        const zoom = e.currentTarget.dataset.zoom
+        map.flyTo({
+          center: [lng, lat],
+          zoom: zoom,
+          essential: true,
+        })
+      }
+      // also probably shouldn't be in here
+      const regionOptions = document.querySelectorAll('.region-option')
+      for (const option of regionOptions) {
+        option.addEventListener('click', handleRegion)
+      }
+
       Dispatcher.bind('clear-blocks', () => {
         setMap([], [], [])
+        mapTooltip.setAttribute(
+          'data',
+          JSON.stringify({
+            currentRegions: [],
+            mode: [],
+            arriveData: [],
+            departData: [],
+          })
+        )
       })
 
       Dispatcher.bind('load-blocks', (regionName, direction, segment) => {
-        document.getElementById('location-header').innerText = regionName.join(
-          ' & '
-        )
+        const finalName = regionName.join(' & ')
+        document.getElementById('location-header').innerText = finalName
+        document.title = `${finalName} - Commuter - Waka`
         document
           .querySelector('.population-link')
           .setAttribute(

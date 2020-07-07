@@ -35,7 +35,7 @@ class PopulationBubbles extends LitElement {
       .domain([0, 10, 50, 250, 1000])
       .range(
         this.showOnly === 'arrivals'
-          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#000022']
+          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4777']
           : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#220000']
       )
       .interpolate(d3.interpolateHcl)

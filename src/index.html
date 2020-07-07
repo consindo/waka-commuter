@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Waka Commuter</title>
+    <title>Commuter - Waka</title>
     <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
@@ -54,7 +54,91 @@
       </div>
       <div id="details">
         <div class="details-splash">
-          <h2>Kia Ora! Welcome to Waka Commuter</h2>
+          <div class="splash-bg">
+            <h2>Explore how we travel</h2>
+            <p>
+              Discover how we get to work & school, using travel data from the
+              2018 Census. Get started by choosing an area on the map, or jump
+              to a region below.
+            </p>
+          </div>
+          <div class="region-options">
+            <div
+              class="region-option"
+              data-lat="-36.9"
+              data-lng="174.7"
+              data-zoom="10.5"
+            >
+              <h3 class="nz-akl">
+                <strong>Tāmaki Makaurau</strong> <span>Auckland</span>
+              </h3>
+            </div>
+            <div
+              class="region-option"
+              data-lat="-43.5"
+              data-lng="172.6"
+              data-zoom="11"
+            >
+              <h3 class="nz-chc">
+                <strong>Ōtautahi</strong> <span>Christchurch</span>
+              </h3>
+            </div>
+            <div
+              class="region-option"
+              data-lat="-41.2"
+              data-lng="174.8"
+              data-zoom="10.5"
+            >
+              <h3 class="nz-wlg">
+                <strong>Te Whanganui-a-Tara</strong> <span>Wellington</span>
+              </h3>
+            </div>
+            <div
+              class="region-option"
+              data-lat="-37.7"
+              data-lng="176.2"
+              data-zoom="11"
+            >
+              <h3 class="nz-trg"><strong>Tauranga</strong> <span></span></h3>
+            </div>
+            <div
+              class="region-option"
+              data-lat="-37.8"
+              data-lng="175.3"
+              data-zoom="11.5"
+            >
+              <h3 class="nz-hlz">
+                <strong>Kirikiriroa</strong> <span>Hamilton</span>
+              </h3>
+            </div>
+            <div
+              class="region-option"
+              data-lat="-45.9"
+              data-lng="170.5"
+              data-zoom="11"
+            >
+              <h3 class="nz-dud">
+                <strong>Ōtepoti</strong> <span>Dunedin</span>
+              </h3>
+            </div>
+          </div>
+          <div class="data-sources">
+            <h3>Data Sources</h3>
+            <p>
+              This app is built with data from the 2018 Census. It primarily
+              uses the
+              <a
+                href="https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/"
+                >commuter view dataset</a
+              >, as well as aggregates from the
+              <a
+                href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
+                >NZ.Stat repository</a
+              >. The code for this website is free & open source on
+              <a href="https://github.com/consindo/commuterview">GitHub</a>.
+            </p>
+          </div>
+          <footer><a href="https://jono.nz">&copy; 2020 Jono Cooper</a></footer>
         </div>
         <div class="details-location hidden">
           <div class="nav-header">
