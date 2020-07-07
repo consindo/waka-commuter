@@ -11,8 +11,8 @@ import { setDetails } from './views/details-render.js'
 import Dispatcher from './dispatcher.js'
 import './components/map-tooltip.js'
 
-const token = ''
 const sa2File = require('../shapes/sa2-optimized.geojson')
+const token = process.env.MAPBOX_TOKEN
 
 const sa2Data = fetch(sa2File).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {

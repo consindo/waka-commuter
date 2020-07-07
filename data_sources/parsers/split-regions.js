@@ -41,7 +41,7 @@ const splitRegions = () => {
       JSON.stringify(data[key], '', 2),
       (err) => {
         if (err) throw err
-        console.log(`written ${filename}.json`)
+        // console.log(`written ${filename}.json`)
       }
     )
   })
