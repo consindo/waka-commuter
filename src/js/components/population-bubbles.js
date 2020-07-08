@@ -1,6 +1,9 @@
 import { LitElement, css } from 'lit-element'
 import './map-tooltip.js'
 
+// no no no really should not be doing this yikes
+import Dispatcher from '../dispatcher.js'
+
 class PopulationBubbles extends LitElement {
   static get properties() {
     return {
@@ -72,8 +75,19 @@ class PopulationBubbles extends LitElement {
       .enter()
       .append('g')
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`)
-      .on('mouseover', () => mapTooltip.setAttribute('opacity', 1))
-      .on('mouseleave', () => mapTooltip.setAttribute('opacity', 0))
+      .on('click', (d) => {
+        Dispatcher.setRegions([d.key])
+        mapTooltip.setAttribute('loading', true)
+        // element will be disposed when the next page loads
+      })
+      .on('mouseover', function () {
+        d3.select(this).style('opacity', 0.8)
+        mapTooltip.setAttribute('opacity', 1)
+      })
+      .on('mouseleave', function () {
+        d3.select(this).style('opacity', 1)
+        mapTooltip.setAttribute('opacity', 0)
+      })
       .on('mousemove', (d) => {
         if (needFrame) {
           needFrame = false

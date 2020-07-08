@@ -210,12 +210,7 @@ class TravelMode extends LitElement {
 
           const keyName = d3.select(this.parentNode).datum().key
           const keyValue = d.data[keyName]
-          const content = [
-            keyName,
-            `${keyValue.toLocaleString()} (${Math.round(
-              (keyValue / total) * 100
-            )}%)`,
-          ]
+          const content = [keyName, `${Math.round((keyValue / total) * 100)}%`]
 
           requestAnimationFrame(() => {
             needFrame = true

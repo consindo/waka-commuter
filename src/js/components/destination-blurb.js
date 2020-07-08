@@ -28,6 +28,23 @@ class DestinationBlurb extends LitElement {
     `
   }
 
+  humanMode(message, mode) {
+    const msg = message.toLowerCase()
+    if (this.mode === 'arrivals') {
+      if (msg.includes('passenger')) {
+        return 'be a ' + msg
+      }
+    } else {
+      if (msg.includes('passenger')) {
+        return 'are ' + msg.replace('passenger', 'passengers')
+      }
+    }
+    if (msg.includes('bus') || msg.includes('ferry')) {
+      return 'take a ' + msg
+    }
+    return msg
+  }
+
   getVars() {
     const place = this.currentRegions.join(' & ')
 
@@ -121,7 +138,7 @@ class DestinationBlurb extends LitElement {
         ? ''
         : html`The most popular way to arrive to ${vars.destination} is to
             <strong>
-              ${vars.popularMode.toLowerCase()}
+              ${this.humanMode(vars.popularMode)}
               (${vars.popularPercentage}%)</strong
             >.`}`
   }
@@ -152,7 +169,7 @@ class DestinationBlurb extends LitElement {
         ? ''
         : html`To depart to ${vars.destination}, people in ${vars.place} mostly
             <strong>
-              ${vars.popularMode.toLowerCase()}
+              ${this.humanMode(vars.popularMode)}
               (${vars.popularPercentage}%)</strong
             >.`}`
   }
