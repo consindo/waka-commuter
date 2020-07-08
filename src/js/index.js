@@ -4,10 +4,11 @@ import {
   transformData,
   transformModeData,
   transformFilename,
+  humanRegionName,
 } from './data.js'
 import { areaFill, lineFill, pointsFill } from './views/map-styles.js'
 import { bindDetailsEvents } from './views/details-events.js'
-import { setDetails } from './views/details-render.js'
+import { setDetails, hideDetails } from './views/details-render.js'
 import Dispatcher from './dispatcher.js'
 import './components/map-tooltip.js'
 
@@ -19,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
   bindDetailsEvents()
   const mapTooltip = document.createElement('map-tooltip')
   document.getElementById('map').appendChild(mapTooltip)
+
+  if (navigator.platform === 'MacIntel') {
+    document.querySelector('.operating-system-ctrl').innerText = '⌘ Cmd'
+  }
 
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
@@ -193,14 +198,14 @@ document.addEventListener('DOMContentLoaded', () => {
         Object.keys(combinedObject).forEach((i) => {
           selectedAreas.push(i)
           // should probably always stand out if it's the selected area...
-          const isSelected = regionName.includes(i) ? regionName.length : null
+          const isSelected = regionName.includes(i)
           map.setFeatureState(
             {
               source: 'sa2',
               id: i,
             },
             {
-              selected: isSelected ? regionName.length : null,
+              selected: isSelected ? 1 : null,
               population: combinedObject[i].population,
               magnitude: combinedObject[i].magnitude,
             }
@@ -228,7 +233,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const meshblock = e.features[0]
         if (meshblock != null) {
           mapTooltip.setAttribute('loading', true)
-          Dispatcher.setRegions([meshblock.id])
+          if (e.originalEvent.ctrlKey || e.originalEvent.metaKey) {
+            Dispatcher.addRegion(meshblock.id)
+          } else {
+            Dispatcher.setRegions([meshblock.id])
+          }
         }
       })
 
@@ -250,7 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       Dispatcher.bind('clear-blocks', () => {
         document.querySelector('.map-legend').classList.add('hidden')
+        hideDetails()
         setMap([], [], [])
+        mapTooltip.removeAttribute('loading')
         mapTooltip.setAttribute(
           'data',
           JSON.stringify({
@@ -263,9 +274,14 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       Dispatcher.bind('load-blocks', (regionName, direction, segment) => {
-        const finalName = regionName.join(' & ')
-        document.getElementById('location-header').innerText = finalName
-        document.title = `${finalName} - Commuter - Waka`
+        document.getElementById('location-header').innerText = humanRegionName(
+          regionName,
+          'full'
+        )
+        document.title = `${humanRegionName(
+          regionName,
+          'title'
+        )} - Commuter - Waka`
         document
           .querySelector('.population-link')
           .setAttribute(

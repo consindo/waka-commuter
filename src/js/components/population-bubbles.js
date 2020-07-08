@@ -76,9 +76,14 @@ class PopulationBubbles extends LitElement {
       .append('g')
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`)
       .on('click', (d) => {
-        Dispatcher.setRegions([d.key])
-        mapTooltip.setAttribute('loading', true)
+        if (d3.event.ctrlKey || d3.event.metaKey) {
+          Dispatcher.addRegion(d.key)
+        } else {
+          Dispatcher.setRegions([d.key])
+        }
+
         // element will be disposed when the next page loads
+        mapTooltip.setAttribute('loading', true)
       })
       .on('mouseover', function () {
         d3.select(this).style('opacity', 0.8)

@@ -47,10 +47,7 @@ export const bindDetailsEvents = () => {
     .querySelector('.btn-segment-education')
     .addEventListener('click', toggleSegment('education'))
 
-  // probably shouldn't be in here
   document.querySelector('.btn-close').addEventListener('click', () => {
-    document.querySelector('.details-splash').classList.remove('hidden')
-    document.querySelector('.details-location').classList.add('hidden')
     Dispatcher.setRegions([])
   })
 }

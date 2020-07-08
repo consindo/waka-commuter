@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element'
+import { humanRegionName } from '../data.js'
 
 class MapTooltip extends LitElement {
   static get properties() {
@@ -80,7 +81,7 @@ class MapTooltip extends LitElement {
     const percentage = this.percentage === true
     const loading = this.loading === true
     const { mode } = this.parsedData
-    const regions = this.parsedData.currentRegions.join(' & ')
+    const regions = humanRegionName(this.parsedData.currentRegions, 'condensed')
     const departData = this.parsedData.departData[this.id] || []
     const arriveData = this.parsedData.arriveData[this.id] || []
 

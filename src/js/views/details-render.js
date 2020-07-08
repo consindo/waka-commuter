@@ -60,8 +60,9 @@ export const setDetails = (
   document.querySelector('.details-location').classList.remove('hidden')
   const arriveContainer = document.querySelector('.arrive-from.graph-container')
   const departContainer = document.querySelector('.depart-to.graph-container')
-  document.querySelector('.population-count').innerText =
-    departModeData.Total.Total
+  document.querySelector(
+    '.population-count'
+  ).innerText = departModeData.Total.Total.toLocaleString()
 
   const populationLabel = document.querySelector('.population-label')
   if (segment === 'all') {
@@ -96,4 +97,9 @@ export const setDetails = (
   setBubble(departContainer, location, departData, tooltipData, 'departures')
   setMode(arriveContainer, arriveModeData)
   setMode(departContainer, departModeData)
+}
+
+export const hideDetails = () => {
+  document.querySelector('.details-splash').classList.remove('hidden')
+  document.querySelector('.details-location').classList.add('hidden')
 }

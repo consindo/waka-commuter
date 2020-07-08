@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element'
+import { humanRegionName } from '../data.js'
 
 class DestinationBlurb extends LitElement {
   static get properties() {
@@ -25,6 +26,9 @@ class DestinationBlurb extends LitElement {
       .arrivals {
         color: #90caf9;
       }
+      .less-emphasis {
+        color: #bbb;
+      }
     `
   }
 
@@ -46,7 +50,8 @@ class DestinationBlurb extends LitElement {
   }
 
   getVars() {
-    const place = this.currentRegions.join(' & ')
+    const place = humanRegionName(this.currentRegions, 'full')
+    const placeReduced = humanRegionName(this.currentRegions, 'condensed')
 
     let regionCount = 0
     let travellersCount = 0
@@ -103,6 +108,7 @@ class DestinationBlurb extends LitElement {
       topRegionCount,
       topRegionPercentage,
       place,
+      placeReduced,
       destination,
       popularMode,
       popularPercentage,
@@ -115,14 +121,14 @@ class DestinationBlurb extends LitElement {
         >${vars.travellersCount.toLocaleString()}
         ${vars.travellersCount === 1 ? 'person' : 'people'}</strong
       >
-      travel to ${vars.place} for ${vars.destination}
-      (${vars.travellersPercentage}%), while
+      travel to <span class="less-emphasis">${vars.place}</span> for
+      ${vars.destination} (${vars.travellersPercentage}%), while
       <strong class="wfh"
         >${vars.residentsCount.toLocaleString()}
         ${vars.residentsCount === 1 ? 'person' : 'people'}
         (${vars.residentsPercentage}%)</strong
       >
-      ${vars.travellersCount > 0 ? 'also' : ''} live in ${vars.place}.
+      ${vars.travellersCount > 0 ? 'also' : ''} live in ${vars.placeReduced}.
       ${vars.regionCount === 0
         ? ''
         : html`People arrive from
@@ -150,7 +156,7 @@ class DestinationBlurb extends LitElement {
         ${vars.travellersCount === 1 ? 'person' : 'people'}
         (${vars.travellersPercentage}%)</strong
       >
-      leave ${vars.place} to
+      leave <span class="less-emphasis">${vars.place}</span> to
       <strong class="departures"
         >${vars.regionCount} different
         ${vars.regionCount === 1 ? 'area' : 'areas'}</strong
@@ -164,10 +170,11 @@ class DestinationBlurb extends LitElement {
               ${vars.topRegionCount === 1 ? 'departure' : 'departures'}
               (${vars.topRegionPercentage}%)
             </strong>
-            is the top destination outside of ${vars.place}.`}
+            is the top destination outside of ${vars.placeReduced}.`}
       ${vars.popularPercentage === -1
         ? ''
-        : html`To depart to ${vars.destination}, people in ${vars.place} mostly
+        : html`To depart to ${vars.destination}, people in ${vars.placeReduced}
+            mostly
             <strong>
               ${this.humanMode(vars.popularMode)}
               (${vars.popularPercentage}%)</strong

@@ -43,6 +43,17 @@ class Dispatcher extends Events {
     }
   }
 
+  addRegion = (regionName) => {
+    // assumes regionName is a string
+    const currentIndex = this.currentRegion.indexOf(regionName)
+    if (currentIndex > -1) {
+      this.currentRegion.splice(currentIndex, 1)
+    } else {
+      this.currentRegion.push(regionName)
+    }
+    this.loadBlocks()
+  }
+
   setRegions = (regionName) => {
     this.currentRegion = regionName
     this.loadBlocks()

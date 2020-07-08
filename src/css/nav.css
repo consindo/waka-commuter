@@ -10,6 +10,8 @@
 
 .nav-header .title {
   flex: 1;
+  overflow: hidden;
+  padding-right: 1rem;
 }
 
 .nav-header h2 {

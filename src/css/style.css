@@ -63,6 +63,14 @@ h3 {
   flex: 1;
 }
 
+.tip-container {
+  padding: 0 var(--sidebar-padding);
+  color: #ccc;
+}
+.tip-container p {
+  margin: -0.5rem 0 2rem;
+}
+
 .mode-inner {
   width: 300px;
   margin: 0 auto;

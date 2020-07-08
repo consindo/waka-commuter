@@ -8,6 +8,24 @@ export const transformFilename = (name) =>
     .join('-')
     .replace(/[()\/]/g, '')
 
+export const humanRegionName = (nameArray, mode) => {
+  if (nameArray.length === 1) {
+    return nameArray[0]
+  } else if (mode === 'condensed') {
+    return `these ${nameArray.length} areas`
+  } else if (nameArray.length === 2) {
+    return nameArray.join(' & ')
+  }
+
+  if (mode === 'full') {
+    return `${nameArray.slice(0, -1).join(', ')}, and ${nameArray.slice(-1)}`
+  } else if (mode === 'title') {
+    return `${nameArray[0]} & ${nameArray.length - 1} other areas`
+  }
+  // should never get here
+  return nameArray.join(', ')
+}
+
 // allows to get multiple locations, with a cache for speed
 let locationCache = {}
 export const getData = (locations) =>
