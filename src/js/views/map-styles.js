@@ -11,11 +11,11 @@ const colors = [
     -50,
     '#2196F3',
     -10,
-    '#E3F2FD',
+    '#BBDEFB',
     0,
-    '#FFF',
+    '#BA68C8',
     10,
-    '#FFEBEE',
+    '#FFCDD2',
     50,
     '#F44336',
     250,
@@ -29,7 +29,9 @@ const opacity = [
   ['feature-state', 'magnitude'],
   0,
   0,
-  25,
+  20,
+  0.5,
+  30,
   0.8,
   100,
   0.9,
@@ -39,12 +41,24 @@ const opacity = [
   1,
 ]
 
+const hoverOpacity = [
+  'interpolate',
+  ['linear'],
+  ['feature-state', 'magnitude'],
+  0,
+  0.45,
+  30,
+  0.6,
+  500,
+  0.7,
+]
+
 export const areaFill = {
   'fill-outline-color': 'rgba(0,0,0,0)',
   'fill-opacity': [
     'case',
     ['boolean', ['feature-state', 'hover'], false],
-    0.75,
+    hoverOpacity,
     ['case', ['==', ['feature-state', 'selected'], 1], 0.75, opacity],
   ],
   'fill-color': [

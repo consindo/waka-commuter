@@ -1,11 +1,8 @@
-.details-splash {
-}
-
 .splash-bg {
   background: linear-gradient(
       120deg,
-      rgba(10, 0, 20, 0.8),
-      rgba(10, 0, 20, 0.2)
+      rgba(10, 0, 20, 0.8) 50%,
+      rgba(10, 0, 20, 0.4)
     ),
     url('./splash.jpg');
   background-size: cover;
