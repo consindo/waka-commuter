@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     style: 'mapbox://styles/mapbox/dark-v10',
     center: [173, -40],
     zoom: 5.5,
+    logoPosition: 'bottom-right',
   })
   map.getCanvas().style.cursor = 'default'
   map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
@@ -248,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       Dispatcher.bind('clear-blocks', () => {
+        document.querySelector('.map-legend').classList.add('hidden')
         setMap([], [], [])
         mapTooltip.setAttribute(
           'data',
@@ -328,6 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
       Dispatcher.bind(
         'update-blocks',
         ({ regionName, direction, arriveData, departData }) => {
+          document.querySelector('.map-legend').classList.remove('hidden')
+
           // only really want to toggle the map data for direction
           if (direction === 'all') {
             setMap(arriveData, departData, regionName)

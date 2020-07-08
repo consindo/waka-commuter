@@ -1,6 +1,6 @@
 # Waka Commuter
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/366a1f64-192f-4d71-a6d6-3a7a6818b76c/deploy-status)](https://app.netlify.com/sites/adoring-cori-f9ace0/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/366a1f64-192f-4d71-a6d6-3a7a6818b76c/deploy-status)](https://commuter.waka.app)
 
 ## Build Instructions
 
