@@ -60,6 +60,7 @@
   bottom: 10px;
   left: 49px;
   color: #fff;
+  pointer-events: none;
 }
 
 .map-legend.all .hide-all,

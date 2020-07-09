@@ -73,6 +73,9 @@ h3 {
 .tip-container p {
   margin: -0.5rem 0 2rem;
 }
+.tip-container.mobile {
+  display: none;
+}
 
 .mode-inner {
   width: 300px;
@@ -130,5 +133,19 @@ h3 {
   .map-view #details {
     overflow: hidden;
     transform: translate3d(0, calc(var(--real-height) - 110px), 0);
+  }
+
+  .tip-container.desktop {
+    display: none;
+  }
+  .tip-container.mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 599px) {
+  /* aligns the svg's to the center */
+  .location-inner {
+    margin-left: calc((100vw - 580px) / 2);
   }
 }

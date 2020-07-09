@@ -51,7 +51,10 @@ export const bindDetailsEvents = () => {
     Dispatcher.setRegions([])
   })
 
-  document.querySelector('.btn-expand').addEventListener('click', () => {
-    document.getElementById('app').classList.toggle('map-view')
-  })
+  for (const node of document.querySelectorAll('.btn-expand')) {
+    node.addEventListener('click', () => {
+      document.getElementById('details')
+      document.getElementById('app').classList.toggle('map-view')
+    })
+  }
 }

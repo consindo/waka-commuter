@@ -216,42 +216,54 @@
         </div>
         <div class="details-location hidden">
           <div class="nav-header">
-            <div class="title">
-              <h2 id="location-header"></h2>
-              <p title="Resident Population">
-                <a
-                  class="population-link"
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <strong class="population-label"></strong>
-                  <span class="population-count"></span>
-                </a>
-              </p>
-            </div>
-            <nav class="controls">
-              <button title="Close Location" class="btn-close">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  alt="Close Location"
-                  fill="#fff"
-                >
-                  <path d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                  />
-                </svg>
-              </button>
-              <div>
-                <a href="#" class="btn-segment-all selected">All</a> &middot;
-                <a href="#" class="btn-segment-workplace">Workplace</a> &middot;
-                <a href="#" class="btn-segment-education">Education</a>
+            <div class="nav-header-flex">
+              <div class="title">
+                <h2 id="location-header"></h2>
               </div>
-            </nav>
+              <nav class="controls">
+                <button title="Learn More" class="btn-expand">
+                  <img src="expand.svg" />
+                </button>
+                <button title="Close Location" class="btn-close">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    alt="Close Location"
+                    fill="#fff"
+                  >
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                    />
+                  </svg>
+                </button>
+              </nav>
+            </div>
+            <div class="nav-header-flex">
+              <div class="title">
+                <p title="Resident Population">
+                  <a
+                    class="population-link"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <strong class="population-label"></strong>
+                    <span class="population-count"></span>
+                  </a>
+                </p>
+              </div>
+              <nav class="controls">
+                <div>
+                  <a href="#" class="btn-segment-all selected">All</a> &middot;
+                  <a href="#" class="btn-segment-workplace">Workplace</a>
+                  &middot;
+                  <a href="#" class="btn-segment-education">Education</a>
+                </div>
+              </nav>
+            </div>
           </div>
           <h3>Arrivals</h3>
           <div class="arrive-from blurb-container"></div>
@@ -283,11 +295,17 @@
               </div>
             </div>
           </div>
-          <div class="tip-container">
+          <div class="tip-container desktop">
             <p>
               <strong>Tip:</strong> Hold down
               <strong class="operating-system-ctrl">Ctrl</strong> to select
               multiple areas.
+            </p>
+          </div>
+          <div class="tip-container mobile">
+            <p>
+              <strong>Tip:</strong> Open this app on a PC to get more detailed
+              insights, and to select multiple areas.
             </p>
           </div>
         </div>
