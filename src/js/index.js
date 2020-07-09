@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
     container: 'map-content',
-    style: 'mapbox://styles/mapbox/dark-v10',
+    style: 'mapbox://styles/mapbox/dark-v10?optimize=true',
     center: [173, -40],
     zoom: 5.5,
     logoPosition: 'bottom-right',

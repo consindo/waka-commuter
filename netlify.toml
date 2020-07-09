@@ -1,0 +1,47 @@
+# For each of our JSON region payloads & SA2s: 1 month
+[[headers]]
+  for = "/data/regions/*.json"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=2628000
+    '''
+[[headers]]
+  for = "/*.geojson"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=2628000
+    '''
+
+# JS & CSS should be hashed with parcel: 1 month
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=2628000
+    '''
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=2628000
+    '''
+
+# Images: 1 year
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=31536000
+    '''
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=31536000
+    '''
