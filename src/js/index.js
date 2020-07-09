@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   map.addControl(new mapboxgl.GeolocateControl(), 'bottom-left')
 
   map.on('load', () => {
+    map.resize()
     sa2Data.then((data) => {
       const features = data.features
       map.addSource('sa2', {
