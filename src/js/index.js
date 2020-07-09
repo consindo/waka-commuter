@@ -25,18 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.operating-system-ctrl').innerText = '⌘ Cmd'
   }
 
-  // ios hack
-  const resize = () => {
-    document.body.style.setProperty(
-      '--real-height',
-      `${document.documentElement.clientHeight}px`
-    )
-  }
-  resize()
-  window.onresize = () => {
-    requestAnimationFrame(resize)
-  }
-
   const isMobile = document.documentElement.clientWidth <= 1020
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
@@ -49,11 +37,27 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   map.getCanvas().style.cursor = 'default'
 
-  // this gets all messed up because no on-resize, but whatever
+  // TODO:
+  // this gets all messed up because no resize event
+  // but most people don't resize their browser (citation needed)
+  // it works good enough on 1440p / 2
   if (isMobile) {
     map.addControl(new mapboxgl.AttributionControl(), 'top-right')
   } else {
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+  }
+
+  // ios hack
+  const resize = () => {
+    document.body.style.setProperty(
+      '--real-height',
+      `${document.documentElement.clientHeight}px`
+    )
+    map.resize()
+  }
+  resize()
+  window.onresize = () => {
+    requestAnimationFrame(resize)
   }
 
   map.on('load', () => {
@@ -88,7 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let activeBlock = null
       let needFrame = true
+      let isTouch = false
+      map.on('touchstart', 'sa2-fill', () => (isTouch = true))
       map.on('mousemove', 'sa2-fill', (e) => {
+        if (isTouch) return
         const meshblock = e.features[0]
         if (meshblock != null && activeBlock !== meshblock.id) {
           map.setFeatureState(
@@ -139,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       map.on('mouseleave', 'sa2-fill', (e) => {
+        isTouch = false
         map.setFeatureState(
           {
             source: 'sa2',

@@ -20,7 +20,7 @@
 }
 
 .nav-header h2 {
-  margin: 0.25rem 0 0;
+  margin: 0.15rem 0 0.25rem;
   font-size: 2rem;
   line-height: 2.4rem;
   white-space: pre;
@@ -62,7 +62,7 @@
   margin-bottom: 0.55rem;
   background: #111;
   border-radius: 50%;
-  transition: 200ms ease transform;
+  transition: 200ms ease all;
 }
 
 .map-view .nav-header button.btn-expand {
@@ -101,7 +101,16 @@
 
 @media (max-width: 1020px) {
   .nav-header button.btn-expand {
+    transform: translate(36px, 0);
     display: inline-block;
+  }
+  .nav-header button.btn-close {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .map-view .nav-header button.btn-close {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 

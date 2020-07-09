@@ -49,6 +49,7 @@ class PopulationBubbles extends LitElement {
     mapTooltip.setAttribute('locationContext', 'single')
     mapTooltip.setAttribute('percentage', 'true')
     mapTooltip.setAttribute('showOnly', this.showOnly)
+    mapTooltip.setAttribute('opacity', 0)
 
     const rawData = this.data
     const data = rawData
@@ -67,6 +68,7 @@ class PopulationBubbles extends LitElement {
     // defines the size of the circles
     const size = d3.scaleSqrt().domain([0, 1]).range([25, 85])
 
+    let isTouch = false
     let needFrame = true
     const node = svg
       .append('g')
@@ -85,11 +87,16 @@ class PopulationBubbles extends LitElement {
         // element will be disposed when the next page loads
         mapTooltip.setAttribute('loading', true)
       })
+      .on('touchstart', () => {
+        isTouch = true
+      })
       .on('mouseover', function () {
+        if (isTouch) return
         d3.select(this).style('opacity', 0.8)
         mapTooltip.setAttribute('opacity', 1)
       })
       .on('mouseleave', function () {
+        isTouch = false
         d3.select(this).style('opacity', 1)
         mapTooltip.setAttribute('opacity', 0)
       })

@@ -185,6 +185,7 @@ class TravelMode extends LitElement {
       .attr('transform', 'translate(0,' + height + ')')
       .call(d3.axisBottom(x).ticks(5).tickSize(-height).tickFormat(''))
 
+    let isTouch = false
     let needFrame = true
     g.append('g')
       .selectAll('g')
@@ -200,8 +201,17 @@ class TravelMode extends LitElement {
       .attr('y', (d) => y(d.data.category))
       .attr('height', y.bandwidth() - 3)
       .attr('width', (d) => x(d[1]) - x(d[0]))
-      .on('mouseover', () => graphTooltip.setAttribute('opacity', 1))
-      .on('mouseleave', () => graphTooltip.setAttribute('opacity', 0))
+      .on('touchstart', () => {
+        isTouch = true
+      })
+      .on('mouseover', () => {
+        if (isTouch) return
+        graphTooltip.setAttribute('opacity', 1)
+      })
+      .on('mouseleave', () => {
+        isTouch = false
+        graphTooltip.setAttribute('opacity', 0)
+      })
       .on('mousemove', function (d) {
         if (needFrame) {
           needFrame = false
