@@ -6,6 +6,8 @@
   top: 0;
   display: flex;
   margin-bottom: 2rem;
+  height: 110px;
+  box-sizing: border-box;
 }
 
 .nav-header .title {

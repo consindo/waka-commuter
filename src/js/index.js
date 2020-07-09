@@ -25,20 +25,41 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.operating-system-ctrl').innerText = '⌘ Cmd'
   }
 
+  // ios hack
+  const resize = () => {
+    document.body.style.setProperty(
+      '--real-height',
+      `${document.documentElement.clientHeight}px`
+    )
+  }
+  resize()
+  window.onresize = () => {
+    requestAnimationFrame(resize)
+  }
+
+  const isMobile = document.documentElement.clientWidth <= 1020
   mapboxgl.accessToken = token
   const map = new mapboxgl.Map({
     container: 'map-content',
     style: 'mapbox://styles/mapbox/dark-v10?optimize=true',
     center: [173, -40],
-    zoom: 5.5,
-    logoPosition: 'bottom-right',
+    zoom: isMobile ? 4 : 5.5,
+    logoPosition: isMobile ? 'bottom-left' : 'bottom-right',
+    attributionControl: !isMobile,
   })
   map.getCanvas().style.cursor = 'default'
-  map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
-  map.addControl(new mapboxgl.GeolocateControl(), 'bottom-left')
+
+  // this gets all messed up because no on-resize, but whatever
+  if (isMobile) {
+    map.addControl(new mapboxgl.AttributionControl(), 'top-right')
+  } else {
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+  }
 
   map.on('load', () => {
+    // resize hacks for edge / chrome
     map.resize()
+
     sa2Data.then((data) => {
       const features = data.features
       map.addSource('sa2', {
@@ -251,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
           zoom: zoom,
           essential: true,
         })
+        document.getElementById('app').classList.add('map-view')
       }
       // also probably shouldn't be in here
       const regionOptions = document.querySelectorAll('.region-option')

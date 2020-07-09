@@ -25,6 +25,70 @@
   line-height: 1.35;
 }
 
+.splash-controls {
+  display: none;
+  width: 24px;
+  padding: 0 0.25rem 0 0.25rem;
+  text-align: right;
+}
+.splash-controls button {
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+  padding: 0.25rem;
+  margin: 1.25rem 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 50%;
+  transition: 200ms ease transform;
+}
+.map-view .splash-controls button {
+  transform: rotate(-180deg);
+}
+.splash-controls button img {
+  vertical-align: top;
+  width: 24px;
+  height: 24px;
+}
+.splash-controls button.btn-close:hover {
+  background: #000;
+}
+.splash-controls button.btn-close:active {
+  background: #333;
+}
+
+@media (max-width: 1020px) {
+  .splash-bg {
+    padding: 1rem 1rem;
+    display: flex;
+    height: 110px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .splash-bg h2 {
+    margin: 0.1rem 0 0.25rem;
+    font-size: 1.5rem;
+  }
+  .splash-bg p {
+    margin: 0;
+    font-size: 0.9rem;
+    max-width: 300px;
+  }
+  .splash-bg .desktop {
+    display: none;
+  }
+  .splash-content {
+    flex: 1;
+  }
+  .splash-controls {
+    display: block;
+  }
+}
+
 .region-options {
   font-size: 0;
   text-align: center;
@@ -37,12 +101,6 @@
   padding: 0.5rem;
   box-sizing: border-box;
   vertical-align: top;
-}
-
-@media (max-width: 1500px) {
-  .region-option {
-    width: 50%;
-  }
 }
 
 .region-option h3 {
@@ -82,6 +140,17 @@
 
 .region-option h3:active {
   transform: scale(1);
+}
+
+@media (max-width: 1500px) {
+  .region-option {
+    width: 50%;
+  }
+}
+@media (max-width: 500px) {
+  .region-option h3 {
+    height: 110px;
+  }
 }
 
 .nz-akl {

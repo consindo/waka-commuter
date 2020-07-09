@@ -45,3 +45,10 @@
     public,
     max-age=31536000
     '''
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=31536000
+    '''
