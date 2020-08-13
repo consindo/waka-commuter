@@ -92,6 +92,15 @@ h3 {
   font-size: 1rem;
 }
 
+.mode-container h4 a {
+  color: #ccc;
+  font-weight: normal;
+  text-decoration: none;
+}
+.mode-container h4 a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 1500px) {
   #details {
     width: 600px;

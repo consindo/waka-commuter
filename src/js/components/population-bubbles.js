@@ -51,6 +51,16 @@ class PopulationBubbles extends LitElement {
     mapTooltip.setAttribute('showOnly', this.showOnly)
     mapTooltip.setAttribute('opacity', 0)
 
+    svg
+      .append('a')
+      .attr('href', 'https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/')
+      .append('text')
+      .text('Commuter View')
+      .attr('y', this.height - 12)
+      .attr('x', this.width - 95)
+      .style('fill', '#ddd')
+      .style('font-size', '12px')
+
     const rawData = this.data
     const data = rawData
       .map((i) => ({
