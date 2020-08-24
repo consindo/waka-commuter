@@ -135,14 +135,14 @@ class DestinationBlurb extends LitElement {
             <strong class="arrivals"
               >${vars.regionCount} different
               ${vars.regionCount === 1 ? 'area' : 'areas'}</strong
-            >, the majority being
+            >, the largest share being
             <strong>
               ${vars.topRegion} (${vars.topRegionCount.toLocaleString()}
               people—${vars.topRegionPercentage}% of arrivals)</strong
             >.`}
       ${vars.popularPercentage === -1
         ? ''
-        : html`The most popular way to arrive to ${vars.destination} is to
+        : html`The most common way to arrive to ${vars.destination} is to
             <strong>
               ${this.humanMode(vars.popularMode)}
               (${vars.popularPercentage}%)</strong
@@ -174,7 +174,7 @@ class DestinationBlurb extends LitElement {
       ${vars.popularPercentage === -1
         ? ''
         : html`To depart to ${vars.destination}, people in ${vars.placeReduced}
-            mostly
+            most often
             <strong>
               ${this.humanMode(vars.popularMode)}
               (${vars.popularPercentage}%)</strong
