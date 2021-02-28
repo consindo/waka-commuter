@@ -1,0 +1,3 @@
+[submodule "commuterview-extras"]
+	path = commuterview-extras
+	url = https://github.com/consindo/commuterview-extras

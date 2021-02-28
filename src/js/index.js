@@ -1,3 +1,4 @@
+import { getSource } from './sources.js'
 import {
   getData,
   getLocation,
@@ -12,10 +13,10 @@ import { setDetails, hideDetails } from './views/details-render.js'
 import Dispatcher from './dispatcher.js'
 import './components/map-tooltip.js'
 
-const sa2File = require('../shapes/sa2-optimized.geojson')
 const token = process.env.MAPBOX_TOKEN
 
-const sa2Data = fetch(sa2File).then((res) => res.json())
+const source = getSource()
+const sa2Data = fetch(source.shapeFile).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
   bindDetailsEvents()
   const mapTooltip = document.createElement('map-tooltip')
