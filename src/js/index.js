@@ -31,8 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const map = new mapboxgl.Map({
     container: 'map-content',
     style: 'mapbox://styles/mapbox/dark-v10?optimize=true',
-    center: [173, -40],
-    zoom: isMobile ? 4 : 5.5,
+    center: source.initialPosition,
+    zoom: isMobile
+      ? source.initialPosition[2] - 1.5
+      : source.initialPosition[2],
     logoPosition: isMobile ? 'bottom-left' : 'bottom-right',
     attributionControl: !isMobile,
   })

@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const csv = require('csv-parser')
+const stripBom = require('strip-bom-stream')
 
 const filenames = [
   {
@@ -25,6 +26,7 @@ const filenames = [
 const parse = (inputFilename, outputFilename) => {
   const results = {}
   fs.createReadStream(inputFilename)
+    .pipe(stripBom())
     .pipe(csv())
     .on('data', (data) => {
       // doing a big aggregate

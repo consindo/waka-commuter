@@ -11,19 +11,24 @@
     "process:area": "node data_sources/parsers/area-to-area-parser.js",
     "process:travel": "node data_sources/parsers/workplace-travel-split-parser.js",
     "process:combine": "node data_sources/parsers/combine-files.js",
-    "process:copy": "node data_sources/parsers/split-regions.js",
+    "process:copy": "node data_sources/parsers/split-regions.js data_sources/outputs",
+    "process:wsp": "npm run process:wsp:area && npm run process:wsp:combine && npm run process:wsp:copy",
+    "process:wsp:area": "node commuterview-extras/data_sources/parsers/wsp/area-to-area-parser.js",
+    "process:wsp:combine": "node commuterview-extras/data_sources/parsers/wsp/combine-files.js",
+    "process:wsp:copy": "node data_sources/parsers/split-regions.js commuterview-extras/data_sources/outputs/wsp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lit-element": "^2.4.0",
-    "mapbox-gl": "^2.0.1",
+    "mapbox-gl": "^2.1.1",
     "parcel": "^1.12.4",
     "polylabel": "^1.1.0"
   },
   "devDependencies": {
     "csv-parser": "^3.0.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "strip-bom-stream": "^4.0.0"
   }
 }

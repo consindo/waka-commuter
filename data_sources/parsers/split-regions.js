@@ -14,7 +14,9 @@ const transformFilename = (name) => {
 const splitRegions = () => {
   const data = JSON.parse(
     fs
-      .readFileSync(path.join(__dirname, '../outputs', 'combined-output.json'))
+      .readFileSync(
+        path.join(__dirname, '../../', process.argv[2], 'combined-output.json')
+      )
       .toString()
   )
 
