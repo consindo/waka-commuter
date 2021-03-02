@@ -327,42 +327,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
         getData(regionName).then((data) => {
           // depending on the toggle, filter out workspace or education data
-          const sources = data
-            .map((source) => {
-              if (segment === 'all') {
-                return [source.workplace, source.education]
-              } else if (segment === 'workplace') {
-                return [source.workplace]
-              } else if (segment === 'education') {
-                return [source.education]
+          const dataSources = data
+            .map((dataSource) => {
+              // retuns the matching segment
+              if (dataSource[segment] != null) {
+                return [dataSource[segment]]
+              } else if (segment === 'all') {
+                return source.segments.map((key) => dataSource[key])
+              } else {
+                console.error('Could not find segment', segment)
               }
             })
             .flat()
 
+          // relies on no colons being in the keyNames
           const sourceKeys = regionName
             .map((i) => {
               if (segment === 'all') {
-                return [[i, 'workplace'].join(':'), [i, 'education'].join(':')]
-              } else if (segment === 'workplace') {
-                return [[i, 'workplace'].join(':')]
-              } else if (segment === 'education') {
-                return [i, 'education'].join(':')
+                return source.segments.map((key) => [i, key].join(':'))
+              } else {
+                return [[i, segment].join(':')]
               }
             })
             .flat()
 
-          const arriveData = transformData(features, sources, 'arriveFrom')
-          const departData = transformData(features, sources, 'departTo')
-          const arriveModeData = transformModeData(
-            sources,
-            sourceKeys,
-            'arrivalModes'
-          )
-          const departureModeData = transformModeData(
-            sources,
-            sourceKeys,
-            'departureModes'
-          )
+          const arriveData = transformData(features, dataSources, 'arriveFrom')
+          const departData = transformData(features, dataSources, 'departTo')
+
+          let arriveModeData = null
+          let departureModeData = null
+          if (source.modeGraphs === true) {
+            arriveModeData = transformModeData(
+              dataSources,
+              sourceKeys,
+              'arrivalModes'
+            )
+            departureModeData = transformModeData(
+              dataSources,
+              sourceKeys,
+              'departureModes'
+            )
+          }
 
           Dispatcher.trigger('update-blocks', {
             regionName,

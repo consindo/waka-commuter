@@ -85,8 +85,16 @@ class MapTooltip extends LitElement {
     const departData = this.parsedData.departData[this.id] || []
     const arriveData = this.parsedData.arriveData[this.id] || []
 
-    const departCount = departData[0] || 0
-    const arrivalCount = arriveData[0] || 0
+    const departCount = departData[0]
+      ? Number.isInteger(departData[0])
+        ? departData[0]
+        : departData[0].toFixed(2)
+      : 0
+    const arrivalCount = arriveData[0]
+      ? Number.isInteger(arriveData[0])
+        ? arriveData[0]
+        : arriveData[0].toFixed(2)
+      : 0
 
     const departPercentage = Math.round((departData[1] || 0) * 10000) / 100
     const arrivalPercentage = Math.round((arriveData[1] || 0) * 10000) / 100
@@ -98,9 +106,7 @@ class MapTooltip extends LitElement {
       ${percentage ? `(${departPercentage}%)` : ''}
       ${singleContext ? html` &larr; from ${regions}` : ''}<br />`
     const arrivalsBlock = html`
-      <strong class="arrivals">
-        ${arrivalCount} arrivals
-      </strong>
+      <strong class="arrivals"> ${arrivalCount} arrivals </strong>
       ${percentage ? `(${arrivalPercentage}%)` : ''}
       ${singleContext ? html`&rarr; to ${regions}` : ''}
     `

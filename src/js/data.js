@@ -51,7 +51,7 @@ export const getLocation = (features, name) => {
   try {
     geometry = features.find((i) => i.properties.name === name).geometry
   } catch (err) {
-    console.error('Could not find', name, err)
+    console.warn('Could not find area', name)
     return { lat: 0, lng: 0 }
   }
 

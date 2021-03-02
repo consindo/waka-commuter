@@ -19,6 +19,8 @@ const setBubble = (container, location, data, tooltipData, showOnly) => {
 }
 
 const setMode = (container, data) => {
+  // effectively disables the graphs
+  if (data === null) return
   const mode = document.createElement('travel-mode')
   mode.setAttribute('data', JSON.stringify(data))
 
@@ -35,6 +37,7 @@ const setBlurb = (
   destinationData,
   modeData
 ) => {
+  if (modeData === null) return
   const blurb = document.createElement('destination-blurb')
   blurb.setAttribute('currentRegions', JSON.stringify(currentRegions))
   blurb.setAttribute('mode', mode)
@@ -60,9 +63,12 @@ export const setDetails = (
   document.querySelector('.details-location').classList.remove('hidden')
   const arriveContainer = document.querySelector('.arrive-from.graph-container')
   const departContainer = document.querySelector('.depart-to.graph-container')
-  document.querySelector(
-    '.population-count'
-  ).innerText = departModeData.Total.Total.toLocaleString()
+
+  if (departModeData != null) {
+    document.querySelector(
+      '.population-count'
+    ).innerText = departModeData.Total.Total.toLocaleString()
+  }
 
   const populationLabel = document.querySelector('.population-label')
   if (segment === 'all') {
