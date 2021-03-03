@@ -33,6 +33,7 @@ class MapTooltip extends LitElement {
       h4 {
         margin: 0;
         font-size: 1.2rem;
+        text-transform: capitalize;
       }
       .none {
         color: #999;
@@ -81,6 +82,7 @@ class MapTooltip extends LitElement {
     const percentage = this.percentage === true
     const loading = this.loading === true
     const { mode } = this.parsedData
+    const id = humanRegionName([this.id || ''], 'condensed')
     const regions = humanRegionName(this.parsedData.currentRegions, 'condensed')
     const departData = this.parsedData.departData[this.id] || []
     const arriveData = this.parsedData.arriveData[this.id] || []
@@ -115,11 +117,11 @@ class MapTooltip extends LitElement {
       ${this.showOnly === 'departures' ? '' : arrivalsBlock}
     `
 
-    if (regions === this.id) {
+    if (regions === id) {
       subText = html`<strong class="wfh">
           ${departCount} live & ${mode.join('/')}
         </strong>
-        in ${this.id}
+        in ${id}
         ${percentage
           ? html` <br />
               <small>
@@ -142,7 +144,7 @@ class MapTooltip extends LitElement {
         style="opacity: ${this.opacity}; transform: translate(${this.x +
         20}px, ${this.y}px);"
       >
-        <h4>${this.id}</h4>
+        <h4>${id}</h4>
         ${loading ? html`<strong class="none">Loading...</strong>` : ''}
         ${this.parsedData.currentRegions.length !== 0 && !loading
           ? subText

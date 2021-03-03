@@ -16,6 +16,10 @@ import './components/map-tooltip.js'
 const token = process.env.MAPBOX_TOKEN
 
 const source = getSource()
+if (!source.isAllSegmentEnabled) {
+  Dispatcher.dataSegment = source.segments[0]
+}
+
 const sa2Data = fetch(source.shapeFile).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
   bindDetailsEvents()
@@ -359,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           let arriveModeData = null
           let departureModeData = null
-          if (source.modeGraphs === true) {
+          if (source.isModeGraphsEnabled === true) {
             arriveModeData = transformModeData(
               dataSources,
               sourceKeys,

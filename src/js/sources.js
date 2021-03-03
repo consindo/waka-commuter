@@ -3,13 +3,15 @@ const sources = {
   commuterview: {
     shapeFile: require('../shapes/sa2-optimized.geojson'),
     initialPosition: [173, -40, 5.5],
-    modeGraphs: true,
+    isModeGraphsEnabled: true,
+    isAllSegmentEnabled: true,
     segments: ['workplace', 'education'],
   },
   wsp: {
     shapeFile: extras.shapes?.['wsp-zones'],
     initialPosition: [172.5, -43.53, 9.5],
-    modeGraphs: false,
+    isModeGraphsEnabled: false,
+    isAllSegmentEnabled: false,
     segments: [
       '2018-am2hr',
       '2018-ip4hr',

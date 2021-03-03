@@ -53,7 +53,10 @@ class PopulationBubbles extends LitElement {
 
     svg
       .append('a')
-      .attr('href', 'https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/')
+      .attr(
+        'href',
+        'https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/'
+      )
       .append('text')
       .text('Commuter View')
       .attr('y', this.height - 12)
@@ -63,17 +66,16 @@ class PopulationBubbles extends LitElement {
 
     const rawData = this.data
     const data = rawData
+      .sort((a, b) => b.percentage - a.percentage)
+      .slice(0, 30)
       .map((i) => ({
         key: i.key,
         value: i.value,
         percentage: i.percentage,
-        x: (i.x - this.scale.lng) * 400,
-        y: (i.y - this.scale.lat) * -300,
+        // if i.x or i.y is 0, means that the zone is missing on the map
+        x: i.x ? (i.x - this.scale.lng) * 400 : 0,
+        y: i.y ? (i.y - this.scale.lat) * -300 : 0,
       }))
-      .sort((a, b) => {
-        return b.percentage - a.percentage
-      })
-      .slice(0, 30)
 
     // defines the size of the circles
     const size = d3.scaleSqrt().domain([0, 1]).range([25, 85])
