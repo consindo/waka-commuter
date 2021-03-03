@@ -9,18 +9,23 @@ export const transformFilename = (name) =>
     .replace(/[()\/]/g, '')
 
 export const humanRegionName = (nameArray, mode) => {
+  const isZone = nameArray.length > 0 && !isNaN(parseInt(nameArray[0][0]))
   if (nameArray.length === 1) {
-    return nameArray[0]
+    return `${isZone ? 'zone ' : ''}${nameArray[0]}`
   } else if (mode === 'condensed') {
-    return `these ${nameArray.length} areas`
+    return `these ${nameArray.length} ${isZone ? 'zones' : 'areas'}`
   } else if (nameArray.length === 2) {
-    return nameArray.join(' & ')
+    return `${isZone ? 'zones ' : ''}${nameArray.join(' & ')}`
   }
 
   if (mode === 'full') {
-    return `${nameArray.slice(0, -1).join(', ')}, and ${nameArray.slice(-1)}`
+    return `${isZone ? 'zones' : ''} ${nameArray
+      .slice(0, -1)
+      .join(', ')}, and ${nameArray.slice(-1)}`
   } else if (mode === 'title') {
-    return `${nameArray[0]} & ${nameArray.length - 1} other areas`
+    return `${nameArray[0]} & ${nameArray.length - 1} other ${
+      isZone ? 'zones' : 'areas'
+    }`
   }
   // should never get here
   return nameArray.join(', ')

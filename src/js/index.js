@@ -312,10 +312,13 @@ document.addEventListener('DOMContentLoaded', () => {
           regionName,
           'full'
         )
-        document.title = `${humanRegionName(
+        let titleString = `${humanRegionName(
           regionName,
           'title'
         )} - Commuter - Waka`
+        titleString = titleString.charAt(0).toUpperCase() + titleString.slice(1)
+        document.title = titleString
+
         document
           .querySelector('.population-link')
           .setAttribute(

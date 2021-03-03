@@ -20,7 +20,12 @@ const setBubble = (container, location, data, tooltipData, showOnly) => {
 
 const setMode = (container, data) => {
   // effectively disables the graphs
-  if (data === null) return
+  if (data === null) {
+    Array.from(document.querySelectorAll('.mode-container')).forEach(
+      (el) => (el.style.display = 'none')
+    )
+    return
+  }
   const mode = document.createElement('travel-mode')
   mode.setAttribute('data', JSON.stringify(data))
 
@@ -37,7 +42,6 @@ const setBlurb = (
   destinationData,
   modeData
 ) => {
-  if (modeData === null) return
   const blurb = document.createElement('destination-blurb')
   blurb.setAttribute('currentRegions', JSON.stringify(currentRegions))
   blurb.setAttribute('mode', mode)

@@ -26,6 +26,7 @@
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-transform: capitalize;
 }
 
 .nav-header a {

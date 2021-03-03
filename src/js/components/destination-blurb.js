@@ -88,15 +88,19 @@ class DestinationBlurb extends LitElement {
       destination = 'school'
     }
 
-    const searchObj = this.modeData.Total
-    const popularMode = Object.keys(searchObj)
-      .filter((key) => key !== 'Total')
-      .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b))
+    let popularMode = null
+    let popularPercentage = -1 // will prevent it from showing
+    if (this.modeData != null) {
+      const searchObj = this.modeData.Total
+      popularMode = Object.keys(searchObj)
+        .filter((key) => key !== 'Total')
+        .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b))
 
-    const popularPercentage =
-      searchObj.Total === 0
-        ? -1
-        : Math.round((searchObj[popularMode] / searchObj.Total) * 100)
+      popularPercentage =
+        searchObj.Total === 0
+          ? -1
+          : Math.round((searchObj[popularMode] / searchObj.Total) * 100)
+    }
 
     return {
       travellersCount,
@@ -137,7 +141,8 @@ class DestinationBlurb extends LitElement {
               ${vars.regionCount === 1 ? 'area' : 'areas'}</strong
             >, the largest share being
             <strong>
-              ${vars.topRegion} (${vars.topRegionCount.toLocaleString()}
+              ${humanRegionName([vars.topRegion], 'full')}
+              (${vars.topRegionCount.toLocaleString()}
               people—${vars.topRegionPercentage}% of arrivals)</strong
             >.`}
       ${vars.popularPercentage === -1
