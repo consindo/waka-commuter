@@ -7,7 +7,7 @@ const sources = {
     isAllSegmentEnabled: true,
     segments: ['workplace', 'education'],
     detailsControls: ['All', 'Workplace', 'Education'],
-    detailsControlFn: (value) => value.toLowerCase(),
+    brandingClass: '',
   },
   wsp: {
     shapeFile: extras.shapes?.['wsp-zones'],
@@ -34,7 +34,7 @@ const sources = {
     ],
     detailsControls: ['AM2hr', 'IP4hr', 'PM2hr', 'DY'],
     detailsSecondaryControls: ['2018', '2028', '2038', '2048'],
-    detailsControlFn: (value) => `2018-${value.toLowerCase()}`,
+    brandingClass: 'wsp',
   },
 }
 

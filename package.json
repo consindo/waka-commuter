@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "npm run build:js && npm run process",
+    "build:wsp": "npm run build:js && npm run process:wsp",
     "build:js": "parcel build src/index.html",
     "process": "npm run process:area && npm run process:travel && npm run process:combine && npm run process:copy",
     "process:area": "node data_sources/parsers/area-to-area-parser.js",

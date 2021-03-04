@@ -27,6 +27,8 @@ if (!source.isAllSegmentEnabled) {
 const sa2Data = fetch(source.shapeFile).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
   setDetailsControls(source.detailsControls, source.detailsSecondaryControls)
+  document.querySelector('.branding').classList.add(source.brandingClass)
+
   bindDetailsEvents()
   const mapTooltip = document.createElement('map-tooltip')
   document.getElementById('map').appendChild(mapTooltip)
