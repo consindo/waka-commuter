@@ -113,3 +113,25 @@ export const hideDetails = () => {
   document.querySelector('.details-splash').classList.remove('hidden')
   document.querySelector('.details-location').classList.add('hidden')
 }
+
+export const setDetailsControls = (
+  detailsControls,
+  detailsSecondaryControls
+) => {
+  const mapFn = (s) =>
+    `<a href="#" class="btn-segment" data-segment=${s}>${s}</a>`
+
+  const container = document.querySelector('.nav-header nav.primary-controls')
+  container.innerHTML = detailsControls.map(mapFn).join(' &middot; ')
+  container.querySelector('.btn-segment').classList.add('selected')
+
+  if (detailsSecondaryControls != null) {
+    const secondaryContainer = document.querySelector(
+      '.nav-header nav.secondary-controls'
+    )
+    secondaryContainer.innerHTML = detailsSecondaryControls
+      .map(mapFn)
+      .join(' &middot; ')
+    secondaryContainer.querySelector('.btn-segment').classList.add('selected')
+  }
+}

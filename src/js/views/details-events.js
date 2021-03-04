@@ -20,9 +20,19 @@ const toggleDirection = (direction) => (e) => {
   linkHack(e, direction)
   Dispatcher.setDirection(direction)
 }
-const toggleSegment = (segment) => (e) => {
+const toggleSegment = (e) => {
   linkHack(e)
-  Dispatcher.setSegment(segment)
+
+  // only currently works with the statsnz and wsp sources
+  const primary = document.querySelector('nav.primary-controls .selected')
+  const secondary = document.querySelector('nav.secondary-controls .selected')
+
+  let newSegment = primary.dataset.segment.toLowerCase()
+  if (secondary) {
+    newSegment = [secondary.dataset.segment.toLowerCase(), newSegment].join('-')
+  }
+
+  Dispatcher.setSegment(newSegment)
 }
 
 // events
@@ -37,19 +47,13 @@ export const bindDetailsEvents = () => {
     .querySelector('.btn-direction-departures')
     .addEventListener('click', toggleDirection('departures'))
 
-  document
-    .querySelector('.btn-segment-all')
-    .addEventListener('click', toggleSegment('all'))
-  document
-    .querySelector('.btn-segment-workplace')
-    .addEventListener('click', toggleSegment('workplace'))
-  document
-    .querySelector('.btn-segment-education')
-    .addEventListener('click', toggleSegment('education'))
-
   document.querySelector('.btn-close').addEventListener('click', () => {
     Dispatcher.setRegions([])
   })
+
+  for (const node of document.querySelectorAll('.btn-segment')) {
+    node.addEventListener('click', toggleSegment)
+  }
 
   for (const node of document.querySelectorAll('.btn-expand')) {
     node.addEventListener('click', () => {

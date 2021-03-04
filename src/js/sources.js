@@ -6,6 +6,8 @@ const sources = {
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,
     segments: ['workplace', 'education'],
+    detailsControls: ['All', 'Workplace', 'Education'],
+    detailsControlFn: (value) => value.toLowerCase(),
   },
   wsp: {
     shapeFile: extras.shapes?.['wsp-zones'],
@@ -30,6 +32,9 @@ const sources = {
       '2048-pm2hr',
       '2048-dy',
     ],
+    detailsControls: ['AM2hr', 'IP4hr', 'PM2hr', 'DY'],
+    detailsSecondaryControls: ['2018', '2028', '2038', '2048'],
+    detailsControlFn: (value) => `2018-${value.toLowerCase()}`,
   },
 }
 

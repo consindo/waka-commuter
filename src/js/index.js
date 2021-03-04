@@ -9,7 +9,11 @@ import {
 } from './data.js'
 import { areaFill, lineFill, pointsFill } from './views/map-styles.js'
 import { bindDetailsEvents } from './views/details-events.js'
-import { setDetails, hideDetails } from './views/details-render.js'
+import {
+  setDetailsControls,
+  setDetails,
+  hideDetails,
+} from './views/details-render.js'
 import Dispatcher from './dispatcher.js'
 import './components/map-tooltip.js'
 
@@ -22,6 +26,7 @@ if (!source.isAllSegmentEnabled) {
 
 const sa2Data = fetch(source.shapeFile).then((res) => res.json())
 document.addEventListener('DOMContentLoaded', () => {
+  setDetailsControls(source.detailsControls, source.detailsSecondaryControls)
   bindDetailsEvents()
   const mapTooltip = document.createElement('map-tooltip')
   document.getElementById('map').appendChild(mapTooltip)
