@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html",
     "build": "npm run build:js && npm run process",
     "build:wsp": "npm run build:js && npm run process:wsp",
-    "build:js": "parcel build src/index.html",
+    "build:js": "rollup -c",
     "process": "npm run process:area && npm run process:travel && npm run process:combine && npm run process:copy",
     "process:area": "node data_sources/parsers/area-to-area-parser.js",
     "process:travel": "node data_sources/parsers/workplace-travel-split-parser.js",
@@ -17,19 +16,31 @@
     "process:wsp:area": "node commuterview-extras/data_sources/parsers/wsp/area-to-area-parser.js",
     "process:wsp:combine": "node commuterview-extras/data_sources/parsers/wsp/combine-files.js",
     "process:wsp:copy": "node data_sources/parsers/split-regions.js commuterview-extras/data_sources/outputs/wsp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "rollup -c -w",
+    "start": "sirv dist"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lit-element": "^2.4.0",
     "mapbox-gl": "^2.1.1",
-    "parcel": "^1.12.4",
-    "polylabel": "^1.1.0"
+    "polylabel": "^1.1.0",
+    "sirv-cli": "^1.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-replace": "^2.4.1",
     "csv-parser": "^3.0.0",
     "prettier": "^2.2.1",
-    "strip-bom-stream": "^4.0.0"
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "strip-bom-stream": "^4.0.0",
+    "svelte": "^3.0.0"
   }
 }

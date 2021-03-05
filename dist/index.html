@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
     <title>Commuter - Waka</title>
+
     <meta
       name="description"
       content="Discover how we get to work & education, using travel data from the New Zealand 2018 Census"
@@ -10,7 +12,8 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#111111" />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/build/bundle.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
       rel="stylesheet"
@@ -28,7 +31,7 @@
       defer
       src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"
     ></script>
-    <script defer src="js/index.js"></script>
+    <script defer src="/build/bundle.js"></script>
     <script async src="https://d3js.org/d3.v5.min.js"></script>
 
     <meta property="og:title" content="Waka Commuter" />
@@ -55,12 +58,12 @@
       content="https://commuter.waka.app/splash.f36493d7.jpg"
     />
 
-    <link rel="shortcut icon" href="favicon.ico" />
     <link rel="icon" sizes="16x16 32x32 64x64" href="favicon.ico" />
     <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
   </head>
+
   <body>
     <div class="branding">
       <h1>Commuter</h1>
@@ -102,24 +105,7 @@
       </div>
       <div id="details">
         <div class="details-splash">
-          <div class="splash-bg">
-            <div class="splash-content">
-              <h2>Explore how we travel</h2>
-              <p>
-                Discover how we get to work & education, using travel data from
-                the 2018 Census.
-                <span class="desktop"
-                  >Get started by choosing an area on the map, or jump to a
-                  region below.</span
-                >
-              </p>
-            </div>
-            <div class="splash-controls">
-              <button title="Learn More" class="btn-expand">
-                <img alt="Toggle Details" src="expand.svg" />
-              </button>
-            </div>
-          </div>
+          <div id="svelte-app" class="splash-bg"></div>
           <div class="region-options">
             <div
               class="region-option"

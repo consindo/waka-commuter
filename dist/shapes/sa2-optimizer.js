@@ -1,5 +1,5 @@
 const fs = require('fs')
-const geojson = JSON.parse(fs.readFileSync('./sa2.geojson'))
+const geojson = JSON.parse(fs.readFileSync('./sa2.json'))
 
 const transformFilename = (name) => {
   return name
@@ -53,5 +53,5 @@ geojson.features = geojson.features
     return !(isEmpty && isWater)
   })
 
-fs.writeFileSync('./sa2-optimized.geojson', JSON.stringify(geojson))
+fs.writeFileSync('./sa2-optimized.json', JSON.stringify(geojson))
 console.log('Processed!')
