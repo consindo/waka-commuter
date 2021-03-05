@@ -70,6 +70,7 @@ export default {
 			process: JSON.stringify({
 				env: {
 					MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
+					WAKA_COMMUTER_SOURCE: process.env.WAKA_COMMUTER_SOURCE,
 				},
 			}),
 		}),

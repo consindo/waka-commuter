@@ -3,4 +3,5 @@ data_sources/outputs/*
 .cache/
 dist/build/
 dist/data/
+dist/shapes/extras/
 .DS_Store

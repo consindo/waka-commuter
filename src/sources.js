@@ -1,4 +1,3 @@
-// import extras from '../../commuterview-extras/**/*-optimized.geojson'
 const sources = {
   commuterview: {
     shapeFile: '/shapes/sa2-optimized.json',
@@ -10,7 +9,7 @@ const sources = {
     brandingClass: '',
   },
   wsp: {
-    shapeFile: '/shapes/sa2-optimized.json',
+    shapeFile: '/shapes/extras/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
     isAllSegmentEnabled: false,
