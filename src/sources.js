@@ -1,7 +1,6 @@
-const extras = require('../../commuterview-extras/**/*-optimized.geojson')
 const sources = {
   commuterview: {
-    shapeFile: require('../shapes/sa2-optimized.geojson'),
+    shapeFile: '/shapes/sa2-optimized.json',
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,
@@ -10,7 +9,7 @@ const sources = {
     brandingClass: '',
   },
   wsp: {
-    shapeFile: extras.shapes?.['wsp-zones'],
+    shapeFile: '/shapes/extras/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
     isAllSegmentEnabled: false,

@@ -1,5 +1,7 @@
 node_modules/
 data_sources/outputs/*
 .cache/
-dist/
+dist/build/
+dist/data/
+dist/shapes/extras/
 .DS_Store

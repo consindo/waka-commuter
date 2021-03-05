@@ -11,7 +11,8 @@ This is competition code, so, well, it's not great. It uses Mapbox GL JS for map
 - Set the environment variable `MAPBOX_TOKEN` to your Mapbox Token. You can get a free one from the Mapbox website.
 - `npm run build` - to build everything - JS & datasets. You should run this first.
 - `npm run process` - to process all the data sets into static json.
-- `npm start` for local development
+- `npm start` - to serve the built version
+- `npm run dev` for local development
 - Check `package.json` for more scripts.
 
 ## Deployment
