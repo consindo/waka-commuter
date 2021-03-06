@@ -1,175 +1,6 @@
-.splash-bg {
-  background: linear-gradient(
-      120deg,
-      rgba(10, 0, 20, 0.8) 50%,
-      rgba(10, 0, 20, 0.4)
-    ),
-    url('./splash.jpg');
-  background-size: cover;
-  background-position: 50% 50%;
-  height: 400px;
-  padding: 4rem 2.5rem;
-  box-sizing: border-box;
-}
-
-.splash-bg h2 {
-  font-size: 3rem;
-  margin: 3.5rem 0 1rem;
-  text-shadow: 0 1px 3px #000;
-}
-.splash-bg p {
-  font-size: 1.35rem;
-  text-shadow: 0 1px 2px #000;
-  max-width: 600px;
-  margin: 0;
-  line-height: 1.35;
-}
-
-.splash-controls {
-  display: none;
-  width: 24px;
-  padding: 0 0.25rem 0 0.25rem;
-  text-align: right;
-}
-.splash-controls button {
-  border: 0;
-  background: transparent;
-  font-family: inherit;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  text-align: center;
-  padding: 0.25rem;
-  margin: 1.25rem 0;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 50%;
-  transition: 200ms ease transform;
-}
-.map-view .splash-controls button {
+/* needs to be moved to svelte native */
+.map-view .btn-expand {
   transform: rotate(-180deg);
-}
-.splash-controls button img {
-  vertical-align: top;
-  width: 24px;
-  height: 24px;
-}
-.splash-controls button.btn-close:hover {
-  background: #000;
-}
-.splash-controls button.btn-close:active {
-  background: #333;
-}
-
-@media (max-width: 1020px) {
-  .splash-bg {
-    padding: 1rem 1rem;
-    display: flex;
-    height: 110px;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
-  .splash-bg h2 {
-    margin: 0.1rem 0 0.25rem;
-    font-size: 1.5rem;
-  }
-  .splash-bg p {
-    margin: 0;
-    font-size: 0.9rem;
-    max-width: 300px;
-  }
-  .splash-bg .desktop {
-    display: none;
-  }
-  .splash-content {
-    flex: 1;
-  }
-  .splash-controls {
-    display: block;
-  }
-}
-
-.region-options {
-  font-size: 0;
-  text-align: center;
-  padding: 0.75rem 0.25rem;
-}
-
-.region-option {
-  width: 33%;
-  display: inline-block;
-  padding: 0.5rem;
-  box-sizing: border-box;
-  vertical-align: top;
-}
-
-.region-option h3 {
-  height: 140px;
-  padding: 0 0 0.5rem;
-  box-sizing: border-box;
-  line-height: 1;
-  font-size: 0.9rem;
-  text-align: center;
-  background-color: #222;
-  border-radius: 5px;
-  font-weight: 300;
-  margin: 0;
-  transition: 100ms ease transform;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  align-content: flex-end;
-  justify-content: flex-end;
-  background-size: cover;
-  text-shadow: 0 1px 1px #000, 0 0px 3px #000;
-}
-
-.region-option h3 span {
-  display: block;
-}
-
-.region-option h3 strong {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.region-option h3:hover {
-  transform: scale(1.02);
-}
-
-.region-option h3:active {
-  transform: scale(1);
-}
-
-@media (max-width: 1500px) {
-  .region-option {
-    width: 50%;
-  }
-}
-@media (max-width: 500px) {
-  .region-option h3 {
-    height: 110px;
-  }
-}
-
-.nz-akl {
-  background-image: url(./regions/nz-akl.jpg);
-}
-.nz-chc {
-  background-image: url(./regions/nz-chc.jpg);
-}
-.nz-wlg {
-  background-image: url(./regions/nz-wlg.jpg);
-}
-.nz-hlz {
-  background-image: url(./regions/nz-hlz.jpg);
-}
-.nz-trg {
-  background-image: url(./regions/nz-trg.jpg);
-}
-.nz-dud {
-  background-image: url(./regions/nz-dud.jpg);
 }
 
 .data-sources {
@@ -181,12 +12,14 @@
   line-height: 1.35;
 }
 
-.data-sources a, .tip-container a {
+.data-sources a,
+.tip-container a {
   color: #90caf9;
   text-decoration: none;
 }
 
-.data-sources a:hover, .tip-container a:hover {
+.data-sources a:hover,
+.tip-container a:hover {
   text-decoration: underline;
 }
 

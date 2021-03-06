@@ -19,7 +19,8 @@
     "shapes:wsp": "ncp commuterview-extras/shapes dist/shapes/extras",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c -w",
-    "start": "sirv dist"
+    "start": "sirv dist",
+    "prettier": "prettier --write src/**/*.svelte src/**/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -37,6 +38,7 @@
     "csv-parser": "^3.0.0",
     "ncp": "^2.0.0",
     "prettier": "^2.2.1",
+    "prettier-plugin-svelte": "^2.2.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
