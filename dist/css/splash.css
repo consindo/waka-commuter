@@ -3,31 +3,11 @@
   transform: rotate(-180deg);
 }
 
-.data-sources {
-  padding: 1rem 0 0.5rem;
-}
-
-.data-sources p {
-  padding: 0 var(--sidebar-padding);
-  line-height: 1.35;
-}
-
-.data-sources a,
 .tip-container a {
   color: #90caf9;
   text-decoration: none;
 }
 
-.data-sources a:hover,
 .tip-container a:hover {
   text-decoration: underline;
-}
-
-footer {
-  padding: 0 var(--sidebar-padding) 3rem;
-}
-footer a {
-  color: #999;
-  text-decoration: none;
-  font-size: 0.85rem;
 }

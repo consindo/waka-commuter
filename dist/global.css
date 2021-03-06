@@ -49,6 +49,15 @@ h3 {
   font-size: 1.5rem;
 }
 
+noscript {
+  margin: 2rem;
+}
+
+noscript p {
+  padding: 0 var(--sidebar-padding);
+  line-height: 1.35;
+}
+
 .graph-container {
   display: flex;
 }
