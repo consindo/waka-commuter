@@ -7,23 +7,7 @@
     max-age=2628000
     '''
 [[headers]]
-  for = "/*.geojson"
-  [headers.values]
-    cache-control = '''
-    public,
-    max-age=2628000
-    '''
-
-# JS & CSS should be hashed with parcel: 1 month
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    cache-control = '''
-    public,
-    max-age=2628000
-    '''
-[[headers]]
-  for = "/*.css"
+  for = "/shapes/*.json"
   [headers.values]
     cache-control = '''
     public,
