@@ -1,5 +1,7 @@
 <script>
   import Splash from './components/splash/Splash.svelte'
+
+  export let flyTo
 </script>
 
-<Splash />
+<Splash on:locationChange={flyTo} />

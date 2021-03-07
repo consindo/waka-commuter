@@ -1,4 +1,7 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+
   const regions = [
     {
       id: 'nz-akl',
@@ -58,6 +61,12 @@
       data-lat={region.lat}
       data-lng={region.lng}
       data-zoom={region.zoom}
+      on:click={() =>
+        dispatch('locationChange', {
+          lat: region.lat,
+          lng: region.lng,
+          zoom: region.zoom,
+        })}
     >
       <h3 style="background-image: url(/css/regions/{region.id}.jpg)">
         <strong>{region.primaryName}</strong>

@@ -21,11 +21,17 @@ import App from './App.svelte'
 const app = new App({
   target: document.getElementById('svelte-app'),
   props: {
-    name: 'world',
+    flyTo: (e) => {
+      const { lat, lng, zoom } = e.detail
+      window.mapboxMap.flyTo({
+        center: [lng, lat],
+        zoom,
+        essential: true,
+      })
+      document.getElementById('app').classList.add('map-view')
+    },
   },
 })
-
-export default app
 
 const token = process.env.MAPBOX_TOKEN
 
@@ -61,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logoPosition: isMobile ? 'bottom-left' : 'bottom-right',
     attributionControl: !isMobile,
   })
+  window.mapboxMap = map
   map.getCanvas().style.cursor = 'default'
 
   // TODO:
@@ -296,23 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       })
-
-      const handleRegion = (e) => {
-        const lat = e.currentTarget.dataset.lat
-        const lng = e.currentTarget.dataset.lng
-        const zoom = e.currentTarget.dataset.zoom
-        map.flyTo({
-          center: [lng, lat],
-          zoom: zoom,
-          essential: true,
-        })
-        document.getElementById('app').classList.add('map-view')
-      }
-      // also probably shouldn't be in here
-      const regionOptions = document.querySelectorAll('.region-option')
-      for (const option of regionOptions) {
-        option.addEventListener('click', handleRegion)
-      }
 
       Dispatcher.bind('clear-blocks', () => {
         document.querySelector('.map-legend').classList.add('hidden')

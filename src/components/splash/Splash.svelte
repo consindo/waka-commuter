@@ -5,5 +5,5 @@
 </script>
 
 <Banner />
-<Regions />
+<Regions on:locationChange />
 <DataSources />
