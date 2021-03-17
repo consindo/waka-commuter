@@ -4,6 +4,7 @@ const sources = {
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,
+    isMapAreaLabelsEnabled: false,
     segments: ['workplace', 'education'],
     detailsControls: ['All', 'Workplace', 'Education'],
     brandingClass: '',
@@ -13,6 +14,7 @@ const sources = {
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
     isAllSegmentEnabled: false,
+    isMapAreaLabelsEnabled: true,
     segments: [
       '2018-am2hr',
       '2018-ip4hr',

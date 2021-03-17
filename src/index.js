@@ -123,6 +123,33 @@ document.addEventListener('DOMContentLoaded', () => {
         paint: lineFill,
       })
 
+      if (source.isMapAreaLabelsEnabled) {
+        map.addLayer({
+          id: 'sa2-tabels',
+          type: 'symbol',
+          source: 'sa2',
+          layout: {
+            'text-field': '{name}',
+            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            'text-size': 11,
+          },
+          paint: {
+            // 'text-color': 'rgba(255,255,255,0.7)',
+            'text-color': [
+              'case',
+              ['==', ['feature-state', 'magnitude'], null],
+              'rgba(255,255,255,0.3)',
+              [
+                'case',
+                ['<', ['feature-state', 'magnitude'], 1],
+                'rgba(255,255,255,0.3)',
+                '#fff',
+              ],
+            ],
+          },
+        })
+      }
+
       let activeBlock = null
       let needFrame = true
       let isTouch = false
