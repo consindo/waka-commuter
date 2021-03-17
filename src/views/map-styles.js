@@ -96,4 +96,5 @@ export const pointsFill = {
   'circle-stroke-width': 1,
   // Transition from heatmap to circle layer by zoom level
   'circle-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0, 8, 1],
+  'circle-stroke-width': ['case', ['<', ['get', 'magnitude'], 1], 0, 1],
 }

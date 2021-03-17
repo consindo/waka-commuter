@@ -66,7 +66,10 @@ class DestinationBlurb extends LitElement {
         residentsCount += row.value
         residentsPercentage += row.percentage
       } else {
-        regionCount += 1
+        // don't include the region if it's less than 1
+        if (row.value >= 1) {
+          regionCount += 1
+        }
         travellersCount += row.value
         travellersPercentage += row.percentage
 

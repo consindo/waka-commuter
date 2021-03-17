@@ -66,6 +66,8 @@ class PopulationBubbles extends LitElement {
 
     const rawData = this.data
     const data = rawData
+      // don't show bubble if there's less than one trip to it
+      .filter((i) => i.value >= 1)
       .sort((a, b) => b.percentage - a.percentage)
       .slice(0, 30)
       .map((i) => ({
