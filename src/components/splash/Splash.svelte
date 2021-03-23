@@ -4,6 +4,8 @@
   import DataSources from './DataSources.svelte'
 </script>
 
-<Banner />
-<Regions on:locationChange />
-<DataSources />
+<div class="details-splash">
+  <Banner />
+  <Regions on:locationChange />
+  <DataSources />
+</div>

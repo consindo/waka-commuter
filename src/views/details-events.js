@@ -57,7 +57,6 @@ export const bindDetailsEvents = () => {
 
   for (const node of document.querySelectorAll('.btn-expand')) {
     node.addEventListener('click', () => {
-      document.getElementById('details')
       document.getElementById('app').classList.toggle('map-view')
     })
   }

@@ -1,5 +1,3 @@
-@import './css/branding.css';
-@import './css/map.css';
 @import './css/nav.css';
 @import './css/splash.css';
 
@@ -17,19 +15,6 @@ html {
   color: #fff;
   font-family: 'Fira Sans', sans-serif;
   overflow: hidden;
-}
-
-#app {
-  display: flex;
-  height: 100vh;
-  height: var(--real-height);
-}
-
-#details {
-  width: 900px;
-  border-left: var(--border);
-  overflow-y: auto;
-  background: #111;
 }
 
 .blurb-container {
@@ -112,9 +97,6 @@ noscript p {
 }
 
 @media (max-width: 1500px) {
-  #details {
-    width: 600px;
-  }
   .graph-container {
     display: block;
   }
@@ -130,30 +112,6 @@ noscript p {
 
 /* This should allow iPad's in landscape to still use the expanded view */
 @media (max-width: 1020px) {
-  #app {
-    display: block;
-  }
-  #map {
-    height: calc(100% - 110px);
-  }
-  #details {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-left: 0;
-    transform: translate3d(0, 0, 0);
-    transition: 300ms ease transform;
-    z-index: 10;
-    overflow-x: hidden;
-  }
-  .map-view #details {
-    overflow: hidden;
-    transform: translate3d(0, calc(var(--real-height) - 110px), 0);
-  }
-
   .tip-container.desktop {
     display: none;
   }

@@ -1,12 +1,14 @@
-#map {
-  flex: 1;
-}
+<div class="map-legend hidden all">
+  <div class="map-legend-colors"></div>
+  <ul>
+    <li class="hide-departures hide-all">Less Arrivals</li>
+    <li class="hide-departures">More Arrivals</li>
+    <li class="hide-arrivals hide-all">Less Departures</li>
+    <li class="hide-arrivals">More Departures</li>
+  </ul>
+</div>
 
-#map-content {
-  width: 100%;
-  height: 100%;
-}
-
+<style>
 .map-legend {
   width: 220px;
   background: rgba(20, 20, 20, 0.6);
@@ -48,7 +50,7 @@
   background-image: linear-gradient(90deg, #ffcdd2, #f44336, #b71c1c);
 }
 
-.map-legend ul {
+ul {
   margin: 0;
   padding: 0 7px 3px;
   list-style-type: none;
@@ -56,11 +58,11 @@
   font-family: 'Fira Sans Condensed';
   font-size: 11px;
 }
-.map-legend li {
+li {
   flex: 1;
 }
-.map-legend.arrivals li:nth-child(2),
-.map-legend li:last-child {
+.arrivals li:nth-child(2),
+li:last-child {
   text-align: right;
 }
 
@@ -72,3 +74,5 @@
     bottom: auto;
   }
 }
+
+</style>
