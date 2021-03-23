@@ -92,7 +92,7 @@ export const pointsFill = {
   ],
 
   'circle-color': 'rgba(255,255,255,0.1)',
-  'circle-stroke-color': 'white',
+  'circle-stroke-color': 'rgba(255,255,255,0.5)',
   'circle-stroke-width': 1,
   // Transition from heatmap to circle layer by zoom level
   'circle-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0, 8, 1],

@@ -1,10 +1,11 @@
 import { LitElement, html, css } from 'lit-element'
-import { humanRegionName } from '../data.js'
+import { humanRegionName, chooseBestName } from '../data.js'
 
 class MapTooltip extends LitElement {
   static get properties() {
     return {
       id: { type: String },
+      friendlyName: { type: String },
       data: { type: Object },
       x: { type: Number },
       y: { type: Number },
@@ -83,6 +84,7 @@ class MapTooltip extends LitElement {
     const loading = this.loading === true
     const { mode } = this.parsedData
     const id = humanRegionName([this.id || ''], 'condensed')
+    const friendlyName = chooseBestName(id, this.friendlyName)
     const regions = humanRegionName(this.parsedData.currentRegions, 'condensed')
     const departData = this.parsedData.departData[this.id] || []
     const arriveData = this.parsedData.arriveData[this.id] || []
@@ -144,7 +146,7 @@ class MapTooltip extends LitElement {
         style="opacity: ${this.opacity}; transform: translate(${this.x +
         20}px, ${this.y}px);"
       >
-        <h4>${id}</h4>
+        <h4>${friendlyName}</h4>
         ${loading ? html`<strong class="none">Loading...</strong>` : ''}
         ${this.parsedData.currentRegions.length !== 0 && !loading
           ? subText

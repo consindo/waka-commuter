@@ -5,6 +5,7 @@ import {
   transformData,
   transformModeData,
   transformFilename,
+  chooseBestName,
   humanRegionName,
 } from './data.js'
 import { areaFill, lineFill, pointsFill } from './views/map-styles.js'
@@ -97,8 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // resize hacks for edge / chrome
     map.resize()
 
+    const friendlyNames = {}
     sa2Data.then((data) => {
       const features = data.features
+
+      // easy reference to the freindly names
+      features.forEach((feature) => {
+        const { name, friendlyName } = feature.properties
+        friendlyNames[name] = friendlyName
+      })
+
       map.addSource('sa2', {
         type: 'geojson',
         data,
@@ -125,11 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (source.isMapAreaLabelsEnabled) {
         map.addLayer({
-          id: 'sa2-tabels',
+          id: 'sa2-labels',
           type: 'symbol',
           source: 'sa2',
           layout: {
-            'text-field': '{name}',
+            'text-field': `{${source.isMapAreaLabelsEnabled}}`,
             'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             'text-size': 11,
           },
@@ -179,6 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
           )
 
           mapTooltip.setAttribute('id', meshblock.id)
+          mapTooltip.setAttribute(
+            'friendlyName',
+            meshblock.properties.friendlyName
+          )
           mapTooltip.setAttribute('opacity', 1)
         }
 
@@ -348,12 +361,18 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       Dispatcher.bind('load-blocks', (regionName, direction, segment) => {
+        const modifiedRegionNames = regionName.map((name) =>
+          chooseBestName(
+            humanRegionName([name || ''], 'condensed'),
+            friendlyNames[name]
+          )
+        )
         document.getElementById('location-header').innerText = humanRegionName(
-          regionName,
+          modifiedRegionNames,
           'full'
         )
         let titleString = `${humanRegionName(
-          regionName,
+          modifiedRegionNames,
           'title'
         )} - Commuter - Waka`
         titleString = titleString.charAt(0).toUpperCase() + titleString.slice(1)

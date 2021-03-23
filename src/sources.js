@@ -14,7 +14,7 @@ const sources = {
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
     isAllSegmentEnabled: false,
-    isMapAreaLabelsEnabled: true,
+    isMapAreaLabelsEnabled: 'friendlyName',
     segments: [
       '2018-am2hr',
       '2018-ip4hr',

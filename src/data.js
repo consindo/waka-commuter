@@ -8,6 +8,12 @@ export const transformFilename = (name) =>
     .join('-')
     .replace(/[()\/]/g, '')
 
+export const chooseBestName = (name, friendlyName) => {
+  return friendlyName && friendlyName !== 'undefined'
+    ? `${friendlyName} (${name})`
+    : name
+}
+
 export const humanRegionName = (nameArray, mode) => {
   const isZone = nameArray.length > 0 && !isNaN(parseInt(nameArray[0][0]))
   if (nameArray.length === 1) {
