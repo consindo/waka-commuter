@@ -1,8 +1,8 @@
- <div class="details-location hidden">
+<div class="details-location hidden">
   <div class="nav-header">
     <div class="nav-header-flex">
       <div class="title">
-        <h2 id="location-header"></h2>
+        <h2 id="location-header" />
       </div>
       <nav class="controls">
         <button title="Learn More" class="btn-expand">
@@ -34,21 +34,21 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <strong class="population-label"></strong>
-            <span class="population-count"></span>
+            <strong class="population-label" />
+            <span class="population-count" />
           </a>
         </p>
-        <nav class="secondary-controls"></nav>
+        <nav class="secondary-controls" />
       </div>
-      <nav class="controls primary-controls"></nav>
+      <nav class="controls primary-controls" />
     </div>
   </div>
   <h3>Arrivals</h3>
-  <div class="arrive-from blurb-container"></div>
+  <div class="arrive-from blurb-container" />
   <div class="arrive-from graph-container">
     <div class="location-container">
       <div class="location-inner">
-        <div class="location"></div>
+        <div class="location" />
       </div>
     </div>
     <div class="mode-container">
@@ -62,16 +62,16 @@
             ></small
           >
         </h4>
-        <div class="mode"></div>
+        <div class="mode" />
       </div>
     </div>
   </div>
   <h3>Departures</h3>
-  <div class="depart-to blurb-container"></div>
+  <div class="depart-to blurb-container" />
   <div class="depart-to graph-container">
     <div class="location-container">
       <div class="location-inner">
-        <div class="location"></div>
+        <div class="location" />
       </div>
     </div>
     <div class="mode-container">
@@ -85,7 +85,7 @@
             ></small
           >
         </h4>
-        <div class="mode"></div>
+        <div class="mode" />
       </div>
     </div>
   </div>
@@ -107,14 +107,15 @@
   <div class="tip-container desktop">
     <p>
       <strong>Tip:</strong> Hold down
-      <strong class="operating-system-ctrl">Ctrl</strong> to select
-      multiple areas.
+      <strong
+        >{#if navigator.platform === 'MacIntel'}⌘ Cmd{:else}Ctrl{/if}</strong
+      > to select multiple areas.
     </p>
   </div>
   <div class="tip-container mobile">
     <p>
-      <strong>Tip:</strong> Open this app on a PC to get more detailed
-      insights, and to select multiple areas.
+      <strong>Tip:</strong> Open this app on a PC to get more detailed insights,
+      and to select multiple areas.
     </p>
   </div>
 </div>

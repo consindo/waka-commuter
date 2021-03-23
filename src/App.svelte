@@ -29,36 +29,32 @@
     background: #111;
   }
 
+  @media (max-width: 1500px) {
+    section {
+      width: 600px;
+    }
+  }
 
-@media (max-width: 1500px) {
-  section {
-    width: 600px;
+  @media (max-width: 1020px) {
+    #map {
+      height: calc(100% - 110px);
+    }
+    section {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-left: 0;
+      transform: translate3d(0, 0, 0);
+      transition: 300ms ease transform;
+      z-index: 10;
+      overflow-x: hidden;
+    }
+    .map-view section {
+      overflow: hidden;
+      transform: translate3d(0, calc(var(--real-height) - 110px), 0);
+    }
   }
-}
-
-@media (max-width: 1020px) {
-  #app {
-    display: block;
-  }
-  #map {
-    height: calc(100% - 110px);
-  }
-  section {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-left: 0;
-    transform: translate3d(0, 0, 0);
-    transition: 300ms ease transform;
-    z-index: 10;
-    overflow-x: hidden;
-  }
-  .map-view section {
-    overflow: hidden;
-    transform: translate3d(0, calc(var(--real-height) - 110px), 0);
-  }
-}
 </style>
