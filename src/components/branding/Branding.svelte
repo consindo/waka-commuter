@@ -1,4 +1,11 @@
-<div class="branding">
+<script>
+  import { getSource } from '../../sources.js'
+
+  const source = getSource()
+  const brandingClass = source.brandingClass
+</script>
+
+<div class={brandingClass}>
   <h1>Commuter</h1>
   <nav class="controls">
     <a

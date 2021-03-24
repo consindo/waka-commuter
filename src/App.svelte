@@ -1,15 +1,27 @@
 <script>
+  import { getSource } from './sources.js'
+
   import Branding from './components/branding/Branding.svelte'
   import Map from './components/map/Map.svelte'
   import Splash from './components/splash/Splash.svelte'
   import Details from './components/details/Details.svelte'
 
-  export let flyTo
+  const source = getSource()
+  const sa2Data = fetch(source.shapeFile).then((res) => res.json())
+  window.sa2Data = sa2Data
+
+  let [lng, lat, zoom] = [...source.initialPosition]
+
+  const flyTo = (e) => {
+    lat = e.detail.lat
+    lng = e.detail.lng
+    zoom = e.detail.zoom
+  }
 </script>
 
 <Branding />
 <div id="app" class="map-view">
-  <Map />
+  <Map {lat} {lng} {zoom} />
   <section>
     <Splash on:locationChange={flyTo} />
     <Details />

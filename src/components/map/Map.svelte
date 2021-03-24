@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, afterUpdate } from 'svelte'
 
   import Dispatcher from '../../dispatcher.js'
   import { getSource } from '../../sources.js'
@@ -17,18 +17,18 @@
 
   mapboxgl.accessToken = token
 
+  export let lat, lng, zoom
+
+  let map = null
   onMount(async () => {
-    const map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
       container: 'map-content',
       style: 'mapbox://styles/mapbox/dark-v10?optimize=true',
-      center: source.initialPosition,
-      zoom: isMobile
-        ? source.initialPosition[2] - 1.5
-        : source.initialPosition[2],
+      center: [lng, lat],
+      zoom: isMobile ? zoom - 1.5 : zoom,
       logoPosition: isMobile ? 'bottom-left' : 'bottom-right',
       attributionControl: !isMobile,
     })
-    window.mapboxMap = map
     map.getCanvas().style.cursor = 'default'
 
     // TODO:
@@ -373,6 +373,15 @@
         )
       })
     })
+  })
+
+  afterUpdate(() => {
+    map.flyTo({
+      center: [lng, lat],
+      zoom,
+      essential: true,
+    })
+    document.getElementById('app').classList.add('map-view')
   })
 </script>
 
