@@ -3,12 +3,19 @@ import '../components/population-bubbles.js'
 import '../components/travel-mode.js'
 import '../components/destination-blurb.js'
 
+import { getSource } from '../sources.js'
+const source = getSource()
+
 const setBubble = (container, location, data, tooltipData, showOnly) => {
   const bubble = document.createElement('population-bubbles')
   bubble.setAttribute('scale', JSON.stringify(location))
   bubble.setAttribute('data', JSON.stringify(data))
   bubble.setAttribute('tooltipData', tooltipData)
   bubble.setAttribute('showOnly', showOnly)
+
+  if (source.brandingClass === 'statsnz') {
+    bubble.setAttribute('attribution', true)
+  }
 
   const locationContainer = container.querySelector('.location')
   bubble.setAttribute('width', '580')

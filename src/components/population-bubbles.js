@@ -13,6 +13,7 @@ class PopulationBubbles extends LitElement {
       showOnly: { type: String },
       width: { type: Number },
       height: { type: Number },
+      attribution: { type: Boolean },
     }
   }
 
@@ -51,18 +52,20 @@ class PopulationBubbles extends LitElement {
     mapTooltip.setAttribute('showOnly', this.showOnly)
     mapTooltip.setAttribute('opacity', 0)
 
-    svg
-      .append('a')
-      .attr(
-        'href',
-        'https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/'
-      )
-      .append('text')
-      .text('Commuter View')
-      .attr('y', this.height - 12)
-      .attr('x', this.width - 95)
-      .style('fill', '#ddd')
-      .style('font-size', '12px')
+    if (this.attribution === true) {
+      svg
+        .append('a')
+        .attr(
+          'href',
+          'https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/'
+        )
+        .append('text')
+        .text('Commuter View')
+        .attr('y', this.height - 12)
+        .attr('x', this.width - 95)
+        .style('fill', '#ddd')
+        .style('font-size', '12px')
+    }
 
     const rawData = this.data
     const data = rawData
@@ -72,6 +75,7 @@ class PopulationBubbles extends LitElement {
       .slice(0, 30)
       .map((i) => ({
         key: i.key,
+        originalKey: i.originalKey,
         value: i.value,
         percentage: i.percentage,
         // if i.x or i.y is 0, means that the zone is missing on the map
@@ -93,9 +97,9 @@ class PopulationBubbles extends LitElement {
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`)
       .on('click', (d) => {
         if (d3.event.ctrlKey || d3.event.metaKey) {
-          Dispatcher.addRegion(d.key)
+          Dispatcher.addRegion(d.originalKey)
         } else {
-          Dispatcher.setRegions([d.key])
+          Dispatcher.setRegions([d.originalKey])
         }
 
         // element will be disposed when the next page loads

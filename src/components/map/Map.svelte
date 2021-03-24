@@ -60,15 +60,8 @@
       // resize hacks for edge / chrome
       map.resize()
 
-      const friendlyNames = {}
       sa2Data.then((data) => {
         const features = data.features
-
-        // easy reference to the freindly names
-        features.forEach((feature) => {
-          const { name, friendlyName } = feature.properties
-          friendlyNames[name] = friendlyName
-        })
 
         map.addSource('sa2', {
           type: 'geojson',
@@ -304,25 +297,6 @@
               Dispatcher.setRegions([meshblock.id])
             }
           }
-        })
-
-        Dispatcher.bind('load-blocks', (regionName, direction, segment) => {
-          const modifiedRegionNames = regionName.map((name) =>
-            chooseBestName(
-              humanRegionName([name || ''], 'condensed'),
-              friendlyNames[name]
-            )
-          )
-          document.getElementById(
-            'location-header'
-          ).innerText = humanRegionName(modifiedRegionNames, 'full')
-          let titleString = `${humanRegionName(
-            modifiedRegionNames,
-            'title'
-          )} - Commuter - Waka`
-          titleString =
-            titleString.charAt(0).toUpperCase() + titleString.slice(1)
-          document.title = titleString
         })
 
         Dispatcher.bind('clear-blocks', () => {

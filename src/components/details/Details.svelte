@@ -8,7 +8,6 @@
     getLocation,
     transformData,
     transformModeData,
-    transformFilename,
     chooseBestName,
     humanRegionName,
   } from '../../data.js'
@@ -19,6 +18,17 @@
     setDetails,
     hideDetails,
   } from '../../views/details-render.js'
+
+  import Header from './Header.svelte'
+  import Footer from './Footer.svelte'
+
+  let detailsTitle = null
+  let documentTitle = null
+  let firstRegion = ''
+
+  $: document.title = `${
+    documentTitle ? `${documentTitle} - ` : ''
+  }Commuter - Waka`
 
   const sa2Data = window.sa2Data
   const source = getSource()
@@ -31,22 +41,33 @@
     setDetailsControls(source.detailsControls, source.detailsSecondaryControls)
     bindDetailsEvents()
 
+    const friendlyNames = {}
     sa2Data.then((data) => {
       const features = data.features
 
+      // easy reference to the freindly names
+      features.forEach((feature) => {
+        const { name, friendlyName } = feature.properties
+        friendlyNames[name] = friendlyName
+      })
+
+      const regionNameMapper = (name) =>
+        chooseBestName(
+          humanRegionName([name || ''], 'condensed'),
+          friendlyNames[name]
+        )
+
       Dispatcher.bind('clear-blocks', () => {
         hideDetails()
+        documentTitle = null
       })
 
       Dispatcher.bind('load-blocks', (regionName, direction, segment) => {
-        document
-          .querySelector('.population-link')
-          .setAttribute(
-            'href',
-            `https://www.stats.govt.nz/tools/2018-census-place-summaries/${transformFilename(
-              regionName[0]
-            )}#population-and-dwellings`
-          )
+        const modifiedRegionNames = regionName.map(regionNameMapper)
+        detailsTitle = humanRegionName(modifiedRegionNames, 'full')
+        documentTitle = humanRegionName(modifiedRegionNames, 'title')
+
+        firstRegion = regionName[0]
 
         getData(regionName).then((data) => {
           // depending on the toggle, filter out workspace or education data
@@ -115,10 +136,19 @@
           departureModeData,
           segment,
         }) => {
+          // map to friendly names
+          const friendlyMapper = (i) => ({
+            ...i,
+            key: regionNameMapper(i.key),
+            originalKey: i.key,
+          })
+          const arriveDataFriendly = arriveData.map(friendlyMapper)
+          const departDataFriendly = departData.map(friendlyMapper)
+
           const tooltipData = {
-            currentRegions: regionName,
-            arriveData,
-            departData,
+            currentRegions: regionName.map(regionNameMapper),
+            arriveData: arriveDataFriendly,
+            departData: departDataFriendly,
             mode: ['work', 'study'],
           }
           if (segment === 'workplace') {
@@ -132,8 +162,8 @@
           const initialLocation = getLocation(features, regionName[0])
           setDetails(
             initialLocation,
-            arriveData,
-            departData,
+            arriveDataFriendly,
+            departDataFriendly,
             arriveModeData,
             departureModeData,
             tooltipJSON,
@@ -146,50 +176,7 @@
 </script>
 
 <div class="details-location hidden">
-  <div class="nav-header">
-    <div class="nav-header-flex">
-      <div class="title">
-        <h2 id="location-header" />
-      </div>
-      <nav class="controls">
-        <button title="Learn More" class="btn-expand">
-          <img alt="Toggle Details" src="expand.svg" />
-        </button>
-        <button title="Close Location" class="btn-close">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            alt="Close Location"
-            fill="#fff"
-          >
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-            />
-          </svg>
-        </button>
-      </nav>
-    </div>
-    <div class="nav-header-flex">
-      <div class="title">
-        <p title="Resident Population">
-          <a
-            class="population-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <strong class="population-label" />
-            <span class="population-count" />
-          </a>
-        </p>
-        <nav class="secondary-controls" />
-      </div>
-      <nav class="controls primary-controls" />
-    </div>
-  </div>
+  <Header title={detailsTitle} {firstRegion} />
   <h3>Arrivals</h3>
   <div class="arrive-from blurb-container" />
   <div class="arrive-from graph-container">
@@ -236,33 +223,5 @@
       </div>
     </div>
   </div>
-  <div class="tip-container">
-    <p>
-      The
-      <a
-        href="https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/"
-        >Commuter View dataset</a
-      >
-      is used for the map & bubble visualisations, while the
-      <a
-        href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-        >NZ.Stat repository</a
-      >
-      is used for the modes of travel, and resident population.
-    </p>
-  </div>
-  <div class="tip-container desktop">
-    <p>
-      <strong>Tip:</strong> Hold down
-      <strong
-        >{#if navigator.platform === 'MacIntel'}⌘ Cmd{:else}Ctrl{/if}</strong
-      > to select multiple areas.
-    </p>
-  </div>
-  <div class="tip-container mobile">
-    <p>
-      <strong>Tip:</strong> Open this app on a PC to get more detailed insights,
-      and to select multiple areas.
-    </p>
-  </div>
+  <Footer />
 </div>

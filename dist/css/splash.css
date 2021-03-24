@@ -2,12 +2,3 @@
 .map-view .btn-expand {
   transform: rotate(-180deg);
 }
-
-.tip-container a {
-  color: #90caf9;
-  text-decoration: none;
-}
-
-.tip-container a:hover {
-  text-decoration: underline;
-}

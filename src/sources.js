@@ -7,7 +7,7 @@ const sources = {
     isMapAreaLabelsEnabled: false,
     segments: ['workplace', 'education'],
     detailsControls: ['All', 'Workplace', 'Education'],
-    brandingClass: '',
+    brandingClass: 'statsnz',
   },
   wsp: {
     shapeFile: '/shapes/extras/wsp-zones-optimized.json',

@@ -61,17 +61,6 @@ noscript p {
   flex: 1;
 }
 
-.tip-container {
-  padding: 0 var(--sidebar-padding);
-  color: #ccc;
-}
-.tip-container p {
-  margin: -0.5rem 0 2rem;
-}
-.tip-container.mobile {
-  display: none;
-}
-
 .mode-inner {
   width: 300px;
   margin: 0 auto;
@@ -107,16 +96,6 @@ noscript p {
   }
   .mode-inner {
     margin-bottom: 1rem;
-  }
-}
-
-/* This should allow iPad's in landscape to still use the expanded view */
-@media (max-width: 1020px) {
-  .tip-container.desktop {
-    display: none;
-  }
-  .tip-container.mobile {
-    display: block;
   }
 }
 
