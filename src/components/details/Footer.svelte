@@ -22,7 +22,7 @@
 {:else if source.brandingClass === 'wsp'}
   <div>
     <p>
-      This visulisation uses data from the Christchurch Transport Model Version
+      This visualisation uses data from the Christchurch Transport Model Version
       18.
     </p>
   </div>

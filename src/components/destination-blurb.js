@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit-element'
 import { humanRegionName } from '../data.js'
 
+import { getSource } from '../sources.js'
+
 class DestinationBlurb extends LitElement {
   static get properties() {
     return {
@@ -84,11 +86,16 @@ class DestinationBlurb extends LitElement {
     residentsPercentage = Math.round(residentsPercentage * 100)
     topRegionPercentage = Math.round(topRegionPercentage * 100)
 
-    let destination = 'work or school'
+    let destination = ' for work or school'
     if (this.segment === 'workplace') {
-      destination = 'work'
+      destination = ' for work'
     } else if (this.segment === 'education') {
-      destination = 'school'
+      destination = ' for school'
+    }
+
+    const source = getSource()
+    if (source.brandingClass === 'wsp') {
+      destination = ''
     }
 
     let popularMode = null
@@ -128,8 +135,9 @@ class DestinationBlurb extends LitElement {
         >${vars.travellersCount.toLocaleString()}
         ${vars.travellersCount === 1 ? 'person' : 'people'}</strong
       >
-      travel to <span class="less-emphasis">${vars.place}</span> for
-      ${vars.destination} (${vars.travellersPercentage}%), while
+      travel to
+      <span class="less-emphasis">${vars.place}</span>${vars.destination}
+      (${vars.travellersPercentage}%), while
       <strong class="wfh"
         >${vars.residentsCount.toLocaleString()}
         ${vars.residentsCount === 1 ? 'person' : 'people'}
@@ -168,8 +176,7 @@ class DestinationBlurb extends LitElement {
       <strong class="departures"
         >${vars.regionCount} different
         ${vars.regionCount === 1 ? 'area' : 'areas'}</strong
-      >
-      for ${vars.destination}.
+      >${vars.destination}.
       ${vars.regionCount === 0
         ? ''
         : html`<strong>${vars.topRegion}</strong>, with

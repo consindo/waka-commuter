@@ -2,6 +2,8 @@
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
+  export let enabledRegions
+
   const regions = [
     {
       id: 'nz-akl',
@@ -51,7 +53,7 @@
       lng: '170.5',
       zoom: '11',
     },
-  ]
+  ].filter((i) => enabledRegions.includes(i.id))
 </script>
 
 <nav>
@@ -79,11 +81,10 @@
 <style>
   nav {
     font-size: 0;
-    text-align: center;
-    padding: 0.75rem 0.25rem;
+    padding: 0.75rem;
   }
   div {
-    width: 33%;
+    width: 33.33%;
     display: inline-block;
     padding: 0.5rem;
     box-sizing: border-box;

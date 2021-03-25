@@ -26,7 +26,7 @@
     <a href="https://twitter.com/consindo">Twitter</a>.
   </p>
 </div>
-<footer><a href="https://jono.nz">&copy; 2020 Jono Cooper</a></footer>
+<footer><a href="https://jono.nz">&copy; 2021 Jono Cooper</a></footer>
 
 <style>
   div {
