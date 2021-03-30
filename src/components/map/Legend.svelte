@@ -21,12 +21,6 @@
     pointer-events: none;
   }
 
-  .map-legend.all .hide-all,
-  .map-legend.departures .hide-departures,
-  .map-legend.arrivals .hide-arrivals {
-    display: none;
-  }
-
   /* Warning: map-styles.js is source of truth for this */
   .map-legend-colors {
     height: 20px;
@@ -42,14 +36,6 @@
     margin: 5px;
   }
 
-  .arrivals .map-legend-colors {
-    background-image: linear-gradient(-90deg, #0d47a1, #2196f3, #bbdefb);
-  }
-
-  .departures .map-legend-colors {
-    background-image: linear-gradient(90deg, #ffcdd2, #f44336, #b71c1c);
-  }
-
   ul {
     margin: 0;
     padding: 0 7px 3px;
@@ -60,10 +46,6 @@
   }
   li {
     flex: 1;
-  }
-  .arrivals li:nth-child(2),
-  li:last-child {
-    text-align: right;
   }
 
   @media (max-width: 1020px) {

@@ -3,6 +3,7 @@
 
   import Banner from './Banner.svelte'
   import Regions from './Regions.svelte'
+  import Satellite from './Satellite.svelte'
   import DataSources from './DataSources.svelte'
 
   const source = getSource()
@@ -11,10 +12,8 @@
 <div class="details-splash">
   {#if source.brandingClass === 'wsp'}
     <Banner dataSource="Christchurch Transport Model Version 18" />
-    <Regions
-      on:locationChange
-      enabledRegions={['nz-chc']}
-    />
+    <Regions on:locationChange enabledRegions={['nz-chc']} />
+    <Satellite />
   {:else}
     <Banner dataSource="2018 Census" />
     <Regions
@@ -28,6 +27,7 @@
         'nz-dud',
       ]}
     />
+    <Satellite on:styleChange />
     <DataSources />
   {/if}
 </div>

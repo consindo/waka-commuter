@@ -10,6 +10,7 @@
   const sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
 
+  let style = 'map'
   let [lng, lat, zoom] = [...source.initialPosition]
 
   const flyTo = (e) => {
@@ -17,13 +18,17 @@
     lng = e.detail.lng
     zoom = e.detail.zoom
   }
+
+  const changeStyle = (e) => {
+    style = e.detail.style
+  }
 </script>
 
 <Branding />
 <div id="app" class="map-view">
-  <Map {lat} {lng} {zoom} />
+  <Map {lat} {lng} {zoom} {style} />
   <section>
-    <Splash on:locationChange={flyTo} />
+    <Splash on:locationChange={flyTo} on:styleChange={changeStyle} />
     <Details />
   </section>
 </div>
