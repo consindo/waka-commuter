@@ -13,7 +13,7 @@
   {#if source.brandingClass === 'wsp'}
     <Banner dataSource="Christchurch Transport Model Version 18" />
     <Regions on:locationChange enabledRegions={['nz-chc']} />
-    <Satellite />
+    <Satellite on:styleChange />
   {:else}
     <Banner dataSource="2018 Census" />
     <Regions
