@@ -20,7 +20,7 @@
         id: name,
         name: friendlyName ? `${name} - ${friendlyName}` : name,
       }
-    })
+    }).sort((a, b) => a.name.localeCompare(b.name))
   }
 
   let regionNames = getRegionNames()
