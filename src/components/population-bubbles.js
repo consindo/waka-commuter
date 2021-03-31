@@ -99,7 +99,7 @@ class PopulationBubbles extends LitElement {
         if (d3.event.ctrlKey || d3.event.metaKey) {
           Dispatcher.addRegion(d.originalKey)
         } else {
-          Dispatcher.setRegions([d.originalKey])
+          Dispatcher.setRegions([d.originalKey], true)
         }
 
         // element will be disposed when the next page loads

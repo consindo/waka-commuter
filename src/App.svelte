@@ -6,9 +6,24 @@
   import Splash from './components/splash/Splash.svelte'
   import Details from './components/details/Details.svelte'
 
+  import { chooseBestName, humanRegionName } from './data.js'
+
   const source = getSource()
   const sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
+
+  async function getRegionNames() {
+    const data = await sa2Data
+    return data.features.map((i) => {
+      const { name, friendlyName } = i.properties
+      return {
+        id: name,
+        name: friendlyName ? `${name} - ${friendlyName}` : name,
+      }
+    })
+  }
+
+  let regionNames = getRegionNames()
 
   let style = 'map'
   let [lng, lat, zoom] = [...source.initialPosition]
@@ -24,7 +39,7 @@
   }
 </script>
 
-<Branding />
+<Branding {regionNames} />
 <div id="app" class="map-view">
   <Map {lat} {lng} {zoom} {style} />
   <section>

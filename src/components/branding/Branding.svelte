@@ -1,12 +1,15 @@
 <script>
   import { getSource } from '../../sources.js'
+  import Search from './Search.svelte'
+
+  export let regionNames
 
   const source = getSource()
   const brandingClass = source.brandingClass
 </script>
 
 <div class={brandingClass}>
-  <h1>Commuter</h1>
+  <Search {regionNames} />
   <nav class="controls">
     <a
       href="#"

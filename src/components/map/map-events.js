@@ -1,3 +1,4 @@
+import polylabel from 'polylabel'
 import Dispatcher from '../../dispatcher.js'
 
 export const bindMapEvents = (map) => {
@@ -94,7 +95,7 @@ const bindMapboxEvents = (map) => {
 const bindDispatcherEvents = (map) => {
   const mapTooltip = document.querySelector('#map map-tooltip')
   let selectedAreas = []
-  const setMap = (arriveData, departData, regionName) => {
+  const setMap = (arriveData, departData, regionName, animate) => {
     // turns off all the old areas
     selectedAreas.forEach((i) => {
       map.setFeatureState(
@@ -123,6 +124,18 @@ const bindDispatcherEvents = (map) => {
         magnitude: 0,
       }
     })
+
+    if (animate) {
+      // hate this
+      const sa2Data = window.sa2Data
+      sa2Data.then((data) => {
+        const feature = data.features.find(
+          (i) => i.properties.name === regionName[0]
+        )
+        map.flyTo({ center: polylabel(feature.geometry.coordinates) })
+      })
+    }
+
     ;[arriveData, departData].forEach((dataset, idx) => {
       let sign = 1
       if (dataset === arriveData) {
@@ -196,7 +209,7 @@ const bindDispatcherEvents = (map) => {
   // map
   Dispatcher.bind(
     'update-blocks',
-    ({ regionName, direction, arriveData, departData, segment }) => {
+    ({ regionName, direction, arriveData, departData, segment, animate }) => {
       document.querySelector('.map-legend').classList.remove('hidden')
 
       const tooltipData = {
@@ -216,11 +229,11 @@ const bindDispatcherEvents = (map) => {
 
       // only really want to toggle the map data for direction
       if (direction === 'all') {
-        setMap(arriveData, departData, regionName)
+        setMap(arriveData, departData, regionName, animate)
       } else if (direction === 'arrivals') {
-        setMap(arriveData, [], regionName)
+        setMap(arriveData, [], regionName, animate)
       } else if (direction === 'departures') {
-        setMap([], departData, regionName)
+        setMap([], departData, regionName, animate)
       }
     }
   )

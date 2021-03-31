@@ -62,7 +62,7 @@
         documentTitle = null
       })
 
-      Dispatcher.bind('load-blocks', (regionName, direction, segment) => {
+      Dispatcher.bind('load-blocks', (regionName, direction, segment, animate) => {
         const modifiedRegionNames = regionName.map(regionNameMapper)
         detailsTitle = humanRegionName(modifiedRegionNames, 'full')
         documentTitle = humanRegionName(modifiedRegionNames, 'title')
@@ -121,6 +121,7 @@
             departData,
             arriveModeData,
             departureModeData,
+            animate,
           })
         })
       })

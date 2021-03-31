@@ -30,7 +30,7 @@ class Dispatcher extends Events {
 
   dataSegment = 'all'
 
-  loadBlocks = () => {
+  loadBlocks = (animate) => {
     if (this.currentRegion.length === 0) {
       this.trigger('clear-blocks')
     } else {
@@ -38,12 +38,13 @@ class Dispatcher extends Events {
         'load-blocks',
         this.currentRegion,
         this.dataDirection,
-        this.dataSegment
+        this.dataSegment,
+        animate
       )
     }
   }
 
-  addRegion = (regionName) => {
+  addRegion = (regionName, animate) => {
     // assumes regionName is a string
     const currentIndex = this.currentRegion.indexOf(regionName)
     if (currentIndex > -1) {
@@ -51,12 +52,12 @@ class Dispatcher extends Events {
     } else {
       this.currentRegion.push(regionName)
     }
-    this.loadBlocks()
+    this.loadBlocks(animate)
   }
 
-  setRegions = (regionName) => {
+  setRegions = (regionName, animate) => {
     this.currentRegion = regionName
-    this.loadBlocks()
+    this.loadBlocks(animate)
   }
 
   setDirection = (direction) => {
