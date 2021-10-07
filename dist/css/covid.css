@@ -1,0 +1,56 @@
+/* easier to put in here */
+
+.dynamic-covid {
+  background: #222;
+  border-radius: 0 10px 10px 0;
+  border-right: 1px solid #000;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.dynamic-covid h4 {
+  margin: 1rem 0 0.25rem;
+}
+.covid-container {
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.covid-container .unvaccinated {
+  flex: 1;
+  margin-right: 2.5rem;
+  color: #f9ca24;
+}
+.covid-container .unvaccinated.bad {
+  color: #f0932b;
+}
+.covid-container .unvaccinated.dire {
+  color: #f44336;
+}
+.covid-container .unvaccinated strong {
+  font-size: 2.5rem;
+}
+.covid-container .unvaccinated span {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+.covid-container .doses {
+  flex: 1;
+}
+.covid-container .doses p {
+  font-size: 18px;
+  margin: 0.25rem 0 0.5rem;
+  text-align: left;
+}
+.covid-container .doses strong {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 1500px) {
+  .dynamic-covid {
+    border-radius: 0;
+    border-right: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+}

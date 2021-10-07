@@ -36,7 +36,7 @@ class Ethnicity extends LitElement {
   getColor(category) {
     const colorMap = {
       European: '#3F51B5',
-      Maori: '#FF9800',
+      Maori: '#f44336',
       'Middle Eastern/Latin American/African': '#9C27B0',
       Asian: '#FFC107',
       'Pacific Peoples': '#4CAF50',

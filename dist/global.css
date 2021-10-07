@@ -1,5 +1,6 @@
 @import './css/nav.css';
 @import './css/splash.css';
+@import './css/covid.css';
 
 :root {
   --sidebar-padding: 1.25rem;
