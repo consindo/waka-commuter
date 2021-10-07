@@ -47,6 +47,7 @@ combineFile('workplace-commute-out.json', 'workplace', 'departureModes')
 combineFile('vaccines-total.json', 'vaccine', 'total')
 combineFile('vaccines-maori.json', 'vaccine', 'maori')
 combineFile('vaccines-pacific.json', 'vaccine', 'pacific')
+combineFile('ethnicity.json', 'ethnicity')
 
 // save it all to one big file
 const outputFilename = path.join(
