@@ -21,6 +21,7 @@ const sources = {
     segments: ['workplace', 'education'],
     detailsControls: ['All', 'Workplace', 'Education'],
     brandingClass: 'covid',
+    title: 'Covid',
   },
   wsp: {
     shapeFile: '/shapes/extras/wsp-zones-optimized.json',

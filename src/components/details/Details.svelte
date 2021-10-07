@@ -31,12 +31,12 @@
   let documentTitle = null
   let firstRegion = ''
 
-  $: document.title = `${
-    documentTitle ? `${documentTitle} - ` : ''
-  }Commuter - Waka`
-
   const sa2Data = window.sa2Data
   const source = getSource()
+
+   $: document.title = `${
+    documentTitle ? `${documentTitle} - ` : ''
+  }${source.title || 'Commuter'} - Waka`
 
   if (!source.isAllSegmentEnabled) {
     Dispatcher.dataSegment = source.segments[0]

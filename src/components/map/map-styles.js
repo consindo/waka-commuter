@@ -55,23 +55,26 @@ const vaccineColors = [
   ],
 ]
 
-const opacity = [
-  'interpolate',
-  ['linear'],
-  ['feature-state', 'magnitude'],
-  0,
-  0,
-  20,
-  0.5,
-  30,
-  0.8,
-  100,
-  0.9,
-  200,
-  0.95,
-  500,
-  1,
-]
+const opacity =
+  source.vaccineData != null
+    ? 0.65
+    : [
+        'interpolate',
+        ['linear'],
+        ['feature-state', 'magnitude'],
+        0,
+        0,
+        20,
+        0.5,
+        30,
+        0.8,
+        100,
+        0.9,
+        200,
+        0.95,
+        500,
+        1,
+      ]
 
 const hoverOpacity = [
   'interpolate',

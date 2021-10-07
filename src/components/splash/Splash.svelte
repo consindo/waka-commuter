@@ -2,9 +2,12 @@
   import { getSource } from '../../sources.js'
 
   import Banner from './Banner.svelte'
+  import CovidBanner from './CovidBanner.svelte'
   import Regions from './Regions.svelte'
   import Satellite from './Satellite.svelte'
   import DataSources from './DataSources.svelte'
+  import CovidDataSources from './CovidDataSources.svelte'
+
 
   const source = getSource()
 </script>
@@ -15,7 +18,7 @@
     <Regions on:locationChange enabledRegions={['nz-chc']} />
     <Satellite on:styleChange />
   {:else if source.brandingClass === 'covid'}
-    covid covid covid
+    <CovidBanner />
     <Regions
       on:locationChange
       enabledRegions={[
@@ -28,6 +31,7 @@
       ]}
     />
     <Satellite on:styleChange />
+    <CovidDataSources />
   {:else}
     <Banner dataSource="2018 Census" />
     <Regions
