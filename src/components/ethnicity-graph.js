@@ -52,7 +52,7 @@ class Ethnicity extends LitElement {
       Māori: ['maori'],
       MELAA: ['middle eastern/latin american/african'],
       Asian: ['asian'],
-      Pacifika: ['pacific peoples'],
+      Pasifika: ['pacific peoples'],
       Other: ['other ethnicity'],
     }
 

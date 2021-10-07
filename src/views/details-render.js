@@ -153,7 +153,7 @@ export const setDetails = (
         vaccineData.pacific.populationCount,
         vaccineData.pacific.dose1Count,
         vaccineData.pacific.dose2Count,
-        'Pacifika'
+        'Pasifika'
       )
     } else {
       document.querySelector('.pacific-container').innerHTML = ''
