@@ -14,6 +14,9 @@ class MapTooltip extends LitElement {
       locationContext: { type: String },
       percentage: { type: Boolean },
       showOnly: { type: String },
+      dose1Uptake: { type: Number },
+      dose2Uptake: { type: Number },
+      populationCount: { type: Number },
     }
   }
 
@@ -47,6 +50,10 @@ class MapTooltip extends LitElement {
       }
       .arrivals {
         color: #90caf9;
+      }
+      .second {
+        display: block;
+        margin-bottom: 0.5em;
       }
     `
   }
@@ -88,6 +95,10 @@ class MapTooltip extends LitElement {
     const regions = humanRegionName(this.parsedData.currentRegions, 'condensed')
     const departData = this.parsedData.departData[this.id] || []
     const arriveData = this.parsedData.arriveData[this.id] || []
+
+    const dose1 = this.dose1Uptake
+    const dose2 = this.dose2Uptake
+    const populationCount = this.populationCount
 
     const departCount = departData[0]
       ? Number.isInteger(departData[0])
@@ -147,7 +158,18 @@ class MapTooltip extends LitElement {
         20}px, ${this.y}px);"
       >
         <h4>${friendlyName}</h4>
-        ${loading ? html`<strong class="none">Loading...</strong>` : ''}
+        ${loading ? html`<strong class="none">Loading...</strong><br />` : ''}
+        ${populationCount != null
+          ? html`<em>Population: ${populationCount}</em><br />`
+          : ''}
+        ${dose1 != null
+          ? html`<strong>${(dose1 / 10).toFixed(1)}%</strong> first dose<br />`
+          : ''}
+        ${dose2 != null
+          ? html`<span class="second"
+              ><strong>${(dose2 / 10).toFixed(1)}%</strong> second dose</span
+            >`
+          : ''}
         ${this.parsedData.currentRegions.length !== 0 && !loading
           ? subText
           : ''}

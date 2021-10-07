@@ -68,6 +68,7 @@ const compressVaccines = () => {
     areas[area] = {
       dose1Uptake: data[area].dose1Uptake,
       dose2Uptake: data[area].dose2Uptake,
+      populationCount: data[area].populationCount,
     }
   })
 

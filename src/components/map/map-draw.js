@@ -11,9 +11,6 @@ export const drawMap = (map, datasets, areaLabels) => {
     })
   }
 
-  window.jono = datasets[0]
-  window.jono1 = datasets[1]
-
   map.addSource('sa2', {
     type: 'geojson',
     data,

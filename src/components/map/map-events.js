@@ -41,6 +41,18 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
+      if (meshblock.properties.dose1Uptake != null) {
+        mapTooltip.setAttribute('dose1Uptake', meshblock.properties.dose1Uptake)
+      }
+      if (meshblock.properties.dose2Uptake != null) {
+        mapTooltip.setAttribute('dose2Uptake', meshblock.properties.dose2Uptake)
+      }
+      if (meshblock.properties.populationCount != null) {
+        mapTooltip.setAttribute(
+          'populationCount',
+          meshblock.properties.populationCount
+        )
+      }
       mapTooltip.setAttribute('opacity', 1)
     }
 
