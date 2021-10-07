@@ -9,7 +9,7 @@
 <div class="nav-header">
   <div class="nav-header-flex">
     <div class="title">
-      <h2>{title}</h2>
+      <h2>{(title || '').trim()}</h2>
     </div>
     <nav class="controls">
       <button title="Learn More" class="btn-expand">

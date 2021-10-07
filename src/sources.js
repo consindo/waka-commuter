@@ -16,6 +16,7 @@ const sources = {
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,
     isMapAreaLabelsEnabled: false,
+    isCovidBlurbEnabled: true,
     enableNullState: ['dose1Uptake', 'dose2Uptake'],
     segments: ['workplace', 'education'],
     detailsControls: ['All', 'Workplace', 'Education'],

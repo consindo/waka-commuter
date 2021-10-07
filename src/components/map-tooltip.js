@@ -51,9 +51,16 @@ class MapTooltip extends LitElement {
       .arrivals {
         color: #90caf9;
       }
-      .second {
+      .unvaccinated {
         display: block;
         margin-bottom: 0.5em;
+        color: #f9ca24;
+      }
+      .bad {
+        color: #f0932b;
+      }
+      .dire {
+        color: #f44336;
       }
     `
   }
@@ -152,6 +159,12 @@ class MapTooltip extends LitElement {
         </strong>
         to/from ${regions}`
     }
+
+    let unvaccinated = null
+    if (dose1) {
+      unvaccinated = (1000 - dose1) / 10
+    }
+
     return html`
       <div
         style="opacity: ${this.opacity}; transform: translate(${this.x +
@@ -166,8 +179,16 @@ class MapTooltip extends LitElement {
           ? html`<strong>${(dose1 / 10).toFixed(1)}%</strong> first dose<br />`
           : ''}
         ${dose2 != null
-          ? html`<span class="second"
-              ><strong>${(dose2 / 10).toFixed(1)}%</strong> second dose</span
+          ? html`<strong>${(dose2 / 10).toFixed(1)}%</strong> second dose`
+          : ''}
+        ${unvaccinated != null
+          ? html`<span
+              class="unvaccinated ${unvaccinated > 10
+                ? unvaccinated > 20
+                  ? 'dire'
+                  : 'bad'
+                : ''}"
+              ><strong>${unvaccinated.toFixed(1)}%</strong> unvaccinated</span
             >`
           : ''}
         ${this.parsedData.currentRegions.length !== 0 && !loading

@@ -68,7 +68,9 @@ export const setDetails = (
   arriveModeData,
   departModeData,
   tooltipData,
-  segment
+  segment,
+  vaccineData,
+  ethnicityData
 ) => {
   document.querySelector('.details-splash').classList.add('hidden')
   document.querySelector('.details-location').classList.remove('hidden')
@@ -82,7 +84,12 @@ export const setDetails = (
   }
 
   const populationLabel = document.querySelector('.population-label')
-  if (segment === 'all') {
+  if (source.isCovidBlurbEnabled === true) {
+    populationLabel.innerText = 'Population:'
+    document.querySelector(
+      '.population-count'
+    ).innerText = vaccineData.total.populationCount.toLocaleString()
+  } else if (segment === 'all') {
     populationLabel.innerText = 'Resident Workers & Students:'
   } else if (segment === 'workplace') {
     populationLabel.innerText = 'Resident Workers:'
@@ -114,6 +121,44 @@ export const setDetails = (
   setBubble(departContainer, location, departData, tooltipData, 'departures')
   setMode(arriveContainer, arriveModeData)
   setMode(departContainer, departModeData)
+
+  if (source.isCovidBlurbEnabled === true) {
+    const covidContainer = document.querySelector('.dynamic-covid')
+    covidContainer.innerHTML = `
+    <div style="flex: 1">
+    <h4>Total</h4>
+      <p>1<sup>st</sup> Doses: ${vaccineData.total.dose1Count}</p>
+      <p>2<sup>nd</sup> Doses: ${vaccineData.total.dose2Count}</p>
+      <p>Unvaccinated: ${
+        vaccineData.total.populationCount - vaccineData.total.dose1Count
+      }</p>
+    </div>
+    `
+    if (vaccineData.maori) {
+      covidContainer.innerHTML += `
+    <div style="flex: 1">
+    <h4>Maori</h4>
+      <p>1<sup>st</sup> Doses: ${vaccineData.maori.dose1Count}</p>
+      <p>2<sup>nd</sup> Doses: ${vaccineData.maori.dose2Count}</p>
+      <p>Unvaccinated: ${
+        vaccineData.maori.populationCount - vaccineData.maori.dose1Count
+      }</p>
+    </div>
+    `
+    }
+    if (vaccineData.pacific) {
+      covidContainer.innerHTML += `
+    <div style="flex: 1">
+    <h4>Pacific</h4>
+      <p>1<sup>st</sup> Doses: ${vaccineData.pacific.dose1Count}</p>
+      <p>2<sup>nd</sup> Doses: ${vaccineData.pacific.dose2Count}</p>
+      <p>Unvaccinated: ${
+        vaccineData.pacific.populationCount - vaccineData.pacific.dose1Count
+      }</p>
+    </div>
+    `
+    }
+  }
 }
 
 export const hideDetails = () => {

@@ -12,6 +12,11 @@
     humanRegionName,
   } from '../../data.js'
 
+  import { 
+    transformVaccine,
+    transformEthnicity
+  } from '../../covid.js'
+
   import { bindDetailsEvents } from '../../views/details-events.js'
   import {
     setDetailsControls,
@@ -113,6 +118,14 @@
             )
           }
 
+          // aggregate vaccine
+          let vaccineData = null
+          let ethnicityData = null
+          if (source.isCovidBlurbEnabled === true) {
+            vaccineData = transformVaccine(data)
+            ethnicityData = transformEthnicity(data)  
+          }
+
           Dispatcher.trigger('update-blocks', {
             regionName,
             direction,
@@ -122,6 +135,8 @@
             arriveModeData,
             departureModeData,
             animate,
+            vaccineData,
+            ethnicityData,
           })
         })
       })
@@ -136,6 +151,9 @@
           arriveModeData,
           departureModeData,
           segment,
+          animate,
+          vaccineData,
+          ethnicityData,
         }) => {
           // map to friendly names
           const friendlyMapper = (i) => ({
@@ -168,7 +186,9 @@
             arriveModeData,
             departureModeData,
             tooltipJSON,
-            segment
+            segment,
+            vaccineData,
+            ethnicityData
           )
         }
       )
@@ -178,6 +198,12 @@
 
 <div class="details-location hidden">
   <Header title={detailsTitle} {firstRegion} />
+  {#if source.isCovidBlurbEnabled}
+  <div class="covid">
+    <h3>COVID-19</h3>
+    <div class="dynamic-covid"></div>
+  </div>
+  {/if}
   <h3>Arrivals</h3>
   <div class="arrive-from blurb-container" />
   <div class="arrive-from graph-container">
@@ -226,3 +252,10 @@
   </div>
   <Footer />
 </div>
+
+<style>
+  .dynamic-covid {
+    display: flex;
+    padding: 0 var(--sidebar-padding) 1rem;
+  }
+</style>
