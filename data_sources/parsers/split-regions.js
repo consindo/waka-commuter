@@ -49,4 +49,28 @@ const splitRegions = () => {
   })
 }
 
+const compressVaccines = () => {
+  const data = JSON.parse(
+    fs
+      .readFileSync(
+        path.join(__dirname, '../../', process.argv[2], 'vaccines-total.json')
+      )
+      .toString()
+  )
+
+  const areas = {}
+  Object.keys(data).forEach((area) => {
+    areas[area] = {
+      dose1Uptake: data[area].dose1Uptake,
+      dose2Uptake: data[area].dose2Uptake,
+    }
+  })
+
+  fs.writeFileSync(
+    path.join(__dirname, '../../dist/data/vaccines-total.json'),
+    JSON.stringify(areas, '', 2)
+  )
+}
+
 splitRegions()
+compressVaccines()

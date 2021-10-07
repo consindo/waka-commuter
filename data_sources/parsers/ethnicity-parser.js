@@ -24,6 +24,11 @@ const parse = (inputFilename, outputFilename) => {
 
       let key = data['Ethnic group']
 
+      // because in the data set it's "Total people - main means of travel to education/work"
+      if (key.includes('Total')) {
+        key = 'Total'
+      }
+
       results[data['Area'].trim()][key] = parseInt(data['Value'], 10)
     })
     .on('end', () => {
