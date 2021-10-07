@@ -59,7 +59,6 @@ noscript p {
 .mode-container {
   min-width: 300px;
   overflow-x: hidden;
-  flex: 1;
 }
 
 .mode-inner {

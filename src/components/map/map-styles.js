@@ -43,10 +43,17 @@ const doseColors = [
   '#253494',
 ]
 
+const hoverState = [
+  'case',
+  ['boolean', ['feature-state', 'hover'], false],
+  'rgba(255,255,255,0.45)',
+  'rgba(0,0,0,0)',
+]
+
 const vaccineColors = [
   'case',
   ['==', ['feature-state', 'nullState'], false],
-  'rgba(0,0,0,0)',
+  hoverState,
   [
     'case',
     ['==', ['feature-state', 'nullState'], 'dose2Uptake'],
@@ -100,14 +107,7 @@ export const areaFill = {
     'case',
     ['!=', ['feature-state', 'population'], null],
     colors,
-    source.vaccineData != null
-      ? vaccineColors
-      : [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          'rgba(255,255,255,0.45)',
-          'rgba(0,0,0,0)',
-        ],
+    source.vaccineData != null ? vaccineColors : hoverState,
   ],
 }
 
