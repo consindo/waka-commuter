@@ -1,6 +1,19 @@
 import { areaFill, lineFill, pointsFill } from './map-styles.js'
 
-export const drawMap = (map, data, areaLabels) => {
+export const drawMap = (map, datasets, areaLabels) => {
+  const data = datasets[0]
+  const vaccineData = datasets[1]
+
+  if (vaccineData) {
+    data.features.forEach((feature) => {
+      const { name } = feature.properties
+      Object.assign(feature.properties, vaccineData[name])
+    })
+  }
+
+  window.jono = datasets[0]
+  window.jono1 = datasets[1]
+
   map.addSource('sa2', {
     type: 'geojson',
     data,

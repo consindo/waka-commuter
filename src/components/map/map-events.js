@@ -1,5 +1,8 @@
 import polylabel from 'polylabel'
 import Dispatcher from '../../dispatcher.js'
+import { getSource } from '../../sources.js'
+
+const source = getSource()
 
 export const bindMapEvents = (map) => {
   bindMapboxEvents(map)
@@ -95,7 +98,49 @@ const bindMapboxEvents = (map) => {
 const bindDispatcherEvents = (map) => {
   const mapTooltip = document.querySelector('#map map-tooltip')
   let selectedAreas = []
+
+  let selectedNullState = source.enableNullState
+    ? source.enableNullState[0]
+    : null
   const setMap = (arriveData, departData, regionName, animate) => {
+    // this basically allows the vaccine layer to render correctly...
+    // should probably be adjusted to be more flexible in the future
+    if (source.enableNullState) {
+      if (regionName.length !== 0 && selectedAreas.length === 0) {
+        sa2Data.then((data) => {
+          data.features.forEach((feature) => {
+            map.setFeatureState(
+              {
+                source: 'sa2',
+                id: feature.properties.name,
+              },
+              {
+                nullState: false,
+              }
+            )
+          })
+        })
+      } else if (
+        (regionName.length === 0 && selectedAreas.length !== 0) ||
+        Dispatcher.dataDoses !== selectedNullState
+      ) {
+        selectedNullState = Dispatcher.dataDoses
+        sa2Data.then((data) => {
+          data.features.forEach((feature) => {
+            map.setFeatureState(
+              {
+                source: 'sa2',
+                id: feature.properties.name,
+              },
+              {
+                nullState: selectedNullState,
+              }
+            )
+          })
+        })
+      }
+    }
+
     // turns off all the old areas
     selectedAreas.forEach((i) => {
       map.setFeatureState(
@@ -193,6 +238,8 @@ const bindDispatcherEvents = (map) => {
 
   Dispatcher.bind('clear-blocks', () => {
     document.querySelector('.map-legend').classList.add('hidden')
+    document.querySelector('.dose-legend').classList.remove('hidden')
+
     setMap([], [], [])
     mapTooltip.removeAttribute('loading')
     mapTooltip.setAttribute(
@@ -210,6 +257,7 @@ const bindDispatcherEvents = (map) => {
   Dispatcher.bind(
     'update-blocks',
     ({ regionName, direction, arriveData, departData, segment, animate }) => {
+      document.querySelector('.dose-legend').classList.add('hidden')
       document.querySelector('.map-legend').classList.remove('hidden')
 
       const tooltipData = {

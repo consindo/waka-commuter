@@ -30,6 +30,8 @@ class Dispatcher extends Events {
 
   dataSegment = 'all'
 
+  dataDoses = 'dose1Uptake'
+
   loadBlocks = (animate) => {
     if (this.currentRegion.length === 0) {
       this.trigger('clear-blocks')
@@ -62,6 +64,11 @@ class Dispatcher extends Events {
 
   setDirection = (direction) => {
     this.dataDirection = direction
+    this.loadBlocks()
+  }
+
+  setDoses = (doses) => {
+    this.dataDoses = doses
     this.loadBlocks()
   }
 

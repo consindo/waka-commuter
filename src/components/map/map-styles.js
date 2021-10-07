@@ -1,3 +1,6 @@
+import { getSource } from '../../sources.js'
+const source = getSource()
+
 const colors = [
   'case',
   ['==', ['feature-state', 'selected'], 1],
@@ -20,6 +23,35 @@ const colors = [
     '#F44336',
     250,
     '#B71C1C',
+  ],
+]
+
+const doseColors = [
+  0,
+  '#ffffcc',
+  450,
+  '#ffffcc',
+  550,
+  '#c7e9b4',
+  650,
+  '#7fcdbb',
+  750,
+  '#41b6c4',
+  850,
+  '#2c7fb8',
+  950,
+  '#253494',
+]
+
+const vaccineColors = [
+  'case',
+  ['==', ['feature-state', 'nullState'], false],
+  'rgba(0,0,0,0)',
+  [
+    'case',
+    ['==', ['feature-state', 'nullState'], 'dose2Uptake'],
+    ['interpolate-hcl', ['linear'], ['get', 'dose2Uptake'], ...doseColors],
+    ['interpolate-hcl', ['linear'], ['get', 'dose1Uptake'], ...doseColors],
   ],
 ]
 
@@ -65,12 +97,14 @@ export const areaFill = {
     'case',
     ['!=', ['feature-state', 'population'], null],
     colors,
-    [
-      'case',
-      ['boolean', ['feature-state', 'hover'], false],
-      'rgba(255,255,255,0.45)',
-      'rgba(0,0,0,0)',
-    ],
+    source.vaccineData != null
+      ? vaccineColors
+      : [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          'rgba(255,255,255,0.45)',
+          'rgba(0,0,0,0)',
+        ],
   ],
 }
 

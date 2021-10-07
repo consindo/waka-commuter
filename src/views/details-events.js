@@ -16,6 +16,10 @@ const linkHack = (e, direction) => {
     legend.classList.add(direction)
   }
 }
+const toggleDoses = (doses) => (e) => {
+  linkHack(e)
+  Dispatcher.setDoses(doses)
+}
 const toggleDirection = (direction) => (e) => {
   linkHack(e, direction)
   Dispatcher.setDirection(direction)
@@ -37,6 +41,13 @@ const toggleSegment = (e) => {
 
 // events
 export const bindDetailsEvents = () => {
+  document
+    .querySelector('.btn-doses-dose1Uptake')
+    .addEventListener('click', toggleDoses('dose1Uptake'))
+  document
+    .querySelector('.btn-doses-dose2Uptake')
+    .addEventListener('click', toggleDoses('dose2Uptake'))
+
   document
     .querySelector('.btn-direction-all')
     .addEventListener('click', toggleDirection('all'))

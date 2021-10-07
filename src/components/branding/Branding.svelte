@@ -1,16 +1,40 @@
 <script>
   import { getSource } from '../../sources.js'
   import Search from './Search.svelte'
+  import Dispatcher from '../../dispatcher.js'
 
   export let regionNames
 
   const source = getSource()
   const brandingClass = source.brandingClass
+
+  let showDoses = source.enableNullState != null
+
+  Dispatcher.bind('update-blocks', () => {
+    showDoses = false
+  })
+
+  Dispatcher.bind('clear-blocks', () => {
+    showDoses = source.enableNullState != null
+  })
 </script>
 
 <div class={brandingClass}>
   <Search {regionNames} />
-  <nav class="controls">
+  <nav class={showDoses ? "controls" : "controls hide"}>
+    <a
+      href="#"
+      title="Show first dose uptake"
+      class="btn-doses-dose1Uptake selected">1<sup>st</sup> Dose</a
+    >
+    &middot;
+    <a
+      href="#"
+      title="Show second dose uptake"
+      class="btn-doses-dose2Uptake">2<sup>nd</sup> Dose</a
+    >
+  </nav>
+  <nav class={!showDoses ? "controls" : "controls hide"}>
     <a
       href="#"
       title="Show both arrivals & departures on map"
@@ -47,6 +71,10 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
     user-select: none;
     letter-spacing: -0.5px;
+  }
+
+  .hide {
+    display: none;
   }
 
   h1 {

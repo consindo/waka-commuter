@@ -11,10 +11,12 @@ const sources = {
   },
   covid: {
     shapeFile: '/shapes/sa2-optimized.json',
+    vaccineData: '/data/vaccines-total.json',
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,
     isMapAreaLabelsEnabled: false,
+    enableNullState: ['dose1Uptake', 'dose2Uptake'],
     segments: ['workplace', 'education'],
     detailsControls: ['All', 'Workplace', 'Education'],
     brandingClass: 'covid',

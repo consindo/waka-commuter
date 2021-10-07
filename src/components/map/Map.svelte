@@ -7,6 +7,7 @@
   import { drawMap } from './map-draw.js'
   import { bindMapEvents } from './map-events.js'
 
+  import DoseLegend from './DoseLegend.svelte'
   import Legend from './Legend.svelte'
 
   const token = process.env.MAPBOX_TOKEN
@@ -14,6 +15,10 @@
 
   const source = getSource()
   const sa2Data = window.sa2Data
+  let vaccineData = Promise.resolve()
+  if (source.vaccineData != null) {
+    vaccineData = fetch(source.vaccineData).then((res) => res.json())
+  }
 
   mapboxgl.accessToken = token
 
@@ -68,8 +73,8 @@
       // resize hacks for edge / chrome
       map.resize()
 
-      sa2Data.then((data) => {
-        const features = data.features
+      Promise.all([sa2Data, vaccineData]).then((data) => {
+        const features = data[0].features
 
         const styleDataCallback = () => {
           if (isLoaded) return
@@ -106,6 +111,7 @@
 <div id="map">
   <div id="map-content" />
   <Legend />
+  <DoseLegend />
   <map-tooltip />
 </div>
 
