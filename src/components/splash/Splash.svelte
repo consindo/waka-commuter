@@ -14,6 +14,20 @@
     <Banner dataSource="Christchurch Transport Model Version 18" />
     <Regions on:locationChange enabledRegions={['nz-chc']} />
     <Satellite on:styleChange />
+  {:else if source.brandingClass === 'covid'}
+    covid covid covid
+    <Regions
+      on:locationChange
+      enabledRegions={[
+        'nz-akl',
+        'nz-chc',
+        'nz-wlg',
+        'nz-trg',
+        'nz-hlz',
+        'nz-dud',
+      ]}
+    />
+    <Satellite on:styleChange />
   {:else}
     <Banner dataSource="2018 Census" />
     <Regions

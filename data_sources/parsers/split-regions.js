@@ -50,13 +50,18 @@ const splitRegions = () => {
 }
 
 const compressVaccines = () => {
-  const data = JSON.parse(
-    fs
-      .readFileSync(
-        path.join(__dirname, '../../', process.argv[2], 'vaccines-total.json')
-      )
-      .toString()
+  const vaccinePath = path.join(
+    __dirname,
+    '../../',
+    process.argv[2],
+    'vaccines-total.json'
   )
+  if (!fs.existsSync(vaccinePath)) {
+    console.log('did not find vaccine data, skipping')
+    return
+  }
+
+  const data = JSON.parse(fs.readFileSync(vaccinePath).toString())
 
   const areas = {}
   Object.keys(data).forEach((area) => {
