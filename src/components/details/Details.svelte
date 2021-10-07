@@ -199,9 +199,23 @@
 <div class="details-location hidden">
   <Header title={detailsTitle} {firstRegion} />
   {#if source.isCovidBlurbEnabled}
-  <div class="covid">
+  <div class="covid-details">
     <h3>COVID-19</h3>
     <div class="dynamic-covid"></div>
+    <div class="mode-container">
+      <div class="mode-inner">
+        <h4>
+          Ethnicity
+          <small
+            ><a
+              href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
+              >(NZ.Stat)</a
+            ></small
+          >
+        </h4>
+        <div class="mode" />
+      </div>
+    </div>
   </div>
   {/if}
   <h3>Arrivals</h3>

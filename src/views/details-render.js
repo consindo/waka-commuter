@@ -2,6 +2,7 @@
 import '../components/population-bubbles.js'
 import '../components/travel-mode.js'
 import '../components/destination-blurb.js'
+import '../components/ethnicity-graph.js'
 
 import { getSource } from '../sources.js'
 const source = getSource()
@@ -158,6 +159,13 @@ export const setDetails = (
     </div>
     `
     }
+
+    const ethnicity = document.createElement('ethnicity-graph')
+    ethnicity.setAttribute('data', JSON.stringify({ Total: ethnicityData }))
+
+    const ethnicityContainer = document.querySelector('.covid-details .mode')
+    ethnicityContainer.innerHTML = ''
+    ethnicityContainer.appendChild(ethnicity)
   }
 }
 

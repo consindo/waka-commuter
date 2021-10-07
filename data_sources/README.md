@@ -26,4 +26,4 @@ URL: https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-
 
 ### Ethnicity
 
-URL: http://nzdotstat.stats.govt.nz/wbos/index.aspx?_ga=2.3772976.1495278435.1581277976-883879982.1573000273#
+URL: http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296
