@@ -23,10 +23,10 @@
   .splash-bg {
     background: linear-gradient(
         120deg,
-        rgba(10, 0, 20, 0.8) 50%,
-        rgba(10, 0, 20, 0.4)
+        rgba(10, 0, 20, 0.7) 50%,
+        rgba(10, 0, 20, 0.3)
       ),
-      url('/css/splash.jpg');
+      url('/css/splash-2.jpg');
     background-size: cover;
     background-position: 50% 50%;
     height: 400px;
