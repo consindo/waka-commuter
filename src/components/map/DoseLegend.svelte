@@ -1,16 +1,19 @@
 <script>
+  import HeatmapToggle from './HeatmapToggle.svelte'
   import { getSource } from '../../sources.js'
   const source = getSource()
   const show = source.enableNullState != null
 </script>
 
 <div class={show ? "dose-legend" : "dose-legend hidden"}>
+  <HeatmapToggle />
   <div class="dose-legend-colors" />
   <ul>
     <li>50%</li>
     <li>70%</li>
     <li>95%</li>
   </ul>
+  <p>Vaccination Rate</p>
 </div>
 
 <style>
@@ -23,7 +26,8 @@
     bottom: 10px;
     left: 49px;
     color: #fff;
-    pointer-events: none;
+    overflow: hidden;
+    user-select: none;
   }
 
   /* Warning: map-styles.js is source of truth for this */
@@ -59,6 +63,12 @@
   }
   li:last-child {
     text-align: right;
+  }
+
+  p {
+    font-weight: bold;
+    margin: 0 7px;
+    font-size: 11px;
   }
 
   @media (max-width: 1020px) {

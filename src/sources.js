@@ -12,6 +12,8 @@ const sources = {
   covid: {
     shapeFile: '/shapes/sa2-optimized.json',
     vaccineData: '/data/vaccines-total.json',
+    heatmapData:
+      'https://raw.githubusercontent.com/minhealthnz/nz-covid-data/main/locations-of-interest/august-2021/locations-of-interest.geojson',
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,

@@ -1,4 +1,9 @@
+<script>
+  import HeatmapToggle from './HeatmapToggle.svelte'
+</script>
+
 <div class="map-legend hidden all">
+  <HeatmapToggle />
   <div class="map-legend-colors" />
   <ul>
     <li class="hide-departures hide-all">Less Arrivals</li>
@@ -18,7 +23,8 @@
     bottom: 10px;
     left: 49px;
     color: #fff;
-    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
   }
 
   /* Warning: map-styles.js is source of truth for this */

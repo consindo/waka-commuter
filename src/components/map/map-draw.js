@@ -1,4 +1,7 @@
-import { areaFill, lineFill, pointsFill } from './map-styles.js'
+import { areaFill, lineFill, pointsFill, heatmapPaint } from './map-styles.js'
+import { getSource } from '../../sources.js'
+
+const source = getSource()
 
 export const drawMap = (map, datasets, areaLabels) => {
   const data = datasets[0]
@@ -49,6 +52,32 @@ export const drawMap = (map, datasets, areaLabels) => {
     source: 'points',
     paint: pointsFill,
   })
+
+  if (source.heatmapData != null) {
+    map.addSource('heatmap', {
+      type: 'geojson',
+      data: source.heatmapData,
+    })
+
+    map.addLayer({
+      id: 'heatmap',
+      type: 'heatmap',
+      source: 'heatmap',
+      paint: heatmapPaint,
+    })
+
+    const inputs = Array.from(document.querySelectorAll('.loi-input'))
+    inputs.forEach((el) =>
+      el.addEventListener('click', (e) => {
+        if (e.currentTarget.checked) {
+          map.setLayoutProperty('heatmap', 'visibility', 'visible')
+        } else {
+          map.setLayoutProperty('heatmap', 'visibility', 'none')
+        }
+        inputs.forEach((el) => (el.checked = e.currentTarget.checked))
+      })
+    )
+  }
 
   if (areaLabels) {
     map.addLayer({

@@ -25,7 +25,6 @@ export const transformVaccine = (data) => {
 }
 
 export const transformEthnicity = (data) => {
-  console.log(data)
   let aggregate = {}
   data.map((dataSource) => {
     Object.keys(dataSource.ethnicity).forEach((key) => {
