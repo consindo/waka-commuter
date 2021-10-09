@@ -67,16 +67,17 @@
 
   p {
     font-weight: bold;
-    margin: 0 7px;
+    margin: 0 7px 5px;
     font-size: 11px;
   }
 
   @media (max-width: 1020px) {
     .dose-legend {
-      top: calc(var(--real-height) - 164px);
       left: auto;
       right: 8px;
       bottom: auto;
+      top: auto;
+      bottom: 116px;
     }
   }
 </style>

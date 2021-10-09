@@ -91,7 +91,8 @@
     }
     h2 {
       margin: 0.1rem 0 0.25rem;
-      font-size: 1.5rem;
+      font-size: 1rem;
+      line-height: 2rem;
     }
     p {
       margin: 0;

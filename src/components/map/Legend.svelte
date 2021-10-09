@@ -56,10 +56,10 @@
 
   @media (max-width: 1020px) {
     .map-legend {
-      top: calc(var(--real-height) - 164px);
       left: auto;
       right: 8px;
-      bottom: auto;
+      top: auto;
+      bottom: 116px;
     }
   }
 </style>
