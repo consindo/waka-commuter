@@ -21,6 +21,8 @@
   }
   .loi-container input {
     margin: 0;
+    vertical-align: top;
     margin-right: 4px;
+    margin-top: 4px;
   }
 </style>
