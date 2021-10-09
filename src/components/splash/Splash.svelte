@@ -8,7 +8,6 @@
   import DataSources from './DataSources.svelte'
   import CovidDataSources from './CovidDataSources.svelte'
 
-
   const source = getSource()
 </script>
 

@@ -14,13 +14,15 @@
 
   async function getRegionNames() {
     const data = await sa2Data
-    return data.features.map((i) => {
-      const { name, friendlyName } = i.properties
-      return {
-        id: name,
-        name: friendlyName ? `${name} - ${friendlyName}` : name,
-      }
-    }).sort((a, b) => a.name.localeCompare(b.name))
+    return data.features
+      .map((i) => {
+        const { name, friendlyName } = i.properties
+        return {
+          id: name,
+          name: friendlyName ? `${name} - ${friendlyName}` : name,
+        }
+      })
+      .sort((a, b) => a.name.localeCompare(b.name))
   }
 
   let regionNames = getRegionNames()

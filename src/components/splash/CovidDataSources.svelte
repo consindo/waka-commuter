@@ -6,12 +6,26 @@
   <Footer />
   <h3>Data Sources</h3>
   <p>
-    This app uses our vaccination data from the <a href="https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data/covid-19-vaccination-uptake-rates-across-nz">Ministry of Health</a> and data from the <a href="https://commuter.waka.app">2018 Census</a>. The vaccination information is as 11:59pm on 05 October 2021.
+    This app uses our vaccination data from the <a
+      href="https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data/covid-19-vaccination-uptake-rates-across-nz"
+      >Ministry of Health</a
+    >
+    and data from the <a href="https://commuter.waka.app">2018 Census</a>. The
+    vaccination information is as 11:59pm on 05 October 2021.
   </p>
   <ul>
-    <li>Vaccine uptake between the map and detailed breakdown may slightly differ, due to standard privacy procedures</li>
-    <li>Some areas have vaccination counts that are higher than the anticipated population count due to population movements</li>
-    <li>Some records are not able to be mapped to a location and are not shown in this app</li>
+    <li>
+      Vaccine uptake between the map and detailed breakdown may slightly differ,
+      due to standard privacy procedures
+    </li>
+    <li>
+      Some areas have vaccination counts that are higher than the anticipated
+      population count due to population movements
+    </li>
+    <li>
+      Some records are not able to be mapped to a location and are not shown in
+      this app
+    </li>
   </ul>
   <p>
     App not loading? Make sure you’re using the latest version of

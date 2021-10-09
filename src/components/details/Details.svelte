@@ -12,10 +12,7 @@
     humanRegionName,
   } from '../../data.js'
 
-  import { 
-    transformVaccine,
-    transformEthnicity
-  } from '../../covid.js'
+  import { transformVaccine, transformEthnicity } from '../../covid.js'
 
   import { bindDetailsEvents } from '../../views/details-events.js'
   import {
@@ -34,9 +31,9 @@
   const sa2Data = window.sa2Data
   const source = getSource()
 
-   $: document.title = `${
-    documentTitle ? `${documentTitle} - ` : ''
-  }${source.title || 'Commuter'} - Waka`
+  $: document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
+    source.title || 'Commuter'
+  } - Waka`
 
   if (!source.isAllSegmentEnabled) {
     Dispatcher.dataSegment = source.segments[0]
@@ -67,79 +64,86 @@
         documentTitle = null
       })
 
-      Dispatcher.bind('load-blocks', (regionName, direction, segment, animate) => {
-        const modifiedRegionNames = regionName.map(regionNameMapper)
-        detailsTitle = humanRegionName(modifiedRegionNames, 'full')
-        documentTitle = humanRegionName(modifiedRegionNames, 'title')
+      Dispatcher.bind(
+        'load-blocks',
+        (regionName, direction, segment, animate) => {
+          const modifiedRegionNames = regionName.map(regionNameMapper)
+          detailsTitle = humanRegionName(modifiedRegionNames, 'full')
+          documentTitle = humanRegionName(modifiedRegionNames, 'title')
 
-        firstRegion = regionName[0]
+          firstRegion = regionName[0]
 
-        getData(regionName).then((data) => {
-          // depending on the toggle, filter out workspace or education data
-          const dataSources = data
-            .map((dataSource) => {
-              // retuns the matching segment
-              if (dataSource[segment] != null) {
-                return [dataSource[segment]]
-              } else if (segment === 'all') {
-                return source.segments.map((key) => dataSource[key])
-              } else {
-                console.error('Could not find segment', segment)
-              }
-            })
-            .flat()
+          getData(regionName).then((data) => {
+            // depending on the toggle, filter out workspace or education data
+            const dataSources = data
+              .map((dataSource) => {
+                // retuns the matching segment
+                if (dataSource[segment] != null) {
+                  return [dataSource[segment]]
+                } else if (segment === 'all') {
+                  return source.segments.map((key) => dataSource[key])
+                } else {
+                  console.error('Could not find segment', segment)
+                }
+              })
+              .flat()
 
-          // relies on no colons being in the keyNames
-          const sourceKeys = regionName
-            .map((i) => {
-              if (segment === 'all') {
-                return source.segments.map((key) => [i, key].join(':'))
-              } else {
-                return [[i, segment].join(':')]
-              }
-            })
-            .flat()
+            // relies on no colons being in the keyNames
+            const sourceKeys = regionName
+              .map((i) => {
+                if (segment === 'all') {
+                  return source.segments.map((key) => [i, key].join(':'))
+                } else {
+                  return [[i, segment].join(':')]
+                }
+              })
+              .flat()
 
-          const arriveData = transformData(features, dataSources, 'arriveFrom')
-          const departData = transformData(features, dataSources, 'departTo')
-
-          let arriveModeData = null
-          let departureModeData = null
-          if (source.isModeGraphsEnabled === true) {
-            arriveModeData = transformModeData(
+            const arriveData = transformData(
+              features,
               dataSources,
-              sourceKeys,
-              'arrivalModes'
+              'arriveFrom'
             )
-            departureModeData = transformModeData(
-              dataSources,
-              sourceKeys,
-              'departureModes'
-            )
-          }
+            const departData = transformData(features, dataSources, 'departTo')
 
-          // aggregate vaccine
-          let vaccineData = null
-          let ethnicityData = null
-          if (source.isCovidBlurbEnabled === true) {
-            vaccineData = transformVaccine(data)
-            ethnicityData = transformEthnicity(data)  
-          }
+            let arriveModeData = null
+            let departureModeData = null
+            if (source.isModeGraphsEnabled === true) {
+              arriveModeData = transformModeData(
+                dataSources,
+                sourceKeys,
+                'arrivalModes'
+              )
+              departureModeData = transformModeData(
+                dataSources,
+                sourceKeys,
+                'departureModes'
+              )
+            }
 
-          Dispatcher.trigger('update-blocks', {
-            regionName,
-            direction,
-            segment,
-            arriveData,
-            departData,
-            arriveModeData,
-            departureModeData,
-            animate,
-            vaccineData,
-            ethnicityData,
+            // aggregate vaccine
+            let vaccineData = null
+            let ethnicityData = null
+            if (source.isCovidBlurbEnabled === true) {
+              vaccineData = transformVaccine(data)
+              ethnicityData = transformEthnicity(data)
+            }
+
+            Dispatcher.trigger('update-blocks', {
+              regionName,
+              direction,
+              segment,
+              arriveData,
+              departData,
+              arriveModeData,
+              departureModeData,
+              animate,
+              vaccineData,
+              ethnicityData,
+            })
           })
-        })
-      })
+        }
+      )
 
       // details
       Dispatcher.bind(
@@ -199,30 +203,30 @@
 <div class="details-location hidden">
   <Header title={detailsTitle} {firstRegion} />
   {#if source.isCovidBlurbEnabled}
-  <div class="covid-details">
-    <h3>COVID-19</h3>
-    <div class="covid-details-inner">
-      <div class="dynamic-covid">
-        <div class="total-container"></div>
-        <div class="maori-container"></div>
-        <div class="pacific-container"></div>
-      </div>
-      <div class="mode-container">
-        <div class="mode-inner">
-          <h4>
-            Ethnicity
-            <small
-              ><a
-                href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-                >(NZ.Stat)</a
-              ></small
-            >
-          </h4>
-          <div class="mode" />
+    <div class="covid-details">
+      <h3>COVID-19</h3>
+      <div class="covid-details-inner">
+        <div class="dynamic-covid">
+          <div class="total-container" />
+          <div class="maori-container" />
+          <div class="pacific-container" />
+        </div>
+        <div class="mode-container">
+          <div class="mode-inner">
+            <h4>
+              Ethnicity
+              <small
+                ><a
+                  href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
+                  >(NZ.Stat)</a
+                ></small
+              >
+            </h4>
+            <div class="mode" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
   {/if}
   <h3>Arrivals</h3>
   <div class="arrive-from blurb-container" />

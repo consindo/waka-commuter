@@ -6,7 +6,8 @@
   <div class="splash-content">
     <h2>How is our COVID-19 vaccination going?</h2>
     <p>
-      Discover how our COVID-19 vaccination campaign affects different communities.
+      Discover how our COVID-19 vaccination campaign affects different
+      communities.
       <span class="desktop"
         >Get started by choosing an area on the map, or jump to a region below.</span
       >

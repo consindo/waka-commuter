@@ -5,16 +5,18 @@
 </script>
 
 {#if showHeatmap}
-<div class="loi-container">
-  <label><input type="checkbox" class="loi-input" checked>Locations of Interest</label>
-</div>
+  <div class="loi-container">
+    <label
+      ><input type="checkbox" class="loi-input" checked />Locations of Interest</label
+    >
+  </div>
 {/if}
 
 <style>
   .loi-container {
     font-size: 13px;
     line-height: 22px;
-    background: rgba(255,0,0,0.2);
+    background: rgba(255, 0, 0, 0.2);
     padding: 2px 5px;
   }
   .loi-container input {

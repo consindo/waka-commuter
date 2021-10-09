@@ -5,7 +5,7 @@
   const show = source.enableNullState != null
 </script>
 
-<div class={show ? "dose-legend" : "dose-legend hidden"}>
+<div class={show ? 'dose-legend' : 'dose-legend hidden'}>
   <HeatmapToggle />
   <div class="dose-legend-colors" />
   <ul>

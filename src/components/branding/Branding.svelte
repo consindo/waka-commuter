@@ -21,20 +21,18 @@
 
 <div class={brandingClass}>
   <Search {regionNames} />
-  <nav class={showDoses ? "controls" : "controls hide"}>
+  <nav class={showDoses ? 'controls' : 'controls hide'}>
     <a
       href="#"
       title="Show first dose uptake"
       class="btn-doses-dose1Uptake selected">1<sup>st</sup> Dose</a
     >
     &middot;
-    <a
-      href="#"
-      title="Show second dose uptake"
-      class="btn-doses-dose2Uptake">2<sup>nd</sup> Dose</a
+    <a href="#" title="Show second dose uptake" class="btn-doses-dose2Uptake"
+      >2<sup>nd</sup> Dose</a
     >
   </nav>
-  <nav class={!showDoses ? "controls" : "controls hide"}>
+  <nav class={!showDoses ? 'controls' : 'controls hide'}>
     <a
       href="#"
       title="Show both arrivals & departures on map"
