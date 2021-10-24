@@ -18,15 +18,16 @@ const filenames = [
   },
 ]
 
-const parseNumber = (number) => {
+const parseNumber = (number, rate) => {
   // fuzzyness
+  if (number === 'masked') {
+    // this will be the pop times the rate, which should give an accurate estimate
+    if (rate) return rate
+    return 0
+  }
   if (number === '>950') {
     return 1000
-  } else if (
-    number === '5 or less' ||
-    number === 'masked' ||
-    number === '<50'
-  ) {
+  } else if (number === '5 or less' || number === '<50') {
     return 0
   }
   return parseInt(number, 10)
@@ -45,11 +46,17 @@ const parse = (inputFilename, outputFilename) => {
         results[area] = {}
       }
 
-      results[area].dose1Count = parseNumber(data['dose1_cnt'])
-      results[area].dose2Count = parseNumber(data['dose2_cnt'])
       results[area].populationCount = parseNumber(data['pop_cnt'])
       results[area].dose1Uptake = parseNumber(data['dose1_uptake'])
       results[area].dose2Uptake = parseNumber(data['dose2_uptake'])
+      results[area].dose1Count = parseNumber(
+        data['dose1_cnt'],
+        (results[area].populationCount * results[area].dose1Uptake) / 1000
+      )
+      results[area].dose2Count = parseNumber(
+        data['dose2_cnt'],
+        (results[area].populationCount * results[area].dose2Uptake) / 1000
+      )
     })
     .on('end', () => {
       fs.writeFileSync(outputFilename, JSON.stringify(results, '', 2))
