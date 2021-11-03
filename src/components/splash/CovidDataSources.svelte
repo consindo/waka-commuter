@@ -11,7 +11,7 @@
       >Ministry of Health</a
     >
     and data from the <a href="https://commuter.waka.app">2018 Census</a>. The
-    vaccination information is as 11:59pm on 26 October 2021.
+    vaccination information is as 11:59pm on 2 November 2021.
   </p>
   <ul>
     <li>
