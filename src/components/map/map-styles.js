@@ -39,8 +39,10 @@ const doseColors = [
   '#41b6c4',
   850,
   '#2c7fb8',
-  950,
+  949,
   '#253494',
+  1000,
+  '#000000',
 ]
 
 const hoverState = [
