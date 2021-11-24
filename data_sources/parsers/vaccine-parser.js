@@ -20,7 +20,7 @@ const filenames = [
 
 const parseNumber = (number, rate) => {
   // fuzzyness
-  if (number === 'masked') {
+  if (number.toLowerCase() === 'masked') {
     // this will be the pop times the rate, which should give an accurate estimate
     if (rate) return rate
     return 0
@@ -46,9 +46,9 @@ const parse = (inputFilename, outputFilename) => {
         results[area] = {}
       }
 
-      results[area].populationCount = parseNumber(data['pop_cnt'])
-      results[area].dose1Uptake = parseNumber(data['dose1_uptake'])
-      results[area].dose2Uptake = parseNumber(data['dose2_uptake'])
+      results[area].populationCount = parseNumber(data['pop_cnt'].trim())
+      results[area].dose1Uptake = parseNumber(data['dose1_uptake'].trim())
+      results[area].dose2Uptake = parseNumber(data['dose2_uptake'].trim())
       results[area].dose1Count = parseNumber(
         data['dose1_cnt'],
         (results[area].populationCount * results[area].dose1Uptake) / 1000
