@@ -3,9 +3,10 @@ import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
 import livereload from 'rollup-plugin-livereload'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 import css from 'rollup-plugin-css-only'
 import json from '@rollup/plugin-json'
+import childProcess from 'child_process'
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -19,14 +20,10 @@ function serve() {
 	return {
 		writeBundle() {
 			if (server) return
-			server = require('child_process').spawn(
-				'npm',
-				['run', 'start', '--', '--dev'],
-				{
-					stdio: ['ignore', 'inherit', 'inherit'],
-					shell: true,
-				}
-			)
+			server = childProcess.spawn('npm', ['run', 'start', '--', '--dev'], {
+				stdio: ['ignore', 'inherit', 'inherit'],
+				shell: true,
+			})
 
 			process.on('SIGTERM', toExit)
 			process.on('exit', toExit)
@@ -67,12 +64,10 @@ export default {
 		}),
 
 		replace({
-			process: JSON.stringify({
-				env: {
-					MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
-					WAKA_COMMUTER_SOURCE: process.env.WAKA_COMMUTER_SOURCE,
-				},
-			}),
+			'process.env.MAPBOX_TOKEN': JSON.stringify(process.env.MAPBOX_TOKEN),
+			'process.env.WAKA_COMMUTER_SOURCE': JSON.stringify(
+				process.env.WAKA_COMMUTER_SOURCE
+			),
 		}),
 
 		commonjs(),
