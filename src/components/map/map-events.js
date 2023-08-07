@@ -250,7 +250,6 @@ const bindDispatcherEvents = (map) => {
 
   Dispatcher.bind('clear-blocks', () => {
     document.querySelector('.map-legend').classList.add('hidden')
-    document.querySelector('.dose-legend').classList.remove('hidden')
 
     setMap([], [], [])
     mapTooltip.removeAttribute('loading')
@@ -269,7 +268,6 @@ const bindDispatcherEvents = (map) => {
   Dispatcher.bind(
     'update-blocks',
     ({ regionName, direction, arriveData, departData, segment, animate }) => {
-      document.querySelector('.dose-legend').classList.add('hidden')
       document.querySelector('.map-legend').classList.remove('hidden')
 
       const tooltipData = {

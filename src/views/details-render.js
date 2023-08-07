@@ -4,8 +4,6 @@ import '../components/travel-mode.js'
 import '../components/destination-blurb.js'
 import '../components/ethnicity-graph.js'
 
-import { getCovidHtml } from './details-covid.js'
-
 import { getSource } from '../sources.js'
 const source = getSource()
 
@@ -72,8 +70,6 @@ export const setDetails = (
   departModeData,
   tooltipData,
   segment,
-  vaccineData,
-  ethnicityData
 ) => {
   document.querySelector('.details-splash').classList.add('hidden')
   document.querySelector('.details-location').classList.remove('hidden')
@@ -87,12 +83,7 @@ export const setDetails = (
   }
 
   const populationLabel = document.querySelector('.population-label')
-  if (source.isCovidBlurbEnabled === true) {
-    populationLabel.innerText = 'Population:'
-    document.querySelector(
-      '.population-count'
-    ).innerText = vaccineData.total.populationCount.toLocaleString()
-  } else if (segment === 'all') {
+  if (segment === 'all') {
     populationLabel.innerText = 'Resident Workers & Students:'
   } else if (segment === 'workplace') {
     populationLabel.innerText = 'Resident Workers:'
@@ -124,47 +115,6 @@ export const setDetails = (
   setBubble(departContainer, location, departData, tooltipData, 'departures')
   setMode(arriveContainer, arriveModeData)
   setMode(departContainer, departModeData)
-
-  if (source.isCovidBlurbEnabled === true) {
-    if (vaccineData.total.populationCount > 0) {
-      document.querySelector('.total-container').innerHTML = getCovidHtml(
-        vaccineData.total.populationCount,
-        vaccineData.total.dose1Count,
-        vaccineData.total.dose2Count,
-        'Total'
-      )
-    } else {
-      document.querySelector('.total-container').innerHTML = ''
-    }
-
-    if (vaccineData.maori && vaccineData.maori.populationCount > 0) {
-      document.querySelector('.maori-container').innerHTML = getCovidHtml(
-        vaccineData.maori.populationCount,
-        vaccineData.maori.dose1Count,
-        vaccineData.maori.dose2Count,
-        'Māori'
-      )
-    } else {
-      document.querySelector('.maori-container').innerHTML = ''
-    }
-
-    if (vaccineData.pacific && vaccineData.pacific.populationCount > 0) {
-      document.querySelector('.pacific-container').innerHTML = getCovidHtml(
-        vaccineData.pacific.populationCount,
-        vaccineData.pacific.dose1Count,
-        vaccineData.pacific.dose2Count,
-        'Pasifika'
-      )
-    } else {
-      document.querySelector('.pacific-container').innerHTML = ''
-    }
-
-    const ethnicity = document.createElement('ethnicity-graph')
-    ethnicity.setAttribute('data', JSON.stringify({ Total: ethnicityData }))
-    const ethnicityContainer = document.querySelector('.covid-details .mode')
-    ethnicityContainer.innerHTML = ''
-    ethnicityContainer.appendChild(ethnicity)
-  }
 }
 
 export const hideDetails = () => {
