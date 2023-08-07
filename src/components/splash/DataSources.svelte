@@ -26,7 +26,9 @@
     <a href="https://twitter.com/consindo">Twitter</a>.
   </p>
 </div>
-<footer><a href="https://jono.nz">&copy; 2021 Jono Cooper</a></footer>
+<footer>
+  &copy; 2023 Turbomaps &middot; <a href="https://turbomaps.io">turbomaps.io</a>
+</footer>
 
 <style>
   div {
@@ -49,10 +51,10 @@
 
   footer {
     padding: 0 var(--sidebar-padding) 3rem;
+    color: #999;
+    font-size: 0.9rem;
   }
   footer a {
-    color: #999;
-    text-decoration: none;
-    font-size: 0.85rem;
+    color: inherit;
   }
 </style>

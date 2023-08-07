@@ -7,7 +7,6 @@
   import { drawMap } from './map-draw.js'
   import { bindMapEvents } from './map-events.js'
 
-  import DoseLegend from './DoseLegend.svelte'
   import Legend from './Legend.svelte'
 
   const token = process.env.MAPBOX_TOKEN
@@ -111,7 +110,6 @@
 <div id="map">
   <div id="map-content" />
   <Legend />
-  <DoseLegend />
   <map-tooltip />
 </div>
 

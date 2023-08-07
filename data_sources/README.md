@@ -20,10 +20,6 @@ URL: http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296#
 - selection settings adjusted to include all means of travel to work
 - selection settings adjusted to include all areas
 
-### Vaccines
-
-URL: https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data/covid-19-vaccination-uptake-rates-across-nz
-
 ### Ethnicity
 
 URL: http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296

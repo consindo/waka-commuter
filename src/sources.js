@@ -9,22 +9,6 @@ const sources = {
     detailsControls: ['All', 'Workplace', 'Education'],
     brandingClass: 'statsnz',
   },
-  covid: {
-    shapeFile: '/shapes/sa2-optimized.json',
-    vaccineData: '/data/vaccines-total.json',
-    heatmapData:
-      'https://raw.githubusercontent.com/minhealthnz/nz-covid-data/main/locations-of-interest/august-2021/locations-of-interest.geojson',
-    initialPosition: [173, -40, 5.5],
-    isModeGraphsEnabled: true,
-    isAllSegmentEnabled: true,
-    isMapAreaLabelsEnabled: false,
-    isCovidBlurbEnabled: true,
-    enableNullState: ['dose1Uptake', 'dose2Uptake'],
-    segments: ['workplace', 'education'],
-    detailsControls: ['All', 'Workplace', 'Education'],
-    brandingClass: 'covid',
-    title: 'Covid',
-  },
   wsp: {
     shapeFile: '/shapes/extras/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],

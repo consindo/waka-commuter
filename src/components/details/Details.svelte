@@ -12,8 +12,6 @@
     humanRegionName,
   } from '../../data.js'
 
-  import { transformVaccine, transformEthnicity } from '../../covid.js'
-
   import { bindDetailsEvents } from '../../views/details-events.js'
   import {
     setDetailsControls,
@@ -121,14 +119,6 @@
               )
             }
 
-            // aggregate vaccine
-            let vaccineData = null
-            let ethnicityData = null
-            if (source.isCovidBlurbEnabled === true) {
-              vaccineData = transformVaccine(data)
-              ethnicityData = transformEthnicity(data)
-            }
-
             Dispatcher.trigger('update-blocks', {
               regionName,
               direction,
@@ -138,8 +128,6 @@
               arriveModeData,
               departureModeData,
               animate,
-              vaccineData,
-              ethnicityData,
             })
           })
         }
@@ -156,8 +144,6 @@
           departureModeData,
           segment,
           animate,
-          vaccineData,
-          ethnicityData,
         }) => {
           // map to friendly names
           const friendlyMapper = (i) => ({
@@ -190,9 +176,7 @@
             arriveModeData,
             departureModeData,
             tooltipJSON,
-            segment,
-            vaccineData,
-            ethnicityData
+            segment
           )
         }
       )
@@ -202,32 +186,6 @@
 
 <div class="details-location hidden">
   <Header title={detailsTitle} {firstRegion} />
-  {#if source.isCovidBlurbEnabled}
-    <div class="covid-details">
-      <h3>COVID-19</h3>
-      <div class="covid-details-inner">
-        <div class="dynamic-covid">
-          <div class="total-container" />
-          <div class="maori-container" />
-          <div class="pacific-container" />
-        </div>
-        <div class="mode-container">
-          <div class="mode-inner">
-            <h4>
-              Ethnicity
-              <small
-                ><a
-                  href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-                  >(NZ.Stat)</a
-                ></small
-              >
-            </h4>
-            <div class="mode" />
-          </div>
-        </div>
-      </div>
-    </div>
-  {/if}
   <h3>Arrivals</h3>
   <div class="arrive-from blurb-container" />
   <div class="arrive-from graph-container">
@@ -276,21 +234,3 @@
   </div>
   <Footer />
 </div>
-
-<style>
-  .covid-details-inner {
-    display: flex;
-    margin-bottom: 1.5rem;
-    align-items: center;
-  }
-  .dynamic-covid {
-    margin-top: 1rem;
-    flex: 1;
-    padding: 0 var(--sidebar-padding) 1rem;
-  }
-  @media (max-width: 1500px) {
-    .covid-details-inner {
-      display: block;
-    }
-  }
-</style>
