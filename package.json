@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "npm run build:js && npm run process",
-    "build:wsp": "npm run build:js && npm run process:wsp && npm run shapes:wsp",
-    "build:js": "rollup -c",
+    "build": "npm run process && npm run build:js",
+    "build:wsp": "npm run process:wsp && npm run shapes:wsp && npm run build:js",
+    "build:js": "vite build",
     "process": "npm run process:area && npm run process:travel && npm run process:ethnicity && npm run process:combine && npm run process:copy",
     "process:area": "node data_sources/parsers/area-to-area-parser.js",
     "process:ethnicity": "node data_sources/parsers/ethnicity-parser.js",
@@ -17,35 +18,27 @@
     "process:wsp:area": "node commuterview-extras/data_sources/parsers/wsp/area-to-area-parser.js",
     "process:wsp:combine": "node commuterview-extras/data_sources/parsers/wsp/combine-files.js",
     "process:wsp:copy": "node data_sources/parsers/split-regions.js commuterview-extras/data_sources/outputs/wsp",
-    "shapes:wsp": "ncp commuterview-extras/shapes dist/shapes/extras",
+    "shapes:wsp": "ncp commuterview-extras/shapes/wsp-zones-optimized.json public/shapes/wsp-zones-optimized.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rollup -c -w",
-    "start": "sirv dist",
+    "dev": "vite dev --host",
+    "start": "vite preview",
     "prettier": "prettier --write src/**/*.svelte src/**/*.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit-element": "^3.2.2",
-    "mapbox-gl": "^2.12.0",
-    "polylabel": "^1.1.0",
-    "sirv-cli": "^2.0.2"
+    "lit-element": "^3.3.3",
+    "mapbox-gl": "^2.15.0",
+    "polylabel": "^1.1.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-replace": "^5.0.2",
+    "@sveltejs/vite-plugin-svelte": "^2.4.4",
     "csv-parser": "^3.0.0",
     "ncp": "^2.0.0",
-    "prettier": "^2.8.2",
-    "prettier-plugin-svelte": "^2.9.0",
-    "rollup": "^3.9.1",
-    "rollup-plugin-css-only": "^4.3.0",
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-svelte": "^7.1.0",
-    "@rollup/plugin-terser": "^0.3.0",
-    "strip-bom-stream": "^4.0.0",
-    "svelte": "^3.55.0"
+    "prettier": "^3.0.1",
+    "prettier-plugin-svelte": "^3.0.3",
+    "strip-bom-stream": "^5.0.0",
+    "svelte": "^4.1.2",
+    "vite": "^4.4.9"
   }
 }

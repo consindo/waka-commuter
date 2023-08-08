@@ -1,6 +1,8 @@
+import sa2 from '../static/shapes/sa2-optimized.json?url'
+
 const sources = {
   commuterview: {
-    shapeFile: '/shapes/sa2-optimized.json',
+    shapeFile: sa2,
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,
@@ -10,7 +12,7 @@ const sources = {
     brandingClass: 'statsnz',
   },
   wsp: {
-    shapeFile: '/shapes/extras/wsp-zones-optimized.json',
+    shapeFile: '/shapes/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
     isAllSegmentEnabled: false,
@@ -40,7 +42,7 @@ const sources = {
 }
 
 export const getSource = () => {
-  const source = process.env.WAKA_COMMUTER_SOURCE || 'commuterview'
+  const source = import.meta.env.VITE_WAKA_COMMUTER_SOURCE || 'commuterview'
   const sourceObj = sources[source]
   if (sourceObj === undefined || sourceObj.shapeFile === undefined) {
     console.error('Could not find source', source, sourceObj)

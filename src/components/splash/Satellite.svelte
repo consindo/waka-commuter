@@ -40,9 +40,9 @@
     background-color: #000;
   }
   button.map {
-    background-image: url(/icons/satellite.svg);
+    background-image: url(/static/icons/satellite.svg);
   }
   button.satellite {
-    background-image: url(/icons/map.svg);
+    background-image: url(/static/icons/map.svg);
   }
 </style>

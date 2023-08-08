@@ -1,5 +1,9 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const finalResult = {}
 
@@ -20,14 +24,14 @@ const splitRegions = () => {
       .toString()
   )
 
-  const dataPath = path.join(__dirname, '../../dist/data')
+  const dataPath = path.join(__dirname, '../../public/data')
   try {
     fs.mkdirSync(dataPath)
   } catch (err) {
     // folder doesn't exist
   }
 
-  const outputPath = path.join(__dirname, '../../dist/data/regions')
+  const outputPath = path.join(__dirname, '../../public/data/regions')
 
   try {
     fs.rmdirSync(outputPath, { recursive: true })

@@ -70,9 +70,6 @@
   }
 
   @media (max-width: 1020px) {
-    #map {
-      height: calc(100% - 110px);
-    }
     section {
       width: 100%;
       position: absolute;

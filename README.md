@@ -8,7 +8,7 @@ This is competition code, so, well, it's not great. It uses Mapbox GL JS for map
 
 ## Build Instructions
 
-- Set the environment variable `MAPBOX_TOKEN` to your Mapbox Token. You can get a free one from the Mapbox website.
+- Set the environment variable `VITE_MAPBOX_TOKEN` to your Mapbox Token. You can get a free one from the Mapbox website.
 - `npm run build` - to build everything - JS & datasets. You should run this first.
 - `npm run process` - to process all the data sets into static json.
 - `npm start` - to serve the built version

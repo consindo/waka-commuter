@@ -69,7 +69,7 @@ export const setDetails = (
   arriveModeData,
   departModeData,
   tooltipData,
-  segment,
+  segment
 ) => {
   document.querySelector('.details-splash').classList.add('hidden')
   document.querySelector('.details-location').classList.remove('hidden')
@@ -77,9 +77,8 @@ export const setDetails = (
   const departContainer = document.querySelector('.depart-to.graph-container')
 
   if (departModeData != null) {
-    document.querySelector(
-      '.population-count'
-    ).innerText = departModeData.Total.Total.toLocaleString()
+    document.querySelector('.population-count').innerText =
+      departModeData.Total.Total.toLocaleString()
   }
 
   const populationLabel = document.querySelector('.population-label')

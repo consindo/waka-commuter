@@ -1,4 +1,5 @@
 <script>
+  import expand from '/static/expand.svg'
   export let dataSource
 </script>
 
@@ -14,7 +15,7 @@
   </div>
   <div class="splash-controls">
     <button title="Learn More" class="btn-expand">
-      <img alt="Toggle Details" src="expand.svg" />
+      <img alt="Toggle Details" src={expand} />
     </button>
   </div>
 </div>
@@ -26,7 +27,7 @@
         rgba(10, 0, 20, 0.8) 50%,
         rgba(10, 0, 20, 0.4)
       ),
-      url('/css/splash.jpg');
+      url('/static/css/splash.jpg');
     background-size: cover;
     background-position: 50% 50%;
     height: 400px;
