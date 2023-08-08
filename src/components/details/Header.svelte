@@ -1,4 +1,5 @@
 <script>
+  import expand from '/static/expand.svg'
   import { transformFilename } from '../../data.js'
 
   export let title, firstRegion
@@ -13,7 +14,7 @@
     </div>
     <nav class="controls">
       <button title="Learn More" class="btn-expand">
-        <img alt="Toggle Details" src="expand.svg" />
+        <img alt="Toggle Details" src={expand} />
       </button>
       <button title="Close Location" class="btn-close">
         <svg

@@ -20,14 +20,14 @@ const splitRegions = () => {
       .toString()
   )
 
-  const dataPath = path.join(__dirname, '../../dist/data')
+  const dataPath = path.join(__dirname, '../../public/data')
   try {
     fs.mkdirSync(dataPath)
   } catch (err) {
     // folder doesn't exist
   }
 
-  const outputPath = path.join(__dirname, '../../dist/data/regions')
+  const outputPath = path.join(__dirname, '../../public/data/regions')
 
   try {
     fs.rmdirSync(outputPath, { recursive: true })

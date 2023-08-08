@@ -9,7 +9,7 @@
 
   import Legend from './Legend.svelte'
 
-  const token = process.env.MAPBOX_TOKEN
+  const token = import.meta.env.VITE_MAPBOX_TOKEN
   const isMobile = document.documentElement.clientWidth <= 1020
 
   const source = getSource()
@@ -121,5 +121,11 @@
   #map-content {
     width: 100%;
     height: 100%;
+  }
+
+  @media (max-width: 1020px) {
+    #map {
+      height: calc(100% - 110px);
+    }
   }
 </style>

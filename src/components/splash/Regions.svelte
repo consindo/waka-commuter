@@ -4,6 +4,9 @@
 
   export let enabledRegions
 
+  const getImageUrl = (name) =>
+    new URL(`/static/css/regions/${name}.jpg`, import.meta.url).href
+
   const regions = [
     {
       id: 'nz-akl',
@@ -12,6 +15,7 @@
       lat: '-36.9',
       lng: '174.7',
       zoom: '10.5',
+      url: getImageUrl('nz-akl'),
     },
     {
       id: 'nz-chc',
@@ -20,6 +24,7 @@
       lat: '-43.5',
       lng: '172.6',
       zoom: '11',
+      url: getImageUrl('nz-chc'),
     },
     {
       id: 'nz-wlg',
@@ -28,6 +33,7 @@
       lat: '-41.2',
       lng: '174.8',
       zoom: '10.5',
+      url: getImageUrl('nz-wlg'),
     },
     {
       id: 'nz-trg',
@@ -36,6 +42,7 @@
       lat: '-37.7',
       lng: '176.2',
       zoom: '11',
+      url: getImageUrl('nz-trg'),
     },
     {
       id: 'nz-hlz',
@@ -44,6 +51,7 @@
       lat: '-37.8',
       lng: '175.3',
       zoom: '11.5',
+      url: getImageUrl('nz-hlz'),
     },
     {
       id: 'nz-dud',
@@ -52,6 +60,7 @@
       lat: '-45.9',
       lng: '170.5',
       zoom: '11',
+      url: getImageUrl('nz-dud'),
     },
   ].filter((i) => enabledRegions.includes(i.id))
 </script>
@@ -70,7 +79,7 @@
           zoom: region.zoom,
         })}
     >
-      <h3 style="background-image: url(/css/regions/{region.id}.jpg)">
+      <h3 style="background-image: url({region.url})">
         <strong>{region.primaryName}</strong>
         <span>{region.secondaryName}</span>
       </h3>

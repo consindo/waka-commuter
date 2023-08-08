@@ -7,32 +7,11 @@
 
   const source = getSource()
   const brandingClass = source.brandingClass
-
-  let showDoses = source.enableNullState != null
-
-  Dispatcher.bind('update-blocks', () => {
-    showDoses = false
-  })
-
-  Dispatcher.bind('clear-blocks', () => {
-    showDoses = source.enableNullState != null
-  })
 </script>
 
 <div class={brandingClass}>
   <Search {regionNames} />
-  <nav class={showDoses ? 'controls' : 'controls hide'}>
-    <a
-      href="#"
-      title="Show first dose uptake"
-      class="btn-doses-dose1Uptake selected">1<sup>st</sup> Dose</a
-    >
-    &middot;
-    <a href="#" title="Show second dose uptake" class="btn-doses-dose2Uptake"
-      >2<sup>nd</sup> Dose</a
-    >
-  </nav>
-  <nav class={!showDoses ? 'controls' : 'controls hide'}>
+  <nav class="controls">
     <a
       href="#"
       title="Show both arrivals & departures on map"
@@ -59,7 +38,7 @@
     top: 0;
     left: 0;
     z-index: 1;
-    background-image: url('/css/icon.png');
+    background-image: url(/static/css/icon.png);
     background-repeat: no-repeat;
     background-position: 0.75rem 50%;
     background-size: 2.5rem 2.5rem;
@@ -103,7 +82,7 @@
   }
 
   .wsp {
-    background-image: url('/css/wsp.svg');
+    background-image: url(/static/css/wsp.svg);
     background-size: auto 24px;
     text-indent: 3.875rem;
   }

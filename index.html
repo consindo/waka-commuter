@@ -12,8 +12,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#111111" />
 
-    <link rel="stylesheet" href="/global.css" />
-    <link rel="stylesheet" href="/build/bundle.css" />
+    <link rel="stylesheet" href="/static/global.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
       rel="stylesheet"
@@ -26,12 +25,11 @@
       href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap"
       rel="stylesheet"
     />
-    <!-- Yes, this isn't very modern JS to use CDNs. Sorry. -->
     <script
       defer
       src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"
     ></script>
-    <script defer src="/build/bundle.js"></script>
+    <script defer src="/src/index.js" type="module"></script>
     <script async src="https://d3js.org/d3.v5.min.js"></script>
 
     <meta property="og:title" content="Waka Commuter" />
@@ -51,17 +49,17 @@
     <!-- Hardcoded, because has to be an absolute URL! -->
     <meta
       property="og:image"
-      content="https://commuter.waka.app/css/splash.jpg"
+      content="https://commuter.waka.app/social.jpg"
     />
     <meta
       name="twitter:image"
-      content="https://commuter.waka.app/css/splash.jpg"
+      content="https://commuter.waka.app/social.jpg"
     />
 
-    <link rel="icon" sizes="16x16 32x32 64x64" href="favicon.ico" />
-    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+    <link rel="icon" sizes="16x16 32x32 64x64" href="/static/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/static/favicon-64.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16.png" />
   </head>
 
   <body>
