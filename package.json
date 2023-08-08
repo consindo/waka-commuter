@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "npm run process && npm run build:js",
     "build:wsp": "npm run process:wsp && npm run shapes:wsp && npm run build:js",
@@ -26,18 +27,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit-element": "^3.2.2",
-    "mapbox-gl": "^2.12.0",
+    "lit-element": "^3.3.3",
+    "mapbox-gl": "^2.15.0",
     "polylabel": "^1.1.0"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.4",
     "csv-parser": "^3.0.0",
     "ncp": "^2.0.0",
-    "prettier": "^2.8.2",
-    "prettier-plugin-svelte": "^2.9.0",
-    "strip-bom-stream": "^4.0.0",
-    "svelte": "^3.55.0",
+    "prettier": "^3.0.1",
+    "prettier-plugin-svelte": "^3.0.3",
+    "strip-bom-stream": "^5.0.0",
+    "svelte": "^4.1.2",
     "vite": "^4.4.9"
   }
 }

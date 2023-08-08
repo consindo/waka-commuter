@@ -1,7 +1,11 @@
-const fs = require('fs')
-const path = require('path')
-const csv = require('csv-parser')
-const stripBom = require('strip-bom-stream')
+import fs from 'fs'
+import path from 'path'
+import csv from 'csv-parser'
+import stripBom from 'strip-bom-stream'
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const filenames = [
   {

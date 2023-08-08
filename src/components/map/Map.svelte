@@ -27,7 +27,7 @@
   let oldLng = lng
 
   const styleUrls = {
-    map: 'mapbox://styles/mapbox/dark-v10?optimize=true',
+    map: 'mapbox://styles/mapbox/dark-v11?optimize=true',
     satellite: 'mapbox://styles/mapbox/satellite-v9?optimize=true',
   }
 

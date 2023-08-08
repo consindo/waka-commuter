@@ -117,7 +117,9 @@
     align-content: flex-end;
     justify-content: flex-end;
     background-size: cover;
-    text-shadow: 0 1px 1px #000, 0 0px 3px #000;
+    text-shadow:
+      0 1px 1px #000,
+      0 0px 3px #000;
   }
   h3:hover {
     transform: scale(1.02);
