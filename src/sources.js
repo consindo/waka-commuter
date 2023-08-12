@@ -11,6 +11,16 @@ const sources = {
     detailsControls: ['All', 'Workplace', 'Education'],
     brandingClass: 'statsnz',
   },
+  ason: {
+    shapeFile: '/shapes/australia-sa2-2021-optimized.json',
+    initialPosition: [133, -25, 4],
+    isModeGraphsEnabled: false,
+    isAllSegmentEnabled: false,
+    isMapAreaLabelsEnabled: false,
+    segments: ['2021-sa2'],
+    detailsControls: ['All'],
+    brandingClass: 'statsnz',
+  },
   wsp: {
     shapeFile: '/shapes/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],

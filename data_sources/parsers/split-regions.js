@@ -34,7 +34,7 @@ const splitRegions = () => {
   const outputPath = path.join(__dirname, '../../public/data/regions')
 
   try {
-    fs.rmdirSync(outputPath, { recursive: true })
+    fs.rmSync(outputPath, { recursive: true })
   } catch (err) {
     // folder doesn't exist
   }
