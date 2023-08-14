@@ -13,15 +13,12 @@
   const isMobile = document.documentElement.clientWidth <= 1020
 
   const source = getSource()
-  const sa2Data = window.sa2Data
-  let vaccineData = Promise.resolve()
-  if (source.vaccineData != null) {
-    vaccineData = fetch(source.vaccineData).then((res) => res.json())
-  }
 
   mapboxgl.accessToken = token
 
-  export let lat, lng, zoom, style
+  export let mapData, lat, lng, zoom, style
+  let mapDataCopy = mapData
+
   // gross hack
   let oldLat = lat
   let oldLng = lng
@@ -68,25 +65,66 @@
       requestAnimationFrame(resize)
     }
 
-    map.on('load', () => {
+    map.on('load', async () => {
       // resize hacks for edge / chrome
       map.resize()
 
-      Promise.all([sa2Data, vaccineData]).then((data) => {
-        const features = data[0].features
+      const data = await Promise.all([mapData])
 
-        const styleDataCallback = () => {
-          if (isLoaded) return
-          isLoaded = true
+      const styleDataCallback = () => {
+        if (isLoaded) return
+        isLoaded = true
 
-          drawMap(map, data, source.isMapAreaLabelsEnabled)
-        }
-        map.on('styledata', styleDataCallback)
-        styleDataCallback()
-        bindMapEvents(map)
-      })
+        drawMap(map, data, source.isMapAreaLabelsEnabled)
+      }
+      map.on('styledata', styleDataCallback)
+      styleDataCallback()
+      bindMapEvents(map)
     })
+    if (source.dynamicShapeFiles) {
+      map.on('zoom', () => {
+        const zoom = map.getZoom()
+        const center = map.getCenter()
+        source.dynamicShapeFiles
+          .filter((shape) => shape.isLoaded !== true)
+          .forEach((shape) => {
+            if (
+              zoom > shape.zoom &&
+              center.lng > shape.bbox[0][0] &&
+              center.lng < shape.bbox[1][0] &&
+              center.lat > shape.bbox[0][1] &&
+              center.lat < shape.bbox[1][1]
+            ) {
+              shape.isLoaded = true
+              loadDynamic(shape.url)
+            }
+          })
+      })
+    }
   })
+
+  const loadDynamic = async (url) => {
+    const currentData = await mapDataCopy
+    const res = await fetch(url)
+    const newData = await res.json()
+    const stateLookup = newData.features.reduce((acc, cur) => {
+      acc[cur.properties.name] = cur
+      return acc
+    }, {})
+    const augmentedData = {
+      type: 'FeatureCollection',
+      features: currentData.features.map((i) => {
+        const enhancedData = stateLookup[i.properties.name]
+        if (enhancedData) {
+          return enhancedData
+        }
+        return i
+      }),
+    }
+    map.getSource('sa2').setData(augmentedData)
+    mapDataCopy = Promise.resolve(augmentedData)
+    console.info('dynamically loaded', url)
+  }
 
   afterUpdate(() => {
     if (oldLat !== lat || oldLng !== lng) {

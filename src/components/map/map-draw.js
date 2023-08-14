@@ -1,18 +1,7 @@
-import { areaFill, lineFill, pointsFill, heatmapPaint } from './map-styles.js'
-import { getSource } from '../../sources.js'
-
-const source = getSource()
+import { areaFill, lineFill, pointsFill } from './map-styles.js'
 
 export const drawMap = (map, datasets, areaLabels) => {
   const data = datasets[0]
-  const vaccineData = datasets[1]
-
-  if (vaccineData) {
-    data.features.forEach((feature) => {
-      const { name } = feature.properties
-      Object.assign(feature.properties, vaccineData[name])
-    })
-  }
 
   map.addSource('sa2', {
     type: 'geojson',
@@ -52,32 +41,6 @@ export const drawMap = (map, datasets, areaLabels) => {
     source: 'points',
     paint: pointsFill,
   })
-
-  if (source.heatmapData != null) {
-    map.addSource('heatmap', {
-      type: 'geojson',
-      data: source.heatmapData,
-    })
-
-    map.addLayer({
-      id: 'heatmap',
-      type: 'heatmap',
-      source: 'heatmap',
-      paint: heatmapPaint,
-    })
-
-    const inputs = Array.from(document.querySelectorAll('.loi-input'))
-    inputs.forEach((el) =>
-      el.addEventListener('click', (e) => {
-        if (e.currentTarget.checked) {
-          map.setLayoutProperty('heatmap', 'visibility', 'visible')
-        } else {
-          map.setLayoutProperty('heatmap', 'visibility', 'none')
-        }
-        inputs.forEach((el) => (el.checked = e.currentTarget.checked))
-      })
-    )
-  }
 
   if (areaLabels) {
     map.addLayer({

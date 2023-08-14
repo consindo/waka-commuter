@@ -25,8 +25,8 @@
     "process:wsp:area": "node commuterview-extras/data_sources/parsers/wsp/area-to-area-parser.js",
     "process:wsp:combine": "node commuterview-extras/data_sources/parsers/wsp/combine-files.js",
     "process:wsp:copy": "node data_sources/parsers/split-regions.js commuterview-extras/data_sources/outputs/wsp",
-    "shapes:ason": "ncp commuterview-extras/shapes/australia-sa2-2021-optimized.json public/shapes/australia-sa2-2021-optimized.json",
-    "shapes:wsp": "ncp commuterview-extras/shapes/wsp-zones-optimized.json public/shapes/wsp-zones-optimized.json",
+    "shapes:ason": "cp -r commuterview-extras/shapes/australia-sa2-2021-*.json public/shapes",
+    "shapes:wsp": "cp commuterview-extras/shapes/wsp-zones-optimized.json public/shapes/wsp-zones-optimized.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev --host",
     "start": "vite preview",
@@ -42,7 +42,6 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.4",
     "csv-parser": "^3.0.0",
-    "ncp": "^2.0.0",
     "prettier": "^3.0.1",
     "prettier-plugin-svelte": "^3.0.3",
     "strip-bom-stream": "^5.0.0",
