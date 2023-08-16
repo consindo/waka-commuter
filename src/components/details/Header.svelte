@@ -2,7 +2,7 @@
   import expand from '/static/expand.svg'
   import { transformFilename } from '../../data.js'
 
-  export let title, firstRegion
+  export let title, firstRegion, populationLabel, populationLink
 
   $: path = transformFilename(firstRegion)
 </script>
@@ -36,15 +36,20 @@
   <div class="nav-header-flex">
     <div class="title">
       <p title="Resident Population">
-        <a
-          class="population-link"
-          href="https://www.stats.govt.nz/tools/2018-census-place-summaries/{path}#population-and-dwellings`"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <strong class="population-label" />
+        {#if populationLink}
+          <a
+            class="population-link"
+            href="https://www.stats.govt.nz/tools/2018-census-place-summaries/{path}#population-and-dwellings`"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong class="population-label">{populationLabel}</strong>
+            <span class="population-count" />
+          </a>
+        {:else}
+          <strong class="population-label">{populationLabel}</strong>
           <span class="population-count" />
-        </a>
+        {/if}
       </p>
       <nav class="secondary-controls" />
     </div>

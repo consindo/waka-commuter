@@ -52,7 +52,7 @@ const sources = {
       }
     ],
     initialPosition: [133, -25, 4],
-    isModeGraphsEnabled: false,
+    isModeGraphsEnabled: true,
     isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
     segments: ['2021-sa2'],

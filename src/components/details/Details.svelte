@@ -25,6 +25,7 @@
   let detailsTitle = null
   let documentTitle = null
   let firstRegion = ''
+  let populationLabel = ''
 
   let hiddenArrivals = []
   let hiddenDepartures = []
@@ -173,7 +174,6 @@
               }
               return true
             })
-            console.log(hiddenArrivals, hiddenDepartures)
             hiddenArrivals.sort((a, b) => b.value - a.value)
             hiddenDepartures.sort((a, b) => b.value - a.value)
           }
@@ -190,6 +190,16 @@
             tooltipData.mode = ['study']
           }
           const tooltipJSON = JSON.stringify(tooltipData)
+
+          if (segment === 'all') {
+            populationLabel = 'Resident Workers & Students:'
+          } else if (segment === 'workplace') {
+            populationLabel = 'Resident Workers:'
+          } else if (segment === 'education') {
+            populationLabel = 'Resident Students:'
+          } else if (segment === '2021-sa2') {
+            populationLabel = 'Resident 15+ Population:'
+          }
 
           // also consuming the tooltip data in the population bubbles
           const initialLocation = getLocation(features, regionName[0])
@@ -209,7 +219,12 @@
 </script>
 
 <div class="details-location hidden">
-  <Header title={detailsTitle} {firstRegion} />
+  <Header
+    title={detailsTitle}
+    {firstRegion}
+    {populationLabel}
+    populationLink={source === 'statsnz'}
+  />
   <h3>Arrivals</h3>
   <div class="arrive-from blurb-container" />
   <div class="arrive-from graph-container">
@@ -233,12 +248,14 @@
       <div class="mode-inner">
         <h4>
           Arrival Modes
-          <small
-            ><a
-              href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-              >(NZ.Stat)</a
-            ></small
-          >
+          {#if source.brandingClass === 'statsnz'}
+            <small
+              ><a
+                href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
+                >(NZ.Stat)</a
+              ></small
+            >
+          {/if}
         </h4>
         <div class="mode" />
       </div>
@@ -267,12 +284,14 @@
       <div class="mode-inner">
         <h4>
           Departure Modes
-          <small
-            ><a
-              href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-              >(NZ.Stat)</a
-            ></small
-          >
+          {#if source.brandingClass === 'statsnz'}
+            <small
+              ><a
+                href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
+                >(NZ.Stat)</a
+              ></small
+            >
+          {/if}
         </h4>
         <div class="mode" />
       </div>
@@ -287,7 +306,5 @@
     margin-bottom: 1.5em;
     padding-left: 1.25em;
     list-style-type: none;
-  }
-  .hidden-trips li {
   }
 </style>
