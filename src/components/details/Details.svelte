@@ -26,12 +26,15 @@
   let documentTitle = null
   let firstRegion = ''
 
+  let hiddenArrivals = []
+  let hiddenDepartures = []
+
   const sa2Data = window.sa2Data
   const source = getSource()
 
   $: document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
-    source.title || 'Commuter'
-  } - Waka`
+    source.title || 'Commuter - Waka'
+  }`
 
   if (!source.isAllSegmentEnabled) {
     Dispatcher.dataSegment = source.segments[0]
@@ -151,8 +154,29 @@
             key: regionNameMapper(i.key),
             originalKey: i.key,
           })
-          const arriveDataFriendly = arriveData.map(friendlyMapper)
-          const departDataFriendly = departData.map(friendlyMapper)
+          let arriveDataFriendly = arriveData.map(friendlyMapper)
+          let departDataFriendly = departData.map(friendlyMapper)
+          hiddenArrivals = []
+          hiddenDepartures = []
+          if (source.brandingClass === 'ason') {
+            arriveDataFriendly = arriveDataFriendly.filter((i) => {
+              if (i.key.startsWith('POW') || i.key.startsWith('No usual')) {
+                hiddenArrivals.push(i)
+                return false
+              }
+              return true
+            })
+            departDataFriendly = departDataFriendly.filter((i) => {
+              if (i.key.startsWith('POW') || i.key.startsWith('No usual')) {
+                hiddenDepartures.push(i)
+                return false
+              }
+              return true
+            })
+            console.log(hiddenArrivals, hiddenDepartures)
+            hiddenArrivals.sort((a, b) => b.value - a.value)
+            hiddenDepartures.sort((a, b) => b.value - a.value)
+          }
 
           const tooltipData = {
             currentRegions: regionName.map(regionNameMapper),
@@ -193,6 +217,17 @@
       <div class="location-inner">
         <div class="location" />
       </div>
+      <div class="hidden-trips">
+        <ul>
+          {#each hiddenArrivals as i}
+            <li>
+              <strong>{i.key}</strong>: {i.value} people ({(
+                i.percentage * 100
+              ).toFixed(2)}%)
+            </li>
+          {/each}
+        </ul>
+      </div>
     </div>
     <div class="mode-container">
       <div class="mode-inner">
@@ -216,6 +251,17 @@
       <div class="location-inner">
         <div class="location" />
       </div>
+      <div class="hidden-trips">
+        <ul>
+          {#each hiddenDepartures as i}
+            <li>
+              <strong>{i.key}</strong>: {i.value} people ({(
+                i.percentage * 100
+              ).toFixed(2)}%)
+            </li>
+          {/each}
+        </ul>
+      </div>
     </div>
     <div class="mode-container">
       <div class="mode-inner">
@@ -234,3 +280,14 @@
   </div>
   <Footer />
 </div>
+
+<style>
+  .hidden-trips ul {
+    margin-top: -0.5em;
+    margin-bottom: 1.5em;
+    padding-left: 1.25em;
+    list-style-type: none;
+  }
+  .hidden-trips li {
+  }
+</style>

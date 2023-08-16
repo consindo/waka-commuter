@@ -12,6 +12,7 @@ const sources = {
     brandingClass: 'statsnz',
   },
   ason: {
+    title: 'Ason Group Explorer',
     shapeFile: '/shapes/australia-sa2-2021-truncated.json',
     dynamicShapeFiles: [
       {
@@ -56,9 +57,10 @@ const sources = {
     isMapAreaLabelsEnabled: false,
     segments: ['2021-sa2'],
     detailsControls: ['All'],
-    brandingClass: 'statsnz',
+    brandingClass: 'ason',
   },
   wsp: {
+    title: 'WSP Commuter',
     shapeFile: '/shapes/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,

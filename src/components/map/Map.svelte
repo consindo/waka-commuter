@@ -104,13 +104,13 @@
   })
 
   const loadDynamic = async (url) => {
-    const currentData = await mapDataCopy
     const res = await fetch(url)
     const newData = await res.json()
     const stateLookup = newData.features.reduce((acc, cur) => {
       acc[cur.properties.name] = cur
       return acc
     }, {})
+    const currentData = await mapDataCopy
     const augmentedData = {
       type: 'FeatureCollection',
       features: currentData.features.map((i) => {
