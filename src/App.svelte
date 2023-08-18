@@ -6,8 +6,6 @@
   import Splash from './components/splash/Splash.svelte'
   import Details from './components/details/Details.svelte'
 
-  import { chooseBestName, humanRegionName } from './data.js'
-
   const source = getSource()
   const sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
@@ -43,7 +41,7 @@
 
 <Branding {regionNames} />
 <div id="app" class="map-view">
-  <Map {lat} {lng} {zoom} {style} />
+  <Map mapData={sa2Data} {lat} {lng} {zoom} {style} />
   <section>
     <Splash on:locationChange={flyTo} on:styleChange={changeStyle} />
     <Details />

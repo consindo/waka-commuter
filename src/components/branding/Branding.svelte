@@ -86,4 +86,12 @@
     background-size: auto 24px;
     text-indent: 3.875rem;
   }
+
+  .ason {
+    background-image: url(/static/css/ason.png);
+    background-size: auto 24px;
+    background-position: 0.75rem 18px;
+    text-indent: 0;
+    padding-top: 48px;
+  }
 </style>

@@ -35,7 +35,12 @@ const setMode = (container, data) => {
     return
   }
   const mode = document.createElement('travel-mode')
-  mode.setAttribute('data', JSON.stringify(data))
+  if (source.brandingClass === 'statsnz') {
+    mode.setAttribute('data', JSON.stringify(data))
+  } else {
+    // don't need to split between workplace and education
+    mode.setAttribute('data', JSON.stringify({ Total: data.Total }))
+  }
 
   const arriveModeContainer = container.querySelector('.mode')
   arriveModeContainer.innerHTML = ''
@@ -79,15 +84,6 @@ export const setDetails = (
   if (departModeData != null) {
     document.querySelector('.population-count').innerText =
       departModeData.Total.Total.toLocaleString()
-  }
-
-  const populationLabel = document.querySelector('.population-label')
-  if (segment === 'all') {
-    populationLabel.innerText = 'Resident Workers & Students:'
-  } else if (segment === 'workplace') {
-    populationLabel.innerText = 'Resident Workers:'
-  } else if (segment === 'education') {
-    populationLabel.innerText = 'Resident Students:'
   }
 
   // hack

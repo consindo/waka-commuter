@@ -73,15 +73,24 @@ class PopulationBubbles extends LitElement {
       .filter((i) => i.value >= 1)
       .sort((a, b) => b.percentage - a.percentage)
       .slice(0, 30)
-      .map((i) => ({
-        key: i.key,
-        originalKey: i.originalKey,
-        value: i.value,
-        percentage: i.percentage,
+      .map((i) => {
         // if i.x or i.y is 0, means that the zone is missing on the map
-        x: i.x ? (i.x - this.scale.lng) * 400 : 0,
-        y: i.y ? (i.y - this.scale.lat) * -300 : 0,
-      }))
+        let x = i.x ? (i.x - this.scale.lng) * 400 : 0
+        let y = i.y ? (i.y - this.scale.lat) * -300 : 0
+        if (x > 50) x = 50
+        if (x < -50) x = -50
+        if (y > 50) y = 50
+        if (y < -50) y = -50 
+
+        return {
+          key: i.key,
+          originalKey: i.originalKey,
+          value: i.value,
+          percentage: i.percentage,
+          x,
+          y,
+        }
+      })
 
     // defines the size of the circles
     const size = d3.scaleSqrt().domain([0, 1]).range([25, 85])
@@ -144,6 +153,7 @@ class PopulationBubbles extends LitElement {
     const labelTransform = (t) =>
       t
         .replace(/ \(.*\)/, '')
+        .replace(/ - /g, '-')
         .split('-')
         .join('- ')
         .split(' ')

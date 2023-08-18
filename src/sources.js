@@ -11,7 +11,56 @@ const sources = {
     detailsControls: ['All', 'Workplace', 'Education'],
     brandingClass: 'statsnz',
   },
+  ason: {
+    title: 'Ason Group Explorer',
+    shapeFile: '/shapes/australia-sa2-2021-truncated.json',
+    dynamicShapeFiles: [
+      {
+        url: '/shapes/australia-sa2-2021-nsw.json',
+        bbox: [[141, -37.5], [154, -28]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2021-vic.json',
+        bbox: [[141, -39], [151, -34]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2021-qld.json',
+        bbox: [[138, -29], [153, -10]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2021-wa.json',
+        bbox: [[112, -35], [129, -12]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2021-sa.json',
+        bbox: [[129, -38], [141, -26]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2021-tas.json',
+        bbox: [[143, -44], [149, -39]],
+        zoom: 6,
+      },      
+      {
+        url: '/shapes/australia-sa2-2021-nt.json',
+        bbox: [[129, -26], [138, -10]],
+        zoom: 5,
+      }
+    ],
+    initialPosition: [133, -25, 4],
+    isModeGraphsEnabled: true,
+    isAllSegmentEnabled: false,
+    isMapAreaLabelsEnabled: false,
+    segments: ['2021-sa2'],
+    detailsControls: ['All'],
+    brandingClass: 'ason',
+  },
   wsp: {
+    title: 'WSP Commuter',
     shapeFile: '/shapes/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
