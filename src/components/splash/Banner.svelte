@@ -1,11 +1,6 @@
 <script>
   import expand from '/static/expand.svg'
-  export let dataSource,
-    background = `linear-gradient(
-        120deg,
-        rgba(10, 0, 20, 0.8) 50%,
-        rgba(10, 0, 20, 0.4)
-      ), url(/static/css/splash.jpg)`
+  export let dataSource, background
 </script>
 
 <div class="splash-bg" style={`background-image: ${background}`}>

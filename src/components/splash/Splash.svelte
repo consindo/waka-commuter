@@ -8,6 +8,9 @@
   import DataSourcesAu from './DataSourcesAu.svelte'
 
   const source = getSource()
+
+  const getImageUrl = (name) =>
+    new URL(`/static/css/${name}.jpg`, import.meta.url).href
 </script>
 
 <div class="details-splash">
@@ -18,7 +21,7 @@
         120deg,
         rgba(10, 0, 20, 0.8) 50%,
         rgba(10, 0, 20, 0.4)
-      ), url(/static/css/splash-2.jpg)"
+      ), url(/static/css/{getImageUrl('splash-2')}.jpg)"
     />
     <Regions on:locationChange enabledRegions={['nz-chc']} />
     <Satellite on:styleChange />
@@ -29,7 +32,7 @@
         120deg,
         rgba(10, 0, 20, 0.75) 50%,
         rgba(10, 0, 20, 0.3)
-      ), url(/static/css/splash-3.jpg)"
+      ), url({getImageUrl('splash-3')})"
     />
     <Regions
       on:locationChange
