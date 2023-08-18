@@ -69,12 +69,11 @@
       // resize hacks for edge / chrome
       map.resize()
 
-      const data = await Promise.all([mapData])
-
-      const styleDataCallback = () => {
+      const styleDataCallback = async () => {
         if (isLoaded) return
         isLoaded = true
 
+        const data = await Promise.all([mapDataCopy])
         drawMap(map, data, source.isMapAreaLabelsEnabled)
       }
       map.on('styledata', styleDataCallback)
@@ -135,6 +134,7 @@
       })
       oldLat = lat
       oldLng = lng
+      return
     }
 
     if (isLoaded) {

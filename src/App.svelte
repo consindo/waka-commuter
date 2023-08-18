@@ -29,9 +29,10 @@
   let [lng, lat, zoom] = [...source.initialPosition]
 
   const flyTo = (e) => {
-    lat = e.detail.lat
-    lng = e.detail.lng
-    zoom = e.detail.zoom
+    const rand = Math.random() * 0.001
+    lat = parseFloat(e.detail.lat) + rand
+    lng = parseFloat(e.detail.lng) + rand
+    zoom = parseFloat(e.detail.zoom)
   }
 
   const changeStyle = (e) => {
