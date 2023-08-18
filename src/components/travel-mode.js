@@ -39,13 +39,13 @@ class TravelMode extends LitElement {
       'Drive a private car, truck or van': '#EF6C00',
       'Car, as driver': '#EF6C00',
       'Drive a company car, truck or van': '#FF9800',
-      'Truck': '#FF9800',
+      Truck: '#FF9800',
       'Motorbike/scooter': '#D35400',
       'Passenger in a car, truck, van, or company bus': '#9C27B0',
       'Car, as passenger': '#9C27B0',
       'Taxi/ride-share service': '#8E44AD',
       'Public bus': '#FFC107',
-      'Bus': '#FFC107',
+      Bus: '#FFC107',
       'School bus': '#FFEB3B',
       'Walk or jog': '#4CAF50',
       'Walked only': '#4CAF50',
@@ -111,7 +111,7 @@ class TravelMode extends LitElement {
         }
         // don't care about the totals
         if (row === 'Total') return
-        buckets[category][finalCategory][row] += this.data[category][row]  
+        buckets[category][finalCategory][row] += this.data[category][row]
       })
     })
 
@@ -233,7 +233,12 @@ class TravelMode extends LitElement {
 
           const keyName = d3.select(this.parentNode).datum().key
           const keyValue = d.data[keyName]
-          const content = [keyName, `${keyValue.toLocaleString()} (${Math.round((keyValue / total) * 100)}%)`]
+          const content = [
+            keyName,
+            `${keyValue.toLocaleString()} (${Math.round(
+              (keyValue / total) * 100
+            )}%)`,
+          ]
 
           requestAnimationFrame(() => {
             needFrame = true

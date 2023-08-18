@@ -15,7 +15,6 @@
       lat: '-36.9',
       lng: '174.7',
       zoom: '10.5',
-      url: getImageUrl('nz-akl'),
     },
     {
       id: 'nz-chc',
@@ -24,7 +23,6 @@
       lat: '-43.5',
       lng: '172.6',
       zoom: '11',
-      url: getImageUrl('nz-chc'),
     },
     {
       id: 'nz-wlg',
@@ -33,7 +31,6 @@
       lat: '-41.2',
       lng: '174.8',
       zoom: '10.5',
-      url: getImageUrl('nz-wlg'),
     },
     {
       id: 'nz-trg',
@@ -42,7 +39,6 @@
       lat: '-37.7',
       lng: '176.2',
       zoom: '11',
-      url: getImageUrl('nz-trg'),
     },
     {
       id: 'nz-hlz',
@@ -51,7 +47,6 @@
       lat: '-37.8',
       lng: '175.3',
       zoom: '11.5',
-      url: getImageUrl('nz-hlz'),
     },
     {
       id: 'nz-dud',
@@ -60,7 +55,78 @@
       lat: '-45.9',
       lng: '170.5',
       zoom: '11',
-      url: getImageUrl('nz-dud'),
+    },
+    {
+      id: 'au-syd',
+      primaryName: 'Sydney',
+      secondaryName: 'New South Wales',
+      lat: '-33.8',
+      lng: '151.2',
+      zoom: '10',
+    },
+    {
+      id: 'au-mel',
+      primaryName: 'Melbourne',
+      secondaryName: 'Victoria',
+      lat: '-37.8',
+      lng: '144.9',
+      zoom: '10',
+    },
+    {
+      id: 'au-bne',
+      primaryName: 'Brisbane',
+      secondaryName: 'Queensland',
+      lat: '-27.5',
+      lng: '153',
+      zoom: '10',
+    },
+    {
+      id: 'au-per',
+      primaryName: 'Perth',
+      secondaryName: 'Western Australia',
+      lat: '-31.9',
+      lng: '115.8',
+      zoom: '10',
+    },
+    {
+      id: 'au-adl',
+      primaryName: 'Adelaide',
+      secondaryName: 'South Australia',
+      lat: '-34.9',
+      lng: '138.6',
+      zoom: '10.5',
+    },
+    {
+      id: 'au-ool',
+      primaryName: 'Gold Coast',
+      secondaryName: 'Queensland',
+      lat: '-28',
+      lng: '153.4',
+      zoom: '10.5',
+    },
+    {
+      id: 'au-ntl',
+      primaryName: 'Newcastle',
+      secondaryName: 'New South Wales',
+      lat: '-32.9',
+      lng: '151.7',
+      zoom: '11.5',
+    },
+    {
+      id: 'au-can',
+      primaryName: 'Canberra',
+      secondaryName: 'ACT',
+      lat: '-35.3',
+      lng: '149.1',
+      zoom: '11',
+    },
+    {
+      id: 'au-hba',
+      primaryName: 'Hobart',
+      secondaryName: 'Tasmania',
+      lat: '-42.9',
+      lng: '147.3',
+      zoom: '11',
     },
   ].filter((i) => enabledRegions.includes(i.id))
 </script>
@@ -79,7 +145,7 @@
           zoom: region.zoom,
         })}
     >
-      <h3 style="background-image: url({region.url})">
+      <h3 style="background-image: url({getImageUrl(region.id)})">
         <strong>{region.primaryName}</strong>
         <span>{region.secondaryName}</span>
       </h3>

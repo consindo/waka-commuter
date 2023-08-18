@@ -1,4 +1,9 @@
 <div>
+  <h3>Custom Maps</h3>
+  <p>
+    Want a custom map for your country, region, or model? Get in touch:
+    <a href="mailto:hello@turbomaps.io">hello@turbomaps.io</a>.
+  </p>
   <h3>Data Sources</h3>
   <p>
     For an accessible version of this data, please email
@@ -21,9 +26,7 @@
     App not loading? Make sure you’re using the latest version of
     <a href="https://firefox.com">Firefox</a>,
     <a href="https://www.microsoft.com/en-us/edge">Edge</a>, or
-    <a href="https://www.google.com/chrome/">Chrome</a>. If you’re still having
-    issues, reach out on
-    <a href="https://twitter.com/consindo">Twitter</a>.
+    <a href="https://www.google.com/chrome/">Chrome</a>.
   </p>
 </div>
 <footer>
@@ -32,7 +35,11 @@
 
 <style>
   div {
-    padding: 1rem 0 0.5rem;
+    padding: 0 0 0.5rem;
+  }
+
+  h3 {
+    margin-top: 1.25em;
   }
 
   p {
