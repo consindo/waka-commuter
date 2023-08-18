@@ -80,7 +80,7 @@ class PopulationBubbles extends LitElement {
         if (x > 50) x = 50
         if (x < -50) x = -50
         if (y > 50) y = 50
-        if (y < -50) y = -50 
+        if (y < -50) y = -50
 
         return {
           key: i.key,

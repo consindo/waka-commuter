@@ -94,7 +94,7 @@ class DestinationBlurb extends LitElement {
     }
 
     const source = getSource()
-    if (source.brandingClass === 'wsp') {
+    if (source.brandingClass === 'wsp' || source.brandingClass === 'ason') {
       destination = ''
     }
 
@@ -158,7 +158,7 @@ class DestinationBlurb extends LitElement {
             >.`}
       ${vars.popularPercentage === -1
         ? ''
-        : html`The most common way to arrive to ${vars.destination} is to
+        : html`The most common way to arrive is
             <strong>
               ${this.humanMode(vars.popularMode)}
               (${vars.popularPercentage}%)</strong
@@ -188,8 +188,7 @@ class DestinationBlurb extends LitElement {
             is the top destination outside of ${vars.placeReduced}.`}
       ${vars.popularPercentage === -1
         ? ''
-        : html`To depart to ${vars.destination}, people in ${vars.placeReduced}
-            most often
+        : html`People in ${vars.placeReduced} most often depart by
             <strong>
               ${this.humanMode(vars.popularMode)}
               (${vars.popularPercentage}%)</strong
