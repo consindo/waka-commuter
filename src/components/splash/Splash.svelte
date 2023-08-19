@@ -21,7 +21,7 @@
         120deg,
         rgba(10, 0, 20, 0.8) 50%,
         rgba(10, 0, 20, 0.4)
-      ), url(/static/css/{getImageUrl('splash-2')}.jpg)"
+      ), url({getImageUrl('splash-2')})"
     />
     <Regions on:locationChange enabledRegions={['nz-chc']} />
     <Satellite on:styleChange />
