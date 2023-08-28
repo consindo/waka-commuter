@@ -32,7 +32,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev --host",
     "start": "vite preview",
-    "prettier": "prettier --write src/**/*.svelte src/**/*.js"
+    "format": "prettier --write src/**/*.svelte src/**/*.js"
   },
   "author": "",
   "license": "ISC",

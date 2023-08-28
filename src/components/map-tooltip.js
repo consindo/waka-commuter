@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit-element'
 import { humanRegionName, chooseBestName } from '../data.js'
 
+import { getSource } from '../sources.js'
+
 class MapTooltip extends LitElement {
   static get properties() {
     return {
@@ -14,8 +16,6 @@ class MapTooltip extends LitElement {
       locationContext: { type: String },
       percentage: { type: Boolean },
       showOnly: { type: String },
-      dose1Uptake: { type: Number },
-      dose2Uptake: { type: Number },
       populationCount: { type: Number },
     }
   }
@@ -50,11 +50,6 @@ class MapTooltip extends LitElement {
       }
       .arrivals {
         color: #90caf9;
-      }
-      .unvaccinated {
-        display: block;
-        margin-bottom: 0.5em;
-        color: #f9ca24;
       }
       .bad {
         color: #f0932b;
@@ -96,15 +91,18 @@ class MapTooltip extends LitElement {
   render() {
     const percentage = this.percentage === true
     const loading = this.loading === true
-    const { mode } = this.parsedData
+    let { mode } = this.parsedData
     const id = humanRegionName([this.id || ''], 'condensed')
     const friendlyName = chooseBestName(id, this.friendlyName)
     const regions = humanRegionName(this.parsedData.currentRegions, 'condensed')
     const departData = this.parsedData.departData[this.id] || []
     const arriveData = this.parsedData.arriveData[this.id] || []
 
-    const dose1 = this.dose1Uptake
-    const dose2 = this.dose2Uptake
+    const source = getSource()
+    if (source.brandingClass === 'ason') {
+      mode = ['work']
+    }
+
     const populationCount = this.populationCount
 
     const departCount = departData[0]
@@ -160,11 +158,6 @@ class MapTooltip extends LitElement {
         to/from ${regions}`
     }
 
-    let unvaccinated = null
-    if (dose1) {
-      unvaccinated = (1000 - dose1) / 10
-    }
-
     return html`
       <div
         style="opacity: ${this.opacity}; transform: translate(${this.x +
@@ -174,22 +167,6 @@ class MapTooltip extends LitElement {
         ${loading ? html`<strong class="none">Loading...</strong><br />` : ''}
         ${populationCount != null
           ? html`<em>Population: ${populationCount}</em><br />`
-          : ''}
-        ${dose1 != null
-          ? html`<strong>${(dose1 / 10).toFixed(1)}%</strong> first dose<br />`
-          : ''}
-        ${dose2 != null
-          ? html`<strong>${(dose2 / 10).toFixed(1)}%</strong> second dose`
-          : ''}
-        ${unvaccinated != null
-          ? html`<span
-              class="unvaccinated ${unvaccinated > 10
-                ? unvaccinated > 20
-                  ? 'dire'
-                  : 'bad'
-                : ''}"
-              ><strong>${unvaccinated.toFixed(1)}%</strong> unvaccinated</span
-            >`
           : ''}
         ${this.parsedData.currentRegions.length !== 0 && !loading
           ? subText

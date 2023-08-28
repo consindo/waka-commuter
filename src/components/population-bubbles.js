@@ -105,7 +105,11 @@ class PopulationBubbles extends LitElement {
       .append('g')
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`)
       .on('click', (d) => {
-        if (d3.event.ctrlKey || d3.event.metaKey || Dispatcher.currentRegion.includes(d.originalKey)) {
+        if (
+          d3.event.ctrlKey ||
+          d3.event.metaKey ||
+          Dispatcher.currentRegion.includes(d.originalKey)
+        ) {
           Dispatcher.addRegion(d.originalKey)
         } else {
           Dispatcher.setRegions([d.originalKey], true)
