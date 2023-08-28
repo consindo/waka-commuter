@@ -42,9 +42,16 @@
 
 <Branding {regionNames} />
 <div id="app" class="map-view">
-  <Map mapData={sa2Data} {lat} {lng} {zoom} {style} />
+  <Map
+    mapData={sa2Data}
+    {lat}
+    {lng}
+    {zoom}
+    {style}
+    on:styleChange={changeStyle}
+  />
   <section>
-    <Splash on:locationChange={flyTo} on:styleChange={changeStyle} />
+    <Splash on:locationChange={flyTo} />
     <Details />
   </section>
 </div>

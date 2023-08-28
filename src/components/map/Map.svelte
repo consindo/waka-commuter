@@ -2,7 +2,8 @@
   import { onMount, afterUpdate } from 'svelte'
 
   import { getSource } from '../../sources.js'
-  import { chooseBestName, humanRegionName } from '../../data.js'
+  import SatelliteButton from './SatelliteButton.svelte'
+  import Dispatcher from '../../dispatcher.js'
 
   import { drawMap } from './map-draw.js'
   import { bindMapEvents } from './map-events.js'
@@ -34,10 +35,11 @@
   onMount(async () => {
     map = new mapboxgl.Map({
       container: 'map-content',
+      projection: 'globe',
       style: styleUrls[style],
       center: [lng, lat],
       zoom: isMobile ? zoom - 1.5 : zoom,
-      logoPosition: isMobile ? 'bottom-left' : 'bottom-right',
+      logoPosition: 'bottom-right',
       attributionControl: !isMobile,
     })
     map.getCanvas().style.cursor = 'default'
@@ -48,9 +50,8 @@
     // it works good enough on 1440p / 2
     if (isMobile) {
       map.addControl(new mapboxgl.AttributionControl(), 'top-right')
-    } else {
-      map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
     }
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
 
     // ios hack
     const resize = () => {
@@ -75,6 +76,10 @@
 
         const data = await Promise.all([mapDataCopy])
         drawMap(map, data, source.isMapAreaLabelsEnabled)
+
+        if (Dispatcher.currentRegion.length > 0) {
+          Dispatcher.setRegions(Dispatcher.currentRegion)
+        }
       }
       map.on('styledata', styleDataCallback)
       styleDataCallback()
@@ -148,6 +153,7 @@
 <div id="map">
   <div id="map-content" />
   <Legend />
+  <SatelliteButton on:styleChange />
   <map-tooltip />
 </div>
 

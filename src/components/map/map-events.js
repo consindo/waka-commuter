@@ -41,12 +41,6 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
-      if (meshblock.properties.dose1Uptake != null) {
-        mapTooltip.setAttribute('dose1Uptake', meshblock.properties.dose1Uptake)
-      }
-      if (meshblock.properties.dose2Uptake != null) {
-        mapTooltip.setAttribute('dose2Uptake', meshblock.properties.dose2Uptake)
-      }
       if (meshblock.properties.populationCount != null) {
         mapTooltip.setAttribute(
           'populationCount',
@@ -98,7 +92,7 @@ const bindMapboxEvents = (map) => {
     const meshblock = e.features[0]
     if (meshblock != null) {
       mapTooltip.setAttribute('loading', true)
-      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey) {
+      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey || Dispatcher.currentRegion.includes(meshblock.id)) {
         Dispatcher.addRegion(meshblock.id)
       } else {
         Dispatcher.setRegions([meshblock.id])

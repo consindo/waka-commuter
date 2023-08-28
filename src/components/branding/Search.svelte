@@ -20,7 +20,7 @@
     // checks to make sure they used a precanned one
     const match = data.find((region) => region.name === value)
     if (match) {
-      if (ctrlKey || metaKey) {
+      if (ctrlKey || metaKey || Dispatcher.currentRegion.includes(match.id)) {
         Dispatcher.addRegion(match.id)
       } else {
         Dispatcher.setRegions([match.id], true)
