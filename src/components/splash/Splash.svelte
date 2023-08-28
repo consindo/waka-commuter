@@ -3,7 +3,6 @@
 
   import Banner from './Banner.svelte'
   import Regions from './Regions.svelte'
-  import Satellite from './Satellite.svelte'
   import DataSources from './DataSources.svelte'
   import DataSourcesAu from './DataSourcesAu.svelte'
 
@@ -24,7 +23,6 @@
       ), url({getImageUrl('splash-2')})"
     />
     <Regions on:locationChange enabledRegions={['nz-chc']} />
-    <Satellite on:styleChange />
   {:else if source.brandingClass === 'ason'}
     <Banner
       dataSource="2021 Census"
@@ -48,7 +46,6 @@
         'au-hba',
       ]}
     />
-    <Satellite on:styleChange />
     <DataSourcesAu />
   {:else}
     <Banner dataSource="2018 Census" />
@@ -63,7 +60,6 @@
         'nz-dud',
       ]}
     />
-    <Satellite on:styleChange />
     <DataSources />
   {/if}
 </div>

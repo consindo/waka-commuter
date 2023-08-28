@@ -14,35 +14,50 @@
   }
 </script>
 
-<button class={style} on:click={handleClick}>
-  {style === 'map' ? 'Switch to Satellite Map' : 'Switch to Street Map'}
+<button
+  class={style}
+  on:click={handleClick}
+  title={style === 'map' ? 'Satellite Map' : 'Street Map'}
+>
 </button>
 
 <style>
   button {
-    margin: 0.25rem var(--sidebar-padding);
-    padding: 0.5rem 1.25rem;
-    background-color: #333;
+    margin: 0;
+    background-color: #fff;
     background-repeat: no-repeat;
-    text-indent: 24px;
-    background-position: 12px 50%;
+    background-position: 50%;
+    background-size: 22px;
     border: 0;
     color: #fff;
     font-family: 'Fira Sans', sans-serif;
     font-size: 1rem;
     border-radius: 5px;
     font-weight: 700;
+    position: absolute;
+    bottom: 105px;
+    left: 10px;
+    padding-left: 15px;
+    padding-right: 14px;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    cursor: pointer;
   }
   button:hover {
-    background-color: #222;
+    background-color: #ddd;
   }
   button:active {
-    background-color: #000;
+    background-color: #ccc;
   }
   button.map {
     background-image: url(/static/icons/satellite.svg);
   }
   button.satellite {
     background-image: url(/static/icons/map.svg);
+  }
+  @media (max-width: 1020px) {
+    button {
+      bottom: 215px;
+    }
   }
 </style>
