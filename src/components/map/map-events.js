@@ -98,7 +98,7 @@ const bindMapboxEvents = (map) => {
     const meshblock = e.features[0]
     if (meshblock != null) {
       mapTooltip.setAttribute('loading', true)
-      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey) {
+      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey || Dispatcher.currentRegion.includes(meshblock.id)) {
         Dispatcher.addRegion(meshblock.id)
       } else {
         Dispatcher.setRegions([meshblock.id])
