@@ -85,11 +85,9 @@
       styleDataCallback()
       bindMapEvents(map)
     })
-    if (source.dynamicShapeFiles) {
-      map.on('zoom', () => {
-        const zoom = map.getZoom()
-        const center = map.getCenter()
-        source.dynamicShapeFiles
+    if (source.dynamicShapeFiles || source.dynamicSecondaryShapeFiles) {
+      const dynamicFilter = (file, zoom, center, mapSource) =>
+        file
           .filter((shape) => shape.isLoaded !== true)
           .forEach((shape) => {
             if (
@@ -100,21 +98,33 @@
               center.lat < shape.bbox[1][1]
             ) {
               shape.isLoaded = true
-              loadDynamic(shape.url)
+              loadDynamic(shape.url, mapSource)
             }
           })
+      map.on('zoom', () => {
+        const zoom = map.getZoom()
+        const center = map.getCenter()
+        dynamicFilter(source.dynamicShapeFiles, zoom, center, 'sa2')
+        if (source.dynamicSecondaryShapeFiles) {
+          dynamicFilter(source.dynamicSecondaryShapeFiles, zoom, center, 'dzn')
+        }
       })
     }
   })
 
-  const loadDynamic = async (url) => {
+  const loadDynamic = async (url, mapSource) => {
     const res = await fetch(url)
     const newData = await res.json()
     const stateLookup = newData.features.reduce((acc, cur) => {
       acc[cur.properties.name] = cur
       return acc
     }, {})
-    const currentData = await mapDataCopy
+    let currentData
+    if (mapSource === 'sa2') {
+      currentData = await mapDataCopy
+    } else if (mapSource === 'dzn') {
+      currentData = await secondaryData
+    }
     const augmentedData = {
       type: 'FeatureCollection',
       features: currentData.features.map((i) => {
@@ -125,8 +135,12 @@
         return i
       }),
     }
-    map.getSource('sa2').setData(augmentedData)
-    mapDataCopy = Promise.resolve(augmentedData)
+    map.getSource(mapSource).setData(augmentedData)
+    if (mapSource === 'sa2') {
+      mapDataCopy = Promise.resolve(augmentedData)
+    } else if (mapSource === 'dzn') {
+      secondaryData = Promise.resolve(augmentedData)
+    }
     console.info('dynamically loaded', url)
   }
 

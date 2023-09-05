@@ -52,6 +52,43 @@ const sources = {
         zoom: 5,
       }
     ],
+    dynamicSecondaryShapeFiles: [
+      {
+        url: '/shapes/australia-dzn-2021-nsw.json',
+        bbox: [[141, -37.5], [154, -28]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2021-vic.json',
+        bbox: [[141, -39], [151, -34]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2021-qld.json',
+        bbox: [[138, -29], [153, -10]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2021-wa.json',
+        bbox: [[112, -35], [129, -12]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2021-sa.json',
+        bbox: [[129, -38], [141, -26]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2021-tas.json',
+        bbox: [[143, -44], [149, -39]],
+        zoom: 6,
+      },      
+      {
+        url: '/shapes/australia-dzn-2021-nt.json',
+        bbox: [[129, -26], [138, -10]],
+        zoom: 5,
+      }
+    ],
     initialPosition: [133, -25, 4],
     isModeGraphsEnabled: false,
     isAllSegmentEnabled: false,
