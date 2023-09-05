@@ -17,7 +17,7 @@
 
   mapboxgl.accessToken = token
 
-  export let mapData, lat, lng, zoom, style
+  export let mapData, secondaryData, lat, lng, zoom, style
   let mapDataCopy = mapData
 
   // gross hack
@@ -74,7 +74,7 @@
         if (isLoaded) return
         isLoaded = true
 
-        const data = await Promise.all([mapDataCopy])
+        const data = await Promise.all([mapDataCopy, secondaryData])
         drawMap(map, data, source.isMapAreaLabelsEnabled)
 
         if (Dispatcher.currentRegion.length > 0) {

@@ -119,6 +119,19 @@ const bindDispatcherEvents = (map) => {
           magnitude: null,
         }
       )
+      if (source.secondaryShapeFile) {
+        map.setFeatureState(
+          {
+            source: 'dzn',
+            id: i,
+          },
+          {
+            selected: null,
+            population: null,
+            magnitude: null,
+          }
+        )
+      }
     })
     selectedAreas = []
 
@@ -182,6 +195,19 @@ const bindDispatcherEvents = (map) => {
           magnitude: combinedObject[i].magnitude,
         }
       )
+      if (source.secondaryShapeFile) {
+        map.setFeatureState(
+          {
+            source: 'dzn',
+            id: i,
+          },
+          {
+            selected: isSelected ? 1 : null,
+            population: combinedObject[i].population,
+            magnitude: combinedObject[i].magnitude,
+          }
+        )
+      }
     })
 
     map.getSource('points').setData({

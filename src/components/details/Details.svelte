@@ -22,6 +22,8 @@
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
 
+  export let mapData
+
   let detailsTitle = null
   let documentTitle = null
   let firstRegion = ''
@@ -30,7 +32,6 @@
   let hiddenArrivals = []
   let hiddenDepartures = []
 
-  const sa2Data = window.sa2Data
   const source = getSource()
 
   $: document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
@@ -46,7 +47,7 @@
     bindDetailsEvents()
 
     const friendlyNames = {}
-    sa2Data.then((data) => {
+    mapData.then((data) => {
       const features = data.features
 
       // easy reference to the freindly names
@@ -86,6 +87,10 @@
                   return source.segments.map((key) => dataSource[key])
                 } else {
                   console.error('Could not find segment', segment)
+                  return {
+                    departTo: {},
+                    arriveFrom: {},
+                  }
                 }
               })
               .flat()

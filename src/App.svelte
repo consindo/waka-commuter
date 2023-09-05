@@ -7,8 +7,23 @@
   import Details from './components/details/Details.svelte'
 
   const source = getSource()
-  const sa2Data = fetch(source.shapeFile).then((res) => res.json())
+  let sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
+
+  let secondaryData
+  if (source.secondaryShapeFile) {
+    secondaryData = fetch(source.secondaryShapeFile)
+      .then((res) => res.json())
+      .then(async (secondary) => {
+        const sa2 = await sa2Data
+        const newData = Promise.resolve({
+          type: 'FeatureCollection',
+          features: [...sa2.features, ...secondary.features],
+        })
+        window.sa2Data = newData
+        return secondary
+      })
+  }
 
   async function getRegionNames() {
     const data = await sa2Data
@@ -44,6 +59,7 @@
 <div id="app" class="map-view">
   <Map
     mapData={sa2Data}
+    {secondaryData}
     {lat}
     {lng}
     {zoom}
@@ -52,7 +68,7 @@
   />
   <section>
     <Splash on:locationChange={flyTo} />
-    <Details />
+    <Details mapData={sa2Data} />
   </section>
 </div>
 
