@@ -49,6 +49,9 @@ export const drawMap = (map, datasets, areaLabels) => {
       id: 'dzn-fill',
       type: 'fill',
       source: 'dzn',
+      layout: {
+        'visibility': 'none',
+      },
       paint: areaFill,
     })
 
@@ -59,6 +62,7 @@ export const drawMap = (map, datasets, areaLabels) => {
       layout: {
         'line-join': 'round',
         'line-cap': 'round',
+        'visibility': 'none',
       },
       paint: lineFill,
     })

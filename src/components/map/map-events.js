@@ -12,6 +12,7 @@ export const bindMapEvents = (map) => {
 const bindMapboxEvents = (map) => {
   const mapTooltip = document.querySelector('#map map-tooltip')
   let activeBlock = null
+  let activeDznBlock = null
   let needFrame = true
   let isTouch = false
   map.on('touchstart', 'sa2-fill', () => (isTouch = true))
@@ -32,6 +33,52 @@ const bindMapboxEvents = (map) => {
       map.setFeatureState(
         {
           source: 'sa2',
+          id: meshblock.id,
+        },
+        {
+          hover: true,
+        }
+      )
+
+      mapTooltip.setAttribute('id', meshblock.id)
+      mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
+      if (meshblock.properties.populationCount != null) {
+        mapTooltip.setAttribute(
+          'populationCount',
+          meshblock.properties.populationCount
+        )
+      }
+      mapTooltip.setAttribute('opacity', 1)
+    }
+
+    if (needFrame) {
+      needFrame = false
+      const { pageX, pageY } = e.originalEvent
+      requestAnimationFrame(() => {
+        needFrame = true
+        mapTooltip.setAttribute('x', pageX)
+        mapTooltip.setAttribute('y', pageY)
+      })
+    }
+  })
+
+  map.on('mousemove', 'dzn-fill', (e) => {
+    if (isTouch) return
+    const meshblock = e.features[0]
+    if (meshblock != null && activeDznBlock !== meshblock.id) {
+      map.setFeatureState(
+        {
+          source: 'dzn',
+          id: activeDznBlock,
+        },
+        {
+          hover: false,
+        }
+      )
+      activeDznBlock = meshblock.id
+      map.setFeatureState(
+        {
+          source: 'dzn',
           id: meshblock.id,
         },
         {
@@ -85,6 +132,21 @@ const bindMapboxEvents = (map) => {
       }
     )
     activeBlock = null
+    mapTooltip.setAttribute('opacity', 0)
+  })
+
+  map.on('mouseleave', 'dzn-fill', (e) => {
+    isTouch = false
+    map.setFeatureState(
+      {
+        source: 'dzn',
+        id: activeDznBlock,
+      },
+      {
+        hover: false,
+      }
+    )
+    activeDznBlock = null
     mapTooltip.setAttribute('opacity', 0)
   })
 
@@ -263,6 +325,15 @@ const bindDispatcherEvents = (map) => {
       const tooltipJSON = JSON.stringify(tooltipData)
       mapTooltip.setAttribute('data', tooltipJSON)
       mapTooltip.removeAttribute('loading')
+
+      // ASON SPECIFIC CODE
+      if (segment === '2021-dzn') {
+        map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
+        map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
+      } else if (segment === '2021-sa2') {
+        map.setLayoutProperty('dzn-lines', 'visibility', 'none')
+        map.setLayoutProperty('dzn-fill', 'visibility', 'none')
+      }
 
       // only really want to toggle the map data for direction
       if (direction === 'all') {
