@@ -90,7 +90,9 @@ export const setDetails = (
   ) {
     pop = arriveModeData.Total.Total.toLocaleString()
   }
-  document.querySelector('.population-count').innerText = pop
+  if (source.isModeGraphsEnabled) {
+    document.querySelector('.population-count').innerText = pop
+  }
 
   // hack
   const currentRegions = JSON.parse(tooltipData).currentRegions
