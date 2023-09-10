@@ -94,7 +94,7 @@ const sources = {
     isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
     segments: ['2021-sa2', '2021-dzn'],
-    detailsControls: ['2021-sa2', '2021-dzn'],
+    detailsControls: ['2021-SA2', '2021-DZN'],
     brandingClass: 'ason',
   },
   wsp: {

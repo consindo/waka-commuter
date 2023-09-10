@@ -12,12 +12,7 @@
     humanRegionName,
   } from '../../data.js'
 
-  import { bindDetailsEvents } from '../../views/details-events.js'
-  import {
-    setDetailsControls,
-    setDetails,
-    hideDetails,
-  } from '../../views/details-render.js'
+  import { setDetails, hideDetails } from '../../views/details-render.js'
 
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
@@ -43,9 +38,6 @@
   }
 
   onMount(() => {
-    setDetailsControls(source.detailsControls, source.detailsSecondaryControls)
-    bindDetailsEvents()
-
     const friendlyNames = {}
     mapData.then((data) => {
       const features = data.features
@@ -86,7 +78,7 @@
                 } else if (segment === 'all') {
                   return source.segments.map((key) => dataSource[key])
                 } else {
-                  console.error('Could not find segment', segment)
+                  console.warn('Could not find segment', segment)
                   return {
                     departTo: {},
                     arriveFrom: {},

@@ -14,7 +14,12 @@
     </p>
   </div>
   <div class="splash-controls">
-    <button title="Learn More" class="btn-expand">
+    <button
+      title="Learn More"
+      class="btn-expand"
+      on:click={() =>
+        document.getElementById('app').classList.toggle('map-view')}
+    >
       <img alt="Toggle Details" src={expand} />
     </button>
   </div>

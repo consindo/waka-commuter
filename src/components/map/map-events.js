@@ -86,6 +86,8 @@ const bindMapboxEvents = (map) => {
         }
       )
 
+      if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment === '2021-dzn') return
+
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
       if (meshblock.properties.populationCount != null) {
@@ -151,6 +153,24 @@ const bindMapboxEvents = (map) => {
   })
 
   map.on('click', 'sa2-fill', (e) => {
+    // ason specific, we use the other event otherwise
+    if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment === '2021-dzn') return
+
+    const meshblock = e.features[0]
+    if (meshblock != null) {
+      mapTooltip.setAttribute('loading', true)
+      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey || Dispatcher.currentRegion.includes(meshblock.id)) {
+        Dispatcher.addRegion(meshblock.id)
+      } else {
+        Dispatcher.setRegions([meshblock.id])
+      }
+    }
+  })
+
+  map.on('click', 'dzn-fill', (e) => {
+    // ason specific, we use the other event otherwise
+    if (Dispatcher.dataDirection !== 'arrivals' || Dispatcher.dataSegment !== '2021-dzn') return
+
     const meshblock = e.features[0]
     if (meshblock != null) {
       mapTooltip.setAttribute('loading', true)
