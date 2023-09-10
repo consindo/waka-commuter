@@ -85,7 +85,7 @@
     background: #111;
   }
 
-  @media (max-width: 1500px) {
+  @media (max-width: 1650px) {
     section {
       width: 600px;
     }

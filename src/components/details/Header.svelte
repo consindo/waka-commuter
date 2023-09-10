@@ -34,7 +34,10 @@
   Dispatcher.bind('load-blocks', loadBlocks)
 </script>
 
-<div class="nav-header">
+<div class="nav-header" class:ason={source.brandingClass === 'ason'}>
+  {#if source.brandingClass === 'ason'}
+    <img src="/static/css/ason.png" alt="Ason Logo" />
+  {/if}
   <div class="nav-header-flex">
     <div class="title">
       <h2>{(title || '').trim()}</h2>
@@ -132,5 +135,11 @@
   .secondary-controls li:not(:last-child)::after {
     content: '·';
     margin-right: 3px;
+  }
+  .ason {
+    height: calc(110px + 24px);
+  }
+  .ason img {
+    height: 13px;
   }
 </style>

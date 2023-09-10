@@ -201,7 +201,7 @@
   span {
     display: block;
   }
-  @media (max-width: 1500px) {
+  @media (max-width: 1650px) {
     div {
       width: 50%;
     }
