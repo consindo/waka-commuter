@@ -114,8 +114,6 @@ export const transformModeData = (dataSources, sourceKeys, category) => {
       }
     })
 
-    console.log(key, index, dataSources, category)
-
     Object.keys(dataSources[index][category] || {}).forEach((c) => {
       // don't care about the aggregated totals in the json
       keyArr.forEach((k) => {

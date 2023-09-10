@@ -26,7 +26,7 @@ const colors = [
 const hoverState = [
   'case',
   ['boolean', ['feature-state', 'hover'], false],
-  'rgba(255,255,255,0.45)',
+  'rgba(255,255,255,0.35)',
   'rgba(0,0,0,0)',
 ]
 
@@ -66,7 +66,7 @@ export const areaFill = {
     'case',
     ['boolean', ['feature-state', 'hover'], false],
     hoverOpacity,
-    ['case', ['==', ['feature-state', 'selected'], 1], 0.75, opacity],
+    ['case', ['==', ['feature-state', 'selected'], 1], 0.6, opacity],
   ],
   'fill-color': [
     'case',

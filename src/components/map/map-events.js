@@ -356,6 +356,11 @@ const bindDispatcherEvents = (map) => {
       if (segment === '2021-dzn') {
         map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
         map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
+        if (direction === 'departures') {
+          map.moveLayer('dzn-fill', 'sa2-fill')
+        } else if (direction === 'arrivals') {
+          map.moveLayer('sa2-fill', 'dzn-fill')
+        }
       } else if (segment === '2021-sa2') {
         map.setLayoutProperty('dzn-lines', 'visibility', 'none')
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')

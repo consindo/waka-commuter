@@ -104,7 +104,7 @@ class DestinationBlurb extends LitElement {
       const searchObj = this.modeData.Total
       popularMode = Object.keys(searchObj)
         .filter((key) => key !== 'Total')
-        .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b))
+        .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b), '')
 
       popularPercentage =
         searchObj.Total === 0

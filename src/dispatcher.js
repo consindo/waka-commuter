@@ -72,6 +72,9 @@ class Dispatcher extends Events {
 
   setDirection = (direction) => {
     if (direction === 'all' && this.dataSegment === '2021-dzn') {
+      if (!isNaN(parseInt(this.currentRegion[0]))) {
+        this.currentRegion = []
+      }
       this.dataSegment = '2021-sa2'
     }
 
@@ -82,6 +85,10 @@ class Dispatcher extends Events {
   setSegment = (segment) => {
     if (segment === '2021-dzn' && this.dataDirection === 'all') {
       this.dataDirection = 'departures'
+    } else if (segment === '2021-sa2') {
+      if (!isNaN(parseInt(this.currentRegion[0]))) {
+        this.currentRegion = []
+      }
     }
 
     this.dataSegment = segment

@@ -33,17 +33,6 @@ export const drawMap = (map, datasets, areaLabels) => {
     paint: areaFill,
   })
 
-  map.addLayer({
-    id: 'sa2-lines',
-    type: 'line',
-    source: 'sa2',
-    layout: {
-      'line-join': 'round',
-      'line-cap': 'round',
-    },
-    paint: lineFill,
-  })
-
   if (secondaryData) {
     map.addLayer({
       id: 'dzn-fill',
@@ -67,6 +56,17 @@ export const drawMap = (map, datasets, areaLabels) => {
       paint: lineFill,
     })
   }
+
+  map.addLayer({
+    id: 'sa2-lines',
+    type: 'line',
+    source: 'sa2',
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round',
+    },
+    paint: lineFill,
+  })
 
   map.addLayer({
     id: 'points',
