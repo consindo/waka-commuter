@@ -24,6 +24,11 @@
   let firstRegion = ''
   let populationLabel = ''
 
+  let hideArrivals = false
+  let hideDepartures = false
+  let invalidArrival = false
+  let invalidDeparture = false
+
   let hiddenArrivals = []
   let hiddenDepartures = []
 
@@ -108,16 +113,24 @@
             let arriveModeData = null
             let departureModeData = null
             if (source.isModeGraphsEnabled === true) {
-              arriveModeData = transformModeData(
-                dataSources,
-                sourceKeys,
-                'arrivalModes'
-              )
-              departureModeData = transformModeData(
-                dataSources,
-                sourceKeys,
-                'departureModes'
-              )
+              if (segment === '2021-dzn' && direction === 'departures') {
+                arriveModeData = null
+              } else {
+                arriveModeData = transformModeData(
+                  dataSources,
+                  sourceKeys,
+                  'arrivalModes'
+                )
+              }
+              if (segment === '2021-dzn' && direction === 'arrivals') {
+                departureModeData = null
+              } else {
+                departureModeData = transformModeData(
+                  dataSources,
+                  sourceKeys,
+                  'departureModes'
+                )
+              }
             }
 
             Dispatcher.trigger('update-blocks', {
@@ -198,6 +211,27 @@
             populationLabel = 'Resident 15+ Population:'
           }
 
+          if (
+            segment === '2021-dzn' &&
+            Dispatcher.dataDirection === 'arrivals'
+          ) {
+            hideDepartures = true
+            hideArrivals = false
+            invalidArrival = isNaN(parseInt(regionName[0]))
+          } else if (
+            segment === '2021-dzn' &&
+            Dispatcher.dataDirection === 'departures'
+          ) {
+            hideDepartures = false
+            hideArrivals = true
+            invalidDeparture = !isNaN(parseInt(regionName[0]))
+          } else {
+            hideDepartures = false
+            hideArrivals = false
+            invalidDeparture = false
+            invalidArrival = false
+          }
+
           // also consuming the tooltip data in the population bubbles
           const initialLocation = getLocation(features, regionName[0])
           setDetails(
@@ -222,75 +256,91 @@
     {populationLabel}
     populationLink={source === 'statsnz'}
   />
-  <h3>Arrivals</h3>
-  <div class="arrive-from blurb-container" />
-  <div class="arrive-from graph-container">
-    <div class="location-container">
-      <div class="location-inner">
-        <div class="location" />
+  <div class="arrive-from warning" class:hidden={!invalidArrival}>
+    <p>
+      A SA2 is selected. Select individual DZNs or switch to SA2 mode to see
+      arrivals.
+    </p>
+  </div>
+  <div class:hidden={hideArrivals || invalidArrival}>
+    <h3>Arrivals</h3>
+    <div class="arrive-from blurb-container" />
+    <div class="arrive-from graph-container">
+      <div class="location-container">
+        <div class="location-inner">
+          <div class="location" />
+        </div>
+        <div class="hidden-trips">
+          <ul>
+            {#each hiddenArrivals as i}
+              <li>
+                <strong>{i.key}</strong>: {i.value} people ({(
+                  i.percentage * 100
+                ).toFixed(2)}%)
+              </li>
+            {/each}
+          </ul>
+        </div>
       </div>
-      <div class="hidden-trips">
-        <ul>
-          {#each hiddenArrivals as i}
-            <li>
-              <strong>{i.key}</strong>: {i.value} people ({(
-                i.percentage * 100
-              ).toFixed(2)}%)
-            </li>
-          {/each}
-        </ul>
-      </div>
-    </div>
-    <div class="mode-container">
-      <div class="mode-inner">
-        <h4>
-          Arrival Modes
-          {#if source.brandingClass === 'statsnz'}
-            <small
-              ><a
-                href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-                >(NZ.Stat)</a
-              ></small
-            >
-          {/if}
-        </h4>
-        <div class="mode" />
+      <div class="mode-container">
+        <div class="mode-inner">
+          <h4>
+            Arrival Modes
+            {#if source.brandingClass === 'statsnz'}
+              <small
+                ><a
+                  href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
+                  >(NZ.Stat)</a
+                ></small
+              >
+            {/if}
+          </h4>
+          <div class="mode" />
+        </div>
       </div>
     </div>
   </div>
-  <h3>Departures</h3>
-  <div class="depart-to blurb-container" />
-  <div class="depart-to graph-container">
-    <div class="location-container">
-      <div class="location-inner">
-        <div class="location" />
+  <div class="depart-to warning" class:hidden={!invalidDeparture}>
+    <p>
+      There is no departure data for individual DZNs. Select a SA2 or switch to
+      arrivals to continue.
+    </p>
+  </div>
+  <div class:hidden={hideDepartures || invalidDeparture}>
+    <h3>Departures</h3>
+    <div class="depart-to blurb-container" />
+    <div class="depart-to graph-container">
+      <div class="location-container">
+        <div class="location-inner">
+          <div class="location" />
+        </div>
+        <div class="hidden-trips">
+          <ul>
+            {#each hiddenDepartures as i}
+              <li>
+                <strong>{i.key}</strong>: {i.value} people ({(
+                  i.percentage * 100
+                ).toFixed(2)}%)
+              </li>
+            {/each}
+          </ul>
+        </div>
       </div>
-      <div class="hidden-trips">
-        <ul>
-          {#each hiddenDepartures as i}
-            <li>
-              <strong>{i.key}</strong>: {i.value} people ({(
-                i.percentage * 100
-              ).toFixed(2)}%)
-            </li>
-          {/each}
-        </ul>
-      </div>
-    </div>
-    <div class="mode-container">
-      <div class="mode-inner">
-        <h4>
-          Departure Modes
-          {#if source.brandingClass === 'statsnz'}
-            <small
-              ><a
-                href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-                >(NZ.Stat)</a
-              ></small
-            >
-          {/if}
-        </h4>
-        <div class="mode" />
+      <div class="mode-container">
+        <div class="mode-inner">
+          <h4>
+            Departure Modes
+            {#if source.brandingClass === 'statsnz'}
+              <small
+                ><a
+                  href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
+                  >(NZ.Stat)</a
+                ></small
+              >
+            {/if}
+          </h4>
+          <div class="mode" />
+        </div>
       </div>
     </div>
   </div>
@@ -303,5 +353,9 @@
     margin-bottom: 1.5em;
     padding-left: 1.25em;
     list-style-type: none;
+  }
+  .warning {
+    padding: 0 1em;
+    font-size: 1.125rem;
   }
 </style>

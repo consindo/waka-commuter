@@ -29,10 +29,10 @@ const setBubble = (container, location, data, tooltipData, showOnly) => {
 const setMode = (container, data) => {
   // effectively disables the graphs
   if (data === null) {
-    Array.from(document.querySelectorAll('.mode-container')).forEach(
-      (el) => (el.style.display = 'none')
-    )
+    container.querySelector('.mode-container').style.display = 'none'
     return
+  } else {
+    container.querySelector('.mode-container').style.display = 'block'
   }
   const mode = document.createElement('travel-mode')
   if (source.brandingClass === 'statsnz') {
@@ -81,10 +81,16 @@ export const setDetails = (
   const arriveContainer = document.querySelector('.arrive-from.graph-container')
   const departContainer = document.querySelector('.depart-to.graph-container')
 
-  if (departModeData != null) {
-    document.querySelector('.population-count').innerText =
-      departModeData.Total.Total.toLocaleString()
+  let pop = 'Unknown'
+  if (departModeData != null && departModeData.Total.Total !== undefined) {
+    pop = departModeData.Total.Total.toLocaleString()
+  } else if (
+    arriveModeData != null &&
+    arriveModeData.Total.Total !== undefined
+  ) {
+    pop = arriveModeData.Total.Total.toLocaleString()
   }
+  document.querySelector('.population-count').innerText = pop
 
   // hack
   const currentRegions = JSON.parse(tooltipData).currentRegions

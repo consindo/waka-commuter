@@ -42,6 +42,11 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
+      if (Dispatcher.dataSegment === '2021-dzn') {
+        mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
+      } else {
+        mapTooltip.removeAttribute('showOnly')
+      }
       if (meshblock.properties.populationCount != null) {
         mapTooltip.setAttribute(
           'populationCount',
@@ -90,6 +95,7 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
+      mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
       if (meshblock.properties.populationCount != null) {
         mapTooltip.setAttribute(
           'populationCount',

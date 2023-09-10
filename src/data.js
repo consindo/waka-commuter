@@ -17,7 +17,7 @@ export const chooseBestName = (name, friendlyName) => {
 export const humanRegionName = (nameArray, mode) => {
   const isZone = nameArray.length > 0 && !isNaN(parseInt(nameArray[0][0]))
   if (nameArray.length === 1) {
-    return `${isZone ? 'zone ' : ''}${nameArray[0]}`
+    return `${isZone ? 'Zone ' : ''}${nameArray[0]}`
   } else if (mode === 'condensed') {
     return `these ${nameArray.length} ${isZone ? 'zones' : 'areas'}`
   } else if (nameArray.length === 2) {
@@ -114,7 +114,9 @@ export const transformModeData = (dataSources, sourceKeys, category) => {
       }
     })
 
-    Object.keys(dataSources[index][category]).forEach((c) => {
+    console.log(key, index, dataSources, category)
+
+    Object.keys(dataSources[index][category] || {}).forEach((c) => {
       // don't care about the aggregated totals in the json
       keyArr.forEach((k) => {
         if (combinedSource[k][c] === undefined) {
