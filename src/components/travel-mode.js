@@ -74,8 +74,8 @@ class TravelMode extends LitElement {
     if (level === 2) {
       categories = {
         Drive: ['drive', 'truck', 'motorbike'],
-        Passenger: ['passenger', 'taxi'],
         Bus: ['bus', 'public bus', 'school bus'],
+        Passenger: ['passenger', 'taxi'],
         Train: ['train', 'tram'],
         Ferry: ['ferry'],
         Walk: ['walk'],
