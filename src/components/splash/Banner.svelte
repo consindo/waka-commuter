@@ -7,14 +7,19 @@
   <div class="splash-content">
     <h2>Explore how we travel</h2>
     <p>
-      Discover how we get to work & education, using travel data from the {dataSource}.
+      Discover how we get around, using travel data from the {dataSource}.
       <span class="desktop"
         >Get started by choosing an area on the map, or jump to a region below.</span
       >
     </p>
   </div>
   <div class="splash-controls">
-    <button title="Learn More" class="btn-expand">
+    <button
+      title="Learn More"
+      class="btn-expand"
+      on:click={() =>
+        document.getElementById('app').classList.toggle('map-view')}
+    >
       <img alt="Toggle Details" src={expand} />
     </button>
   </div>

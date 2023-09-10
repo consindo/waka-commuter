@@ -12,6 +12,7 @@ export const bindMapEvents = (map) => {
 const bindMapboxEvents = (map) => {
   const mapTooltip = document.querySelector('#map map-tooltip')
   let activeBlock = null
+  let activeDznBlock = null
   let needFrame = true
   let isTouch = false
   map.on('touchstart', 'sa2-fill', () => (isTouch = true))
@@ -41,6 +42,60 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
+      if (Dispatcher.dataSegment === '2021-dzn') {
+        mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
+      } else {
+        mapTooltip.removeAttribute('showOnly')
+      }
+      if (meshblock.properties.populationCount != null) {
+        mapTooltip.setAttribute(
+          'populationCount',
+          meshblock.properties.populationCount
+        )
+      }
+      mapTooltip.setAttribute('opacity', 1)
+    }
+
+    if (needFrame) {
+      needFrame = false
+      const { pageX, pageY } = e.originalEvent
+      requestAnimationFrame(() => {
+        needFrame = true
+        mapTooltip.setAttribute('x', pageX)
+        mapTooltip.setAttribute('y', pageY)
+      })
+    }
+  })
+
+  map.on('mousemove', 'dzn-fill', (e) => {
+    if (isTouch) return
+    const meshblock = e.features[0]
+    if (meshblock != null && activeDznBlock !== meshblock.id) {
+      map.setFeatureState(
+        {
+          source: 'dzn',
+          id: activeDznBlock,
+        },
+        {
+          hover: false,
+        }
+      )
+      activeDznBlock = meshblock.id
+      map.setFeatureState(
+        {
+          source: 'dzn',
+          id: meshblock.id,
+        },
+        {
+          hover: true,
+        }
+      )
+
+      if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment === '2021-dzn') return
+
+      mapTooltip.setAttribute('id', meshblock.id)
+      mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
+      mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
       if (meshblock.properties.populationCount != null) {
         mapTooltip.setAttribute(
           'populationCount',
@@ -88,7 +143,40 @@ const bindMapboxEvents = (map) => {
     mapTooltip.setAttribute('opacity', 0)
   })
 
+  map.on('mouseleave', 'dzn-fill', (e) => {
+    isTouch = false
+    map.setFeatureState(
+      {
+        source: 'dzn',
+        id: activeDznBlock,
+      },
+      {
+        hover: false,
+      }
+    )
+    activeDznBlock = null
+    mapTooltip.setAttribute('opacity', 0)
+  })
+
   map.on('click', 'sa2-fill', (e) => {
+    // ason specific, we use the other event otherwise
+    if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment === '2021-dzn') return
+
+    const meshblock = e.features[0]
+    if (meshblock != null) {
+      mapTooltip.setAttribute('loading', true)
+      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey || Dispatcher.currentRegion.includes(meshblock.id)) {
+        Dispatcher.addRegion(meshblock.id)
+      } else {
+        Dispatcher.setRegions([meshblock.id])
+      }
+    }
+  })
+
+  map.on('click', 'dzn-fill', (e) => {
+    // ason specific, we use the other event otherwise
+    if (Dispatcher.dataDirection !== 'arrivals' || Dispatcher.dataSegment !== '2021-dzn') return
+
     const meshblock = e.features[0]
     if (meshblock != null) {
       mapTooltip.setAttribute('loading', true)
@@ -119,6 +207,19 @@ const bindDispatcherEvents = (map) => {
           magnitude: null,
         }
       )
+      if (source.secondaryShapeFile) {
+        map.setFeatureState(
+          {
+            source: 'dzn',
+            id: i,
+          },
+          {
+            selected: null,
+            population: null,
+            magnitude: null,
+          }
+        )
+      }
     })
     selectedAreas = []
 
@@ -182,6 +283,19 @@ const bindDispatcherEvents = (map) => {
           magnitude: combinedObject[i].magnitude,
         }
       )
+      if (source.secondaryShapeFile) {
+        map.setFeatureState(
+          {
+            source: 'dzn',
+            id: i,
+          },
+          {
+            selected: isSelected ? 1 : null,
+            population: combinedObject[i].population,
+            magnitude: combinedObject[i].magnitude,
+          }
+        )
+      }
     })
 
     map.getSource('points').setData({
@@ -237,6 +351,20 @@ const bindDispatcherEvents = (map) => {
       const tooltipJSON = JSON.stringify(tooltipData)
       mapTooltip.setAttribute('data', tooltipJSON)
       mapTooltip.removeAttribute('loading')
+
+      // ASON SPECIFIC CODE
+      if (segment === '2021-dzn') {
+        map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
+        map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
+        if (direction === 'departures') {
+          map.moveLayer('dzn-fill', 'sa2-fill')
+        } else if (direction === 'arrivals') {
+          map.moveLayer('sa2-fill', 'dzn-fill')
+        }
+      } else if (segment === '2021-sa2') {
+        map.setLayoutProperty('dzn-lines', 'visibility', 'none')
+        map.setLayoutProperty('dzn-fill', 'visibility', 'none')
+      }
 
       // only really want to toggle the map data for direction
       if (direction === 'all') {

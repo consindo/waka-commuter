@@ -102,7 +102,7 @@ noscript p {
   text-align: right;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1650px) {
   .graph-container {
     display: block;
   }

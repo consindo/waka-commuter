@@ -1,22 +1,58 @@
 <script>
   import expand from '/static/expand.svg'
+  import ason from '/static/css/ason.png'
   import { transformFilename } from '../../data.js'
+  import Dispatcher from '../../dispatcher.js'
+  import { getSource } from '../../sources.js'
 
   export let title, firstRegion, populationLabel, populationLink
 
+  const source = getSource()
+
   $: path = transformFilename(firstRegion)
+
+  const triggerClose = () => {
+    Dispatcher.setRegions([])
+  }
+  const triggerSegment = (segment) => () => {
+    const newSegment = segment.toLowerCase()
+    if (source.detailsSecondaryControls != null) {
+      const secondary = Dispatcher.dataSegment.split('-')[0]
+      Dispatcher.setSegment([secondary, newSegment].join('-'))
+    } else {
+      Dispatcher.setSegment(newSegment)
+    }
+  }
+  const triggerSecondarySegment = (segment) => () => {
+    const newSegment = segment.toLowerCase()
+    const primary = Dispatcher.dataSegment.split('-')[1]
+    Dispatcher.setSegment([newSegment, primary].join('-'))
+  }
+  let currentSegment = source.segments[0]
+  const loadBlocks = () => {
+    currentSegment = Dispatcher.dataSegment
+  }
+  Dispatcher.bind('load-blocks', loadBlocks)
 </script>
 
-<div class="nav-header">
+<div class="nav-header" class:ason={source.brandingClass === 'ason'}>
+  {#if source.brandingClass === 'ason'}
+    <img src={ason} alt="Ason Logo" />
+  {/if}
   <div class="nav-header-flex">
     <div class="title">
       <h2>{(title || '').trim()}</h2>
     </div>
     <nav class="controls">
-      <button title="Learn More" class="btn-expand">
+      <button
+        title="Learn More"
+        class="btn-expand"
+        on:click={() =>
+          document.getElementById('app').classList.toggle('map-view')}
+      >
         <img alt="Toggle Details" src={expand} />
       </button>
-      <button title="Close Location" class="btn-close">
+      <button title="Close Location" class="btn-close" on:click={triggerClose}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24"
@@ -51,8 +87,60 @@
           <span class="population-count" />
         {/if}
       </p>
-      <nav class="secondary-controls" />
+      <nav class="secondary-controls">
+        <ul>
+          {#each source.detailsSecondaryControls || [] as control}
+            <li>
+              <a
+                href="#"
+                class="btn-segment"
+                on:click={triggerSecondarySegment(control)}
+                class:selected={currentSegment.split('-')[0] ===
+                  control.toLowerCase()}>{control}</a
+              >
+            </li>
+          {/each}
+        </ul>
+      </nav>
     </div>
-    <nav class="controls primary-controls" />
+    <nav class="controls primary-controls">
+      <ul>
+        {#each source.detailsControls as control}
+          <li>
+            <a
+              href="#"
+              class="btn-segment"
+              on:click={triggerSegment(control)}
+              class:selected={(source.detailsSecondaryControls != null
+                ? currentSegment.split('-')[1]
+                : currentSegment) === control.toLowerCase()}>{control}</a
+            >
+          </li>
+        {/each}
+      </ul>
+    </nav>
   </div>
 </div>
+
+<style>
+  nav ul {
+    display: inline-block;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav li {
+    display: inline-block;
+  }
+  .primary-controls li:not(:last-child)::after,
+  .secondary-controls li:not(:last-child)::after {
+    content: '·';
+    margin-right: 3px;
+  }
+  .ason {
+    height: calc(110px + 24px);
+  }
+  .ason img {
+    height: 13px;
+  }
+</style>

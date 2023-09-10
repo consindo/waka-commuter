@@ -86,16 +86,18 @@ class DestinationBlurb extends LitElement {
     residentsPercentage = Math.round(residentsPercentage * 100)
     topRegionPercentage = Math.round(topRegionPercentage * 100)
 
-    let destination = ' for work or school'
+    let destination = ['work', 'school']
     if (this.segment === 'workplace') {
-      destination = ' for work'
+      destination = ['work']
     } else if (this.segment === 'education') {
-      destination = ' for school'
+      destination = ['school']
     }
 
     const source = getSource()
-    if (source.brandingClass === 'wsp' || source.brandingClass === 'ason') {
-      destination = ''
+    if (source.brandingClass === 'wsp') {
+      destination = []
+    } else if (source.brandingClass === 'ason') {
+      destination = ['work']
     }
 
     let popularMode = null
@@ -104,7 +106,7 @@ class DestinationBlurb extends LitElement {
       const searchObj = this.modeData.Total
       popularMode = Object.keys(searchObj)
         .filter((key) => key !== 'Total')
-        .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b))
+        .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b), '')
 
       popularPercentage =
         searchObj.Total === 0
@@ -133,24 +135,23 @@ class DestinationBlurb extends LitElement {
     const vars = this.getVars()
     return html`<strong class="arrivals"
         >${vars.travellersCount.toLocaleString()}
-        ${vars.travellersCount === 1 ? 'person' : 'people'}</strong
+        ${vars.travellersCount === 1 ? 'person' : 'people'} (${vars.travellersPercentage}% of arrivals)</strong
       >
       travel to
-      <span class="less-emphasis">${vars.place}</span>${vars.destination}
-      (${vars.travellersPercentage}%), while
+      <span class="less-emphasis">${vars.place}</span>${vars.destination.length > 0 ? ` for ${vars.destination.join(' & ')}` : ''}, while
       <strong class="wfh"
         >${vars.residentsCount.toLocaleString()}
         ${vars.residentsCount === 1 ? 'person' : 'people'}
-        (${vars.residentsPercentage}%)</strong
+        (${vars.residentsPercentage}% of arrivals)</strong
       >
-      ${vars.travellersCount > 0 ? 'also' : ''} live in ${vars.placeReduced}.
+      ${vars.travellersCount > 0 ? 'also' : ''} live ${vars.destination.length > 0 ? `& ${vars.destination.join('/')}` : ''} within ${vars.placeReduced}.
       ${vars.regionCount === 0
         ? ''
         : html`People arrive from
             <strong class="arrivals"
               >${vars.regionCount} different
               ${vars.regionCount === 1 ? 'area' : 'areas'}</strong
-            >, the largest share being
+            >, the largest external origin being
             <strong>
               ${humanRegionName([vars.topRegion], 'full')}
               (${vars.topRegionCount.toLocaleString()}
@@ -169,23 +170,27 @@ class DestinationBlurb extends LitElement {
     const vars = this.getVars()
     return html`<strong class="departures"
         >${vars.travellersCount.toLocaleString()}
-        ${vars.travellersCount === 1 ? 'person' : 'people'}
-        (${vars.travellersPercentage}%)</strong
+        ${vars.travellersCount === 1 ? 'person' : 'people'} (${vars.travellersPercentage}% of departures)</strong
       >
-      leave <span class="less-emphasis">${vars.place}</span> to
-      <strong class="departures"
-        >${vars.regionCount} different
-        ${vars.regionCount === 1 ? 'area' : 'areas'}</strong
-      >${vars.destination}.
+      travel from <span class="less-emphasis">${vars.place}</span> ${vars.destination.length > 0 ? ` for ${vars.destination.join('&amp;')}` : ''}, while
+      <strong class="wfh"
+        >${vars.residentsCount.toLocaleString()}
+        ${vars.residentsCount === 1 ? 'person' : 'people'}
+        (${vars.residentsPercentage}% of departures)</strong
+      >
+      ${vars.travellersCount > 0 ? 'also' : ''} live ${vars.destination.length > 0 ? `& ${vars.destination.join('/')}` : ''} within ${vars.placeReduced}.
       ${vars.regionCount === 0
         ? ''
-        : html`<strong>${vars.topRegion}</strong>, with
+        : html`People travel to
+            <strong class="departures"
+              >${vars.regionCount} different
+              ${vars.regionCount === 1 ? 'area' : 'areas'}</strong
+            >, the largest external destination being
             <strong>
-              ${vars.topRegionCount.toLocaleString()}
-              ${vars.topRegionCount === 1 ? 'departure' : 'departures'}
-              (${vars.topRegionPercentage}%)
-            </strong>
-            is the top destination outside of ${vars.placeReduced}.`}
+              ${humanRegionName([vars.topRegion], 'full')}
+              (${vars.topRegionCount.toLocaleString()}
+              people—${vars.topRegionPercentage}% of departures)</strong
+            >.`}
       ${vars.popularPercentage === -1
         ? ''
         : html`People in ${vars.placeReduced} most often depart by

@@ -29,10 +29,10 @@ const setBubble = (container, location, data, tooltipData, showOnly) => {
 const setMode = (container, data) => {
   // effectively disables the graphs
   if (data === null) {
-    Array.from(document.querySelectorAll('.mode-container')).forEach(
-      (el) => (el.style.display = 'none')
-    )
+    container.querySelector('.mode-container').style.display = 'none'
     return
+  } else {
+    container.querySelector('.mode-container').style.display = 'block'
   }
   const mode = document.createElement('travel-mode')
   if (source.brandingClass === 'statsnz') {
@@ -81,9 +81,17 @@ export const setDetails = (
   const arriveContainer = document.querySelector('.arrive-from.graph-container')
   const departContainer = document.querySelector('.depart-to.graph-container')
 
-  if (departModeData != null) {
-    document.querySelector('.population-count').innerText =
-      departModeData.Total.Total.toLocaleString()
+  let pop = 'Unknown'
+  if (departModeData != null && departModeData.Total.Total !== undefined) {
+    pop = departModeData.Total.Total.toLocaleString()
+  } else if (
+    arriveModeData != null &&
+    arriveModeData.Total.Total !== undefined
+  ) {
+    pop = arriveModeData.Total.Total.toLocaleString()
+  }
+  if (source.isModeGraphsEnabled) {
+    document.querySelector('.population-count').innerText = pop
   }
 
   // hack
@@ -115,26 +123,4 @@ export const setDetails = (
 export const hideDetails = () => {
   document.querySelector('.details-splash').classList.remove('hidden')
   document.querySelector('.details-location').classList.add('hidden')
-}
-
-export const setDetailsControls = (
-  detailsControls,
-  detailsSecondaryControls
-) => {
-  const mapFn = (s) =>
-    `<a href="#" class="btn-segment" data-segment=${s}>${s}</a>`
-
-  const container = document.querySelector('.nav-header nav.primary-controls')
-  container.innerHTML = detailsControls.map(mapFn).join(' &middot; ')
-  container.querySelector('.btn-segment').classList.add('selected')
-
-  if (detailsSecondaryControls != null) {
-    const secondaryContainer = document.querySelector(
-      '.nav-header nav.secondary-controls'
-    )
-    secondaryContainer.innerHTML = detailsSecondaryControls
-      .map(mapFn)
-      .join(' &middot; ')
-    secondaryContainer.querySelector('.btn-segment').classList.add('selected')
-  }
 }

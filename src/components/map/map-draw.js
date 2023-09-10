@@ -2,6 +2,7 @@ import { areaFill, lineFill, pointsFill } from './map-styles.js'
 
 export const drawMap = (map, datasets, areaLabels) => {
   const data = datasets[0]
+  const secondaryData = datasets[1]
 
   map.addSource('sa2', {
     type: 'geojson',
@@ -17,12 +18,44 @@ export const drawMap = (map, datasets, areaLabels) => {
     },
   })
 
+  if (secondaryData) {
+    map.addSource('dzn', {
+      type: 'geojson',
+      data: secondaryData,
+      promoteId: 'name',
+    })
+  }
+
   map.addLayer({
     id: 'sa2-fill',
     type: 'fill',
     source: 'sa2',
     paint: areaFill,
   })
+
+  if (secondaryData) {
+    map.addLayer({
+      id: 'dzn-fill',
+      type: 'fill',
+      source: 'dzn',
+      layout: {
+        'visibility': 'none',
+      },
+      paint: areaFill,
+    })
+
+    map.addLayer({
+      id: 'dzn-lines',
+      type: 'line',
+      source: 'dzn',
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round',
+        'visibility': 'none',
+      },
+      paint: lineFill,
+    })
+  }
 
   map.addLayer({
     id: 'sa2-lines',

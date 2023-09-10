@@ -17,7 +17,7 @@ export const chooseBestName = (name, friendlyName) => {
 export const humanRegionName = (nameArray, mode) => {
   const isZone = nameArray.length > 0 && !isNaN(parseInt(nameArray[0][0]))
   if (nameArray.length === 1) {
-    return `${isZone ? 'zone ' : ''}${nameArray[0]}`
+    return `${isZone ? 'Zone ' : ''}${nameArray[0]}`
   } else if (mode === 'condensed') {
     return `these ${nameArray.length} ${isZone ? 'zones' : 'areas'}`
   } else if (nameArray.length === 2) {
@@ -29,9 +29,8 @@ export const humanRegionName = (nameArray, mode) => {
       .slice(0, -1)
       .join(', ')}, and ${nameArray.slice(-1)}`
   } else if (mode === 'title') {
-    return `${nameArray[0]} & ${nameArray.length - 1} other ${
-      isZone ? 'zones' : 'areas'
-    }`
+    return `${nameArray[0]} & ${nameArray.length - 1} other ${isZone ? 'zones' : 'areas'
+      }`
   }
   // should never get here
   return nameArray.join(', ')
@@ -62,7 +61,7 @@ export const getLocation = (features, name) => {
   try {
     geometry = features.find((i) => i.properties.name === name).geometry
   } catch (err) {
-    console.warn('Could not find area', name)
+    // console.warn('Could not find area', name)
     return { lat: 0, lng: 0 }
   }
 
@@ -115,7 +114,7 @@ export const transformModeData = (dataSources, sourceKeys, category) => {
       }
     })
 
-    Object.keys(dataSources[index][category]).forEach((c) => {
+    Object.keys(dataSources[index][category] || {}).forEach((c) => {
       // don't care about the aggregated totals in the json
       keyArr.forEach((k) => {
         if (combinedSource[k][c] === undefined) {

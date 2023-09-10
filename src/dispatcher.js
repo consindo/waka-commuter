@@ -55,17 +55,42 @@ class Dispatcher extends Events {
     this.loadBlocks(animate)
   }
 
+  // lots of ason specific code in here
   setRegions = (regionName, animate) => {
+    if (this.dataSegment === '2021-dzn') {
+      const isDZN = !isNaN(parseInt(regionName[0]))
+      if (isDZN && this.dataDirection === 'departures') {
+        this.dataDirection = 'arrivals'  
+      } else if (!isDZN && this.dataDirection === 'arrivals') {
+        this.dataDirection = 'departures'  
+      }
+    }
+
     this.currentRegion = regionName
     this.loadBlocks(animate)
   }
 
   setDirection = (direction) => {
+    if (direction === 'all' && this.dataSegment === '2021-dzn') {
+      if (!isNaN(parseInt(this.currentRegion[0]))) {
+        this.currentRegion = []
+      }
+      this.dataSegment = '2021-sa2'
+    }
+
     this.dataDirection = direction
     this.loadBlocks()
   }
 
   setSegment = (segment) => {
+    if (segment === '2021-dzn' && this.dataDirection === 'all') {
+      this.dataDirection = 'departures'
+    } else if (segment === '2021-sa2') {
+      if (!isNaN(parseInt(this.currentRegion[0]))) {
+        this.currentRegion = []
+      }
+    }
+
     this.dataSegment = segment
     this.loadBlocks()
   }
