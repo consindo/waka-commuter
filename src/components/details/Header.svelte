@@ -1,5 +1,6 @@
 <script>
   import expand from '/static/expand.svg'
+  import ason from '/static/css/ason.png'
   import { transformFilename } from '../../data.js'
   import Dispatcher from '../../dispatcher.js'
   import { getSource } from '../../sources.js'
@@ -36,7 +37,7 @@
 
 <div class="nav-header" class:ason={source.brandingClass === 'ason'}>
   {#if source.brandingClass === 'ason'}
-    <img src="/static/css/ason.png" alt="Ason Logo" />
+    <img src={ason} alt="Ason Logo" />
   {/if}
   <div class="nav-header-flex">
     <div class="title">
