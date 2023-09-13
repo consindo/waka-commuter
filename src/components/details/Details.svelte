@@ -78,18 +78,21 @@
             const dataSources = data
               .map((dataSource) => {
                 // retuns the matching segment
+                const defaultSource = {
+                  departTo: {},
+                  arriveFrom: {},
+                }
                 if (dataSource[segment] != null) {
                   return [dataSource[segment]]
                 } else if (segment.split('|').length > 1) {
-                  return segment.split('|').map((key) => dataSource[key])
+                  return segment
+                    .split('|')
+                    .map((key) => dataSource[key] || defaultSource)
                 } else if (segment === 'all') {
                   return source.segments.map((key) => dataSource[key])
                 } else {
                   console.warn('Could not find segment', segment)
-                  return {
-                    departTo: {},
-                    arriveFrom: {},
-                  }
+                  return defaultSource
                 }
               })
               .flat()

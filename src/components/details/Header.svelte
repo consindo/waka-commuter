@@ -4,6 +4,7 @@
   import { transformFilename } from '../../data.js'
   import Dispatcher from '../../dispatcher.js'
   import { getSource } from '../../sources.js'
+  import ModeToggle from './ModeToggle.svelte'
 
   export let title, firstRegion, populationLabel, populationLink
 
@@ -18,21 +19,31 @@
     const newSegment = segment.toLowerCase()
     if (source.detailsSecondaryControls != null) {
       const secondary = Dispatcher.dataSegment.split('-')[0]
-      Dispatcher.setSegment([secondary, newSegment].join('-'))
+      setSegmentWithMode([secondary, newSegment].join('-'), selection)
     } else {
-      Dispatcher.setSegment(newSegment)
+      setSegmentWithMode(newSegment, selection)
     }
   }
   const triggerSecondarySegment = (segment) => () => {
     const newSegment = segment.toLowerCase()
     const primary = Dispatcher.dataSegment.split('-')[1]
-    Dispatcher.setSegment([newSegment, primary].join('-'))
+    setSegmentWithMode([newSegment, primary].join('-'), selection)
   }
   let currentSegment = source.segments[0]
   const loadBlocks = () => {
     currentSegment = Dispatcher.dataSegment
   }
   Dispatcher.bind('load-blocks', loadBlocks)
+
+  let selection = []
+  $: setSegmentWithMode(Dispatcher.dataSegment, selection)
+  const setSegmentWithMode = (segment, selectedModes) => {
+    let finalSegment = segment.split('-').slice(0, 2).join('-')
+    if (selectedModes.length > 0) {
+      finalSegment = selectedModes.map((i) => `${finalSegment}-${i}`).join('|')
+    }
+    Dispatcher.setSegment(finalSegment)
+  }
 </script>
 
 <div class="nav-header" class:ason={source.brandingClass === 'ason'}>
@@ -113,12 +124,14 @@
               on:click={triggerSegment(control)}
               class:selected={(source.detailsSecondaryControls != null
                 ? currentSegment.split('-')[1]
-                : currentSegment) === control.toLowerCase()}>{control}</a
+                : currentSegment
+              ).startsWith(control.toLowerCase())}>{control}</a
             >
           </li>
         {/each}
       </ul>
     </nav>
+    <ModeToggle bind:selection />
   </div>
 </div>
 
