@@ -57,7 +57,7 @@ class Dispatcher extends Events {
 
   // lots of ason specific code in here
   setRegions = (regionName, animate) => {
-    if (this.dataSegment === '2021-dzn') {
+    if (this.dataSegment.startsWith('2021-dzn')) {
       const isDZN = !isNaN(parseInt(regionName[0]))
       if (isDZN && this.dataDirection === 'departures') {
         this.dataDirection = 'arrivals'  
@@ -71,7 +71,7 @@ class Dispatcher extends Events {
   }
 
   setDirection = (direction) => {
-    if (direction === 'all' && this.dataSegment === '2021-dzn') {
+    if (direction === 'all' && this.dataSegment.startsWith('2021-dzn')) {
       if (!isNaN(parseInt(this.currentRegion[0]))) {
         this.currentRegion = []
       }
@@ -83,9 +83,9 @@ class Dispatcher extends Events {
   }
 
   setSegment = (segment) => {
-    if (segment === '2021-dzn' && this.dataDirection === 'all') {
+    if (segment.startsWith('2021-dzn') && this.dataDirection === 'all') {
       this.dataDirection = 'departures'
-    } else if (segment === '2021-sa2') {
+    } else if (segment.startsWith('2021-sa2')) {
       if (!isNaN(parseInt(this.currentRegion[0]))) {
         this.currentRegion = []
       }

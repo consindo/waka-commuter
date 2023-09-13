@@ -80,6 +80,8 @@
                 // retuns the matching segment
                 if (dataSource[segment] != null) {
                   return [dataSource[segment]]
+                } else if (segment.split('|').length > 1) {
+                  return segment.split('|').map((key) => dataSource[key])
                 } else if (segment === 'all') {
                   return source.segments.map((key) => dataSource[key])
                 } else {
@@ -113,7 +115,10 @@
             let arriveModeData = null
             let departureModeData = null
             if (source.isModeGraphsEnabled === true) {
-              if (segment === '2021-dzn' && direction === 'departures') {
+              if (
+                segment.startsWith('2021-dzn') &&
+                direction === 'departures'
+              ) {
                 arriveModeData = null
               } else {
                 arriveModeData = transformModeData(
@@ -122,7 +127,7 @@
                   'arrivalModes'
                 )
               }
-              if (segment === '2021-dzn' && direction === 'arrivals') {
+              if (segment.startsWith('2021-dzn') && direction === 'arrivals') {
                 departureModeData = null
               } else {
                 departureModeData = transformModeData(
@@ -207,19 +212,22 @@
             populationLabel = 'Resident Workers:'
           } else if (segment === 'education') {
             populationLabel = 'Resident Students:'
-          } else if (segment === '2021-sa2') {
+          } else if (
+            segment.startsWith('2021-sa2') ||
+            segment.startsWith('2021-dzn')
+          ) {
             populationLabel = 'Resident 15+ Population:'
           }
 
           if (
-            segment === '2021-dzn' &&
+            segment.startsWith('2021-dzn') &&
             Dispatcher.dataDirection === 'arrivals'
           ) {
             hideDepartures = true
             hideArrivals = false
             invalidArrival = isNaN(parseInt(regionName[0]))
           } else if (
-            segment === '2021-dzn' &&
+            segment.startsWith('2021-dzn') &&
             Dispatcher.dataDirection === 'departures'
           ) {
             hideDepartures = false

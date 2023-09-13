@@ -42,7 +42,7 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
-      if (Dispatcher.dataSegment === '2021-dzn') {
+      if (Dispatcher.dataSegment.startsWith('2021-dzn')) {
         mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
       } else {
         mapTooltip.removeAttribute('showOnly')
@@ -91,7 +91,7 @@ const bindMapboxEvents = (map) => {
         }
       )
 
-      if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment === '2021-dzn') return
+      if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment.startsWith('2021-dzn')) return
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
@@ -160,7 +160,7 @@ const bindMapboxEvents = (map) => {
 
   map.on('click', 'sa2-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment === '2021-dzn') return
+    if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment.startsWith('2021-dzn')) return
 
     const meshblock = e.features[0]
     if (meshblock != null) {
@@ -175,7 +175,7 @@ const bindMapboxEvents = (map) => {
 
   map.on('click', 'dzn-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection !== 'arrivals' || Dispatcher.dataSegment !== '2021-dzn') return
+    if (Dispatcher.dataDirection !== 'arrivals' || !Dispatcher.dataSegment.startsWith('2021-dzn')) return
 
     const meshblock = e.features[0]
     if (meshblock != null) {
@@ -353,7 +353,7 @@ const bindDispatcherEvents = (map) => {
       mapTooltip.removeAttribute('loading')
 
       // ASON SPECIFIC CODE
-      if (segment === '2021-dzn') {
+      if (segment.startsWith('2021-dzn')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
         map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
         if (direction === 'departures') {
@@ -361,7 +361,7 @@ const bindDispatcherEvents = (map) => {
         } else if (direction === 'arrivals') {
           map.moveLayer('sa2-fill', 'dzn-fill')
         }
-      } else if (segment === '2021-sa2') {
+      } else if (segment.startsWith('2021-sa2')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'none')
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')
       }
