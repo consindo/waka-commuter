@@ -172,7 +172,7 @@ class DestinationBlurb extends LitElement {
         >${vars.travellersCount.toLocaleString()}
         ${vars.travellersCount === 1 ? 'person' : 'people'} (${vars.travellersPercentage}% of departures)</strong
       >
-      travel from <span class="less-emphasis">${vars.place}</span> ${vars.destination.length > 0 ? ` for ${vars.destination.join('&amp;')}` : ''}, while
+      travel from <span class="less-emphasis">${vars.place}</span> ${vars.destination.length > 0 ? ` for ${vars.destination.join('&')}` : ''}, while
       <strong class="wfh"
         >${vars.residentsCount.toLocaleString()}
         ${vars.residentsCount === 1 ? 'person' : 'people'}

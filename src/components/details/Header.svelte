@@ -130,8 +130,10 @@
           </li>
         {/each}
       </ul>
+      {#if source.brandingClass === 'ason'}
+        <ModeToggle bind:selection />
+      {/if}
     </nav>
-    <ModeToggle bind:selection />
   </div>
 </div>
 
