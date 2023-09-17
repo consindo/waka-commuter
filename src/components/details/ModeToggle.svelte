@@ -1,23 +1,7 @@
 <script>
   import filterIcon from '../../../static/icons/filter.svg'
+  import { modes } from './ModeMap'
 
-  const modes = [
-    { id: 'mode-1', name: '🚆 Train ' },
-    { id: 'mode-2', name: '🚍 Bus ' },
-    { id: 'mode-3', name: '⛴️ Ferry' },
-    { id: 'mode-4', name: '🚈 Tram/light rail' },
-    { id: 'mode-5', name: '🚖 Taxi/ride-share service' },
-    { id: 'mode-6', name: '🚘 Car, as driver' },
-    { id: 'mode-7', name: '🚘 Car, as passenger' },
-    { id: 'mode-8', name: '🚛 Truck' },
-    { id: 'mode-9', name: '🏍️ Motorbike/scooter' },
-    { id: 'mode-10', name: '🚲 Bicycle' },
-    { id: 'mode-11', name: '✈️ Other mode' },
-    { id: 'mode-12', name: '🚶 Walked only' },
-    { id: 'mode-13', name: '🏠 Worked at home' },
-    { id: 'mode-14', name: '🛌 Did not go to work' },
-    { id: 'mode-15', name: '❓ Not stated' },
-  ]
   export let selection = []
   let internalSelection = modes.map((i) => i.id)
   $: {
@@ -60,7 +44,7 @@
     {#each modes as mode}
       <li>
         <label
-          ><span>{mode.name}</span><input
+          ><span>{mode.icon} {mode.name}</span><input
             type="checkbox"
             bind:group={internalSelection}
             value={mode.id}

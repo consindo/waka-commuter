@@ -105,7 +105,14 @@ class DestinationBlurb extends LitElement {
     if (this.modeData != null) {
       const searchObj = this.modeData.Total
       popularMode = Object.keys(searchObj)
-        .filter((key) => key !== 'Total' && key !== 'Not applicable' && key !== 'Worked at home' && key !== 'Did not go to work' && key !== 'Not stated')
+        .filter(
+          (key) =>
+            key !== 'Total' &&
+            key !== 'Not applicable' &&
+            key !== 'Worked at home' &&
+            key !== 'Did not go to work' &&
+            key !== 'Not stated'
+        )
         .reduce((a, b) => (searchObj[a] > searchObj[b] ? a : b), '')
 
       popularPercentage =
@@ -135,16 +142,26 @@ class DestinationBlurb extends LitElement {
     const vars = this.getVars()
     return html`<strong class="arrivals"
         >${vars.travellersCount.toLocaleString()}
-        ${vars.travellersCount === 1 ? 'person' : 'people'} (${vars.travellersPercentage}% of arrivals)</strong
+        ${vars.travellersCount === 1 ? 'person' : 'people'}
+        (${vars.travellersPercentage}% of arrivals)</strong
       >
       travel to
-      <span class="less-emphasis">${vars.place}</span>${vars.destination.length > 0 ? ` for ${vars.destination.join(' & ')}` : ''}${vars.residentsCount > 0 ? html`, while
-      <strong class="wfh"
-        >${vars.residentsCount.toLocaleString()}
-        ${vars.residentsCount === 1 ? 'person' : 'people'}
-        (${vars.residentsPercentage}% of arrivals)</strong
-      >
-      ${vars.travellersCount > 0 ? 'also' : ''} live ${vars.destination.length > 0 ? `& ${vars.destination.join('/')}` : ''} within ${vars.placeReduced}` : ''}.
+      <span class="less-emphasis">${vars.place}</span>${vars.destination
+        .length > 0
+        ? ` for ${vars.destination.join(' & ')}`
+        : ''}${vars.residentsCount > 0
+        ? html`, while
+            <strong class="wfh"
+              >${vars.residentsCount.toLocaleString()}
+              ${vars.residentsCount === 1 ? 'person' : 'people'}
+              (${vars.residentsPercentage}% of arrivals)</strong
+            >
+            ${vars.travellersCount > 0 ? 'also' : ''} live
+            ${vars.destination.length > 0
+              ? `& ${vars.destination.join('/')}`
+              : ''}
+            within ${vars.placeReduced}`
+        : ''}.
       ${vars.regionCount === 0
         ? ''
         : html`People arrive from
@@ -170,15 +187,25 @@ class DestinationBlurb extends LitElement {
     const vars = this.getVars()
     return html`<strong class="departures"
         >${vars.travellersCount.toLocaleString()}
-        ${vars.travellersCount === 1 ? 'person' : 'people'} (${vars.travellersPercentage}% of departures)</strong
+        ${vars.travellersCount === 1 ? 'person' : 'people'}
+        (${vars.travellersPercentage}% of departures)</strong
       >
-      travel from <span class="less-emphasis">${vars.place}</span> ${vars.destination.length > 0 ? ` for ${vars.destination.join('&')}` : ''}${vars.residentsCount > 0 ? html`, while
-      <strong class="wfh"
-        >${vars.residentsCount.toLocaleString()}
-        ${vars.residentsCount === 1 ? 'person' : 'people'}
-        (${vars.residentsPercentage}% of departures)</strong
-      >
-      ${vars.travellersCount > 0 ? 'also' : ''} live ${vars.destination.length > 0 ? `& ${vars.destination.join('/')}` : ''} within ${vars.placeReduced}` : ''}.
+      travel from <span class="less-emphasis">${vars.place}</span> ${vars
+        .destination.length > 0
+        ? ` for ${vars.destination.join('&')}`
+        : ''}${vars.residentsCount > 0
+        ? html`, while
+            <strong class="wfh"
+              >${vars.residentsCount.toLocaleString()}
+              ${vars.residentsCount === 1 ? 'person' : 'people'}
+              (${vars.residentsPercentage}% of departures)</strong
+            >
+            ${vars.travellersCount > 0 ? 'also' : ''} live
+            ${vars.destination.length > 0
+              ? `& ${vars.destination.join('/')}`
+              : ''}
+            within ${vars.placeReduced}`
+        : ''}.
       ${vars.regionCount === 0
         ? ''
         : html`People travel to

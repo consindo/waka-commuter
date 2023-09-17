@@ -12,6 +12,7 @@
     humanRegionName,
   } from '../../data.js'
 
+  import { modes } from './ModeMap.js'
   import { setDetails, hideDetails } from '../../views/details-render.js'
 
   import Header from './Header.svelte'
@@ -82,12 +83,47 @@
                   departTo: {},
                   arriveFrom: {},
                 }
-                if (dataSource[segment] != null) {
+
+                // this is probably a better condition but doesn't capture the single mode
+                // if (segment.split('|').length > 1) {
+                if (segment.split('-mode-').length > 1) {
+                  const combinedSegments = segment.split('|').map((key) => {
+                    const data = dataSource[key] || defaultSource
+
+                    let departureModes = null
+                    let arrivalModes = null
+                    if (segment.startsWith('2021-dzn')) {
+                      departureModes = dataSource['2021-dzn'].departureModes
+                      arrivalModes = dataSource['2021-dzn'].arrivalModes
+                    } else if (segment.startsWith('2021-sa2')) {
+                      departureModes = dataSource['2021-sa2'].departureModes
+                      arrivalModes = dataSource['2021-sa2'].arrivalModes
+                    }
+                    const name = modes.find(
+                      (i) => i.id === `mode-${key.split('mode-')[1]}`
+                    ).name
+                    if (departureModes) {
+                      data.departureModes = { [name]: departureModes[name] }
+                    }
+                    if (arrivalModes) {
+                      data.arrivalModes = { [name]: arrivalModes[name] }
+                    }
+                    return data
+                  })
+                  return [
+                    combinedSegments.reduce((acc, cur) => {
+                      Object.keys(cur).forEach((key) => {
+                        acc[key] = acc[key] || {}
+                        Object.keys(cur[key]).forEach((valueKey) => {
+                          acc[key][valueKey] = acc[key][valueKey] || 0
+                          acc[key][valueKey] += cur[key][valueKey]
+                        })
+                      })
+                      return acc
+                    }, {}),
+                  ]
+                } else if (dataSource[segment] != null) {
                   return [dataSource[segment]]
-                } else if (segment.split('|').length > 1) {
-                  return segment
-                    .split('|')
-                    .map((key) => dataSource[key] || defaultSource)
                 } else if (segment === 'all') {
                   return source.segments.map((key) => dataSource[key])
                 } else {
