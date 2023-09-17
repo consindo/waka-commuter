@@ -6,8 +6,6 @@
   let ctrlKey = false
   let metaKey = false
 
-  $: console.log(regionNames)
-
   const onKeyPress = (e) => {
     if (e.ctrlKey !== undefined) ctrlKey = e.ctrlKey
     if (e.metaKey !== undefined) metaKey = e.metaKey
