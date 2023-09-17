@@ -12,6 +12,7 @@
     humanRegionName,
   } from '../../data.js'
 
+  import { modes } from './ModeMap.js'
   import { setDetails, hideDetails } from '../../views/details-render.js'
 
   import Header from './Header.svelte'
@@ -78,16 +79,62 @@
             const dataSources = data
               .map((dataSource) => {
                 // retuns the matching segment
-                if (dataSource[segment] != null) {
+                const defaultSource = {
+                  departTo: {},
+                  arriveFrom: {},
+                }
+
+                // this is probably a better condition but doesn't capture the single mode
+                // if (segment.split('|').length > 1) {
+                if (segment.split('-mode-').length > 1) {
+                  const combinedSegments = segment.split('|').map((key) => {
+                    const data = dataSource[key] || defaultSource
+
+                    let departureModes = null
+                    let arrivalModes = null
+                    if (segment.startsWith('2021-dzn')) {
+                      departureModes = dataSource['2021-dzn'].departureModes
+                      arrivalModes = dataSource['2021-dzn'].arrivalModes
+                    } else if (segment.startsWith('2021-sa2')) {
+                      departureModes = dataSource['2021-sa2'].departureModes
+                      arrivalModes = dataSource['2021-sa2'].arrivalModes
+                    }
+                    const name = modes.find(
+                      (i) => i.id === `mode-${key.split('mode-')[1]}`
+                    ).name
+                    if (departureModes) {
+                      data.departureModes = {
+                        [name]: departureModes[name],
+                        Total: departureModes[name],
+                      }
+                    }
+                    if (arrivalModes) {
+                      data.arrivalModes = {
+                        [name]: arrivalModes[name],
+                        Total: arrivalModes[name],
+                      }
+                    }
+                    return data
+                  })
+                  return [
+                    combinedSegments.reduce((acc, cur) => {
+                      Object.keys(cur).forEach((key) => {
+                        acc[key] = acc[key] || {}
+                        Object.keys(cur[key]).forEach((valueKey) => {
+                          acc[key][valueKey] = acc[key][valueKey] || 0
+                          acc[key][valueKey] += cur[key][valueKey]
+                        })
+                      })
+                      return acc
+                    }, {}),
+                  ]
+                } else if (dataSource[segment] != null) {
                   return [dataSource[segment]]
                 } else if (segment === 'all') {
                   return source.segments.map((key) => dataSource[key])
                 } else {
                   console.warn('Could not find segment', segment)
-                  return {
-                    departTo: {},
-                    arriveFrom: {},
-                  }
+                  return defaultSource
                 }
               })
               .flat()
@@ -113,7 +160,10 @@
             let arriveModeData = null
             let departureModeData = null
             if (source.isModeGraphsEnabled === true) {
-              if (segment === '2021-dzn' && direction === 'departures') {
+              if (
+                segment.startsWith('2021-dzn') &&
+                direction === 'departures'
+              ) {
                 arriveModeData = null
               } else {
                 arriveModeData = transformModeData(
@@ -122,7 +172,7 @@
                   'arrivalModes'
                 )
               }
-              if (segment === '2021-dzn' && direction === 'arrivals') {
+              if (segment.startsWith('2021-dzn') && direction === 'arrivals') {
                 departureModeData = null
               } else {
                 departureModeData = transformModeData(
@@ -207,19 +257,26 @@
             populationLabel = 'Resident Workers:'
           } else if (segment === 'education') {
             populationLabel = 'Resident Students:'
-          } else if (segment === '2021-sa2') {
-            populationLabel = 'Resident 15+ Population:'
+          } else if (
+            segment.startsWith('2021-sa2') ||
+            segment.startsWith('2021-dzn')
+          ) {
+            if (segment.includes('-mode-')) {
+              populationLabel = 'Filtered 15+ Population:'
+            } else {
+              populationLabel = 'Resident 15+ Population:'
+            }
           }
 
           if (
-            segment === '2021-dzn' &&
+            segment.startsWith('2021-dzn') &&
             Dispatcher.dataDirection === 'arrivals'
           ) {
             hideDepartures = true
             hideArrivals = false
             invalidArrival = isNaN(parseInt(regionName[0]))
           } else if (
-            segment === '2021-dzn' &&
+            segment.startsWith('2021-dzn') &&
             Dispatcher.dataDirection === 'departures'
           ) {
             hideDepartures = false

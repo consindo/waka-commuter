@@ -21,12 +21,13 @@
           features: [...sa2.features, ...secondary.features],
         })
         window.sa2Data = newData
+        regionNames = getRegionNames()
         return secondary
       })
   }
 
   async function getRegionNames() {
-    const data = await sa2Data
+    const data = await window.sa2Data
     return data.features
       .map((i) => {
         const { name, friendlyName } = i.properties
@@ -35,7 +36,14 @@
           name: friendlyName ? `${name} - ${friendlyName}` : name,
         }
       })
-      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort(
+        (a, b) =>
+          isFinite(a.name[0]) - isFinite(b.name[0]) ||
+          a.name.localeCompare(b.name, undefined, {
+            numeric: true,
+            sensitivity: 'base',
+          })
+      )
   }
 
   let regionNames = getRegionNames()
