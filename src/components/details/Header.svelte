@@ -48,7 +48,7 @@
 
 <div class="nav-header" class:ason={source.brandingClass === 'ason'}>
   {#if source.brandingClass === 'ason'}
-    <img src={ason} alt="Ason Logo" />
+    <img src={ason} alt="Ason Logo" class="logo" />
   {/if}
   <div class="nav-header-flex">
     <div class="title">
@@ -152,10 +152,16 @@
     content: '·';
     margin-right: 3px;
   }
-  .ason {
-    height: calc(110px + 24px);
+  .ason img.logo {
+    display: none;
   }
-  .ason img {
-    height: 13px;
+  @media (min-width: 1020px) {
+    .ason {
+      height: calc(110px + 24px);
+    }
+    .ason img.logo {
+      height: 13px;
+      display: inline-block;
+    }
   }
 </style>

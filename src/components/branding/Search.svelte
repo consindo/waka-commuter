@@ -6,6 +6,8 @@
   let ctrlKey = false
   let metaKey = false
 
+  $: console.log(regionNames)
+
   const onKeyPress = (e) => {
     if (e.ctrlKey !== undefined) ctrlKey = e.ctrlKey
     if (e.metaKey !== undefined) metaKey = e.metaKey
@@ -20,6 +22,10 @@
     // checks to make sure they used a precanned one
     const match = data.find((region) => region.name === value)
     if (match) {
+      if (isFinite(match.id)) {
+        Dispatcher.dataSegment = Dispatcher.dataSegment.replace(/-sa2/g, '-dzn')
+        Dispatcher.dataDirection = 'arrivals'
+      }
       if (ctrlKey || metaKey || Dispatcher.currentRegion.includes(match.id)) {
         Dispatcher.addRegion(match.id)
       } else {
