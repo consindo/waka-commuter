@@ -103,10 +103,16 @@
                       (i) => i.id === `mode-${key.split('mode-')[1]}`
                     ).name
                     if (departureModes) {
-                      data.departureModes = { [name]: departureModes[name] }
+                      data.departureModes = {
+                        [name]: departureModes[name],
+                        Total: departureModes[name],
+                      }
                     }
                     if (arrivalModes) {
-                      data.arrivalModes = { [name]: arrivalModes[name] }
+                      data.arrivalModes = {
+                        [name]: arrivalModes[name],
+                        Total: arrivalModes[name],
+                      }
                     }
                     return data
                   })
@@ -255,7 +261,11 @@
             segment.startsWith('2021-sa2') ||
             segment.startsWith('2021-dzn')
           ) {
-            populationLabel = 'Resident 15+ Population:'
+            if (segment.includes('-mode-')) {
+              populationLabel = 'Filtered 15+ Population:'
+            } else {
+              populationLabel = 'Resident 15+ Population:'
+            }
           }
 
           if (
