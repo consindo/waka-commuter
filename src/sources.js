@@ -94,7 +94,8 @@ const sources = {
     isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
     segments: ['2021-sa2', '2021-dzn'],
-    detailsControls: ['2021-SA2', '2021-DZN'],
+    detailsControls: ['SA2', 'DZN'],
+    detailsSecondaryControls: ['2021', '2016', '2011'],
     brandingClass: 'ason',
   },
   wsp: {
@@ -129,7 +130,8 @@ const sources = {
 }
 
 export const getSource = () => {
-  const source = import.meta.env.VITE_WAKA_COMMUTER_SOURCE || 'commuterview'
+  // const source = import.meta.env.VITE_WAKA_COMMUTER_SOURCE || 'commuterview'
+  const source = 'ason'
   const sourceObj = sources[source]
   if (sourceObj === undefined || sourceObj.shapeFile === undefined) {
     console.error('Could not find source', source, sourceObj)

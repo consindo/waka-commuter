@@ -164,7 +164,7 @@
   })
 </script>
 
-<div id="map">
+<div id="map" class:expanded={source.brandingClass === 'ason'}>
   <div id="map-content" />
   <Legend />
   <SatelliteButton on:styleChange />
@@ -174,6 +174,7 @@
 <style>
   #map {
     flex: 1;
+    position: relative;
   }
 
   #map-content {
@@ -183,7 +184,10 @@
 
   @media (max-width: 1020px) {
     #map {
-      height: calc(100% - 110px);
+      height: calc(100% - 103px);
+    }
+    #map.expanded {
+      height: calc(100% - 128px);
     }
   }
 </style>

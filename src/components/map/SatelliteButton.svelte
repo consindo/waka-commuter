@@ -55,9 +55,4 @@
   button.satellite {
     background-image: url(/static/icons/map.svg);
   }
-  @media (max-width: 1020px) {
-    button {
-      bottom: 215px;
-    }
-  }
 </style>

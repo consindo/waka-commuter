@@ -28,7 +28,8 @@
 <button
   on:click={toggleFilter}
   title="Filter Mode"
-  class:active={overlayVisible}><img src={filterIcon} alt="Filter" /></button
+  class:active={overlayVisible}
+  >Filter by mode <img src={filterIcon} alt="Filter" /></button
 >
 <div class="overlay" class:visible={overlayVisible}>
   <ul>
@@ -60,7 +61,7 @@
     position: absolute;
     background: #222;
     color: #fff;
-    right: 1.5rem;
+    right: 1.25rem;
     padding: 0.5rem 0.25rem;
     border-radius: 5px;
     display: none;
@@ -90,10 +91,19 @@
     background: #111;
   }
   button {
-    margin-top: -6px;
     margin-bottom: 0;
     vertical-align: top;
-    background: transparent;
+    border-radius: 3px;
+    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+    line-height: 18px;
+  }
+  button:hover {
+    color: #fff;
+  }
+  button img {
+    vertical-align: top;
+    width: 18px;
+    height: 18px;
   }
   button.active {
     background: #000;

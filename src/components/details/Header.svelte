@@ -82,7 +82,24 @@
   </div>
   <div class="nav-header-flex">
     <div class="title">
-      <p title="Resident Population">
+      {#if source.detailsSecondaryControls}
+        <nav class="secondary-controls">
+          <ul>
+            {#each source.detailsSecondaryControls || [] as control}
+              <li>
+                <a
+                  href="#"
+                  class="btn-segment"
+                  on:click={triggerSecondarySegment(control)}
+                  class:selected={currentSegment.split('-')[0] ===
+                    control.toLowerCase()}>{control}</a
+                >
+              </li>
+            {/each}
+          </ul>
+        </nav>
+      {/if}
+      <p class="population-wrapper">
         {#if populationLink}
           <a
             class="population-link"
@@ -98,21 +115,6 @@
           <span class="population-count" />
         {/if}
       </p>
-      <nav class="secondary-controls">
-        <ul>
-          {#each source.detailsSecondaryControls || [] as control}
-            <li>
-              <a
-                href="#"
-                class="btn-segment"
-                on:click={triggerSecondarySegment(control)}
-                class:selected={currentSegment.split('-')[0] ===
-                  control.toLowerCase()}>{control}</a
-              >
-            </li>
-          {/each}
-        </ul>
-      </nav>
     </div>
     <nav class="controls primary-controls">
       <ul>
@@ -131,7 +133,9 @@
         {/each}
       </ul>
       {#if source.brandingClass === 'ason'}
-        <ModeToggle bind:selection />
+        <div class="mode-wrapper">
+          <ModeToggle bind:selection />
+        </div>
       {/if}
     </nav>
   </div>
@@ -147,6 +151,10 @@
   nav li {
     display: inline-block;
   }
+  .primary-controls ul,
+  .secondary-controls ul {
+    margin-bottom: 0.375rem;
+  }
   .primary-controls li:not(:last-child)::after,
   .secondary-controls li:not(:last-child)::after {
     content: '·';
@@ -155,13 +163,27 @@
   .ason img.logo {
     display: none;
   }
+  .mode-wrapper {
+    text-align: right;
+  }
+  .population-wrapper {
+    line-height: 26px;
+  }
   @media (min-width: 1020px) {
     .ason {
-      height: calc(110px + 24px);
+      height: auto;
     }
     .ason img.logo {
       height: 13px;
       display: inline-block;
+    }
+  }
+  @media (max-width: 599px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+    .population-wrapper {
+      display: none;
     }
   }
 </style>
