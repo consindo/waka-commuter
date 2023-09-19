@@ -130,8 +130,7 @@ const sources = {
 }
 
 export const getSource = () => {
-  // const source = import.meta.env.VITE_WAKA_COMMUTER_SOURCE || 'commuterview'
-  const source = 'ason'
+  const source = import.meta.env.VITE_WAKA_COMMUTER_SOURCE || 'commuterview'
   const sourceObj = sources[source]
   if (sourceObj === undefined || sourceObj.shapeFile === undefined) {
     console.error('Could not find source', source, sourceObj)
