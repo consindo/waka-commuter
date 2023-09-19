@@ -1,11 +1,10 @@
 .nav-header {
-  padding: 1.5rem var(--sidebar-padding) 1.5rem;
+  padding: 1rem var(--sidebar-padding) 1rem;
   background: #222;
   border-bottom: var(--border);
   position: sticky;
   top: 0;
   margin-bottom: 2rem;
-  height: 110px;
   box-sizing: border-box;
 }
 
@@ -112,25 +111,5 @@
   .map-view .nav-header button.btn-close {
     opacity: 1;
     pointer-events: auto;
-  }
-}
-
-@media (max-width: 599px) {
-  .nav-header {
-    padding: 1.25rem 0.625rem 1.75rem var(--sidebar-padding);
-  }
-  .nav-header h2 {
-    margin-top: 0;
-    font-size: 1.5rem;
-  }
-  .nav-header button {
-    margin-top: 0.25rem;
-    margin-bottom: 0;
-  }
-  .nav-header-flex:last-child .title {
-    display: none;
-  }
-  .nav-header-flex:last-child .controls a:first-child {
-    padding-left: 0;
   }
 }

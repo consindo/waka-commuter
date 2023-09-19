@@ -59,7 +59,7 @@
       left: auto;
       right: 8px;
       top: auto;
-      bottom: 146px;
+      bottom: 36px;
     }
   }
 </style>

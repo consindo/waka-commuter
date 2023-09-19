@@ -64,7 +64,7 @@
 </script>
 
 <Branding {regionNames} />
-<div id="app" class="map-view">
+<div id="app" class="map-view" class:expanded={source.brandingClass === 'ason'}>
   <Map
     mapData={sa2Data}
     {secondaryData}
@@ -115,7 +115,10 @@
     }
     .map-view section {
       overflow: hidden;
-      transform: translate3d(0, calc(var(--real-height) - 110px), 0);
+      transform: translate3d(0, calc(var(--real-height) - 103px), 0);
+    }
+    .map-view.expanded section {
+      transform: translate3d(0, calc(var(--real-height) - 128px), 0);
     }
   }
 </style>

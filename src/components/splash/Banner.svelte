@@ -89,7 +89,7 @@
     .splash-bg {
       padding: 1rem 1rem;
       display: flex;
-      height: 110px;
+      height: 128px;
       position: sticky;
       top: 0;
       z-index: 2;
