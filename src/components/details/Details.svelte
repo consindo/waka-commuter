@@ -17,6 +17,7 @@
 
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
+  import PopulationGraph from '../PopulationGraph.svelte'
 
   export let mapData
 
@@ -30,6 +31,9 @@
   let invalidArrival = false
   let invalidDeparture = false
 
+  let tooltip = null
+  let arrivals = null
+  let departures = null
   let hiddenArrivals = []
   let hiddenDepartures = []
 
@@ -289,6 +293,11 @@
             invalidArrival = false
           }
 
+          arrivals = arriveDataFriendly
+          departures = departDataFriendly
+
+          tooltip = tooltipJSON
+
           // also consuming the tooltip data in the population bubbles
           const initialLocation = getLocation(features, regionName[0])
           setDetails(
@@ -326,6 +335,17 @@
       <div class="location-container">
         <div class="location-inner">
           <div class="location" />
+        </div>
+        <div class="location-graph">
+          {#key arrivals}
+            {#if arrivals !== null}
+              <PopulationGraph
+                data={arrivals}
+                mode="arrivals"
+                tooltipData={tooltip}
+              />
+            {/if}
+          {/key}
         </div>
         <div class="hidden-trips">
           <ul>
@@ -371,6 +391,17 @@
         <div class="location-inner">
           <div class="location" />
         </div>
+        <div class="location-graph">
+          {#key departures}
+            {#if departures !== null}
+              <PopulationGraph
+                data={departures}
+                mode="departures"
+                tooltipData={tooltip}
+              />
+            {/if}
+          {/key}
+        </div>
         <div class="hidden-trips">
           <ul>
             {#each hiddenDepartures as i}
@@ -405,11 +436,18 @@
 </div>
 
 <style>
+  .location-graph {
+    text-align: center;
+  }
   .hidden-trips ul {
     margin-top: -0.5em;
-    margin-bottom: 1.5em;
+    margin-bottom: 2.5em;
     padding-left: 1.25em;
     list-style-type: none;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    text-indent: 180px;
+    padding-left: 0;
   }
   .warning {
     padding: 0 1em;
