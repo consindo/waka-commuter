@@ -31,6 +31,7 @@
   let invalidArrival = false
   let invalidDeparture = false
 
+  let tooltip = null
   let arrivals = null
   let departures = null
   let hiddenArrivals = []
@@ -295,6 +296,8 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
+          tooltip = tooltipJSON
+
           // also consuming the tooltip data in the population bubbles
           const initialLocation = getLocation(features, regionName[0])
           setDetails(
@@ -336,7 +339,11 @@
         <div class="location-graph">
           {#key arrivals}
             {#if arrivals !== null}
-              <PopulationGraph data={arrivals} mode="arrivals" />
+              <PopulationGraph
+                data={arrivals}
+                mode="arrivals"
+                tooltipData={tooltip}
+              />
             {/if}
           {/key}
         </div>
@@ -387,7 +394,11 @@
         <div class="location-graph">
           {#key departures}
             {#if departures !== null}
-              <PopulationGraph data={departures} mode="departures" />
+              <PopulationGraph
+                data={departures}
+                mode="departures"
+                tooltipData={tooltip}
+              />
             {/if}
           {/key}
         </div>

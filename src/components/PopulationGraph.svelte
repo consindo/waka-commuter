@@ -1,7 +1,10 @@
 <script>
   import { onMount } from 'svelte'
+  import Dispatcher from '../dispatcher.js'
 
-  export let data, mode
+  export let data, mode, tooltipData
+
+  let needFrame = true
 
   // takes 30 hottest results
   const graphData = data
@@ -13,6 +16,43 @@
 
   let el
   onMount(() => {
+    const tooltipclick = (d) => {
+      if (
+        d3.event.ctrlKey ||
+        d3.event.metaKey ||
+        Dispatcher.currentRegion.includes(d.originalKey)
+      ) {
+        Dispatcher.addRegion(d.originalKey)
+      } else {
+        Dispatcher.setRegions([d.originalKey], true)
+      }
+
+      // element will be disposed when the next page loads
+      mapTooltip.setAttribute('loading', true)
+    }
+    const tooltipover = () => {
+      d3.select(this).style('opacity', 0.8)
+      mapTooltip.setAttribute('opacity', 1)
+    }
+    const tooltipleave = () => {
+      d3.select(this).style('opacity', 1)
+      mapTooltip.setAttribute('opacity', 0)
+    }
+    const tooltipmove = (d) => {
+      if (needFrame) {
+        needFrame = false
+        const x = d3.event.pageX
+        const y = d3.event.pageY
+        const id = d.key
+        requestAnimationFrame(() => {
+          needFrame = true
+          mapTooltip.setAttribute('id', id)
+          mapTooltip.setAttribute('x', x)
+          mapTooltip.setAttribute('y', y)
+        })
+      }
+    }
+
     if (graphData.length === 0) return
     const margin = { top: 16, right: 30, bottom: 40, left: 180 },
       width = 580 - margin.left - margin.right,
@@ -32,11 +72,7 @@
     const y = d3
       .scaleBand()
       .range([0, height])
-      .domain(
-        graphData.map(function (d) {
-          return d.key
-        })
-      )
+      .domain(graphData.map((d) => d.key))
       .paddingInner(0.1)
 
     svg
@@ -82,10 +118,24 @@
       .attr('width', (d) => x(d.value))
       .attr('height', y.bandwidth())
       .attr('fill', (d) => color(d.value))
+      .on('click', tooltipclick)
+      .on('mouseover', tooltipover)
+      .on('mouseleave', tooltipleave)
+      .on('mousemove', tooltipmove)
+
+    const mapTooltip = document.createElement('map-tooltip')
+    mapTooltip.setAttribute('data', tooltipData)
+    mapTooltip.setAttribute('locationContext', 'single')
+    mapTooltip.setAttribute('percentage', 'true')
+    mapTooltip.setAttribute('showOnly', mode)
+    mapTooltip.setAttribute('opacity', 0)
+    el.appendChild(mapTooltip)
   })
 </script>
 
-<h3>Top {mode}</h3>
+{#if data.length > 0}
+  <h3>Top {mode}</h3>
+{/if}
 <div bind:this={el}></div>
 
 <style>
@@ -95,7 +145,10 @@
     font-size: 1.125rem;
     text-transform: capitalize;
     margin-bottom: 0;
-    margin-top: -0.5rem;
+    margin-top: 0;
     margin-left: 0;
+  }
+  div {
+    text-align: left;
   }
 </style>
