@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  export let data
+  export let data, mode
 
   // takes 30 hottest results
   const graphData = data
@@ -14,7 +14,7 @@
   let el
   onMount(() => {
     if (graphData.length === 0) return
-    const margin = { top: 20, right: 30, bottom: 40, left: 180 },
+    const margin = { top: 16, right: 30, bottom: 40, left: 180 },
       width = 580 - margin.left - margin.right,
       height = 14 * graphData.length + margin.top + margin.bottom
 
@@ -61,19 +61,41 @@
       .style('font-size', '0.6875rem')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
 
+    const color = d3
+      .scaleLinear()
+      .domain([0, 10, 50, 250, 1000, 5000])
+      .range(
+        mode === 'arrivals'
+          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4777', '#001']
+          : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#220000', '#100']
+      )
+      .interpolate(d3.interpolateHcl)
+
     //Bars
     svg
       .selectAll('myRect')
-      .data(data)
+      .data(graphData)
       .enter()
       .append('rect')
       .attr('x', x(0))
       .attr('y', (d) => y(d.key))
       .attr('width', (d) => x(d.value))
       .attr('height', y.bandwidth())
-      .attr('fill', '#bada55')
+      .attr('fill', (d) => color(d.value))
   })
 </script>
 
+<h3>Top {mode}</h3>
 <div bind:this={el}></div>
-Hello
+
+<style>
+  h3 {
+    width: 178px;
+    text-align: right;
+    font-size: 1.125rem;
+    text-transform: capitalize;
+    margin-bottom: 0;
+    margin-top: -0.5rem;
+    margin-left: 0;
+  }
+</style>

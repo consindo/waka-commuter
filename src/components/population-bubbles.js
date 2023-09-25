@@ -36,11 +36,11 @@ class PopulationBubbles extends LitElement {
   render() {
     const color = d3
       .scaleLinear()
-      .domain([0, 10, 50, 250, 1000])
+      .domain([0, 10, 50, 250, 1000, 5000])
       .range(
         this.showOnly === 'arrivals'
-          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4777']
-          : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#220000']
+          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4777', '#001']
+          : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#220000', '#100']
       )
       .interpolate(d3.interpolateHcl)
 

@@ -336,7 +336,7 @@
         <div class="location-graph">
           {#key arrivals}
             {#if arrivals !== null}
-              <PopulationGraph data={arrivals} />
+              <PopulationGraph data={arrivals} mode="arrivals" />
             {/if}
           {/key}
         </div>
@@ -387,7 +387,7 @@
         <div class="location-graph">
           {#key departures}
             {#if departures !== null}
-              <PopulationGraph data={departures} />
+              <PopulationGraph data={departures} mode="departures" />
             {/if}
           {/key}
         </div>
@@ -426,13 +426,17 @@
 
 <style>
   .location-graph {
-    margin: 0.5em 1.25em;
+    text-align: center;
   }
   .hidden-trips ul {
     margin-top: -0.5em;
-    margin-bottom: 1.5em;
+    margin-bottom: 2.5em;
     padding-left: 1.25em;
     list-style-type: none;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    text-indent: 180px;
+    padding-left: 0;
   }
   .warning {
     padding: 0 1em;
