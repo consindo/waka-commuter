@@ -21,13 +21,31 @@
           features: [...sa2.features, ...secondary.features],
         })
         window.sa2Data = newData
-        regionNames = getRegionNames()
+        regionNames = getRegionNames(window.sa2Data)
         return secondary
       })
   }
 
-  async function getRegionNames() {
-    const data = await window.sa2Data
+  let dataset2
+  if (true) {
+    dataset2 = Promise.all([
+      fetch(source.dataset2ShapeFile).then((res) => res.json()),
+      fetch(source.dataset2SecondaryShapeFile).then((res) => res.json()),
+    ]).then(async (data) => {
+      const sa2 = await window.sa2Data
+      await secondaryData
+      const newData = Promise.resolve({
+        type: 'FeatureCollection',
+        features: [...sa2.features, ...data[0].features, ...data[1].features],
+      })
+      window.sa2Data = newData
+      regionNames = getRegionNames(newData)
+      return data
+    })
+  }
+
+  async function getRegionNames(sourceData) {
+    const data = await sourceData
     return data.features
       .map((i) => {
         const { name, friendlyName } = i.properties
@@ -46,7 +64,7 @@
       )
   }
 
-  let regionNames = getRegionNames()
+  let regionNames = getRegionNames(window.sa2Data)
 
   let style = 'map'
   let [lng, lat, zoom] = [...source.initialPosition]
@@ -68,6 +86,7 @@
   <Map
     mapData={sa2Data}
     {secondaryData}
+    {dataset2}
     {lat}
     {lng}
     {zoom}

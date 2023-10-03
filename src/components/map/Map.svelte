@@ -17,7 +17,7 @@
 
   mapboxgl.accessToken = token
 
-  export let mapData, secondaryData, lat, lng, zoom, style
+  export let mapData, secondaryData, dataset2, lat, lng, zoom, style
   let mapDataCopy = mapData
 
   // gross hack
@@ -83,7 +83,7 @@
       }
       map.on('styledata', styleDataCallback)
       styleDataCallback()
-      bindMapEvents(map)
+      bindMapEvents(map, Promise.all([mapDataCopy, secondaryData]), dataset2)
     })
     if (source.dynamicShapeFiles || source.dynamicSecondaryShapeFiles) {
       const dynamicFilter = (file, zoom, center, mapSource) =>

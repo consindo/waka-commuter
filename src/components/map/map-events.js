@@ -4,9 +4,9 @@ import { getSource } from '../../sources.js'
 
 const source = getSource()
 
-export const bindMapEvents = (map) => {
+export const bindMapEvents = (map, dataset1, dataset2) => {
   bindMapboxEvents(map)
-  bindDispatcherEvents(map)
+  bindDispatcherEvents(map, dataset1, dataset2)
 }
 
 const bindMapboxEvents = (map) => {
@@ -189,11 +189,11 @@ const bindMapboxEvents = (map) => {
   })
 }
 
-const bindDispatcherEvents = (map) => {
+const bindDispatcherEvents = (map, dataset1, dataset2) => {
   const mapTooltip = document.querySelector('#map map-tooltip')
   let selectedAreas = []
 
-  const setMap = (arriveData, departData, regionName, animate) => {
+  const setMap = async (arriveData, departData, regionName, animate) => {
     // turns off all the old areas
     selectedAreas.forEach((i) => {
       map.setFeatureState(
@@ -334,7 +334,7 @@ const bindDispatcherEvents = (map) => {
   // map
   Dispatcher.bind(
     'update-blocks',
-    ({ regionName, direction, arriveData, departData, segment, animate }) => {
+    async ({ regionName, direction, arriveData, departData, segment, animate }) => {
       document.querySelector('.map-legend').classList.remove('hidden')
 
       const tooltipData = {
@@ -353,7 +353,7 @@ const bindDispatcherEvents = (map) => {
       mapTooltip.removeAttribute('loading')
 
       // ASON SPECIFIC CODE
-      if (segment.startsWith('2021-dzn')) {
+      if (segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
         map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
         if (direction === 'departures') {
@@ -361,9 +361,24 @@ const bindDispatcherEvents = (map) => {
         } else if (direction === 'arrivals') {
           map.moveLayer('sa2-fill', 'dzn-fill')
         }
-      } else if (segment.startsWith('2021-sa2')) {
+      } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'none')
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')
+      }
+
+      // todo: this needs to support dynamic loading
+      if (segment.startsWith('2016-sa2')) {
+        const data = await dataset2
+        map.getSource('sa2').setData(data[0])
+      } else if (segment.startsWith('2016-dzn')) {
+        const data = await dataset2
+        map.getSource('dzn').setData(data[1])
+      } if (segment.startsWith('2021-sa2')) {
+        const data = await dataset1
+        map.getSource('sa2').setData(data[0])
+      } else if (segment.startsWith('2021-dzn')) {
+        const data = await dataset1
+        map.getSource('dzn').setData(data[1])
       }
 
       // only really want to toggle the map data for direction

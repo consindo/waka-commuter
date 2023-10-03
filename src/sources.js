@@ -15,6 +15,8 @@ const sources = {
     title: 'Ason Group Explorer',
     shapeFile: '/shapes/australia-sa2-2021-truncated.json',
     secondaryShapeFile: '/shapes/australia-dzn-2021-truncated.json',
+    dataset2ShapeFile: '/shapes/australia-sa2-2016-truncated.json',
+    dataset2SecondaryShapeFile: '/shapes/australia-dzn-2016-truncated.json',
     dynamicShapeFiles: [
       {
         url: '/shapes/australia-sa2-2021-nsw.json',
