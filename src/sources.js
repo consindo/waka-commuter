@@ -15,8 +15,6 @@ const sources = {
     title: 'Ason Group Explorer',
     shapeFile: '/shapes/australia-sa2-2021-truncated.json',
     secondaryShapeFile: '/shapes/australia-dzn-2021-truncated.json',
-    dataset2ShapeFile: '/shapes/australia-sa2-2016-truncated.json',
-    dataset2SecondaryShapeFile: '/shapes/australia-dzn-2016-truncated.json',
     dynamicShapeFiles: [
       {
         url: '/shapes/australia-sa2-2021-nsw.json',
@@ -87,6 +85,82 @@ const sources = {
       },      
       {
         url: '/shapes/australia-dzn-2021-nt.json',
+        bbox: [[129, -26], [138, -10]],
+        zoom: 5,
+      }
+    ],
+    dataset2ShapeFile: '/shapes/australia-sa2-2016-truncated.json',
+    dataset2SecondaryShapeFile: '/shapes/australia-dzn-2016-truncated.json',
+    dataset2DynamicShapeFiles: [
+      {
+        url: '/shapes/australia-sa2-2016-nsw.json',
+        bbox: [[141, -37.5], [154, -28]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-vic.json',
+        bbox: [[141, -39], [151, -34]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-qld.json',
+        bbox: [[138, -29], [153, -10]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-wa.json',
+        bbox: [[112, -35], [129, -12]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-sa.json',
+        bbox: [[129, -38], [141, -26]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-tas.json',
+        bbox: [[143, -44], [149, -39]],
+        zoom: 6,
+      },      
+      {
+        url: '/shapes/australia-sa2-2016-nt.json',
+        bbox: [[129, -26], [138, -10]],
+        zoom: 5,
+      }
+    ],
+    dataset2DynamicSecondaryShapeFiles: [
+      {
+        url: '/shapes/australia-dzn-2016-nsw.json',
+        bbox: [[141, -37.5], [154, -28]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-vic.json',
+        bbox: [[141, -39], [151, -34]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-qld.json',
+        bbox: [[138, -29], [153, -10]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-wa.json',
+        bbox: [[112, -35], [129, -12]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-sa.json',
+        bbox: [[129, -38], [141, -26]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-tas.json',
+        bbox: [[143, -44], [149, -39]],
+        zoom: 6,
+      },      
+      {
+        url: '/shapes/australia-dzn-2016-nt.json',
         bbox: [[129, -26], [138, -10]],
         zoom: 5,
       }

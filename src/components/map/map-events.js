@@ -4,9 +4,14 @@ import { getSource } from '../../sources.js'
 
 const source = getSource()
 
+const datasets = {}
+
 export const bindMapEvents = (map, dataset1, dataset2) => {
+  datasets.dataset1 = dataset1
+  datasets.dataset2 = dataset2
+
   bindMapboxEvents(map)
-  bindDispatcherEvents(map, dataset1, dataset2)
+  bindDispatcherEvents(map)
 }
 
 const bindMapboxEvents = (map) => {
@@ -187,9 +192,68 @@ const bindMapboxEvents = (map) => {
       }
     }
   })
+
+  if (source.dynamicShapeFiles || source.dynamicSecondaryShapeFiles) {
+    const dynamicFilter = (file, zoom, center, mapSource) =>
+      file
+        .filter((shape) => shape.isLoaded !== true)
+        .forEach((shape) => {
+          if (
+            zoom > shape.zoom &&
+            center.lng > shape.bbox[0][0] &&
+            center.lng < shape.bbox[1][0] &&
+            center.lat > shape.bbox[0][1] &&
+            center.lat < shape.bbox[1][1]
+          ) {
+            shape.isLoaded = true
+            loadDynamic(shape.url, mapSource)
+          }
+        })
+    map.on('zoom', () => {
+      const zoom = map.getZoom()
+      const center = map.getCenter()
+      dynamicFilter(source.dynamicShapeFiles, zoom, center, 'sa2')
+      if (source.dynamicSecondaryShapeFiles) {
+        dynamicFilter(source.dynamicSecondaryShapeFiles, zoom, center, 'dzn')
+      }
+    })
+  }
+
+  const loadDynamic = async (url, mapSource) => {
+    const res = await fetch(url)
+    const newData = await res.json()
+    const stateLookup = newData.features.reduce((acc, cur) => {
+      acc[cur.properties.name] = cur
+      return acc
+    }, {})
+    const dataset = await datasets.dataset1
+    let currentData
+    if (mapSource === 'sa2') {
+      currentData = dataset[0]
+    } else if (mapSource === 'dzn') {
+      currentData = dataset[1]
+    }
+    const augmentedData = {
+      type: 'FeatureCollection',
+      features: currentData.features.map((i) => {
+        const enhancedData = stateLookup[i.properties.name]
+        if (enhancedData) {
+          return enhancedData
+        }
+        return i
+      }),
+    }
+    map.getSource(mapSource).setData(augmentedData)
+    if (mapSource === 'sa2') {
+      datasets.dataset1 = Promise.all([Promise.resolve(augmentedData), dataset[1]])
+    } else if (mapSource === 'dzn') {
+      datasets.dataset1 = Promise.all([dataset[0], Promise.resolve(augmentedData)])
+    }
+    console.info('dynamically loaded', url)
+  }
 }
 
-const bindDispatcherEvents = (map, dataset1, dataset2) => {
+const bindDispatcherEvents = (map) => {
   const mapTooltip = document.querySelector('#map map-tooltip')
   let selectedAreas = []
 
@@ -368,16 +432,16 @@ const bindDispatcherEvents = (map, dataset1, dataset2) => {
 
       // todo: this needs to support dynamic loading
       if (segment.startsWith('2016-sa2')) {
-        const data = await dataset2
+        const data = await datasets.dataset2
         map.getSource('sa2').setData(data[0])
       } else if (segment.startsWith('2016-dzn')) {
-        const data = await dataset2
+        const data = await datasets.dataset2
         map.getSource('dzn').setData(data[1])
       } if (segment.startsWith('2021-sa2')) {
-        const data = await dataset1
+        const data = await datasets.dataset1
         map.getSource('sa2').setData(data[0])
       } else if (segment.startsWith('2021-dzn')) {
-        const data = await dataset1
+        const data = await datasets.dataset1
         map.getSource('dzn').setData(data[1])
       }
 
