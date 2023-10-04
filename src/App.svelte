@@ -27,7 +27,7 @@
   }
 
   let dataset2
-  if (true) {
+  if (source.dataset2ShapeFile) {
     dataset2 = Promise.all([
       fetch(source.dataset2ShapeFile).then((res) => res.json()),
       fetch(source.dataset2SecondaryShapeFile).then((res) => res.json()),

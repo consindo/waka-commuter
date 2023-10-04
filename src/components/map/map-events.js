@@ -194,7 +194,7 @@ const bindMapboxEvents = (map) => {
   })
 
   if (source.dynamicShapeFiles || source.dynamicSecondaryShapeFiles) {
-    const dynamicFilter = (file, zoom, center, mapSource) =>
+    const dynamicFilter = (file, zoom, center, mapSource, datasetName) =>
       file
         .filter((shape) => shape.isLoaded !== true)
         .forEach((shape) => {
@@ -206,27 +206,33 @@ const bindMapboxEvents = (map) => {
             center.lat < shape.bbox[1][1]
           ) {
             shape.isLoaded = true
-            loadDynamic(shape.url, mapSource)
+            loadDynamic(shape.url, mapSource, datasetName)
           }
         })
     map.on('zoom', () => {
       const zoom = map.getZoom()
       const center = map.getCenter()
-      dynamicFilter(source.dynamicShapeFiles, zoom, center, 'sa2')
+      dynamicFilter(source.dynamicShapeFiles, zoom, center, 'sa2', 'dataset1')
       if (source.dynamicSecondaryShapeFiles) {
-        dynamicFilter(source.dynamicSecondaryShapeFiles, zoom, center, 'dzn')
+        dynamicFilter(source.dynamicSecondaryShapeFiles, zoom, center, 'dzn', 'dataset1')
+      }
+      if (source.dataset2DynamicShapeFiles) {
+        dynamicFilter(source.dataset2DynamicShapeFiles, zoom, center, 'sa2', 'dataset2')
+      }
+      if (source.dataset2DynamicSecondaryShapeFiles) {
+        dynamicFilter(source.dataset2DynamicSecondaryShapeFiles, zoom, center, 'dzn', 'dataset2') 
       }
     })
   }
 
-  const loadDynamic = async (url, mapSource) => {
+  const loadDynamic = async (url, mapSource, datasetName) => {
     const res = await fetch(url)
     const newData = await res.json()
     const stateLookup = newData.features.reduce((acc, cur) => {
       acc[cur.properties.name] = cur
       return acc
     }, {})
-    const dataset = await datasets.dataset1
+    const dataset = await datasets[datasetName]
     let currentData
     if (mapSource === 'sa2') {
       currentData = dataset[0]
@@ -243,11 +249,13 @@ const bindMapboxEvents = (map) => {
         return i
       }),
     }
-    map.getSource(mapSource).setData(augmentedData)
+    if (datasetName === 'dataset1' && Dispatcher.dataSegment !== '2016-sa2' || datasetName === 'dataset2' && Dispatcher.dataSegment === '2016-sa2') {
+      map.getSource(mapSource).setData(augmentedData)
+    }
     if (mapSource === 'sa2') {
-      datasets.dataset1 = Promise.all([Promise.resolve(augmentedData), dataset[1]])
+      datasets[datasetName] = Promise.all([Promise.resolve(augmentedData), dataset[1]])
     } else if (mapSource === 'dzn') {
-      datasets.dataset1 = Promise.all([dataset[0], Promise.resolve(augmentedData)])
+      datasets[datasetName] = Promise.all([dataset[0], Promise.resolve(augmentedData)])
     }
     console.info('dynamically loaded', url)
   }
@@ -430,7 +438,7 @@ const bindDispatcherEvents = (map) => {
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')
       }
 
-      // todo: this needs to support dynamic loading
+      // todo: could probably optimize this a little by only calling it if there is a change
       if (segment.startsWith('2016-sa2')) {
         const data = await datasets.dataset2
         map.getSource('sa2').setData(data[0])
