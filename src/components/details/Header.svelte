@@ -25,6 +25,16 @@
     }
   }
   const triggerSecondarySegment = (segment) => () => {
+    // more ason specific stuff
+    if (Object.keys(Dispatcher.concordance).length > 0) {
+      Dispatcher.currentRegion = Dispatcher.currentRegion
+        .map(
+          (i) =>
+            Dispatcher.concordance[i][`${segment}-sa2`] ||
+            Dispatcher.concordance[i][`${segment}-dzn`]
+        )
+        .flat()
+    }
     const newSegment = segment.toLowerCase()
     const primary = Dispatcher.dataSegment.split('-')[1]
     setSegmentWithMode([newSegment, primary].join('-'), selection)

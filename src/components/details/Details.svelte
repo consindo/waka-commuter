@@ -149,6 +149,12 @@
               })
               .flat()
 
+            const concordance = data.reduce((acc, cur) => {
+              acc[cur.id] = cur.concordance
+              return acc
+            }, {})
+            Dispatcher.concordance = concordance // this just gets used for later
+
             // relies on no colons being in the keyNames
             const sourceKeys = regionName
               .map((i) => {

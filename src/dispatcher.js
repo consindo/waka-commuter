@@ -30,6 +30,8 @@ class Dispatcher extends Events {
 
   dataSegment = 'all'
 
+  concordance = {}
+
   loadBlocks = (animate) => {
     if (this.currentRegion.length === 0) {
       this.trigger('clear-blocks')
