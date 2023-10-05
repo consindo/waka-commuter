@@ -47,7 +47,7 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
-      if (Dispatcher.dataSegment.startsWith('2021-dzn')) {
+      if (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn')) {
         mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
       } else {
         mapTooltip.removeAttribute('showOnly')
@@ -96,7 +96,7 @@ const bindMapboxEvents = (map) => {
         }
       )
 
-      if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment.startsWith('2021-dzn')) return
+      if (Dispatcher.dataDirection === 'arrivals' && (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn'))) return
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
@@ -165,7 +165,7 @@ const bindMapboxEvents = (map) => {
 
   map.on('click', 'sa2-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment.startsWith('2021-dzn')) return
+    if (Dispatcher.dataDirection === 'arrivals' && (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn'))) return
 
     const meshblock = e.features[0]
     if (meshblock != null) {
@@ -180,7 +180,7 @@ const bindMapboxEvents = (map) => {
 
   map.on('click', 'dzn-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection !== 'arrivals' || !Dispatcher.dataSegment.startsWith('2021-dzn')) return
+    if (Dispatcher.dataDirection !== 'arrivals' || (!Dispatcher.dataSegment.startsWith('2021-dzn') && !Dispatcher.dataSegment.startsWith('2016-dzn'))) return
 
     const meshblock = e.features[0]
     if (meshblock != null) {
@@ -439,17 +439,13 @@ const bindDispatcherEvents = (map) => {
       }
 
       // todo: could probably optimize this a little by only calling it if there is a change
-      if (segment.startsWith('2016-sa2')) {
+      if (segment.startsWith('2016')) {
         const data = await datasets.dataset2
         map.getSource('sa2').setData(data[0])
-      } else if (segment.startsWith('2016-dzn')) {
-        const data = await datasets.dataset2
         map.getSource('dzn').setData(data[1])
-      } if (segment.startsWith('2021-sa2')) {
+      } if (segment.startsWith('2021')) {
         const data = await datasets.dataset1
         map.getSource('sa2').setData(data[0])
-      } else if (segment.startsWith('2021-dzn')) {
-        const data = await datasets.dataset1
         map.getSource('dzn').setData(data[1])
       }
 

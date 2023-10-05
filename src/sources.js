@@ -169,7 +169,7 @@ const sources = {
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
-    segments: ['2021-sa2', '2021-dzn'],
+    segments: ['2021-sa2', '2021-dzn', '2016-sa2', '2016-dzn'],
     detailsControls: ['SA2', 'DZN'],
     detailsSecondaryControls: ['2021', '2016'],
     brandingClass: 'ason',
