@@ -17,8 +17,7 @@
 
   mapboxgl.accessToken = token
 
-  export let mapData, secondaryData, lat, lng, zoom, style
-  let mapDataCopy = mapData
+  export let mapData, secondaryData, dataset2, lat, lng, zoom, style
 
   // gross hack
   let oldLat = lat
@@ -74,7 +73,7 @@
         if (isLoaded) return
         isLoaded = true
 
-        const data = await Promise.all([mapDataCopy, secondaryData])
+        const data = await Promise.all([mapData, secondaryData])
         drawMap(map, data, source.isMapAreaLabelsEnabled)
 
         if (Dispatcher.currentRegion.length > 0) {
@@ -83,66 +82,9 @@
       }
       map.on('styledata', styleDataCallback)
       styleDataCallback()
-      bindMapEvents(map)
+      bindMapEvents(map, Promise.all([mapData, secondaryData]), dataset2)
     })
-    if (source.dynamicShapeFiles || source.dynamicSecondaryShapeFiles) {
-      const dynamicFilter = (file, zoom, center, mapSource) =>
-        file
-          .filter((shape) => shape.isLoaded !== true)
-          .forEach((shape) => {
-            if (
-              zoom > shape.zoom &&
-              center.lng > shape.bbox[0][0] &&
-              center.lng < shape.bbox[1][0] &&
-              center.lat > shape.bbox[0][1] &&
-              center.lat < shape.bbox[1][1]
-            ) {
-              shape.isLoaded = true
-              loadDynamic(shape.url, mapSource)
-            }
-          })
-      map.on('zoom', () => {
-        const zoom = map.getZoom()
-        const center = map.getCenter()
-        dynamicFilter(source.dynamicShapeFiles, zoom, center, 'sa2')
-        if (source.dynamicSecondaryShapeFiles) {
-          dynamicFilter(source.dynamicSecondaryShapeFiles, zoom, center, 'dzn')
-        }
-      })
-    }
   })
-
-  const loadDynamic = async (url, mapSource) => {
-    const res = await fetch(url)
-    const newData = await res.json()
-    const stateLookup = newData.features.reduce((acc, cur) => {
-      acc[cur.properties.name] = cur
-      return acc
-    }, {})
-    let currentData
-    if (mapSource === 'sa2') {
-      currentData = await mapDataCopy
-    } else if (mapSource === 'dzn') {
-      currentData = await secondaryData
-    }
-    const augmentedData = {
-      type: 'FeatureCollection',
-      features: currentData.features.map((i) => {
-        const enhancedData = stateLookup[i.properties.name]
-        if (enhancedData) {
-          return enhancedData
-        }
-        return i
-      }),
-    }
-    map.getSource(mapSource).setData(augmentedData)
-    if (mapSource === 'sa2') {
-      mapDataCopy = Promise.resolve(augmentedData)
-    } else if (mapSource === 'dzn') {
-      secondaryData = Promise.resolve(augmentedData)
-    }
-    console.info('dynamically loaded', url)
-  }
 
   afterUpdate(() => {
     if (oldLat !== lat || oldLng !== lng) {

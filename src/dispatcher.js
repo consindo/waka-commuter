@@ -30,6 +30,8 @@ class Dispatcher extends Events {
 
   dataSegment = 'all'
 
+  concordance = {}
+
   loadBlocks = (animate) => {
     if (this.currentRegion.length === 0) {
       this.trigger('clear-blocks')
@@ -57,7 +59,7 @@ class Dispatcher extends Events {
 
   // lots of ason specific code in here
   setRegions = (regionName, animate) => {
-    if (this.dataSegment.startsWith('2021-dzn')) {
+    if (this.dataSegment.startsWith('2021-dzn') || this.dataSegment.startsWith('2016-dzn')) {
       const isDZN = !isNaN(parseInt(regionName[0]))
       if (isDZN && this.dataDirection === 'departures') {
         this.dataDirection = 'arrivals'  
@@ -76,6 +78,11 @@ class Dispatcher extends Events {
         this.currentRegion = []
       }
       this.dataSegment = '2021-sa2'
+    } else if (direction === 'all' && this.dataSegment.startsWith('2016-dzn')) {
+      if (!isNaN(parseInt(this.currentRegion[0]))) {
+        this.currentRegion = []
+      }
+      this.dataSegment = '2016-sa2'
     }
 
     this.dataDirection = direction
@@ -83,9 +90,9 @@ class Dispatcher extends Events {
   }
 
   setSegment = (segment) => {
-    if (segment.startsWith('2021-dzn') && this.dataDirection === 'all') {
+    if ((segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) && this.dataDirection === 'all') {
       this.dataDirection = 'departures'
-    } else if (segment.startsWith('2021-sa2')) {
+    } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2')) {
       if (!isNaN(parseInt(this.currentRegion[0]))) {
         this.currentRegion = []
       }

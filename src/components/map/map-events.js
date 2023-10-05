@@ -4,7 +4,12 @@ import { getSource } from '../../sources.js'
 
 const source = getSource()
 
-export const bindMapEvents = (map) => {
+const datasets = {}
+
+export const bindMapEvents = (map, dataset1, dataset2) => {
+  datasets.dataset1 = dataset1
+  datasets.dataset2 = dataset2
+
   bindMapboxEvents(map)
   bindDispatcherEvents(map)
 }
@@ -42,7 +47,7 @@ const bindMapboxEvents = (map) => {
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
-      if (Dispatcher.dataSegment.startsWith('2021-dzn')) {
+      if (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn')) {
         mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
       } else {
         mapTooltip.removeAttribute('showOnly')
@@ -91,7 +96,7 @@ const bindMapboxEvents = (map) => {
         }
       )
 
-      if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment.startsWith('2021-dzn')) return
+      if (Dispatcher.dataDirection === 'arrivals' && (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn'))) return
 
       mapTooltip.setAttribute('id', meshblock.id)
       mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
@@ -160,7 +165,7 @@ const bindMapboxEvents = (map) => {
 
   map.on('click', 'sa2-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection === 'arrivals' && Dispatcher.dataSegment.startsWith('2021-dzn')) return
+    if (Dispatcher.dataDirection === 'arrivals' && (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn'))) return
 
     const meshblock = e.features[0]
     if (meshblock != null) {
@@ -175,7 +180,7 @@ const bindMapboxEvents = (map) => {
 
   map.on('click', 'dzn-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection !== 'arrivals' || !Dispatcher.dataSegment.startsWith('2021-dzn')) return
+    if (Dispatcher.dataDirection !== 'arrivals' || (!Dispatcher.dataSegment.startsWith('2021-dzn') && !Dispatcher.dataSegment.startsWith('2016-dzn'))) return
 
     const meshblock = e.features[0]
     if (meshblock != null) {
@@ -187,13 +192,80 @@ const bindMapboxEvents = (map) => {
       }
     }
   })
+
+  if (source.dynamicShapeFiles || source.dynamicSecondaryShapeFiles) {
+    const dynamicFilter = (file, zoom, center, mapSource, datasetName) =>
+      file
+        .filter((shape) => shape.isLoaded !== true)
+        .forEach((shape) => {
+          if (
+            zoom > shape.zoom &&
+            center.lng > shape.bbox[0][0] &&
+            center.lng < shape.bbox[1][0] &&
+            center.lat > shape.bbox[0][1] &&
+            center.lat < shape.bbox[1][1]
+          ) {
+            shape.isLoaded = true
+            loadDynamic(shape.url, mapSource, datasetName)
+          }
+        })
+    map.on('zoom', () => {
+      const zoom = map.getZoom()
+      const center = map.getCenter()
+      dynamicFilter(source.dynamicShapeFiles, zoom, center, 'sa2', 'dataset1')
+      if (source.dynamicSecondaryShapeFiles) {
+        dynamicFilter(source.dynamicSecondaryShapeFiles, zoom, center, 'dzn', 'dataset1')
+      }
+      if (source.dataset2DynamicShapeFiles) {
+        dynamicFilter(source.dataset2DynamicShapeFiles, zoom, center, 'sa2', 'dataset2')
+      }
+      if (source.dataset2DynamicSecondaryShapeFiles) {
+        dynamicFilter(source.dataset2DynamicSecondaryShapeFiles, zoom, center, 'dzn', 'dataset2') 
+      }
+    })
+  }
+
+  const loadDynamic = async (url, mapSource, datasetName) => {
+    const res = await fetch(url)
+    const newData = await res.json()
+    const stateLookup = newData.features.reduce((acc, cur) => {
+      acc[cur.properties.name] = cur
+      return acc
+    }, {})
+    const dataset = await datasets[datasetName]
+    let currentData
+    if (mapSource === 'sa2') {
+      currentData = dataset[0]
+    } else if (mapSource === 'dzn') {
+      currentData = dataset[1]
+    }
+    const augmentedData = {
+      type: 'FeatureCollection',
+      features: currentData.features.map((i) => {
+        const enhancedData = stateLookup[i.properties.name]
+        if (enhancedData) {
+          return enhancedData
+        }
+        return i
+      }),
+    }
+    if (datasetName === 'dataset1' && Dispatcher.dataSegment !== '2016-sa2' || datasetName === 'dataset2' && Dispatcher.dataSegment === '2016-sa2') {
+      map.getSource(mapSource).setData(augmentedData)
+    }
+    if (mapSource === 'sa2') {
+      datasets[datasetName] = Promise.all([Promise.resolve(augmentedData), dataset[1]])
+    } else if (mapSource === 'dzn') {
+      datasets[datasetName] = Promise.all([dataset[0], Promise.resolve(augmentedData)])
+    }
+    console.info('dynamically loaded', url)
+  }
 }
 
 const bindDispatcherEvents = (map) => {
   const mapTooltip = document.querySelector('#map map-tooltip')
   let selectedAreas = []
 
-  const setMap = (arriveData, departData, regionName, animate) => {
+  const setMap = async (arriveData, departData, regionName, animate) => {
     // turns off all the old areas
     selectedAreas.forEach((i) => {
       map.setFeatureState(
@@ -334,7 +406,7 @@ const bindDispatcherEvents = (map) => {
   // map
   Dispatcher.bind(
     'update-blocks',
-    ({ regionName, direction, arriveData, departData, segment, animate }) => {
+    async ({ regionName, direction, arriveData, departData, segment, animate }) => {
       document.querySelector('.map-legend').classList.remove('hidden')
 
       const tooltipData = {
@@ -353,7 +425,7 @@ const bindDispatcherEvents = (map) => {
       mapTooltip.removeAttribute('loading')
 
       // ASON SPECIFIC CODE
-      if (segment.startsWith('2021-dzn')) {
+      if (segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
         map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
         if (direction === 'departures') {
@@ -361,9 +433,20 @@ const bindDispatcherEvents = (map) => {
         } else if (direction === 'arrivals') {
           map.moveLayer('sa2-fill', 'dzn-fill')
         }
-      } else if (segment.startsWith('2021-sa2')) {
+      } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'none')
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')
+      }
+
+      // todo: could probably optimize this a little by only calling it if there is a change
+      if (segment.startsWith('2016')) {
+        const data = await datasets.dataset2
+        map.getSource('sa2').setData(data[0])
+        map.getSource('dzn').setData(data[1])
+      } if (segment.startsWith('2021')) {
+        const data = await datasets.dataset1
+        map.getSource('sa2').setData(data[0])
+        map.getSource('dzn').setData(data[1])
       }
 
       // only really want to toggle the map data for direction

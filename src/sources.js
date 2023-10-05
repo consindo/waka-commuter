@@ -89,11 +89,87 @@ const sources = {
         zoom: 5,
       }
     ],
+    dataset2ShapeFile: '/shapes/australia-sa2-2016-truncated.json',
+    dataset2SecondaryShapeFile: '/shapes/australia-dzn-2016-truncated.json',
+    dataset2DynamicShapeFiles: [
+      {
+        url: '/shapes/australia-sa2-2016-nsw.json',
+        bbox: [[141, -37.5], [154, -28]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-vic.json',
+        bbox: [[141, -39], [151, -34]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-qld.json',
+        bbox: [[138, -29], [153, -10]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-wa.json',
+        bbox: [[112, -35], [129, -12]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-sa.json',
+        bbox: [[129, -38], [141, -26]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-sa2-2016-tas.json',
+        bbox: [[143, -44], [149, -39]],
+        zoom: 6,
+      },      
+      {
+        url: '/shapes/australia-sa2-2016-nt.json',
+        bbox: [[129, -26], [138, -10]],
+        zoom: 5,
+      }
+    ],
+    dataset2DynamicSecondaryShapeFiles: [
+      {
+        url: '/shapes/australia-dzn-2016-nsw.json',
+        bbox: [[141, -37.5], [154, -28]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-vic.json',
+        bbox: [[141, -39], [151, -34]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-qld.json',
+        bbox: [[138, -29], [153, -10]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-wa.json',
+        bbox: [[112, -35], [129, -12]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-sa.json',
+        bbox: [[129, -38], [141, -26]],
+        zoom: 6,
+      },
+      {
+        url: '/shapes/australia-dzn-2016-tas.json',
+        bbox: [[143, -44], [149, -39]],
+        zoom: 6,
+      },      
+      {
+        url: '/shapes/australia-dzn-2016-nt.json',
+        bbox: [[129, -26], [138, -10]],
+        zoom: 5,
+      }
+    ],
     initialPosition: [133, -25, 4],
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
-    segments: ['2021-sa2', '2021-dzn'],
+    segments: ['2021-sa2', '2021-dzn', '2016-sa2', '2016-dzn'],
     detailsControls: ['SA2', 'DZN'],
     detailsSecondaryControls: ['2021', '2016'],
     brandingClass: 'ason',

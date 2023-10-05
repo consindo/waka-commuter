@@ -102,6 +102,12 @@
                     } else if (segment.startsWith('2021-sa2')) {
                       departureModes = dataSource['2021-sa2'].departureModes
                       arrivalModes = dataSource['2021-sa2'].arrivalModes
+                    } else if (segment.startsWith('2016-dzn')) {
+                      departureModes = dataSource['2016-dzn'].departureModes
+                      arrivalModes = dataSource['2016-dzn'].arrivalModes
+                    } else if (segment.startsWith('2016-sa2')) {
+                      departureModes = dataSource['2016-sa2'].departureModes
+                      arrivalModes = dataSource['2016-sa2'].arrivalModes
                     }
                     const name = modes.find(
                       (i) => i.id === `mode-${key.split('mode-')[1]}`
@@ -143,6 +149,14 @@
               })
               .flat()
 
+            const concordance = data.reduce((acc, cur) => {
+              if (cur.concordance) {
+                acc[cur.id] = cur.concordance
+              }
+              return acc
+            }, {})
+            Dispatcher.concordance = concordance // this just gets used for later
+
             // relies on no colons being in the keyNames
             const sourceKeys = regionName
               .map((i) => {
@@ -165,7 +179,8 @@
             let departureModeData = null
             if (source.isModeGraphsEnabled === true) {
               if (
-                segment.startsWith('2021-dzn') &&
+                (segment.startsWith('2021-dzn') ||
+                  segment.startsWith('2016-dzn')) &&
                 direction === 'departures'
               ) {
                 arriveModeData = null
@@ -176,7 +191,11 @@
                   'arrivalModes'
                 )
               }
-              if (segment.startsWith('2021-dzn') && direction === 'arrivals') {
+              if (
+                (segment.startsWith('2021-dzn') ||
+                  segment.startsWith('2016-dzn')) &&
+                direction === 'arrivals'
+              ) {
                 departureModeData = null
               } else {
                 departureModeData = transformModeData(
@@ -263,7 +282,9 @@
             populationLabel = 'Resident Students:'
           } else if (
             segment.startsWith('2021-sa2') ||
-            segment.startsWith('2021-dzn')
+            segment.startsWith('2021-dzn') ||
+            segment.startsWith('2016-sa2') ||
+            segment.startsWith('2016-dzn')
           ) {
             if (segment.includes('-mode-')) {
               populationLabel = 'Filtered 15+ Population:'
@@ -273,14 +294,16 @@
           }
 
           if (
-            segment.startsWith('2021-dzn') &&
+            (segment.startsWith('2021-dzn') ||
+              segment.startsWith('2016-dzn')) &&
             Dispatcher.dataDirection === 'arrivals'
           ) {
             hideDepartures = true
             hideArrivals = false
             invalidArrival = isNaN(parseInt(regionName[0]))
           } else if (
-            segment.startsWith('2021-dzn') &&
+            (segment.startsWith('2021-dzn') ||
+              segment.startsWith('2016-dzn')) &&
             Dispatcher.dataDirection === 'departures'
           ) {
             hideDepartures = false
