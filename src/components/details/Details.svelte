@@ -150,7 +150,9 @@
               .flat()
 
             const concordance = data.reduce((acc, cur) => {
-              acc[cur.id] = cur.concordance
+              if (cur.concordance) {
+                acc[cur.id] = cur.concordance
+              }
               return acc
             }, {})
             Dispatcher.concordance = concordance // this just gets used for later
