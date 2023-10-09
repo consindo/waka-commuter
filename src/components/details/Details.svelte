@@ -18,6 +18,7 @@
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
   import PopulationGraph from '../PopulationGraph.svelte'
+  import PopulationPredictions from './PopulationPredictions.svelte'
 
   export let mapData
 
@@ -36,6 +37,8 @@
   let departures = null
   let hiddenArrivals = []
   let hiddenDepartures = []
+
+  let populationPredictions = {}
 
   const source = getSource()
 
@@ -205,6 +208,15 @@
                 )
               }
             }
+
+            populationPredictions = data.reduce((acc, cur) => {
+              if (cur.tzp22 == null) return acc
+              Object.keys(cur.tzp22).forEach((i) => {
+                acc[i] = acc[i] || 0
+                acc[i] += cur.tzp22[i]
+              })
+              return acc
+            }, {})
 
             Dispatcher.trigger('update-blocks', {
               regionName,
@@ -455,6 +467,12 @@
       </div>
     </div>
   </div>
+  {#if Object.keys(populationPredictions).length > 0}
+    <div>
+      <h3>NSW Population Predictions</h3>
+      <PopulationPredictions population={populationPredictions} />
+    </div>
+  {/if}
   <Footer />
 </div>
 
