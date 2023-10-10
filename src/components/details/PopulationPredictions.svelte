@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte'
+
   export let population
 
   let rows = [
@@ -32,9 +34,97 @@
     '2061',
     '2066',
   ]
+
+  let el
+  onMount(() => {
+    const margin = { top: 16, right: 30, bottom: 40, left: 180 },
+      width = 580 - margin.left - margin.right,
+      height = 200 + margin.top + margin.bottom
+
+    const svg = d3
+      .select(el)
+      .append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+
+    const d3data = [
+      ...rows.map((r) =>
+        columns.map((c) => ({
+          date: new Date(c),
+          value: population[r + c],
+          category: rowMapping[r],
+        }))
+      ),
+      columns.map((column) =>
+        rows.reduce(
+          (acc, row) => {
+            return {
+              date: new Date(column),
+              value: acc.value + population[row + column],
+              category: 'Total',
+            }
+          },
+          { value: 0 }
+        )
+      ),
+    ].flat()
+
+    console.log(d3data)
+
+    const sumstat = d3
+      .nest() // nest function allows to group the calculation per level of a factor
+      .key((d) => d.category)
+      .entries(d3data)
+
+    const x = d3
+      .scaleTime()
+      .domain(d3.extent(d3data, (d) => d.date))
+      .range([0, width])
+
+    svg
+      .append('g')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(d3.axisBottom(x))
+
+    var y = d3
+      .scaleLinear()
+      .domain([
+        0,
+        d3.max(d3data, function (d) {
+          return +d.value
+        }),
+      ])
+      .range([height, 0])
+    svg.append('g').call(d3.axisLeft(y))
+
+    const res = sumstat.map((d) => d.key) // list of group names
+    const color = d3
+      .scaleOrdinal()
+      .domain(res)
+      .range(['#e41a1c', '#377eb8', '#4daf4a', '#999999'])
+
+    // Add the line
+    svg
+      .selectAll('.line')
+      .data(sumstat)
+      .enter()
+      .append('path')
+      .attr('fill', 'none')
+      .attr('stroke', (d) => color(d.key))
+      .attr('stroke-width', 1.5)
+      .attr('d', (d) => {
+        return d3
+          .line()
+          .x((d) => x(d.date))
+          .y((d) => y(d.value))(d.values)
+      })
+  })
 </script>
 
 <div class="container">
+  <div bind:this={el}></div>
   <table>
     <tr>
       <th></th>

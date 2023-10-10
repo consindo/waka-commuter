@@ -468,10 +468,12 @@
     </div>
   </div>
   {#if Object.keys(populationPredictions).length > 0}
-    <div>
-      <h3>NSW Population Predictions</h3>
-      <PopulationPredictions population={populationPredictions} />
-    </div>
+    {#key detailsTitle}
+      <div>
+        <h3>NSW Population Predictions</h3>
+        <PopulationPredictions population={populationPredictions} />
+      </div>
+    {/key}
   {/if}
   <Footer />
 </div>
