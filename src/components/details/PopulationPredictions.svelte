@@ -37,7 +37,7 @@
 
   let el
   onMount(() => {
-    const margin = { top: 16, right: 30, bottom: 40, left: 180 },
+    const margin = { top: 16, right: 30, bottom: 40, left: 60 },
       width = 580 - margin.left - margin.right,
       height = 200 + margin.top + margin.bottom
 
@@ -57,7 +57,7 @@
           category: rowMapping[r],
         }))
       ),
-      columns.map((column) =>
+      columns.map((column, key) =>
         rows.reduce(
           (acc, row) => {
             return {
@@ -70,8 +70,6 @@
         )
       ),
     ].flat()
-
-    console.log(d3data)
 
     const sumstat = d3
       .nest() // nest function allows to group the calculation per level of a factor
@@ -86,9 +84,10 @@
     svg
       .append('g')
       .attr('transform', 'translate(0,' + height + ')')
+      .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
       .call(d3.axisBottom(x))
 
-    var y = d3
+    const y = d3
       .scaleLinear()
       .domain([
         0,
@@ -97,13 +96,20 @@
         }),
       ])
       .range([height, 0])
-    svg.append('g').call(d3.axisLeft(y))
+    svg
+      .append('g')
+      .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
+      .call(d3.axisLeft(y))
+
+    const bisect = d3.bisector(function (d) {
+      return d.date
+    }).left
 
     const res = sumstat.map((d) => d.key) // list of group names
     const color = d3
       .scaleOrdinal()
       .domain(res)
-      .range(['#e41a1c', '#377eb8', '#4daf4a', '#999999'])
+      .range(['#3498db', '#c0392b', '#d35400', '#7f8c8d'])
 
     // Add the line
     svg
@@ -120,11 +126,63 @@
           .x((d) => x(d.date))
           .y((d) => y(d.value))(d.values)
       })
+
+    // Create the circle that travels along the curve of chart
+    const focus = svg
+      .append('g')
+      .append('circle')
+      .style('fill', 'none')
+      .attr('stroke', '#fff')
+      .attr('r', 8.5)
+      .style('opacity', 0)
+
+    // Create the text that travels along the curve of chart
+    const focusText = svg
+      .append('g')
+      .append('text')
+      .style('opacity', 0)
+      .style('fill', '#fff')
+      .attr('text-anchor', 'left')
+      .attr('alignment-baseline', 'middle')
+
+    svg
+      .append('rect')
+      .style('fill', 'none')
+      .style('pointer-events', 'all')
+      .attr('width', width)
+      .attr('height', height)
+      .on('mousemove', function () {
+        // recover coordinate we need
+        const x0 = x.invert(d3.mouse(this)[0])
+        const i = bisect(d3data, x0, 1)
+        const selectedData = d3data[i]
+        focus.attr('cx', x(selectedData.date)).attr('cy', y(selectedData.value))
+        focusText
+          .html(
+            selectedData.date.getFullYear() +
+              '  -  ' +
+              selectedData.value.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })
+          )
+          .attr('x', x(selectedData.date) + 15)
+          .attr('y', y(selectedData.value))
+      })
+      .on('mouseover', function () {
+        focus.style('opacity', 1)
+        focusText.style('opacity', 1)
+      })
+      .on('mouseout', function () {
+        focus.style('opacity', 0)
+        focusText.style('opacity', 0)
+      })
   })
 </script>
 
-<div class="container">
+<div>
   <div bind:this={el}></div>
+</div>
+<div class="container">
   <table>
     <tr>
       <th></th>
