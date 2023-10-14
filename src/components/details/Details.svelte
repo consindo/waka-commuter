@@ -468,7 +468,7 @@
     </div>
   </div>
   {#if Object.keys(populationPredictions).length > 0}
-    {#key detailsTitle}
+    {#key populationPredictions}
       <div>
         <h3>NSW Population Predictions</h3>
         <PopulationPredictions population={populationPredictions} />

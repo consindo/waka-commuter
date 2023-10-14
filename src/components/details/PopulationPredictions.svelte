@@ -3,6 +3,9 @@
 
   export let population
 
+  let focusText = null,
+    focusTextPos = 0
+
   let rows = [
     'Emp_Wkf_POPD_15+yrs_',
     'UnEmp_Wkf_POPD_15+yrs_',
@@ -83,6 +86,13 @@
 
     svg
       .append('g')
+      .attr('class', 'grid')
+      .attr('transform', 'translate(0,' + height + ')')
+      .style('color', '#555')
+      .call(d3.axisBottom(x).tickSize(-height).tickFormat(''))
+
+    svg
+      .append('g')
       .attr('transform', 'translate(0,' + height + ')')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
       .call(d3.axisBottom(x))
@@ -127,23 +137,31 @@
           .y((d) => y(d.value))(d.values)
       })
 
-    // Create the circle that travels along the curve of chart
+    // Create several circles that travels along the curve of chart
     const focus = svg
       .append('g')
       .append('circle')
-      .style('fill', 'none')
-      .attr('stroke', '#fff')
-      .attr('r', 8.5)
-      .style('opacity', 0)
-
-    // Create the text that travels along the curve of chart
-    const focusText = svg
-      .append('g')
-      .append('text')
-      .style('opacity', 0)
       .style('fill', '#fff')
-      .attr('text-anchor', 'left')
-      .attr('alignment-baseline', 'middle')
+      .attr('r', 3)
+      .style('opacity', 0)
+    const focus2 = svg
+      .append('g')
+      .append('circle')
+      .style('fill', '#fff')
+      .attr('r', 3)
+      .style('opacity', 0)
+    const focus3 = svg
+      .append('g')
+      .append('circle')
+      .style('fill', '#fff')
+      .attr('r', 3)
+      .style('opacity', 0)
+    const focus4 = svg
+      .append('g')
+      .append('circle')
+      .style('fill', '#fff')
+      .attr('r', 3)
+      .style('opacity', 0)
 
     svg
       .append('rect')
@@ -154,32 +172,62 @@
       .on('mousemove', function () {
         // recover coordinate we need
         const x0 = x.invert(d3.mouse(this)[0])
-        const i = bisect(d3data, x0, 1)
-        const selectedData = d3data[i]
-        focus.attr('cx', x(selectedData.date)).attr('cy', y(selectedData.value))
-        focusText
-          .html(
-            selectedData.date.getFullYear() +
-              '  -  ' +
-              selectedData.value.toLocaleString(undefined, {
-                maximumFractionDigits: 2,
-              })
-          )
-          .attr('x', x(selectedData.date) + 15)
-          .attr('y', y(selectedData.value))
+        const i = bisect(d3data.slice(columns.length * -1), x0, 1)
+        const selData = d3data[i]
+        const selData2 = d3data[i + columns.length]
+        const selData3 = d3data[i + columns.length * 2]
+        const selData4 = d3data[i + columns.length * 3]
+        focus.attr('cx', x(selData.date)).attr('cy', y(selData.value))
+        focus2.attr('cx', x(selData2.date)).attr('cy', y(selData2.value))
+        focus3.attr('cx', x(selData3.date)).attr('cy', y(selData3.value))
+        focus4.attr('cx', x(selData4.date)).attr('cy', y(selData4.value))
+        focusText = `<h4 style="margin: 0; padding: 0; font-size: 1.25em">${selData.date.getFullYear()}</h4>
+          <strong style="color: #3498db">Employed:</strong> ${selData.value.toLocaleString(
+            undefined,
+            {
+              maximumFractionDigits: 2,
+            }
+          )}<br />
+          <strong style="color: #c0392b">Unemployed:</strong> ${selData2.value.toLocaleString(
+            undefined,
+            {
+              maximumFractionDigits: 2,
+            }
+          )}<br />
+          <strong style="color: #d35400">Not in Wkf:</strong> ${selData3.value.toLocaleString(
+            undefined,
+            {
+              maximumFractionDigits: 2,
+            }
+          )}<br />
+          <strong>Total:</strong> ${selData4.value.toLocaleString(undefined, {
+            maximumFractionDigits: 2,
+          })}
+        `
+        focusTextPos = Math.min(x(selData.date) + 50, width - 80)
       })
       .on('mouseover', function () {
         focus.style('opacity', 1)
-        focusText.style('opacity', 1)
+        focus2.style('opacity', 1)
+        focus3.style('opacity', 1)
+        focus4.style('opacity', 1)
       })
       .on('mouseout', function () {
         focus.style('opacity', 0)
-        focusText.style('opacity', 0)
+        focus2.style('opacity', 0)
+        focus3.style('opacity', 0)
+        focus4.style('opacity', 0)
+        focusText = null
       })
   })
 </script>
 
-<div>
+<div class="svg-wrapper">
+  {#if focusText}
+    <div class="focus-text" style={`left: ${focusTextPos}px`}>
+      {@html focusText}
+    </div>
+  {/if}
   <div bind:this={el}></div>
 </div>
 <div class="container">
@@ -218,6 +266,20 @@
     box-sizing: border-box;
     padding: 0.5em 0 1em;
     margin-bottom: 1em;
+  }
+  .svg-wrapper {
+    position: relative;
+  }
+  .focus-text {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 0.5rem;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 3px;
+    pointer-events: none;
   }
   table {
     font-size: 14px;
