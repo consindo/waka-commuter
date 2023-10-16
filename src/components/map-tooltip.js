@@ -33,6 +33,7 @@ class MapTooltip extends LitElement {
         font-size: 1rem;
         pointer-events: none;
         opacity: 0;
+        z-index: 10;
       }
       h4 {
         margin: 0;
