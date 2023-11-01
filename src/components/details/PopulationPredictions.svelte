@@ -7,15 +7,10 @@
     focusTextPos = 0
 
   let rows = [
-    'Emp_Wkf_POPD_15+yrs_',
-    'UnEmp_Wkf_POPD_15+yrs_',
-    'Not_in_Wkf_POPD_15+yrs_',
+    { id: 'Emp_Wkf_POPD_15+yrs_', name: 'Employed', color: '#3498db' },
+    { id: 'Not_in_Wkf_POPD_15+yrs_', name: 'Not in Wkf', color: '#d35400' },
+    { id: 'UnEmp_Wkf_POPD_15+yrs_', name: 'Unemployed', color: '#c0392b' },
   ]
-  let rowMapping = {
-    'Emp_Wkf_POPD_15+yrs_': 'Employed',
-    'UnEmp_Wkf_POPD_15+yrs_': 'Unemployed',
-    'Not_in_Wkf_POPD_15+yrs_': 'Not in Wkf',
-  }
   let columns = [
     '2016',
     '2017',
@@ -56,22 +51,22 @@
       ...rows.map((r) =>
         columns.map((c) => ({
           date: new Date(c),
-          value: population[r + c],
-          category: rowMapping[r],
+          value: population[r.id + c],
+          category: r.name,
         }))
       ),
-      columns.map((column, key) =>
-        rows.reduce(
-          (acc, row) => {
-            return {
-              date: new Date(column),
-              value: acc.value + population[row + column],
-              category: 'Total',
-            }
-          },
-          { value: 0 }
-        )
-      ),
+      // columns.map((column, key) =>
+      //   rows.reduce(
+      //     (acc, row) => {
+      //       return {
+      //         date: new Date(column),
+      //         value: acc.value + population[row + column],
+      //         category: 'Total',
+      //       }
+      //     },
+      //     { value: 0 }
+      //   )
+      // ),
     ].flat()
 
     const sumstat = d3
@@ -119,7 +114,7 @@
     const color = d3
       .scaleOrdinal()
       .domain(res)
-      .range(['#3498db', '#c0392b', '#d35400', '#7f8c8d'])
+      .range(rows.map((i) => i.color))
 
     // Add the line
     svg
@@ -138,30 +133,14 @@
       })
 
     // Create several circles that travels along the curve of chart
-    const focus = svg
-      .append('g')
-      .append('circle')
-      .style('fill', '#fff')
-      .attr('r', 3)
-      .style('opacity', 0)
-    const focus2 = svg
-      .append('g')
-      .append('circle')
-      .style('fill', '#fff')
-      .attr('r', 3)
-      .style('opacity', 0)
-    const focus3 = svg
-      .append('g')
-      .append('circle')
-      .style('fill', '#fff')
-      .attr('r', 3)
-      .style('opacity', 0)
-    const focus4 = svg
-      .append('g')
-      .append('circle')
-      .style('fill', '#fff')
-      .attr('r', 3)
-      .style('opacity', 0)
+    const focusItems = rows.map(() =>
+      svg
+        .append('g')
+        .append('circle')
+        .style('fill', '#fff')
+        .attr('r', 3)
+        .style('opacity', 0)
+    )
 
     svg
       .append('rect')
@@ -173,50 +152,38 @@
         // recover coordinate we need
         const x0 = x.invert(d3.mouse(this)[0])
         const i = bisect(d3data.slice(columns.length * -1), x0, 1)
-        const selData = d3data[i]
-        const selData2 = d3data[i + columns.length]
-        const selData3 = d3data[i + columns.length * 2]
-        const selData4 = d3data[i + columns.length * 3]
-        focus.attr('cx', x(selData.date)).attr('cy', y(selData.value))
-        focus2.attr('cx', x(selData2.date)).attr('cy', y(selData2.value))
-        focus3.attr('cx', x(selData3.date)).attr('cy', y(selData3.value))
-        focus4.attr('cx', x(selData4.date)).attr('cy', y(selData4.value))
-        focusText = `<h4 style="margin: 0; padding: 0; font-size: 1.25em">${selData.date.getFullYear()}</h4>
-          <strong style="color: #3498db">Employed:</strong> ${selData.value.toLocaleString(
-            undefined,
-            {
-              maximumFractionDigits: 2,
-            }
-          )}<br />
-          <strong style="color: #c0392b">Unemployed:</strong> ${selData2.value.toLocaleString(
-            undefined,
-            {
-              maximumFractionDigits: 2,
-            }
-          )}<br />
-          <strong style="color: #d35400">Not in Wkf:</strong> ${selData3.value.toLocaleString(
-            undefined,
-            {
-              maximumFractionDigits: 2,
-            }
-          )}<br />
-          <strong>Total:</strong> ${selData4.value.toLocaleString(undefined, {
-            maximumFractionDigits: 2,
-          })}
+
+        const selData = new Array(d3data.length / columns.length)
+          .fill(0)
+          .map((value, key) => {
+            return d3data[i + columns.length * key]
+          })
+
+        focusItems.forEach((item, key) => {
+          item
+            .attr('cx', x(selData[key].date))
+            .attr('cy', y(selData[key].value))
+        })
+
+        focusText = `<h4 style="margin: 0; padding: 0; font-size: 1.25em">${selData[0].date.getFullYear()}</h4>
+        ${rows
+          .map(
+            (row, key) =>
+              `<strong style="color: ${row.color}">${
+                row.name
+              }:</strong> ${selData[key].value.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}<br />`
+          )
+          .join('')}
         `
-        focusTextPos = Math.min(x(selData.date) + 50, width - 80)
+        focusTextPos = Math.min(x(selData[0].date) + 50, width - 80)
       })
       .on('mouseover', function () {
-        focus.style('opacity', 1)
-        focus2.style('opacity', 1)
-        focus3.style('opacity', 1)
-        focus4.style('opacity', 1)
+        focusItems.forEach((i) => i.style('opacity', 1))
       })
       .on('mouseout', function () {
-        focus.style('opacity', 0)
-        focus2.style('opacity', 0)
-        focus3.style('opacity', 0)
-        focus4.style('opacity', 0)
+        focusItems.forEach((i) => i.style('opacity', 0))
         focusText = null
       })
   })
@@ -240,13 +207,13 @@
     </tr>
     {#each rows as row}
       <tr>
-        <th title={row}>{rowMapping[row]}</th>
+        <th title={row.id}>{row.name}</th>
         {#each columns as column}
-          <td>{population[row + column].toFixed(1)}</td>
+          <td>{population[row.id + column].toFixed(1)}</td>
         {/each}
       </tr>
     {/each}
-    <tr>
+    <!-- <tr>
       <th>Total</th>
       {#each columns as column}
         <td
@@ -255,7 +222,7 @@
             .toFixed(1)}</td
         >
       {/each}
-    </tr>
+    </tr> -->
   </table>
 </div>
 
@@ -301,7 +268,7 @@
   td:nth-child(even) {
     background: #333;
   }
-  tr:last-child td {
+  /*tr:last-child td {
     border-top: 1px solid #888;
-  }
+  }*/
 </style>
