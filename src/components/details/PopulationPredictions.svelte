@@ -1,16 +1,71 @@
 <script>
   import { onMount } from 'svelte'
 
-  export let population
+  export let population, rowFilter
 
   let focusText = null,
     focusTextPos = 0
 
   let rows = [
-    { id: 'Emp_Wkf_POPD_15+yrs_', name: 'Employed', color: '#3498db' },
-    { id: 'Not_in_Wkf_POPD_15+yrs_', name: 'Not in Wkf', color: '#d35400' },
-    { id: 'UnEmp_Wkf_POPD_15+yrs_', name: 'Unemployed', color: '#c0392b' },
-  ]
+    {
+      id: 'Emp_Wkf_POPD_15+yrs_',
+      color: '#3498db',
+      name: 'Employed Residents',
+      title:
+        'Employed persons in the workforce by place of usual residence (aged 15+ years old in occupied private dwellings)',
+    },
+    {
+      id: 'Not_in_Wkf_POPD_15+yrs_',
+      color: '#d35400',
+      name: 'Residents not in Wkf',
+      title:
+        'Persons not in the workforce by place of usual residence (aged 15+ years old in occupied private dwellings)',
+    },
+    {
+      id: 'UnEmp_Wkf_POPD_15+yrs_',
+      color: '#c0392b',
+      name: 'Unemployed Residents',
+      title:
+        'Unemployed persons in the workforce by place of usual residence (aged 15+ years old in occupied private dwellings)',
+    },
+    {
+      id: 'EMP_',
+      name: 'Employed in Area',
+      color: '#2ecc71',
+      title: 'Employment at place of work',
+    },
+    {
+      id: 'ERP_',
+      name: 'Resident Population',
+      color: '#7f8c8d',
+      title: 'Estimated Resident Population',
+    },
+    {
+      id: 'POPD_',
+      name: 'In private dwellings',
+      title: 'Population in occupied private dwellings',
+      color: '#8e44ad',
+    },
+    {
+      id: 'PNPD_',
+      name: 'In non-private dwellings',
+      title: 'Population in non-private dwellings',
+      color: '#2980b9',
+    },
+    {
+      id: 'SPD_',
+      name: 'Structural Private Dwellings',
+      title: 'Structural Private Dwellings',
+      color: '#7f8c8d',
+    },
+    {
+      id: 'OPD_',
+      name: 'Occupied Private Dwellings',
+      title: 'Occupied Private Dwellings',
+      color: '#2980b9',
+    },
+  ].filter((i) => rowFilter.includes(i.id))
+
   let columns = [
     '2016',
     '2017',
@@ -96,9 +151,7 @@
       .scaleLinear()
       .domain([
         0,
-        d3.max(d3data, function (d) {
-          return +d.value
-        }),
+        d3.max(d3data, (d) => +d.value) * 1.1, // some padding on the top
       ])
       .range([height, 0])
     svg
@@ -106,9 +159,7 @@
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
       .call(d3.axisLeft(y))
 
-    const bisect = d3.bisector(function (d) {
-      return d.date
-    }).left
+    const bisect = d3.bisector((d) => d.date).left
 
     const res = sumstat.map((d) => d.key) // list of group names
     const color = d3
@@ -207,7 +258,7 @@
     </tr>
     {#each rows as row}
       <tr>
-        <th title={row.id}>{row.name}</th>
+        <th title={row.id.slice(0, -1) + ': ' + row.title}>{row.name}</th>
         {#each columns as column}
           <td>{population[row.id + column].toFixed(1)}</td>
         {/each}
