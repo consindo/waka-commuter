@@ -470,14 +470,14 @@
   {#if Object.keys(populationPredictions).length > 0}
     {#key populationPredictions}
       <div>
-        <h3>NSW Population Predictions</h3>
+        <h3>NSW Population Projections</h3>
         <PopulationPredictions
           population={populationPredictions}
-          rowFilter={['ERP_', 'POPD_', 'PNPD_']}
+          rowFilter={['ERP_', 'POPD_', 'PNPD_', 'SPD_', 'OPD_']}
         />
       </div>
       <div>
-        <h3>NSW Workforce Predictions</h3>
+        <h3>NSW Workforce & Employment Projections</h3>
         <PopulationPredictions
           population={populationPredictions}
           rowFilter={[
@@ -486,13 +486,6 @@
             'UnEmp_Wkf_POPD_15+yrs_',
             'EMP_',
           ]}
-        />
-      </div>
-       <div>
-        <h3>NSW Dwelling Predictions</h3>
-        <PopulationPredictions
-          population={populationPredictions}
-          rowFilter={['SPD_', 'OPD_']}
         />
       </div>
     {/key}
