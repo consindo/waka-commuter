@@ -256,14 +256,24 @@
           hiddenDepartures = []
           if (source.brandingClass === 'ason') {
             arriveDataFriendly = arriveDataFriendly.filter((i) => {
-              if (i.key.startsWith('POW') || i.key.startsWith('No usual')) {
+              if (
+                i.key.startsWith('POW') ||
+                i.key.startsWith('No usual') ||
+                i.key.startsWith('DZN POW') ||
+                i.key.startsWith('DZN No usual')
+              ) {
                 hiddenArrivals.push(i)
                 return false
               }
               return true
             })
             departDataFriendly = departDataFriendly.filter((i) => {
-              if (i.key.startsWith('POW') || i.key.startsWith('No usual')) {
+              if (
+                i.key.startsWith('POW') ||
+                i.key.startsWith('No usual') ||
+                i.key.startsWith('DZN POW') ||
+                i.key.startsWith('DZN No usual')
+              ) {
                 hiddenDepartures.push(i)
                 return false
               }
@@ -312,7 +322,7 @@
           ) {
             hideDepartures = true
             hideArrivals = false
-            invalidArrival = isNaN(parseInt(regionName[0]))
+            invalidArrival = !(regionName[0] || '').startsWith('DZN')
           } else if (
             (segment.startsWith('2021-dzn') ||
               segment.startsWith('2016-dzn')) &&
@@ -320,7 +330,7 @@
           ) {
             hideDepartures = false
             hideArrivals = true
-            invalidDeparture = !isNaN(parseInt(regionName[0]))
+            invalidDeparture = (regionName[0] || '').startsWith('DZN')
           } else {
             hideDepartures = false
             hideArrivals = false
