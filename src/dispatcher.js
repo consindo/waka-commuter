@@ -91,7 +91,7 @@ class Dispatcher extends Events {
 
   setSegment = (segment) => {
     if ((segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) && this.dataDirection === 'all') {
-      this.dataDirection = 'departures'
+      this.dataDirection = 'arrivals' // TM-206: should cause an error message when changed
     } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2')) {
       if ((this.currentRegion[0] || '').startsWith('DZN')) {
         this.currentRegion = []

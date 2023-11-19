@@ -477,7 +477,7 @@
       </div>
     </div>
   </div>
-  {#if Object.keys(populationPredictions).length > 0}
+  {#if Object.keys(populationPredictions).length > 0 && !invalidDeparture && !invalidArrival}
     {#key populationPredictions}
       <div>
         <h3>NSW Population Projections</h3>

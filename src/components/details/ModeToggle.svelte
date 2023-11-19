@@ -23,6 +23,24 @@
       internalSelection = modes.map((i) => i.id)
     }
   }
+
+  // TM-206: don't want modes 15 & 16 to show by default
+  internalSelection = [
+    'mode-1',
+    'mode-2',
+    'mode-3',
+    'mode-4',
+    'mode-5',
+    'mode-6',
+    'mode-7',
+    'mode-8',
+    'mode-9',
+    'mode-10',
+    'mode-11',
+    'mode-12',
+    'mode-13',
+    'mode-14',
+  ]
 </script>
 
 <button
