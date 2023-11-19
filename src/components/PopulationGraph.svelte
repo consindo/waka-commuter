@@ -99,11 +99,17 @@
 
     const color = d3
       .scaleLinear()
-      .domain([0, 10, 50, 250, 1000, 5000])
+      .domain([
+        0,
+        graphData[0].value / 25,
+        graphData[0].value / 10,
+        graphData[0].value / 2,
+        graphData[0].value,
+      ])
       .range(
         mode === 'arrivals'
-          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4777', '#001']
-          : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#220000', '#100']
+          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4888']
+          : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#660000']
       )
       .interpolate(d3.interpolateHcl)
 
