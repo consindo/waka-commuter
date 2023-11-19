@@ -2,6 +2,9 @@
   import { getSource } from '../../sources.js'
   import Search from './Search.svelte'
   import Dispatcher from '../../dispatcher.js'
+  import ason from '/static/css/ason.png'
+  import icon from '/static/css/icon.png'
+  import wsp from '/static/css/wsp.svg'
 
   export let regionNames
 
@@ -27,18 +30,13 @@
 <div class="wrapper">
   <div class={brandingClass} class:branding={true}>
     <a href="https://turbomaps.io" class="turbomaps-logo">
-      <img
-        src="/static/css/icon.png"
-        alt="Waka Commuter"
-        width="48"
-        height="48"
-      />
+      <img src={icon} alt="Waka Commuter" width="48" height="48" />
     </a>
     <a href="https://asongroup.com.au" class="ason-logo">
-      <img src="/static/css/ason.png" alt="Ason Group" height="39" />
+      <img src={ason} alt="Ason Group" height="39" />
     </a>
     <a href="https://wsp.com" class="wsp-logo">
-      <img src="/static/css/wsp.svg" alt="WSP" height="24" />
+      <img src={wsp} alt="WSP" height="24" />
     </a>
   </div>
   <Search {regionNames} />
