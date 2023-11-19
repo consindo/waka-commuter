@@ -14,4 +14,5 @@ export const modes = [
     { id: 'mode-13', icon: '🏠', name: 'Worked at home' },
     { id: 'mode-14', icon: '🛌', name: 'Did not go to work' },
     { id: 'mode-15', icon: '❓', name: 'Not stated' },
+    { id: 'mode-16', icon: '🚫', name: 'Not applicable' },
 ]

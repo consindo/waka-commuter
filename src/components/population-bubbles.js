@@ -160,6 +160,10 @@ class PopulationBubbles extends LitElement {
         .replace(/ - /g, '-')
         .split('-')
         .join('- ')
+        .split(' / ')
+        .join(' ')
+        .split('TZ ')
+        .join('TZ')
         .split(' ')
 
     const lineHeight = 14

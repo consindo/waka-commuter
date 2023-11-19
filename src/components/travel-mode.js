@@ -80,6 +80,8 @@ class TravelMode extends LitElement {
         Ferry: ['ferry'],
         Walk: ['walk'],
         Cycle: ['bicycle'],
+        WFH: ['home'],
+        'Didn’t work': ['not go to work'],
         Other: [],
       }
     }

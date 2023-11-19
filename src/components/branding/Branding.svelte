@@ -2,6 +2,9 @@
   import { getSource } from '../../sources.js'
   import Search from './Search.svelte'
   import Dispatcher from '../../dispatcher.js'
+  import ason from '/static/css/ason.png'
+  import icon from '/static/css/icon.png'
+  import wsp from '/static/css/wsp.svg'
 
   export let regionNames
 
@@ -24,7 +27,18 @@
   Dispatcher.bind('load-blocks', loadBlocks)
 </script>
 
-<div class={brandingClass}>
+<div class="wrapper">
+  <div class={brandingClass} class:branding={true}>
+    <a href="https://turbomaps.io" class="turbomaps-logo">
+      <img src={icon} alt="Waka Commuter" width="48" height="48" />
+    </a>
+    <a href="https://asongroup.com.au" class="ason-logo">
+      <img src={ason} alt="Ason Group" height="39" />
+    </a>
+    <a href="https://wsp.com" class="wsp-logo">
+      <img src={wsp} alt="WSP" height="24" />
+    </a>
+  </div>
   <Search {regionNames} />
   <nav class="controls">
     <a
@@ -54,21 +68,47 @@
 </div>
 
 <style>
-  div {
+  .wrapper {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    background-image: url(/static/css/icon.png);
-    background-repeat: no-repeat;
-    background-position: 0.75rem 50%;
-    background-size: 2.5rem 2.5rem;
     padding: 0.75rem;
-    text-indent: 3rem;
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
     user-select: none;
     letter-spacing: -0.5px;
+  }
+
+  .branding img {
+    display: none;
+    width: auto;
+  }
+  .branding a {
+    padding: 0;
+  }
+  .branding a:hover {
+    opacity: 0.9;
+  }
+  .branding.ason .ason-logo img,
+  .branding.statsnz .turbomaps-logo img,
+  .branding.wsp .wsp-logo img {
+    display: block;
+  }
+  .branding.ason .ason-logo img {
+    margin: 0.25rem 0 0.5rem;
+  }
+  .branding.wsp {
+    float: left;
+  }
+  .branding.wsp .wsp-logo img {
+    margin: 0.25rem 0.5rem 0.25rem 0;
+  }
+  .branding.statsnz {
+    float: left;
+  }
+  .branding.statsnz .turbomaps-logo img {
+    margin: 0.25rem 0.5rem 0.25rem 0;
   }
 
   .hide {
@@ -94,7 +134,7 @@
     text-decoration: underline;
   }
 
-  .wsp {
+  /*  .wsp {
     background-image: url(/static/css/wsp.svg);
     background-size: auto 24px;
     text-indent: 3.875rem;
@@ -106,5 +146,5 @@
     background-position: 0.75rem 18px;
     text-indent: 0;
     padding-top: 48px;
-  }
+  }*/
 </style>

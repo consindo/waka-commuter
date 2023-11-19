@@ -60,7 +60,7 @@ class Dispatcher extends Events {
   // lots of ason specific code in here
   setRegions = (regionName, animate) => {
     if (this.dataSegment.startsWith('2021-dzn') || this.dataSegment.startsWith('2016-dzn')) {
-      const isDZN = !isNaN(parseInt(regionName[0]))
+      const isDZN = (regionName[0] || '').startsWith('DZN')
       if (isDZN && this.dataDirection === 'departures') {
         this.dataDirection = 'arrivals'  
       } else if (!isDZN && this.dataDirection === 'arrivals') {
@@ -74,12 +74,12 @@ class Dispatcher extends Events {
 
   setDirection = (direction) => {
     if (direction === 'all' && this.dataSegment.startsWith('2021-dzn')) {
-      if (!isNaN(parseInt(this.currentRegion[0]))) {
+      if ((this.currentRegion[0] || '').startsWith('DZN')) {
         this.currentRegion = []
       }
       this.dataSegment = '2021-sa2'
     } else if (direction === 'all' && this.dataSegment.startsWith('2016-dzn')) {
-      if (!isNaN(parseInt(this.currentRegion[0]))) {
+      if ((this.currentRegion[0] || '').startsWith('DZN')) {
         this.currentRegion = []
       }
       this.dataSegment = '2016-sa2'
@@ -91,9 +91,9 @@ class Dispatcher extends Events {
 
   setSegment = (segment) => {
     if ((segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) && this.dataDirection === 'all') {
-      this.dataDirection = 'departures'
+      this.dataDirection = 'arrivals' // TM-206: should cause an error message when changed
     } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2')) {
-      if (!isNaN(parseInt(this.currentRegion[0]))) {
+      if ((this.currentRegion[0] || '').startsWith('DZN')) {
         this.currentRegion = []
       }
     }

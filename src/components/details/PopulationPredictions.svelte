@@ -50,19 +50,19 @@
       id: 'PNPD_',
       name: 'In non-private dwellings',
       title: 'Population in non-private dwellings',
-      color: '#2980b9',
+      color: '#d35400',
     },
     {
       id: 'SPD_',
       name: 'Structural Private Dwellings',
       title: 'Structural Private Dwellings',
-      color: '#7f8c8d',
+      color: '#2980b9',
     },
     {
       id: 'OPD_',
       name: 'Occupied Private Dwellings',
       title: 'Occupied Private Dwellings',
-      color: '#2980b9',
+      color: '#2ecc71',
     },
   ].filter((i) => rowFilter.includes(i.id))
 
