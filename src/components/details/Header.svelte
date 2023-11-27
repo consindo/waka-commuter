@@ -184,7 +184,7 @@
       height: auto;
     }
     .ason img.logo {
-      height: 13px;
+      height: 20px;
       display: inline-block;
     }
   }
