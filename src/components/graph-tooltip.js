@@ -38,11 +38,11 @@ class GraphTooltip extends LitElement {
     return html`
       <div
         style="opacity: ${this.opacity}; transform: translate(${this.x -
-      10}px, ${this.y}px);"
+        10}px, ${this.y}px);"
       >
         ${(this.content || []).map(
-        (i) => html`<p><strong>${i[0]}:</strong> ${i[1]}</p>`
-      )}
+          (i) => html`<p><strong>${i[0]}:</strong> ${i[1]}</p>`
+        )}
       </div>
     `
   }

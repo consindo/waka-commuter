@@ -249,7 +249,7 @@ const bindMapboxEvents = (map) => {
         return i
       }),
     }
-    if (datasetName === 'dataset1' && Dispatcher.dataSegment !== '2016-sa2' || datasetName === 'dataset2' && Dispatcher.dataSegment === '2016-sa2') {
+    if ((datasetName === 'dataset1' && !Dispatcher.dataSegment.startsWith('2016-sa2') || datasetName === 'dataset2' && Dispatcher.dataSegment.startsWith('2016-sa2')) && (!Dispatcher.dataSegment.startsWith('2021-tz') && !Dispatcher.dataSegment.startsWith('2016-tz'))) {
       map.getSource(mapSource).setData(augmentedData)
     }
     if (mapSource === 'sa2') {
