@@ -10,7 +10,7 @@
   let sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
 
-  let secondaryData
+  let secondaryData, tertiaryData
   if (source.secondaryShapeFile) {
     secondaryData = fetch(source.secondaryShapeFile)
       .then((res) => res.json())
@@ -22,6 +22,21 @@
         })
         window.sa2Data = newData
         regionNames = getRegionNames(window.sa2Data)
+
+        if (source.tertiaryShapeFile) {
+          tertiaryData = fetch(source.tertiaryShapeFile)
+            .then((res) => res.json())
+            .then(async (tertiary) => {
+              const newData = Promise.resolve({
+                type: 'FeatureCollection',
+                features: [...sa2.features, ...tertiary.features],
+              })
+              window.sa2Data = newData
+              regionNames = getRegionNames(window.sa2Data)
+              return tertiary
+            })
+        }
+
         return secondary
       })
   }
@@ -86,6 +101,7 @@
   <Map
     mapData={sa2Data}
     {secondaryData}
+    {tertiaryData}
     {dataset2}
     {lat}
     {lng}

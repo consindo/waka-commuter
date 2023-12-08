@@ -100,17 +100,17 @@
                     let departureModes = null
                     let arrivalModes = null
                     if (segment.startsWith('2021-dzn')) {
-                      departureModes = dataSource['2021-dzn'].departureModes
-                      arrivalModes = dataSource['2021-dzn'].arrivalModes
+                      departureModes = dataSource['2021-dzn']?.departureModes
+                      arrivalModes = dataSource['2021-dzn']?.arrivalModes
                     } else if (segment.startsWith('2021-sa2')) {
-                      departureModes = dataSource['2021-sa2'].departureModes
-                      arrivalModes = dataSource['2021-sa2'].arrivalModes
+                      departureModes = dataSource['2021-sa2']?.departureModes
+                      arrivalModes = dataSource['2021-sa2']?.arrivalModes
                     } else if (segment.startsWith('2016-dzn')) {
-                      departureModes = dataSource['2016-dzn'].departureModes
-                      arrivalModes = dataSource['2016-dzn'].arrivalModes
+                      departureModes = dataSource['2016-dzn']?.departureModes
+                      arrivalModes = dataSource['2016-dzn']?.arrivalModes
                     } else if (segment.startsWith('2016-sa2')) {
-                      departureModes = dataSource['2016-sa2'].departureModes
-                      arrivalModes = dataSource['2016-sa2'].arrivalModes
+                      departureModes = dataSource['2016-sa2']?.departureModes
+                      arrivalModes = dataSource['2016-sa2']?.arrivalModes
                     }
                     const name = modes.find(
                       (i) => i.id === `mode-${key.split('mode-')[1]}`
@@ -331,6 +331,12 @@
             hideDepartures = false
             hideArrivals = true
             invalidDeparture = (regionName[0] || '').startsWith('DZN')
+          } else if (
+            segment.startsWith('2021-tz') ||
+            segment.startsWith('2016-tz')
+          ) {
+            hideDepartures = true
+            hideArrivals = true
           } else {
             hideDepartures = false
             hideArrivals = false
