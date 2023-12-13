@@ -145,11 +145,11 @@ class MapTooltip extends LitElement {
           ? html` <br />
               <small>
                 ${this.showOnly === 'arrivals'
-                  ? ''
-                  : html`(${departPercentage}% of departures)<br />`}
+              ? ''
+              : html`(${departPercentage}% of departures)<br />`}
                 ${this.showOnly === 'departures'
-                  ? ''
-                  : html`(${arrivalPercentage}% of arrivals)`}
+              ? ''
+              : html`(${arrivalPercentage}% of arrivals)`}
               </small>`
           : ''}`
     } else if (departCount === 0 && arrivalCount === 0) {
@@ -159,19 +159,24 @@ class MapTooltip extends LitElement {
         to/from ${regions}`
     }
 
+    // ason specific
+    if (friendlyName.startsWith('TZ')) {
+      subText = ''
+    }
+
     return html`
       <div
         style="opacity: ${this.opacity}; transform: translate(${this.x +
-        20}px, ${this.y}px);"
+      20}px, ${this.y}px);"
       >
         <h4>${friendlyName}</h4>
         ${loading ? html`<strong class="none">Loading...</strong><br />` : ''}
         ${populationCount != null
-          ? html`<em>Population: ${populationCount}</em><br />`
-          : ''}
+        ? html`<em>Population: ${populationCount}</em><br />`
+        : ''}
         ${this.parsedData.currentRegions.length !== 0 && !loading
-          ? subText
-          : ''}
+        ? subText
+        : ''}
       </div>
     `
   }
