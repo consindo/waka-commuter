@@ -10,7 +10,7 @@
   let sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
 
-  let secondaryData
+  let secondaryData, tertiaryData
   if (source.secondaryShapeFile) {
     secondaryData = fetch(source.secondaryShapeFile)
       .then((res) => res.json())
@@ -22,6 +22,22 @@
         })
         window.sa2Data = newData
         regionNames = getRegionNames(window.sa2Data)
+
+        if (source.tertiaryShapeFile) {
+          tertiaryData = fetch(source.tertiaryShapeFile)
+            .then((res) => res.json())
+            .then(async (tertiary) => {
+              const updatedSa2 = await window.sa2Data
+              const newData = Promise.resolve({
+                type: 'FeatureCollection',
+                features: [...updatedSa2.features, ...tertiary.features],
+              })
+              window.sa2Data = newData
+              regionNames = getRegionNames(window.sa2Data)
+              return tertiary
+            })
+        }
+
         return secondary
       })
   }
@@ -45,6 +61,7 @@
   }
 
   async function getRegionNames(sourceData) {
+    let usedNames = []
     const data = await sourceData
     return data.features
       .map((i) => {
@@ -54,14 +71,13 @@
           name: friendlyName ? `${name} - ${friendlyName}` : name,
         }
       })
-      .sort(
-        (a, b) =>
-          isFinite(a.name[0]) - isFinite(b.name[0]) ||
-          a.name.localeCompare(b.name, undefined, {
-            numeric: true,
-            sensitivity: 'base',
-          })
-      )
+      .filter((i) => {
+        const uniqueId = i.id + i.name
+        if (usedNames.includes(uniqueId)) return false
+        usedNames.push(uniqueId)
+        return true
+      })
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, {}))
   }
 
   let regionNames = getRegionNames(window.sa2Data)
@@ -86,6 +102,7 @@
   <Map
     mapData={sa2Data}
     {secondaryData}
+    {tertiaryData}
     {dataset2}
     {lat}
     {lng}

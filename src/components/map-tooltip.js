@@ -159,6 +159,11 @@ class MapTooltip extends LitElement {
         to/from ${regions}`
     }
 
+    // ason specific
+    if (friendlyName.startsWith('TZ')) {
+      subText = ''
+    }
+
     return html`
       <div
         style="opacity: ${this.opacity}; transform: translate(${this.x +

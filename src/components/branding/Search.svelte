@@ -20,8 +20,16 @@
     // checks to make sure they used a precanned one
     const match = data.find((region) => region.name === value)
     if (match) {
-      if (isFinite(match.id)) {
-        Dispatcher.dataSegment = Dispatcher.dataSegment.replace(/-sa2/g, '-dzn')
+      if (match.id.startsWith('TZ')) {
+        Dispatcher.dataSegment = Dispatcher.dataSegment.replace(
+          /-sa2|-dzn/g,
+          '-tz'
+        )
+      } else if (match.id.startsWith('DZN')) {
+        Dispatcher.dataSegment = Dispatcher.dataSegment.replace(
+          /-sa2|-tz/g,
+          '-dzn'
+        )
         Dispatcher.dataDirection = 'arrivals'
       }
       if (ctrlKey || metaKey || Dispatcher.currentRegion.includes(match.id)) {

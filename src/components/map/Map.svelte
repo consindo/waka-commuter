@@ -17,7 +17,14 @@
 
   mapboxgl.accessToken = token
 
-  export let mapData, secondaryData, dataset2, lat, lng, zoom, style
+  export let mapData,
+    secondaryData,
+    tertiaryData,
+    dataset2,
+    lat,
+    lng,
+    zoom,
+    style
 
   // gross hack
   let oldLat = lat
@@ -73,7 +80,7 @@
         if (isLoaded) return
         isLoaded = true
 
-        const data = await Promise.all([mapData, secondaryData])
+        const data = await Promise.all([mapData, secondaryData, tertiaryData])
         drawMap(map, data, source.isMapAreaLabelsEnabled)
 
         if (Dispatcher.currentRegion.length > 0) {
@@ -82,7 +89,11 @@
       }
       map.on('styledata', styleDataCallback)
       styleDataCallback()
-      bindMapEvents(map, Promise.all([mapData, secondaryData]), dataset2)
+      bindMapEvents(
+        map,
+        Promise.all([mapData, secondaryData, tertiaryData]),
+        dataset2
+      )
     })
   })
 

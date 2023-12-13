@@ -12,6 +12,8 @@
 
   $: path = transformFilename(firstRegion)
 
+  let isControlsHidden = false
+
   const triggerClose = () => {
     Dispatcher.setRegions([])
   }
@@ -22,6 +24,12 @@
       setSegmentWithMode([secondary, newSegment].join('-'), selection)
     } else {
       setSegmentWithMode(newSegment, selection)
+    }
+    // ason specific
+    if (newSegment === 'tz') {
+      isControlsHidden = true
+    } else {
+      isControlsHidden = false
     }
   }
   const triggerSecondarySegment = (segment) => () => {
@@ -93,7 +101,7 @@
   <div class="nav-header-flex">
     <div class="title">
       {#if source.detailsSecondaryControls}
-        <nav class="secondary-controls">
+        <nav class="secondary-controls" class:hidden={isControlsHidden}>
           <ul>
             {#each source.detailsSecondaryControls || [] as control}
               <li>
@@ -109,7 +117,7 @@
           </ul>
         </nav>
       {/if}
-      <p class="population-wrapper">
+      <p class="population-wrapper" class:hidden={isControlsHidden}>
         {#if populationLink}
           <a
             class="population-link"
@@ -143,7 +151,7 @@
         {/each}
       </ul>
       {#if source.brandingClass === 'ason'}
-        <div class="mode-wrapper">
+        <div class="mode-wrapper" class:hidden={isControlsHidden}>
           <ModeToggle bind:selection />
         </div>
       {/if}
@@ -178,6 +186,9 @@
   }
   .population-wrapper {
     line-height: 26px;
+  }
+  .hidden {
+    display: none;
   }
   @media (min-width: 1020px) {
     .ason {

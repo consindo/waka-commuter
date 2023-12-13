@@ -249,13 +249,13 @@ const bindMapboxEvents = (map) => {
         return i
       }),
     }
-    if (datasetName === 'dataset1' && Dispatcher.dataSegment !== '2016-sa2' || datasetName === 'dataset2' && Dispatcher.dataSegment === '2016-sa2') {
+    if ((datasetName === 'dataset1' && !Dispatcher.dataSegment.startsWith('2016-sa2') || datasetName === 'dataset2' && Dispatcher.dataSegment.startsWith('2016-sa2')) && (!Dispatcher.dataSegment.startsWith('2021-tz') && !Dispatcher.dataSegment.startsWith('2016-tz'))) {
       map.getSource(mapSource).setData(augmentedData)
     }
     if (mapSource === 'sa2') {
-      datasets[datasetName] = Promise.all([Promise.resolve(augmentedData), dataset[1]])
+      datasets[datasetName] = Promise.all([Promise.resolve(augmentedData), dataset[1], dataset[2]])
     } else if (mapSource === 'dzn') {
-      datasets[datasetName] = Promise.all([dataset[0], Promise.resolve(augmentedData)])
+      datasets[datasetName] = Promise.all([dataset[0], Promise.resolve(augmentedData), dataset[2]])
     }
     console.info('dynamically loaded', url)
   }
@@ -433,17 +433,20 @@ const bindDispatcherEvents = (map) => {
         } else if (direction === 'arrivals') {
           map.moveLayer('sa2-fill', 'dzn-fill')
         }
-      } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2')) {
+      } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2') || segment.startsWith('2021-tz') || segment.startsWith('2016-tz')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'none')
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')
       }
 
       // todo: could probably optimize this a little by only calling it if there is a change
-      if (segment.startsWith('2016')) {
+      if (segment.startsWith('2016-tz') || segment.startsWith('2021-tz')) {
+        const data = await datasets.dataset1
+        map.getSource('sa2').setData(data[2])
+      } else if (segment.startsWith('2016')) {
         const data = await datasets.dataset2
         map.getSource('sa2').setData(data[0])
         map.getSource('dzn').setData(data[1])
-      } if (segment.startsWith('2021')) {
+      } else if (segment.startsWith('2021')) {
         const data = await datasets.dataset1
         map.getSource('sa2').setData(data[0])
         map.getSource('dzn').setData(data[1])

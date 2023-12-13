@@ -15,6 +15,7 @@ const sources = {
     title: 'Ason Group Explorer',
     shapeFile: '/shapes/australia-sa2-2021-truncated.json',
     secondaryShapeFile: '/shapes/australia-dzn-2021-truncated.json',
+    tertiaryShapeFile: '/shapes/australia-tz-2016-nsw.json',
     dynamicShapeFiles: [
       {
         url: '/shapes/australia-sa2-2021-nsw.json',
@@ -170,7 +171,7 @@ const sources = {
     isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
     segments: ['2021-sa2', '2021-dzn', '2016-sa2', '2016-dzn'],
-    detailsControls: ['SA2', 'DZN'],
+    detailsControls: ['SA2', 'DZN', 'TZ'],
     detailsSecondaryControls: ['2021', '2016'],
     brandingClass: 'ason',
   },
