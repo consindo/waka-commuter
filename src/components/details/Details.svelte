@@ -135,7 +135,7 @@
                         acc[key] = acc[key] || {}
                         Object.keys(cur[key]).forEach((valueKey) => {
                           acc[key][valueKey] = acc[key][valueKey] || 0
-                          acc[key][valueKey] += cur[key][valueKey]
+                          acc[key][valueKey] += cur[key][valueKey] || 0
                         })
                       })
                       return acc
