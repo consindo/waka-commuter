@@ -338,8 +338,12 @@
             hideDepartures = true
             hideArrivals = true
           } else {
-            hideDepartures = (regionName[0] || '').startsWith('TZ')
-            hideArrivals = (regionName[0] || '').startsWith('TZ')
+            hideDepartures =
+              (regionName[0] || '').startsWith('TZ') ||
+              Dispatcher.dataDirection === 'arrivals'
+            hideArrivals =
+              (regionName[0] || '').startsWith('TZ') ||
+              Dispatcher.dataDirection === 'departures'
             invalidDeparture = false
             invalidArrival = false
           }
