@@ -35,12 +35,7 @@ const setMode = (container, data) => {
     container.querySelector('.mode-container').style.display = 'block'
   }
   const mode = document.createElement('travel-mode')
-  if (source.brandingClass === 'statsnz') {
-    mode.setAttribute('data', JSON.stringify(data))
-  } else {
-    // don't need to split between workplace and education
-    mode.setAttribute('data', JSON.stringify({ Total: data.Total }))
-  }
+  mode.setAttribute('data', JSON.stringify({ Total: data.Total }))
 
   const arriveModeContainer = container.querySelector('.mode')
   arriveModeContainer.innerHTML = ''
