@@ -250,21 +250,22 @@
 </div>
 <div class="container">
   <table>
-    <tr>
-      <th></th>
-      {#each columns as column}
-        <th>{column}</th>
-      {/each}
-    </tr>
-    {#each rows as row}
+    <tbody>
       <tr>
-        <th title={row.id.slice(0, -1) + ': ' + row.title}>{row.name}</th>
+        <th></th>
         {#each columns as column}
-          <td>{population[row.id + column].toFixed(1)}</td>
+          <th>{column}</th>
         {/each}
       </tr>
-    {/each}
-    <!-- <tr>
+      {#each rows as row}
+        <tr>
+          <th title={row.id.slice(0, -1) + ': ' + row.title}>{row.name}</th>
+          {#each columns as column}
+            <td>{population[row.id + column].toFixed(1)}</td>
+          {/each}
+        </tr>
+      {/each}
+      <!-- <tr>
       <th>Total</th>
       {#each columns as column}
         <td
@@ -274,6 +275,7 @@
         >
       {/each}
     </tr> -->
+    </tbody>
   </table>
 </div>
 

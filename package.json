@@ -41,17 +41,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "lit-element": "^3.3.3",
-    "mapbox-gl": "^2.15.0",
-    "polylabel": "^1.1.0"
+    "mapbox-gl": "^3.10.0",
+    "polylabel": "^2.0.1"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.4.4",
-    "csv-parser": "^3.0.0",
-    "prettier": "^3.0.1",
-    "prettier-plugin-svelte": "^3.0.3",
+    "csv-parser": "^3.2.0",
+    "prettier": "^3.5.2",
+    "prettier-plugin-svelte": "^3.3.3",
     "strip-bom-stream": "^5.0.0",
-    "svelte": "^4.1.2",
-    "vite": "^4.4.9"
+    "svelte": "^5.20.2",
+    "vite": "^6.1.1"
   }
 }
