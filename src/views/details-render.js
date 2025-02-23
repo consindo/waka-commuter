@@ -1,8 +1,6 @@
 // web components
 import '../components/population-bubbles.js'
 import '../components/travel-mode.js'
-import '../components/destination-blurb.js'
-import '../components/ethnicity-graph.js'
 
 import { getSource } from '../sources.js'
 const source = getSource()
@@ -42,26 +40,6 @@ const setMode = (container, data) => {
   arriveModeContainer.appendChild(mode)
 }
 
-const setBlurb = (
-  selector,
-  currentRegions,
-  mode,
-  segment,
-  destinationData,
-  modeData
-) => {
-  const blurb = document.createElement('destination-blurb')
-  blurb.setAttribute('currentRegions', JSON.stringify(currentRegions))
-  blurb.setAttribute('mode', mode)
-  blurb.setAttribute('segment', segment)
-  blurb.setAttribute('destinationData', JSON.stringify(destinationData))
-  blurb.setAttribute('modeData', JSON.stringify(modeData))
-
-  const container = document.querySelector(selector)
-  container.innerHTML = ''
-  container.appendChild(blurb)
-}
-
 export const setDetails = (
   location,
   arriveData,
@@ -69,7 +47,6 @@ export const setDetails = (
   arriveModeData,
   departModeData,
   tooltipData,
-  segment
 ) => {
   document.querySelector('.details-splash').classList.add('hidden')
   document.querySelector('.details-location').classList.remove('hidden')
@@ -89,26 +66,7 @@ export const setDetails = (
     document.querySelector('.population-count').innerText = pop
   }
 
-  // hack
-  const currentRegions = JSON.parse(tooltipData).currentRegions
-
   // do the html updates
-  setBlurb(
-    '.arrive-from.blurb-container',
-    currentRegions,
-    'arrivals',
-    segment,
-    arriveData,
-    arriveModeData
-  )
-  setBlurb(
-    '.depart-to.blurb-container',
-    currentRegions,
-    'departures',
-    segment,
-    departData,
-    departModeData
-  )
   setBubble(arriveContainer, location, arriveData, tooltipData, 'arrivals')
   setBubble(departContainer, location, departData, tooltipData, 'departures')
   setMode(arriveContainer, arriveModeData)

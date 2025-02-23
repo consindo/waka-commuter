@@ -15,6 +15,7 @@ export const chooseBestName = (name, friendlyName) => {
 }
 
 export const humanRegionName = (nameArray, mode) => {
+  // if (nameArray === null) return ''
   const isZone = nameArray.length > 0 && !isNaN(parseInt(nameArray[0][0]))
   if (nameArray.length === 1) {
     return `${isZone ? 'Zone ' : ''}${nameArray[0]}`

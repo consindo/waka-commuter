@@ -1,5 +1,5 @@
 <script>
-  import { run } from 'svelte/legacy';
+  import { run } from 'svelte/legacy'
 
   import { onMount } from 'svelte'
 
@@ -19,10 +19,11 @@
 
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
+  import DetailsBlurb from './DetailsBlurb.svelte'
   import PopulationGraph from '../PopulationGraph.svelte'
   import PopulationPredictions from './PopulationPredictions.svelte'
 
-  let { mapData } = $props();
+  let { mapData } = $props()
 
   let detailsTitle = $state(null)
   let documentTitle = $state(null)
@@ -42,13 +43,18 @@
 
   let populationPredictions = $state({})
 
+  let currentRegions = $state(null)
+  let dataSegment = $state(null)
+  let arriveMode = $state(null)
+  let departureMode = $state(null)
+
   const source = getSource()
 
   run(() => {
     document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
       source.title || 'Commuter - Waka'
     }`
-  });
+  })
 
   if (!source.isAllSegmentEnabled) {
     Dispatcher.dataSegment = source.segments[0]
@@ -287,8 +293,10 @@
             hiddenDepartures.sort((a, b) => b.value - a.value)
           }
 
+          currentRegions = regionName.map(regionNameMapper)
+
           const tooltipData = {
-            currentRegions: regionName.map(regionNameMapper),
+            currentRegions,
             arriveData: arriveDataFriendly,
             departData: departDataFriendly,
             mode: ['work', 'study'],
@@ -355,6 +363,9 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
+          arriveMode = arriveModeData
+          departureMode = departureModeData
+
           tooltip = tooltipJSON
 
           // also consuming the tooltip data in the population bubbles
@@ -368,6 +379,8 @@
             tooltipJSON,
             segment
           )
+
+          dataSegment = segment
         }
       )
     })
@@ -389,7 +402,15 @@
   </div>
   <div class:hidden={hideArrivals || invalidArrival}>
     <h3>Arrivals</h3>
-    <div class="arrive-from blurb-container"></div>
+    {#if currentRegions}
+      <DetailsBlurb
+        mode="arrivals"
+        {currentRegions}
+        segment={dataSegment}
+        destinationData={arrivals}
+        modeData={arriveMode}
+      />
+    {/if}
     <div class="arrive-from graph-container">
       <div class="location-container">
         <div class="location-inner">
@@ -444,7 +465,15 @@
   </div>
   <div class:hidden={hideDepartures || invalidDeparture}>
     <h3>Departures</h3>
-    <div class="depart-to blurb-container"></div>
+    {#if currentRegions}
+      <DetailsBlurb
+        mode="departures"
+        {currentRegions}
+        segment={dataSegment}
+        destinationData={departures}
+        modeData={departureMode}
+      />
+    {/if}
     <div class="depart-to graph-container">
       <div class="location-container">
         <div class="location-inner">
