@@ -4,7 +4,7 @@
 
 <div class="map-legend hidden all">
   <HeatmapToggle />
-  <div class="map-legend-colors" />
+  <div class="map-legend-colors"></div>
   <ul>
     <li class="hide-departures hide-all">Less Arrivals</li>
     <li class="hide-departures">More Arrivals</li>

@@ -17,6 +17,10 @@ html {
   overflow: hidden;
 }
 
+button {
+  font-family: inherit;
+}
+
 .blurb-container {
   padding: 0 var(--sidebar-padding);
   margin: 0 0 1.5rem;

@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import Dispatcher from '../dispatcher.js'
 
-  export let data, mode, tooltipData
+  let { data, mode, tooltipData } = $props()
 
   let needFrame = true
 
@@ -14,7 +14,7 @@
     })
     .slice(0, 30)
 
-  let el
+  let el = $state()
   onMount(() => {
     const tooltipclick = (d) => {
       if (

@@ -1,7 +1,7 @@
 <script>
   import Dispatcher from '../../dispatcher.js'
 
-  export let regionNames
+  let { regionNames } = $props();
 
   let ctrlKey = false
   let metaKey = false
@@ -50,15 +50,15 @@
   <input
     list="search-choice"
     placeholder="Search areas..."
-    on:select={onSearch}
-    on:change={onSearch}
-    on:keydown={onKeyPress}
-    on:keyup={onKeyPress}
-    on:focus={onFocus}
+    onselect={onSearch}
+    onchange={onSearch}
+    onkeydown={onKeyPress}
+    onkeyup={onKeyPress}
+    onfocus={onFocus}
   />
   <datalist id="search-choice">
     {#each regions as region}
-      <option value={region.name} />{/each}
+      <option value={region.name}></option>{/each}
   </datalist>
 {/await}
 

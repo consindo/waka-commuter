@@ -1,10 +1,12 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import filterIcon from '../../../static/icons/filter.svg'
   import { modes } from './ModeMap'
 
-  export let selection = []
-  let internalSelection = modes.map((i) => i.id)
-  $: {
+  let { selection = $bindable([]) } = $props();
+  let internalSelection = $state(modes.map((i) => i.id))
+  run(() => {
     let newValue = []
     if (internalSelection.length !== modes.length) {
       newValue = internalSelection
@@ -12,9 +14,9 @@
     if (selection.length !== 0 || newValue.length !== 0) {
       selection = newValue
     }
-  }
+  });
 
-  let overlayVisible = false
+  let overlayVisible = $state(false)
   const toggleFilter = () => (overlayVisible = !overlayVisible)
   const toggleAll = () => {
     if (internalSelection.length === modes.length) {
@@ -44,7 +46,7 @@
 </script>
 
 <button
-  on:click={toggleFilter}
+  onclick={toggleFilter}
   title="Filter Mode"
   class:active={overlayVisible}
   >Filter by mode <img src={filterIcon} alt="Filter" /></button
@@ -56,7 +58,7 @@
         ><span>All Modes</span><input
           type="checkbox"
           checked={internalSelection.length === modes.length}
-          on:click={toggleAll}
+          onclick={toggleAll}
         /></label
       >
     </li>

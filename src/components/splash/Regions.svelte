@@ -1,8 +1,5 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
-
-  export let enabledRegions
+  let { enabledRegions, setLocation } = $props()
 
   const getImageUrl = (name) =>
     new URL(`/static/css/regions/${name}.jpg`, import.meta.url).href
@@ -133,23 +130,20 @@
 
 <nav>
   {#each regions as region}
-    <div
-      class="region-option"
-      data-lat={region.lat}
-      data-lng={region.lng}
-      data-zoom={region.zoom}
-      on:click={() =>
-        dispatch('locationChange', {
+    <button
+      style="background-image: url({getImageUrl(region.id)})"
+      onclick={() =>
+        setLocation({
           lat: region.lat,
           lng: region.lng,
           zoom: region.zoom,
         })}
     >
-      <h3 style="background-image: url({getImageUrl(region.id)})">
+      <h3>
         <strong>{region.primaryName}</strong>
         <span>{region.secondaryName}</span>
       </h3>
-    </div>
+    </button>
   {/each}
 </nav>
 
@@ -157,13 +151,23 @@
   nav {
     font-size: 0;
     padding: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    border: 0;
+
+    @media (max-width: 1650px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
-  div {
-    width: 33.33%;
-    display: inline-block;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    vertical-align: top;
+  button {
+    padding: 0;
+    background-color: #222;
+    background-size: cover;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    transition: 100ms ease transform;
   }
   h3 {
     height: 140px;
@@ -172,25 +176,21 @@
     line-height: 1;
     font-size: 0.9rem;
     text-align: center;
-    background-color: #222;
-    border-radius: 5px;
     font-weight: 300;
     margin: 0;
-    transition: 100ms ease transform;
     user-select: none;
     display: flex;
     flex-direction: column;
     align-content: flex-end;
     justify-content: flex-end;
-    background-size: cover;
     text-shadow:
       0 1px 1px #000,
       0 0px 3px #000;
   }
-  h3:hover {
+  button:hover {
     transform: scale(1.02);
   }
-  h3:active {
+  button:active {
     transform: scale(1);
   }
   strong {
@@ -200,11 +200,6 @@
   }
   span {
     display: block;
-  }
-  @media (max-width: 1650px) {
-    div {
-      width: 50%;
-    }
   }
   @media (max-width: 500px) {
     h3 {

@@ -6,7 +6,7 @@
   import icon from '/static/css/icon.png'
   import wsp from '/static/css/wsp.svg'
 
-  export let regionNames
+  let { regionNames } = $props();
 
   const source = getSource()
   const brandingClass = source.brandingClass
@@ -17,7 +17,7 @@
     Dispatcher.setDirection(direction)
   }
 
-  let currentDirection = Dispatcher.dataDirection
+  let currentDirection = $state(Dispatcher.dataDirection)
   const loadBlocks = () => {
     currentDirection = Dispatcher.dataDirection
     const legend = document.querySelector('.map-legend')
@@ -43,7 +43,7 @@
   <nav class="controls">
     <a
       class:selected={currentDirection === 'all'}
-      on:click={triggerClick('all')}
+      onclick={triggerClick('all')}
       href="#"
       title="Show both arrivals & departures on map"
       class="btn-direction-all selected">All</a
@@ -51,7 +51,7 @@
     &middot;
     <a
       class:selected={currentDirection === 'arrivals'}
-      on:click={triggerClick('arrivals')}
+      onclick={triggerClick('arrivals')}
       href="#"
       title="Only show places where people arrive from"
       class="btn-direction-arrivals">Arrivals</a
@@ -59,7 +59,7 @@
     &middot;
     <a
       class:selected={currentDirection === 'departures'}
-      on:click={triggerClick('departures')}
+      onclick={triggerClick('departures')}
       href="#"
       title="Only show places where people depart to"
       class="btn-direction-departures">Departures</a

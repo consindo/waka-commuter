@@ -1,10 +1,10 @@
 <script>
   import { onMount } from 'svelte'
 
-  export let population, rowFilter
+  let { population, rowFilter } = $props();
 
-  let focusText = null,
-    focusTextPos = 0
+  let focusText = $state(null),
+    focusTextPos = $state(0)
 
   let rows = [
     {
@@ -88,7 +88,7 @@
     '2066',
   ]
 
-  let el
+  let el = $state()
   onMount(() => {
     const margin = { top: 16, right: 30, bottom: 40, left: 60 },
       width = 580 - margin.left - margin.right,

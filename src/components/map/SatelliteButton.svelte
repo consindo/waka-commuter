@@ -1,24 +1,18 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
+  let { style, styleChange } = $props()
 
-  let style = 'map'
-
-  function handleClick(event) {
+  function handleClick() {
+    let newStyle = 'satellite'
     if (style === 'satellite') {
       style = 'map'
-    } else {
-      style = 'satellite'
     }
-    dispatch('styleChange', { style })
+    styleChange(newStyle)
   }
+
+  const label = $derived(style === 'map' ? 'Satellite Map' : 'Street Map')
 </script>
 
-<button
-  class={style}
-  on:click={handleClick}
-  title={style === 'map' ? 'Satellite Map' : 'Street Map'}
->
+<button class={style} onclick={handleClick} title={label} aria-label={label}>
 </button>
 
 <style>

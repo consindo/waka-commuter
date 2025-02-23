@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import { onMount } from 'svelte'
 
   import { getSource } from '../../sources.js'
@@ -20,31 +22,33 @@
   import PopulationGraph from '../PopulationGraph.svelte'
   import PopulationPredictions from './PopulationPredictions.svelte'
 
-  export let mapData
+  let { mapData } = $props();
 
-  let detailsTitle = null
-  let documentTitle = null
-  let firstRegion = ''
-  let populationLabel = ''
+  let detailsTitle = $state(null)
+  let documentTitle = $state(null)
+  let firstRegion = $state('')
+  let populationLabel = $state('')
 
-  let hideArrivals = false
-  let hideDepartures = false
-  let invalidArrival = false
-  let invalidDeparture = false
+  let hideArrivals = $state(false)
+  let hideDepartures = $state(false)
+  let invalidArrival = $state(false)
+  let invalidDeparture = $state(false)
 
-  let tooltip = null
-  let arrivals = null
-  let departures = null
-  let hiddenArrivals = []
-  let hiddenDepartures = []
+  let tooltip = $state(null)
+  let arrivals = $state(null)
+  let departures = $state(null)
+  let hiddenArrivals = $state([])
+  let hiddenDepartures = $state([])
 
-  let populationPredictions = {}
+  let populationPredictions = $state({})
 
   const source = getSource()
 
-  $: document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
-    source.title || 'Commuter - Waka'
-  }`
+  run(() => {
+    document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
+      source.title || 'Commuter - Waka'
+    }`
+  });
 
   if (!source.isAllSegmentEnabled) {
     Dispatcher.dataSegment = source.segments[0]
@@ -385,11 +389,11 @@
   </div>
   <div class:hidden={hideArrivals || invalidArrival}>
     <h3>Arrivals</h3>
-    <div class="arrive-from blurb-container" />
+    <div class="arrive-from blurb-container"></div>
     <div class="arrive-from graph-container">
       <div class="location-container">
         <div class="location-inner">
-          <div class="location" />
+          <div class="location"></div>
         </div>
         <div class="location-graph">
           {#key arrivals}
@@ -427,7 +431,7 @@
               >
             {/if}
           </h4>
-          <div class="mode" />
+          <div class="mode"></div>
         </div>
       </div>
     </div>
@@ -440,11 +444,11 @@
   </div>
   <div class:hidden={hideDepartures || invalidDeparture}>
     <h3>Departures</h3>
-    <div class="depart-to blurb-container" />
+    <div class="depart-to blurb-container"></div>
     <div class="depart-to graph-container">
       <div class="location-container">
         <div class="location-inner">
-          <div class="location" />
+          <div class="location"></div>
         </div>
         <div class="location-graph">
           {#key departures}
@@ -482,7 +486,7 @@
               >
             {/if}
           </h4>
-          <div class="mode" />
+          <div class="mode"></div>
         </div>
       </div>
     </div>

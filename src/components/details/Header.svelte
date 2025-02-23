@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import expand from '/static/expand.svg'
   import ason from '/static/css/ason.png'
   import { transformFilename } from '../../data.js'
@@ -6,13 +8,17 @@
   import { getSource } from '../../sources.js'
   import ModeToggle from './ModeToggle.svelte'
 
-  export let title, firstRegion, populationLabel, populationLink
+  let {
+    title,
+    firstRegion,
+    populationLabel,
+    populationLink
+  } = $props();
 
   const source = getSource()
 
-  $: path = transformFilename(firstRegion)
 
-  let isControlsHidden = false
+  let isControlsHidden = $state(false)
 
   const triggerClose = () => {
     Dispatcher.setRegions([])
@@ -47,14 +53,13 @@
     const primary = Dispatcher.dataSegment.split('-')[1]
     setSegmentWithMode([newSegment, primary].join('-'), selection)
   }
-  let currentSegment = source.segments[0]
+  let currentSegment = $state(source.segments[0])
   const loadBlocks = () => {
     currentSegment = Dispatcher.dataSegment
   }
   Dispatcher.bind('load-blocks', loadBlocks)
 
-  let selection = []
-  $: setSegmentWithMode(Dispatcher.dataSegment, selection)
+  let selection = $state([])
   const setSegmentWithMode = (segment, selectedModes) => {
     let finalSegment = segment.split('-').slice(0, 2).join('-')
     if (selectedModes.length > 0) {
@@ -62,6 +67,10 @@
     }
     Dispatcher.setSegment(finalSegment)
   }
+  let path = $derived(transformFilename(firstRegion))
+  run(() => {
+    setSegmentWithMode(Dispatcher.dataSegment, selection)
+  });
 </script>
 
 <div class="nav-header" class:ason={source.brandingClass === 'ason'}>
@@ -76,12 +85,12 @@
       <button
         title="Learn More"
         class="btn-expand"
-        on:click={() =>
+        onclick={() =>
           document.getElementById('app').classList.toggle('map-view')}
       >
         <img alt="Toggle Details" src={expand} />
       </button>
-      <button title="Close Location" class="btn-close" on:click={triggerClose}>
+      <button title="Close Location" class="btn-close" onclick={triggerClose}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24"
@@ -108,7 +117,7 @@
                 <a
                   href="#"
                   class="btn-segment"
-                  on:click={triggerSecondarySegment(control)}
+                  onclick={triggerSecondarySegment(control)}
                   class:selected={currentSegment.split('-')[0] ===
                     control.toLowerCase()}>{control}</a
                 >
@@ -126,11 +135,11 @@
             rel="noopener noreferrer"
           >
             <strong class="population-label">{populationLabel}</strong>
-            <span class="population-count" />
+            <span class="population-count"></span>
           </a>
         {:else}
           <strong class="population-label">{populationLabel}</strong>
-          <span class="population-count" />
+          <span class="population-count"></span>
         {/if}
       </p>
     </div>
@@ -141,7 +150,7 @@
             <a
               href="#"
               class="btn-segment"
-              on:click={triggerSegment(control)}
+              onclick={triggerSegment(control)}
               class:selected={(source.detailsSecondaryControls != null
                 ? currentSegment.split('-')[1]
                 : currentSegment

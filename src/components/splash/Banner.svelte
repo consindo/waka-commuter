@@ -1,6 +1,6 @@
 <script>
   import expand from '/static/expand.svg'
-  export let dataSource, background
+  let { dataSource, background } = $props();
 </script>
 
 <div class="splash-bg" style={`background-image: ${background}`}>
@@ -17,7 +17,7 @@
     <button
       title="Learn More"
       class="btn-expand"
-      on:click={() =>
+      onclick={() =>
         document.getElementById('app').classList.toggle('map-view')}
     >
       <img alt="Toggle Details" src={expand} />
