@@ -46,7 +46,7 @@ export const setDetails = (
   departData,
   arriveModeData,
   departModeData,
-  tooltipData,
+  tooltipData
 ) => {
   document.querySelector('.details-splash').classList.add('hidden')
   document.querySelector('.details-location').classList.remove('hidden')

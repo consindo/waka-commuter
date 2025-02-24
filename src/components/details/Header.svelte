@@ -1,5 +1,5 @@
 <script>
-  import { run } from 'svelte/legacy';
+  import { run } from 'svelte/legacy'
 
   import expand from '/static/expand.svg'
   import ason from '/static/css/ason.png'
@@ -8,15 +8,9 @@
   import { getSource } from '../../sources.js'
   import ModeToggle from './ModeToggle.svelte'
 
-  let {
-    title,
-    firstRegion,
-    populationLabel,
-    populationLink
-  } = $props();
+  let { title, firstRegion, populationLabel, populationLink } = $props()
 
   const source = getSource()
-
 
   let isControlsHidden = $state(false)
 
@@ -70,7 +64,7 @@
   let path = $derived(transformFilename(firstRegion))
   run(() => {
     setSegmentWithMode(Dispatcher.dataSegment, selection)
-  });
+  })
 </script>
 
 <div class="nav-header" class:ason={source.brandingClass === 'ason'}>

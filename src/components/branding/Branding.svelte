@@ -6,7 +6,7 @@
   import icon from '/static/css/icon.png'
   import wsp from '/static/css/wsp.svg'
 
-  let { regionNames } = $props();
+  let { regionNames } = $props()
 
   const source = getSource()
   const brandingClass = source.brandingClass

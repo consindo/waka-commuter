@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  let { population, rowFilter } = $props();
+  let { population, rowFilter } = $props()
 
   let focusText = $state(null),
     focusTextPos = $state(0)

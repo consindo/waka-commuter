@@ -1,6 +1,6 @@
 <script>
   import expand from '/static/expand.svg'
-  let { dataSource, background } = $props();
+  let { dataSource, background } = $props()
 </script>
 
 <div class="splash-bg" style={`background-image: ${background}`}>
@@ -27,11 +27,8 @@
 
 <style>
   .splash-bg {
-    background-image: linear-gradient(
-        120deg,
-        rgba(10, 0, 20, 0.8) 50%,
-        rgba(10, 0, 20, 0.4)
-      ),
+    background-image:
+      linear-gradient(120deg, rgba(10, 0, 20, 0.8) 50%, rgba(10, 0, 20, 0.4)),
       url('/static/css/splash.jpg');
     background-size: cover;
     background-position: 50% 50%;

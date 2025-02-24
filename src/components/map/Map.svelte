@@ -9,6 +9,7 @@
   import { bindMapEvents } from './map-events.js'
 
   import Legend from './Legend.svelte'
+  import MapTooltip from './MapTooltip.svelte'
 
   const token = import.meta.env.VITE_MAPBOX_TOKEN
   const isMobile = document.documentElement.clientWidth <= 1020
@@ -29,6 +30,20 @@
   }
 
   const source = getSource()
+
+  let tooltipProps = $state({
+    loading: false,
+    position: [0, 0],
+    data: {
+      currentRegions: [],
+      mode: [],
+      arriveData: [],
+      departData: [],
+    },
+  })
+  const tooltipCallback = (props) => {
+    tooltipProps = { ...tooltipProps, ...props }
+  }
 
   mapboxgl.accessToken = token
 
@@ -103,7 +118,8 @@
       bindMapEvents(
         map,
         Promise.all([mapData, secondaryData, tertiaryData]),
-        dataset2
+        dataset2,
+        tooltipCallback
       )
     })
   })
@@ -113,7 +129,7 @@
   <div id="map-content"></div>
   <Legend />
   <SatelliteButton {style} {styleChange} />
-  <map-tooltip></map-tooltip>
+  <MapTooltip {...tooltipProps} />
 </div>
 
 <style>

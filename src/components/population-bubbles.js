@@ -1,5 +1,4 @@
 import { LitElement, css } from 'lit-element'
-import './map-tooltip.js'
 
 // no no no really should not be doing this yikes
 import Dispatcher from '../dispatcher.js'
@@ -45,12 +44,13 @@ class PopulationBubbles extends LitElement {
       .interpolate(d3.interpolateHcl)
 
     const [svgContainer, svg] = this.getElement()
-    const mapTooltip = document.createElement('map-tooltip')
-    mapTooltip.setAttribute('data', JSON.stringify(this.tooltipData))
-    mapTooltip.setAttribute('locationContext', 'single')
-    mapTooltip.setAttribute('percentage', 'true')
-    mapTooltip.setAttribute('showOnly', this.showOnly)
-    mapTooltip.setAttribute('opacity', 0)
+    // TODO: needs to be use the new svelte map tooltip
+    // const mapTooltip = document.createElement('map-tooltip')
+    // mapTooltip.setAttribute('data', JSON.stringify(this.tooltipData))
+    // mapTooltip.setAttribute('locationContext', 'single')
+    // mapTooltip.setAttribute('percentage', 'true')
+    // mapTooltip.setAttribute('showOnly', this.showOnly)
+    // mapTooltip.setAttribute('opacity', 0)
 
     if (this.attribution === true) {
       svg
@@ -116,7 +116,7 @@ class PopulationBubbles extends LitElement {
         }
 
         // element will be disposed when the next page loads
-        mapTooltip.setAttribute('loading', true)
+        // mapTooltip.setAttribute('loading', true)
       })
       .on('touchstart', () => {
         isTouch = true
@@ -124,26 +124,26 @@ class PopulationBubbles extends LitElement {
       .on('mouseover', function () {
         if (isTouch) return
         d3.select(this).style('opacity', 0.8)
-        mapTooltip.setAttribute('opacity', 1)
+        // mapTooltip.setAttribute('opacity', 1)
       })
       .on('mouseleave', function () {
         isTouch = false
         d3.select(this).style('opacity', 1)
-        mapTooltip.setAttribute('opacity', 0)
+        // mapTooltip.setAttribute('opacity', 0)
       })
       .on('mousemove', (d) => {
-        if (needFrame) {
-          needFrame = false
-          const x = d3.event.pageX
-          const y = d3.event.pageY
-          const id = d.key
-          requestAnimationFrame(() => {
-            needFrame = true
-            mapTooltip.setAttribute('id', id)
-            mapTooltip.setAttribute('x', x)
-            mapTooltip.setAttribute('y', y)
-          })
-        }
+        // if (needFrame) {
+        //   needFrame = false
+        //   const x = d3.event.pageX
+        //   const y = d3.event.pageY
+        //   const id = d.key
+        //   requestAnimationFrame(() => {
+        //     needFrame = true
+        //     mapTooltip.setAttribute('id', id)
+        //     mapTooltip.setAttribute('x', x)
+        //     mapTooltip.setAttribute('y', y)
+        //   })
+        // }
       })
 
     const circle = node
@@ -209,7 +209,7 @@ class PopulationBubbles extends LitElement {
       node.attr('transform', (e) => `translate(${e.x}, ${e.y})`)
     })
 
-    svgContainer.appendChild(mapTooltip)
+    // svgContainer.appendChild(mapTooltip)
     return svgContainer
   }
 }

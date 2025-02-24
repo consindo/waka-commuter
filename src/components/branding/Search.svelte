@@ -1,7 +1,7 @@
 <script>
   import Dispatcher from '../../dispatcher.js'
 
-  let { regionNames } = $props();
+  let { regionNames } = $props()
 
   let ctrlKey = false
   let metaKey = false

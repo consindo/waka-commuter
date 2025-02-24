@@ -1,10 +1,14 @@
 <script>
   import { onMount } from 'svelte'
   import Dispatcher from '../dispatcher.js'
+  import MapTooltip from './map/MapTooltip.svelte'
 
   let { data, mode, tooltipData } = $props()
 
-  let needFrame = true
+  let id = $state(null)
+  let loading = $state(false)
+  let position = $state([0, 0])
+  let opacity = $state(0)
 
   // takes 30 hottest results
   const graphData = data
@@ -28,29 +32,19 @@
       }
 
       // element will be disposed when the next page loads
-      mapTooltip.setAttribute('loading', true)
+      loading = true
     }
     const tooltipover = () => {
       d3.select(this).style('opacity', 0.8)
-      mapTooltip.setAttribute('opacity', 1)
+      opacity = 1
     }
     const tooltipleave = () => {
       d3.select(this).style('opacity', 1)
-      mapTooltip.setAttribute('opacity', 0)
+      opacity = 0
     }
     const tooltipmove = (d) => {
-      if (needFrame) {
-        needFrame = false
-        const x = d3.event.pageX
-        const y = d3.event.pageY
-        const id = d.key
-        requestAnimationFrame(() => {
-          needFrame = true
-          mapTooltip.setAttribute('id', id)
-          mapTooltip.setAttribute('x', x)
-          mapTooltip.setAttribute('y', y)
-        })
-      }
+      id = d.key
+      position = [d3.event.pageX, d3.event.pageY]
     }
 
     if (graphData.length === 0) return
@@ -128,14 +122,6 @@
       .on('mouseover', tooltipover)
       .on('mouseleave', tooltipleave)
       .on('mousemove', tooltipmove)
-
-    const mapTooltip = document.createElement('map-tooltip')
-    mapTooltip.setAttribute('data', tooltipData)
-    mapTooltip.setAttribute('locationContext', 'single')
-    mapTooltip.setAttribute('percentage', 'true')
-    mapTooltip.setAttribute('showOnly', mode)
-    mapTooltip.setAttribute('opacity', 0)
-    el.appendChild(mapTooltip)
   })
 </script>
 
@@ -143,6 +129,18 @@
   <h3>Top {mode}</h3>
 {/if}
 <div bind:this={el}></div>
+{#if tooltipData && id}
+  <MapTooltip
+    data={tooltipData}
+    locationContext="single"
+    percentage
+    {id}
+    {position}
+    showOnly={mode}
+    {loading}
+    {opacity}
+  />
+{/if}
 
 <style>
   h3 {

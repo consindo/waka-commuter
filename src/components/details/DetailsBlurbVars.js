@@ -1,7 +1,12 @@
 import { getSource } from '../../sources.js'
 import { humanRegionName } from '../../data.js'
 
-export const getVars = ({ currentRegions, destinationData, segment, modeData }) => {
+export const getVars = ({
+  currentRegions,
+  destinationData,
+  segment,
+  modeData,
+}) => {
   const place = humanRegionName(currentRegions, 'full')
   const placeReduced = humanRegionName(currentRegions, 'condensed')
 

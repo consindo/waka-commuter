@@ -366,7 +366,7 @@
           arriveMode = arriveModeData
           departureMode = departureModeData
 
-          tooltip = tooltipJSON
+          tooltip = tooltipData
 
           // also consuming the tooltip data in the population bubbles
           const initialLocation = getLocation(features, regionName[0])
