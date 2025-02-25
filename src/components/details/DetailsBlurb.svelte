@@ -27,7 +27,7 @@
 
 <p>
   <strong class={mode}
-    >{vars.travellersCount}
+    >{vars.travellersCount.toLocaleString()}
     {vars.travellersCount === 1 ? 'person' : 'people'} ({vars.travellersPercentage}%
     of {mode})</strong
   >
@@ -35,7 +35,7 @@
   <span class="less-emphasis">{vars.place}</span>
   for {vars.destination.length > 0 ? vars.destination.join(' & ') : ''}, while
   <strong class="wfh"
-    >{vars.residentsCount}
+    >{vars.residentsCount.toLocaleString()}
     {vars.residentsCount === 1 ? 'person' : 'people'} ({vars.residentsPercentage}%
     of arrivals)</strong
   >

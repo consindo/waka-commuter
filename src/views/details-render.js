@@ -1,6 +1,5 @@
 // web components
 import '../components/population-bubbles.js'
-import '../components/travel-mode.js'
 
 import { getSource } from '../sources.js'
 const source = getSource()
@@ -22,22 +21,6 @@ const setBubble = (container, location, data, tooltipData, showOnly) => {
 
   locationContainer.innerHTML = ''
   locationContainer.appendChild(bubble)
-}
-
-const setMode = (container, data) => {
-  // effectively disables the graphs
-  if (data === null) {
-    container.querySelector('.mode-container').style.display = 'none'
-    return
-  } else {
-    container.querySelector('.mode-container').style.display = 'block'
-  }
-  const mode = document.createElement('travel-mode')
-  mode.setAttribute('data', JSON.stringify({ Total: data.Total }))
-
-  const arriveModeContainer = container.querySelector('.mode')
-  arriveModeContainer.innerHTML = ''
-  arriveModeContainer.appendChild(mode)
 }
 
 export const setDetails = (
@@ -69,8 +52,6 @@ export const setDetails = (
   // do the html updates
   setBubble(arriveContainer, location, arriveData, tooltipData, 'arrivals')
   setBubble(departContainer, location, departData, tooltipData, 'departures')
-  setMode(arriveContainer, arriveModeData)
-  setMode(departContainer, departModeData)
 }
 
 export const hideDetails = () => {

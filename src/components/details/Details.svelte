@@ -22,6 +22,7 @@
   import DetailsBlurb from './DetailsBlurb.svelte'
   import PopulationGraph from '../PopulationGraph.svelte'
   import PopulationPredictions from './PopulationPredictions.svelte'
+  import TravelMode from './TravelMode.svelte'
 
   let { mapData } = $props()
 
@@ -452,6 +453,9 @@
               >
             {/if}
           </h4>
+          {#if arriveMode}
+            <TravelMode data={arriveMode.Total} />
+          {/if}
           <div class="mode"></div>
         </div>
       </div>
@@ -515,6 +519,9 @@
               >
             {/if}
           </h4>
+          {#if departureMode}
+            <TravelMode data={departureMode.Total} />
+          {/if}
           <div class="mode"></div>
         </div>
       </div>

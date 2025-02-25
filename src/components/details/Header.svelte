@@ -124,7 +124,7 @@
         {#if populationLink}
           <a
             class="population-link"
-            href="https://www.stats.govt.nz/tools/2018-census-place-summaries/{path}#population-and-dwellings`"
+            href="https://www.stats.govt.nz/tools/2018-census-place-summaries/{path}#population-and-dwellings"
             target="_blank"
             rel="noopener noreferrer"
           >
