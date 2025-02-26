@@ -42,7 +42,6 @@
   "license": "ISC",
   "dependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
-    "lit-element": "^3.3.3",
     "mapbox-gl": "^3.10.0",
     "polylabel": "^2.0.1"
   },

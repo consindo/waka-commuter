@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import { onMount } from 'svelte'
 
   import { getSource } from '../../sources.js'
@@ -23,6 +21,7 @@
   import PopulationGraph from '../PopulationGraph.svelte'
   import PopulationPredictions from './PopulationPredictions.svelte'
   import TravelMode from './TravelMode.svelte'
+  import PopulationBubbles from './PopulationBubbles.svelte'
 
   let { mapData } = $props()
 
@@ -49,18 +48,15 @@
   let arriveMode = $state(null)
   let departureMode = $state(null)
 
-  const source = getSource()
+  let initialLocation = $state(null)
 
-  run(() => {
-    document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
-      source.title || 'Commuter - Waka'
-    }`
-  })
+  const source = getSource()
 
   if (!source.isAllSegmentEnabled) {
     Dispatcher.dataSegment = source.segments[0]
   }
 
+  // todo: this needs to be removed from onmount
   onMount(() => {
     const friendlyNames = {}
     mapData.then((data) => {
@@ -370,7 +366,9 @@
           tooltip = tooltipData
 
           // also consuming the tooltip data in the population bubbles
-          const initialLocation = getLocation(features, regionName[0])
+          initialLocation = getLocation(features, regionName[0])
+
+          // todo: this can almost! be deleted
           setDetails(
             initialLocation,
             arriveDataFriendly,
@@ -387,6 +385,13 @@
     })
   })
 </script>
+
+<svelte:head>
+  <title
+    >{documentTitle ? `${documentTitle} - ` : ''}{source.title ||
+      'Commuter - Waka'}</title
+  >
+</svelte:head>
 
 <div class="details-location hidden">
   <Header
@@ -415,6 +420,17 @@
     <div class="arrive-from graph-container">
       <div class="location-container">
         <div class="location-inner">
+          {#if initialLocation}
+            <PopulationBubbles
+              scale={initialLocation}
+              data={arrivals}
+              tooltipData={tooltip}
+              showOnly="arrivals"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          {/if}
           <div class="location"></div>
         </div>
         <div class="location-graph">
@@ -481,6 +497,17 @@
     <div class="depart-to graph-container">
       <div class="location-container">
         <div class="location-inner">
+          {#if initialLocation}
+            <PopulationBubbles
+              scale={initialLocation}
+              data={departures}
+              tooltipData={tooltip}
+              showOnly="departures"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          {/if}
           <div class="location"></div>
         </div>
         <div class="location-graph">
