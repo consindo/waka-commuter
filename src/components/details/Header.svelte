@@ -8,7 +8,8 @@
   import { getSource } from '../../sources.js'
   import ModeToggle from './ModeToggle.svelte'
 
-  let { title, firstRegion, populationLabel, populationLink } = $props()
+  let { title, firstRegion, populationLabel, populationLink, populationCount } =
+    $props()
 
   const source = getSource()
 
@@ -129,11 +130,11 @@
             rel="noopener noreferrer"
           >
             <strong class="population-label">{populationLabel}</strong>
-            <span class="population-count"></span>
+            <span class="population-count">{populationCount}</span>
           </a>
         {:else}
           <strong class="population-label">{populationLabel}</strong>
-          <span class="population-count"></span>
+          <span class="population-count">{populationCount}</span>
         {/if}
       </p>
     </div>

@@ -131,7 +131,7 @@
       <g
         class="node"
         transform="translate({x}, {y})"
-        onclick={triggerClick(d.key)}
+        onclick={triggerClick(d.originalKey)}
       >
         <circle
           data-name={d.key}

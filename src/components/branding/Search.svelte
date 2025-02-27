@@ -6,6 +6,8 @@
   let ctrlKey = false
   let metaKey = false
 
+  let inputValue = $state('')
+
   const onKeyPress = (e) => {
     if (e.ctrlKey !== undefined) ctrlKey = e.ctrlKey
     if (e.metaKey !== undefined) metaKey = e.metaKey
@@ -15,7 +17,7 @@
   const onSearch = async (e) => {
     const data = await regionNames
     if (e.currentTarget === null) return
-    const { value } = e.currentTarget
+    const value = inputValue
 
     // checks to make sure they used a precanned one
     const match = data.find((region) => region.name === value)
@@ -48,6 +50,7 @@
   <input placeholder="Loading..." />
 {:then regions}
   <input
+    bind:value={inputValue}
     list="search-choice"
     placeholder="Search areas..."
     onselect={onSearch}

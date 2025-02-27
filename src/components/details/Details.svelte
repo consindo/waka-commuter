@@ -13,7 +13,6 @@
   } from '../../data.js'
 
   import { modes } from './ModeMap.js'
-  import { setDetails, hideDetails } from '../../views/details-render.js'
 
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
@@ -29,6 +28,7 @@
   let documentTitle = $state(null)
   let firstRegion = $state('')
   let populationLabel = $state('')
+  let populationCount = $state('')
 
   let hideArrivals = $state(false)
   let hideDepartures = $state(false)
@@ -75,7 +75,10 @@
         )
 
       Dispatcher.bind('clear-blocks', () => {
-        hideDetails()
+        // todo: make this more svelte
+        document.querySelector('.details-splash').classList.remove('hidden')
+        document.querySelector('.details-location').classList.add('hidden')
+
         documentTitle = null
       })
 
@@ -368,16 +371,25 @@
           // also consuming the tooltip data in the population bubbles
           initialLocation = getLocation(features, regionName[0])
 
-          // todo: this can almost! be deleted
-          setDetails(
-            initialLocation,
-            arriveDataFriendly,
-            departDataFriendly,
-            arriveModeData,
-            departureModeData,
-            tooltipJSON,
-            segment
-          )
+          // todo: make this more svelte
+          document.querySelector('.details-splash').classList.add('hidden')
+          document.querySelector('.details-location').classList.remove('hidden')
+
+          let pop = 'Unknown'
+          if (
+            departureModeData != null &&
+            departureModeData.Total.Total !== undefined
+          ) {
+            pop = departureModeData.Total.Total.toLocaleString()
+          } else if (
+            arriveModeData != null &&
+            arriveModeData.Total.Total !== undefined
+          ) {
+            pop = arriveModeData.Total.Total.toLocaleString()
+          }
+          if (source.isModeGraphsEnabled) {
+            populationCount = pop
+          }
 
           dataSegment = segment
         }
@@ -399,6 +411,7 @@
     {firstRegion}
     {populationLabel}
     populationLink={source === 'statsnz'}
+    {populationCount}
   />
   <div class="arrive-from warning" class:hidden={!invalidArrival}>
     <p>
