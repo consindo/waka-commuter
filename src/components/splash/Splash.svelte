@@ -6,6 +6,8 @@
   import DataSources from './DataSources.svelte'
   import DataSourcesAu from './DataSourcesAu.svelte'
 
+  const { setLocation } = $props()
+
   const source = getSource()
 
   const getImageUrl = (name) =>
@@ -22,7 +24,7 @@
         rgba(10, 0, 20, 0.4)
       ), url({getImageUrl('splash-2')})"
     />
-    <Regions on:locationChange enabledRegions={['nz-chc']} />
+    <Regions {setLocation} enabledRegions={['nz-chc']} />
   {:else if source.brandingClass === 'ason'}
     <Banner
       dataSource="2021 Census"
@@ -33,7 +35,7 @@
       ), url({getImageUrl('splash-3')})"
     />
     <Regions
-      on:locationChange
+      {setLocation}
       enabledRegions={[
         'au-syd',
         'au-mel',
@@ -50,7 +52,7 @@
   {:else}
     <Banner dataSource="2018 Census" />
     <Regions
-      on:locationChange
+      {setLocation}
       enabledRegions={[
         'nz-akl',
         'nz-chc',

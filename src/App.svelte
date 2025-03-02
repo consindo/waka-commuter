@@ -10,7 +10,8 @@
   let sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
 
-  let secondaryData, tertiaryData
+  let secondaryData = $state(),
+    tertiaryData = $state()
   if (source.secondaryShapeFile) {
     secondaryData = fetch(source.secondaryShapeFile)
       .then((res) => res.json())
@@ -42,7 +43,7 @@
       })
   }
 
-  let dataset2
+  let dataset2 = $state()
   if (source.dataset2ShapeFile) {
     dataset2 = Promise.all([
       fetch(source.dataset2ShapeFile).then((res) => res.json()),
@@ -80,20 +81,15 @@
       .sort((a, b) => a.name.localeCompare(b.name, undefined, {}))
   }
 
-  let regionNames = getRegionNames(window.sa2Data)
+  let regionNames = $state(getRegionNames(window.sa2Data))
 
-  let style = 'map'
-  let [lng, lat, zoom] = [...source.initialPosition]
+  let [lng, lat, zoom] = $state([...source.initialPosition])
 
-  const flyTo = (e) => {
-    const rand = Math.random() * 0.001
-    lat = parseFloat(e.detail.lat) + rand
-    lng = parseFloat(e.detail.lng) + rand
-    zoom = parseFloat(e.detail.zoom)
-  }
-
-  const changeStyle = (e) => {
-    style = e.detail.style
+  const flyTo = (props) => {
+    const rand = Math.random() * 0.00001
+    lat = parseFloat(props.lat) + rand
+    lng = parseFloat(props.lng) + rand
+    zoom = parseFloat(props.zoom)
   }
 </script>
 
@@ -107,11 +103,9 @@
     {lat}
     {lng}
     {zoom}
-    {style}
-    on:styleChange={changeStyle}
   />
   <section>
-    <Splash on:locationChange={flyTo} />
+    <Splash setLocation={flyTo} />
     <Details mapData={sa2Data} />
   </section>
 </div>
