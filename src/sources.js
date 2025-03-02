@@ -1,14 +1,17 @@
-import sa2 from '../static/shapes/sa2-optimized.json?url'
+import sa22023 from '../static/shapes/sa2-2023-optimized.json?url'
+import sa22018 from '../static/shapes/sa2-2018-optimized.json?url'
 
 const sources = {
   commuterview: {
-    shapeFile: sa2,
+    shapeFile: sa22023,
+    dataset2ShapeFile: sa22018,
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
     isAllSegmentEnabled: true,
     isMapAreaLabelsEnabled: false,
-    segments: ['workplace', 'education'],
+    segments: ['2023-workplace', '2023-education', '2018-workplace', '2018-education'],
     detailsControls: ['All', 'Workplace', 'Education'],
+    detailsSecondaryControls: ['2023', '2018'],
     brandingClass: 'statsnz',
   },
   ason: {

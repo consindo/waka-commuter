@@ -47,7 +47,9 @@
   if (source.dataset2ShapeFile) {
     dataset2 = Promise.all([
       fetch(source.dataset2ShapeFile).then((res) => res.json()),
-      fetch(source.dataset2SecondaryShapeFile).then((res) => res.json()),
+      source.dataset2SecondaryShapeFile
+        ? fetch(source.dataset2SecondaryShapeFile).then((res) => res.json())
+        : { features: [] },
     ]).then(async (data) => {
       const sa2 = await window.sa2Data
       await secondaryData

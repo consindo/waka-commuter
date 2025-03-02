@@ -146,10 +146,10 @@
               href="#"
               class="btn-segment"
               onclick={triggerSegment(control)}
-              class:selected={(source.detailsSecondaryControls != null
+              class:selected={/*(source.detailsSecondaryControls != null
                 ? currentSegment.split('-')[1]
                 : currentSegment
-              ).startsWith(control.toLowerCase())}>{control}</a
+              ).startsWith(control.toLowerCase())*/ false}>{control}</a
             >
           </li>
         {/each}
