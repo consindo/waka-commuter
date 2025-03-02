@@ -1,5 +1,5 @@
-const fs = require('fs')
-const geojson = JSON.parse(fs.readFileSync('./sa2.json'))
+import fs from 'fs'
+const geojson = JSON.parse(fs.readFileSync('./sa2-2023.json'))
 
 const transformFilename = (name) => {
   return name
@@ -26,32 +26,32 @@ geojson.features = geojson.features
         ...i.geometry,
         coordinates: i.geometry['coordinates'].map(truncator),
       },
-      properties: { name: i.properties.SA22018__1 },
+      properties: { name: i.properties.SA22023__1 },
     }
   })
-  .filter((i) => {
-    const data = JSON.parse(
-      fs.readFileSync(
-        `../../dist/data/regions/${transformFilename(i.properties.name)}.json`
-      )
-    )
-    const isEmpty = !(
-      data.education.departTo ||
-      data.education.arriveFrom ||
-      data.workplace.departTo ||
-      data.workplace.arriveFrom
-    )
-    const isWater =
-      i.properties.name.includes('Oceanic') ||
-      i.properties.name.includes('Inlet') ||
-      i.properties.name.includes('Inland water') ||
-      i.properties.name.includes('Bays')
+// .filter((i) => {
+//   const data = JSON.parse(
+//     fs.readFileSync(
+//       `../../dist/data/regions/${transformFilename(i.properties.name)}.json`
+//     )
+//   )
+//   const isEmpty = !(
+//     data.education.departTo ||
+//     data.education.arriveFrom ||
+//     data.workplace.departTo ||
+//     data.workplace.arriveFrom
+//   )
+//   const isWater =
+//     i.properties.name.includes('Oceanic') ||
+//     i.properties.name.includes('Inlet') ||
+//     i.properties.name.includes('Inland water') ||
+//     i.properties.name.includes('Bays')
 
-    if (isEmpty && !isWater) {
-      console.log(i.properties.name, 'is empty and not water!')
-    }
-    return !(isEmpty && isWater)
-  })
+//   if (isEmpty && !isWater) {
+//     console.log(i.properties.name, 'is empty and not water!')
+//   }
+//   return !(isEmpty && isWater)
+// })
 
-fs.writeFileSync('./sa2-optimized.json', JSON.stringify(geojson))
+fs.writeFileSync('./sa2-2023-optimized.json', JSON.stringify(geojson))
 console.log('Processed!')

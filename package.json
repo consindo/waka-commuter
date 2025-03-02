@@ -11,6 +11,7 @@
     "build:js": "vite build",
     "process": "npm run process:area && npm run process:travel && npm run process:ethnicity && npm run process:combine && npm run process:copy",
     "process:area": "node data_sources/parsers/area-to-area-parser.js",
+    "process:concordance": "node data_sources/parsers/concordance.js",
     "process:ethnicity": "node data_sources/parsers/ethnicity-parser.js",
     "process:travel": "node data_sources/parsers/workplace-travel-split-parser.js",
     "process:combine": "node data_sources/parsers/combine-files.js",
