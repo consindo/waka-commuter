@@ -13,43 +13,50 @@
   } from '../../data.js'
 
   import { modes } from './ModeMap.js'
-  import { setDetails, hideDetails } from '../../views/details-render.js'
 
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
+  import DetailsBlurb from './DetailsBlurb.svelte'
   import PopulationGraph from '../PopulationGraph.svelte'
   import PopulationPredictions from './PopulationPredictions.svelte'
+  import TravelMode from './TravelMode.svelte'
+  import PopulationBubbles from './PopulationBubbles.svelte'
 
-  export let mapData
+  let { mapData } = $props()
 
-  let detailsTitle = null
-  let documentTitle = null
-  let firstRegion = ''
-  let populationLabel = ''
+  let detailsTitle = $state(null)
+  let documentTitle = $state(null)
+  let firstRegion = $state('')
+  let populationLabel = $state('')
+  let populationCount = $state('')
 
-  let hideArrivals = false
-  let hideDepartures = false
-  let invalidArrival = false
-  let invalidDeparture = false
+  let hideArrivals = $state(false)
+  let hideDepartures = $state(false)
+  let invalidArrival = $state(false)
+  let invalidDeparture = $state(false)
 
-  let tooltip = null
-  let arrivals = null
-  let departures = null
-  let hiddenArrivals = []
-  let hiddenDepartures = []
+  let tooltip = $state(null)
+  let arrivals = $state(null)
+  let departures = $state(null)
+  let hiddenArrivals = $state([])
+  let hiddenDepartures = $state([])
 
-  let populationPredictions = {}
+  let populationPredictions = $state({})
+
+  let currentRegions = $state(null)
+  let dataSegment = $state(null)
+  let arriveMode = $state(null)
+  let departureMode = $state(null)
+
+  let initialLocation = $state(null)
 
   const source = getSource()
-
-  $: document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
-    source.title || 'Commuter - Waka'
-  }`
 
   if (!source.isAllSegmentEnabled) {
     Dispatcher.dataSegment = source.segments[0]
   }
 
+  // todo: this needs to be removed from onmount
   onMount(() => {
     const friendlyNames = {}
     mapData.then((data) => {
@@ -68,7 +75,10 @@
         )
 
       Dispatcher.bind('clear-blocks', () => {
-        hideDetails()
+        // todo: make this more svelte
+        document.querySelector('.details-splash').classList.remove('hidden')
+        document.querySelector('.details-location').classList.add('hidden')
+
         documentTitle = null
       })
 
@@ -283,8 +293,10 @@
             hiddenDepartures.sort((a, b) => b.value - a.value)
           }
 
+          currentRegions = regionName.map(regionNameMapper)
+
           const tooltipData = {
-            currentRegions: regionName.map(regionNameMapper),
+            currentRegions,
             arriveData: arriveDataFriendly,
             departData: departDataFriendly,
             mode: ['work', 'study'],
@@ -351,24 +363,47 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
-          tooltip = tooltipJSON
+          arriveMode = arriveModeData
+          departureMode = departureModeData
+
+          tooltip = tooltipData
 
           // also consuming the tooltip data in the population bubbles
-          const initialLocation = getLocation(features, regionName[0])
-          setDetails(
-            initialLocation,
-            arriveDataFriendly,
-            departDataFriendly,
-            arriveModeData,
-            departureModeData,
-            tooltipJSON,
-            segment
-          )
+          initialLocation = getLocation(features, regionName[0])
+
+          // todo: make this more svelte
+          document.querySelector('.details-splash').classList.add('hidden')
+          document.querySelector('.details-location').classList.remove('hidden')
+
+          let pop = 'Unknown'
+          if (
+            departureModeData != null &&
+            departureModeData.Total.Total !== undefined
+          ) {
+            pop = departureModeData.Total.Total.toLocaleString()
+          } else if (
+            arriveModeData != null &&
+            arriveModeData.Total.Total !== undefined
+          ) {
+            pop = arriveModeData.Total.Total.toLocaleString()
+          }
+          if (source.isModeGraphsEnabled) {
+            populationCount = pop
+          }
+
+          dataSegment = segment
         }
       )
     })
   })
 </script>
+
+<svelte:head>
+  <title
+    >{documentTitle ? `${documentTitle} - ` : ''}{source.title ||
+      'Commuter - Waka'}</title
+  >
+</svelte:head>
 
 <div class="details-location hidden">
   <Header
@@ -376,6 +411,7 @@
     {firstRegion}
     {populationLabel}
     populationLink={source === 'statsnz'}
+    {populationCount}
   />
   <div class="arrive-from warning" class:hidden={!invalidArrival}>
     <p>
@@ -385,11 +421,30 @@
   </div>
   <div class:hidden={hideArrivals || invalidArrival}>
     <h3>Arrivals</h3>
-    <div class="arrive-from blurb-container" />
+    {#if currentRegions}
+      <DetailsBlurb
+        mode="arrivals"
+        {currentRegions}
+        segment={dataSegment}
+        destinationData={arrivals}
+        modeData={arriveMode}
+      />
+    {/if}
     <div class="arrive-from graph-container">
       <div class="location-container">
         <div class="location-inner">
-          <div class="location" />
+          {#if initialLocation}
+            <PopulationBubbles
+              scale={initialLocation}
+              data={arrivals}
+              tooltipData={tooltip}
+              showOnly="arrivals"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          {/if}
+          <div class="location"></div>
         </div>
         <div class="location-graph">
           {#key arrivals}
@@ -427,7 +482,10 @@
               >
             {/if}
           </h4>
-          <div class="mode" />
+          {#if arriveMode}
+            <TravelMode data={arriveMode.Total} />
+          {/if}
+          <div class="mode"></div>
         </div>
       </div>
     </div>
@@ -440,11 +498,30 @@
   </div>
   <div class:hidden={hideDepartures || invalidDeparture}>
     <h3>Departures</h3>
-    <div class="depart-to blurb-container" />
+    {#if currentRegions}
+      <DetailsBlurb
+        mode="departures"
+        {currentRegions}
+        segment={dataSegment}
+        destinationData={departures}
+        modeData={departureMode}
+      />
+    {/if}
     <div class="depart-to graph-container">
       <div class="location-container">
         <div class="location-inner">
-          <div class="location" />
+          {#if initialLocation}
+            <PopulationBubbles
+              scale={initialLocation}
+              data={departures}
+              tooltipData={tooltip}
+              showOnly="departures"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          {/if}
+          <div class="location"></div>
         </div>
         <div class="location-graph">
           {#key departures}
@@ -482,7 +559,10 @@
               >
             {/if}
           </h4>
-          <div class="mode" />
+          {#if departureMode}
+            <TravelMode data={departureMode.Total} />
+          {/if}
+          <div class="mode"></div>
         </div>
       </div>
     </div>

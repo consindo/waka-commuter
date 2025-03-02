@@ -1,10 +1,12 @@
 <script>
   import Dispatcher from '../../dispatcher.js'
 
-  export let regionNames
+  let { regionNames } = $props()
 
   let ctrlKey = false
   let metaKey = false
+
+  let inputValue = $state('')
 
   const onKeyPress = (e) => {
     if (e.ctrlKey !== undefined) ctrlKey = e.ctrlKey
@@ -15,7 +17,7 @@
   const onSearch = async (e) => {
     const data = await regionNames
     if (e.currentTarget === null) return
-    const { value } = e.currentTarget
+    const value = inputValue
 
     // checks to make sure they used a precanned one
     const match = data.find((region) => region.name === value)
@@ -48,17 +50,18 @@
   <input placeholder="Loading..." />
 {:then regions}
   <input
+    bind:value={inputValue}
     list="search-choice"
     placeholder="Search areas..."
-    on:select={onSearch}
-    on:change={onSearch}
-    on:keydown={onKeyPress}
-    on:keyup={onKeyPress}
-    on:focus={onFocus}
+    onselect={onSearch}
+    onchange={onSearch}
+    onkeydown={onKeyPress}
+    onkeyup={onKeyPress}
+    onfocus={onFocus}
   />
   <datalist id="search-choice">
     {#each regions as region}
-      <option value={region.name} />{/each}
+      <option value={region.name}></option>{/each}
   </datalist>
 {/await}
 

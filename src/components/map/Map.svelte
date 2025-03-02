@@ -1,5 +1,5 @@
 <script>
-  import { onMount, afterUpdate } from 'svelte'
+  import { onMount } from 'svelte'
 
   import { getSource } from '../../sources.js'
   import SatelliteButton from './SatelliteButton.svelte'
@@ -9,34 +9,60 @@
   import { bindMapEvents } from './map-events.js'
 
   import Legend from './Legend.svelte'
+  import MapTooltip from './MapTooltip.svelte'
 
   const token = import.meta.env.VITE_MAPBOX_TOKEN
   const isMobile = document.documentElement.clientWidth <= 1020
 
+  const { mapData, secondaryData, tertiaryData, dataset2, lat, lng, zoom } =
+    $props()
+
+  let isLoaded = false
+  let map = $state(null)
+
+  let style = $state('map')
+  const styleChange = (newStyle) => {
+    style = newStyle
+    if (isLoaded) {
+      isLoaded = false
+      map.setStyle(styleUrls[style])
+    }
+  }
+
   const source = getSource()
+
+  let tooltipProps = $state({
+    loading: false,
+    position: [0, 0],
+    data: {
+      currentRegions: [],
+      mode: [],
+      arriveData: [],
+      departData: [],
+    },
+  })
+  const tooltipCallback = (props) => {
+    tooltipProps = { ...tooltipProps, ...props }
+  }
 
   mapboxgl.accessToken = token
 
-  export let mapData,
-    secondaryData,
-    tertiaryData,
-    dataset2,
-    lat,
-    lng,
-    zoom,
-    style
-
-  // gross hack
-  let oldLat = lat
-  let oldLng = lng
+  $effect(() => {
+    if (map) {
+      map.flyTo({
+        center: [lng, lat],
+        zoom,
+        essential: true,
+      })
+      // on mobile, hides menu
+      document.getElementById('app').classList.add('map-view')
+    }
+  })
 
   const styleUrls = {
     map: 'mapbox://styles/mapbox/dark-v11?optimize=true',
     satellite: 'mapbox://styles/mapbox/satellite-v9?optimize=true',
   }
-
-  let isLoaded = false
-  let map = null
 
   onMount(async () => {
     map = new mapboxgl.Map({
@@ -92,36 +118,18 @@
       bindMapEvents(
         map,
         Promise.all([mapData, secondaryData, tertiaryData]),
-        dataset2
+        dataset2,
+        tooltipCallback
       )
     })
-  })
-
-  afterUpdate(() => {
-    if (oldLat !== lat || oldLng !== lng) {
-      map.flyTo({
-        center: [lng, lat],
-        zoom,
-        essential: true,
-      })
-      oldLat = lat
-      oldLng = lng
-      return
-    }
-
-    if (isLoaded) {
-      isLoaded = false
-      map.setStyle(styleUrls[style])
-    }
-    document.getElementById('app').classList.add('map-view')
   })
 </script>
 
 <div id="map" class:expanded={source.brandingClass === 'ason'}>
-  <div id="map-content" />
+  <div id="map-content"></div>
   <Legend />
-  <SatelliteButton on:styleChange />
-  <map-tooltip />
+  <SatelliteButton {style} {styleChange} />
+  <MapTooltip {...tooltipProps} />
 </div>
 
 <style>

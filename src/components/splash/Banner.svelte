@@ -1,6 +1,6 @@
 <script>
   import expand from '/static/expand.svg'
-  export let dataSource, background
+  let { dataSource, background } = $props()
 </script>
 
 <div class="splash-bg" style={`background-image: ${background}`}>
@@ -17,7 +17,7 @@
     <button
       title="Learn More"
       class="btn-expand"
-      on:click={() =>
+      onclick={() =>
         document.getElementById('app').classList.toggle('map-view')}
     >
       <img alt="Toggle Details" src={expand} />
@@ -27,11 +27,8 @@
 
 <style>
   .splash-bg {
-    background-image: linear-gradient(
-        120deg,
-        rgba(10, 0, 20, 0.8) 50%,
-        rgba(10, 0, 20, 0.4)
-      ),
+    background-image:
+      linear-gradient(120deg, rgba(10, 0, 20, 0.8) 50%, rgba(10, 0, 20, 0.4)),
       url('/static/css/splash.jpg');
     background-size: cover;
     background-position: 50% 50%;
