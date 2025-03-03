@@ -28,7 +28,7 @@ class Dispatcher extends Events {
 
   dataDirection = 'all'
 
-  dataSegment = 'all'
+  dataSegment = 'unknown'
 
   concordance = {}
 

@@ -34,15 +34,19 @@
     }
   }
   const triggerSecondarySegment = (segment) => () => {
-    // more ason specific stuff
     if (Object.keys(Dispatcher.concordance).length > 0) {
-      Dispatcher.currentRegion = Dispatcher.currentRegion
-        .map(
-          (i) =>
-            Dispatcher.concordance[i][`${segment}-sa2`] ||
-            Dispatcher.concordance[i][`${segment}-dzn`]
-        )
-        .flat()
+      // more ason specific stuff
+      if (source.brandingClass === 'ason') {
+        Dispatcher.currentRegion = Dispatcher.currentRegion
+          .map(
+            (i) =>
+              Dispatcher.concordance[i][`${segment}-sa2`] ||
+              Dispatcher.concordance[i][`${segment}-dzn`]
+          )
+          .flat()
+      } else {
+        console.log('TODO: solve concordance')
+      }
     }
     const newSegment = segment.toLowerCase()
     const primary = Dispatcher.dataSegment.split('-')[1]
@@ -146,10 +150,10 @@
               href="#"
               class="btn-segment"
               onclick={triggerSegment(control)}
-              class:selected={/*(source.detailsSecondaryControls != null
+              class:selected={(source.detailsSecondaryControls != null
                 ? currentSegment.split('-')[1]
                 : currentSegment
-              ).startsWith(control.toLowerCase())*/ false}>{control}</a
+              ).startsWith(control.toLowerCase())}>{control}</a
             >
           </li>
         {/each}
@@ -180,7 +184,7 @@
   .primary-controls li:not(:last-child)::after,
   .secondary-controls li:not(:last-child)::after {
     content: '·';
-    margin-right: 3px;
+    margin: 0 3px;
   }
   .ason img.logo {
     display: none;
