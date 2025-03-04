@@ -9,7 +9,7 @@
     "build:ason": "npm run process:ason && npm run shapes:ason && npm run build:js",
     "build:wsp": "npm run process:wsp && npm run shapes:wsp && npm run build:js",
     "build:js": "vite build",
-    "process": "npm run process:area && npm run process:travel && npm run process:ethnicity && npm run process:combine && npm run process:copy",
+    "process": "npm run process:concordance && npm run process:area && npm run process:travel && npm run process:ethnicity && npm run process:combine && npm run process:copy",
     "process:area": "node data_sources/parsers/area-to-area-parser.js",
     "process:concordance": "node data_sources/parsers/concordance.js",
     "process:ethnicity": "node data_sources/parsers/ethnicity-parser.js",
