@@ -29,29 +29,36 @@ geojson.features = geojson.features
       properties: { name: i.properties.SA22023__1 },
     }
   })
-// .filter((i) => {
-//   const data = JSON.parse(
-//     fs.readFileSync(
-//       `../../dist/data/regions/${transformFilename(i.properties.name)}.json`
-//     )
-//   )
-//   const isEmpty = !(
-//     data.education.departTo ||
-//     data.education.arriveFrom ||
-//     data.workplace.departTo ||
-//     data.workplace.arriveFrom
-//   )
-//   const isWater =
-//     i.properties.name.includes('Oceanic') ||
-//     i.properties.name.includes('Inlet') ||
-//     i.properties.name.includes('Inland water') ||
-//     i.properties.name.includes('Bays')
+  .filter((i) => {
+    let data
+    try {
+      data = JSON.parse(
+        fs.readFileSync(
+          `../../dist/data/regions/${transformFilename(i.properties.name)}.json`
+        )
+      )
+    } catch (err) {
+      console.warn('skipping optimization of', `${i.properties.name}.json`)
+      return true
+    }
+    const isEmpty = !(
+      data.education.departTo ||
+      data.education.arriveFrom ||
+      data.workplace.departTo ||
+      data.workplace.arriveFrom
+    )
+    const isWater =
+      i.properties.name.includes('Oceanic') ||
+      i.properties.name.includes('Inlet') ||
+      i.properties.name.includes('Inland water') ||
+      i.properties.name.includes('Bays') ||
+      i.properties.name.includes('Island')
 
-//   if (isEmpty && !isWater) {
-//     console.log(i.properties.name, 'is empty and not water!')
-//   }
-//   return !(isEmpty && isWater)
-// })
+    if (isEmpty && !isWater) {
+      console.log(i.properties.name, 'is empty and not water!')
+    }
+    return !(isEmpty && isWater)
+  })
 
 fs.writeFileSync('./sa2-2023-optimized.json', JSON.stringify(geojson))
 console.log('Processed!')

@@ -460,6 +460,19 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         data: tooltipData,
       })
 
+      // STATS NZ SPECIFIC CODE - 'DZN' is secondaryShapeFile
+      if (segment === '2023-all') {
+        map.setLayoutProperty('sa2-lines', 'visibility', 'visible')
+        map.setLayoutProperty('sa2-fill', 'visibility', 'visible')
+        map.setLayoutProperty('dzn-lines', 'visibility', 'none')
+        map.setLayoutProperty('dzn-fill', 'visibility', 'none')
+      } else if (segment === '2018-all') {
+        map.setLayoutProperty('sa2-lines', 'visibility', 'none')
+        map.setLayoutProperty('sa2-fill', 'visibility', 'none')
+        map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
+        map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
+      }
+
       // ASON SPECIFIC CODE
       if (segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
