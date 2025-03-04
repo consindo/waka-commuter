@@ -37,15 +37,25 @@
     if (Object.keys(Dispatcher.concordance).length > 0) {
       // more ason specific stuff
       if (source.brandingClass === 'ason') {
-        Dispatcher.currentRegion = Dispatcher.currentRegion
-          .map(
-            (i) =>
-              Dispatcher.concordance[i][`${segment}-sa2`] ||
-              Dispatcher.concordance[i][`${segment}-dzn`]
+        Dispatcher.currentRegion = Array.from(
+          new Set(
+            Dispatcher.currentRegion
+              .map(
+                (i) =>
+                  Dispatcher.concordance[i][`${segment}-sa2`] ||
+                  Dispatcher.concordance[i][`${segment}-dzn`]
+              )
+              .flat()
           )
-          .flat()
+        )
       } else {
-        console.log('TODO: solve concordance')
+        Dispatcher.currentRegion = Array.from(
+          new Set(
+            Dispatcher.currentRegion
+              .map((i) => Dispatcher.concordance[i][`${segment}-sa2`])
+              .flat()
+          )
+        )
       }
     }
     const newSegment = segment.toLowerCase()
