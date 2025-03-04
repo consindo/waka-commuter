@@ -34,15 +34,29 @@
     }
   }
   const triggerSecondarySegment = (segment) => () => {
-    // more ason specific stuff
     if (Object.keys(Dispatcher.concordance).length > 0) {
-      Dispatcher.currentRegion = Dispatcher.currentRegion
-        .map(
-          (i) =>
-            Dispatcher.concordance[i][`${segment}-sa2`] ||
-            Dispatcher.concordance[i][`${segment}-dzn`]
+      // more ason specific stuff
+      if (source.brandingClass === 'ason') {
+        Dispatcher.currentRegion = Array.from(
+          new Set(
+            Dispatcher.currentRegion
+              .map(
+                (i) =>
+                  Dispatcher.concordance[i][`${segment}-sa2`] ||
+                  Dispatcher.concordance[i][`${segment}-dzn`]
+              )
+              .flat()
+          )
         )
-        .flat()
+      } else {
+        Dispatcher.currentRegion = Array.from(
+          new Set(
+            Dispatcher.currentRegion
+              .map((i) => Dispatcher.concordance[i][`${segment}-sa2`])
+              .flat()
+          )
+        )
+      }
     }
     const newSegment = segment.toLowerCase()
     const primary = Dispatcher.dataSegment.split('-')[1]
@@ -180,7 +194,7 @@
   .primary-controls li:not(:last-child)::after,
   .secondary-controls li:not(:last-child)::after {
     content: '·';
-    margin-right: 3px;
+    margin: 0 3px;
   }
   .ason img.logo {
     display: none;

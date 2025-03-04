@@ -1,14 +1,46 @@
-import sa2 from '../static/shapes/sa2-optimized.json?url'
+import sa22023 from '../static/shapes/sa2-2023-optimized.json?url'
+import sa22023small from '../static/shapes/sa2-2023-small-optimized.json?url'
+import sa22018 from '../static/shapes/sa2-2018-optimized.json?url'
+import sa22018small from '../static/shapes/sa2-2018-small-optimized.json?url'
 
 const sources = {
   commuterview: {
-    shapeFile: sa2,
+    shapeFile: sa22023small,
+    // todo: this really should be dataset2, but secondary is a bit easier to work with in code
+    secondaryShapeFile: sa22018small,
+    dynamicShapeFiles: [
+      {
+        url: sa22023,
+        bbox: [
+          [161, -48],
+          [186, -32],
+        ],
+        zoom: 6,
+      },
+    ],
+    dynamicSecondaryShapeFiles: [
+      {
+        url: sa22018,
+        bbox: [
+          [161, -48],
+          [186, -32],
+        ],
+        zoom: 6,
+      },
+    ],
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
-    isAllSegmentEnabled: true,
     isMapAreaLabelsEnabled: false,
-    segments: ['workplace', 'education'],
+    segments: [
+      '2023-all',
+      '2023-workplace',
+      '2023-education',
+      '2018-all',
+      '2018-workplace',
+      '2018-education',
+    ],
     detailsControls: ['All', 'Workplace', 'Education'],
+    detailsSecondaryControls: ['2023', '2018'],
     brandingClass: 'statsnz',
   },
   ason: {
@@ -252,7 +284,6 @@ const sources = {
     ],
     initialPosition: [133, -25, 4],
     isModeGraphsEnabled: true,
-    isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
     segments: ['2021-sa2', '2021-dzn', '2016-sa2', '2016-dzn'],
     detailsControls: ['SA2', 'DZN', 'TZ'],
@@ -264,7 +295,6 @@ const sources = {
     shapeFile: '/shapes/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
-    isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: 'friendlyName',
     segments: [
       '2018-am2hr',

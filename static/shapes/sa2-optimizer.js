@@ -1,5 +1,5 @@
-const fs = require('fs')
-const geojson = JSON.parse(fs.readFileSync('./sa2.json'))
+import fs from 'fs'
+const geojson = JSON.parse(fs.readFileSync('./sa2-2023.json'))
 
 const transformFilename = (name) => {
   return name
@@ -26,15 +26,21 @@ geojson.features = geojson.features
         ...i.geometry,
         coordinates: i.geometry['coordinates'].map(truncator),
       },
-      properties: { name: i.properties.SA22018__1 },
+      properties: { name: i.properties.SA22023__1 },
     }
   })
   .filter((i) => {
-    const data = JSON.parse(
-      fs.readFileSync(
-        `../../dist/data/regions/${transformFilename(i.properties.name)}.json`
+    let data
+    try {
+      data = JSON.parse(
+        fs.readFileSync(
+          `../../dist/data/regions/${transformFilename(i.properties.name)}.json`
+        )
       )
-    )
+    } catch (err) {
+      console.warn('skipping optimization of', `${i.properties.name}.json`)
+      return true
+    }
     const isEmpty = !(
       data.education.departTo ||
       data.education.arriveFrom ||
@@ -45,7 +51,8 @@ geojson.features = geojson.features
       i.properties.name.includes('Oceanic') ||
       i.properties.name.includes('Inlet') ||
       i.properties.name.includes('Inland water') ||
-      i.properties.name.includes('Bays')
+      i.properties.name.includes('Bays') ||
+      i.properties.name.includes('Island')
 
     if (isEmpty && !isWater) {
       console.log(i.properties.name, 'is empty and not water!')
@@ -53,5 +60,5 @@ geojson.features = geojson.features
     return !(isEmpty && isWater)
   })
 
-fs.writeFileSync('./sa2-optimized.json', JSON.stringify(geojson))
+fs.writeFileSync('./sa2-2023-optimized.json', JSON.stringify(geojson))
 console.log('Processed!')

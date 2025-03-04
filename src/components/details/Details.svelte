@@ -52,9 +52,7 @@
 
   const source = getSource()
 
-  if (!source.isAllSegmentEnabled) {
-    Dispatcher.dataSegment = source.segments[0]
-  }
+  Dispatcher.dataSegment = source.segments[0]
 
   // todo: this needs to be removed from onmount
   onMount(() => {
@@ -153,8 +151,6 @@
                   ]
                 } else if (dataSource[segment] != null) {
                   return [dataSource[segment]]
-                } else if (segment === 'all') {
-                  return source.segments.map((key) => dataSource[key])
                 } else {
                   console.warn('Could not find segment', segment)
                   return defaultSource
@@ -173,11 +169,7 @@
             // relies on no colons being in the keyNames
             const sourceKeys = regionName
               .map((i) => {
-                if (segment === 'all') {
-                  return source.segments.map((key) => [i, key].join(':'))
-                } else {
-                  return [[i, segment].join(':')]
-                }
+                return [[i, segment].join(':')]
               })
               .flat()
 
@@ -308,11 +300,11 @@
           }
           const tooltipJSON = JSON.stringify(tooltipData)
 
-          if (segment === 'all') {
+          if (segment.endsWith('-all')) {
             populationLabel = 'Resident Workers & Students:'
-          } else if (segment === 'workplace') {
+          } else if (segment.endsWith('-workplace')) {
             populationLabel = 'Resident Workers:'
-          } else if (segment === 'education') {
+          } else if (segment.endsWith('-education')) {
             populationLabel = 'Resident Students:'
           } else if (
             segment.startsWith('2021-sa2') ||
