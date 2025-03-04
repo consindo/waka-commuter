@@ -144,12 +144,16 @@ const bindMapboxEvents = (map, tooltipCallback) => {
 
   map.on('click', 'sa2-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (
-      Dispatcher.dataDirection === 'arrivals' &&
-      (Dispatcher.dataSegment.startsWith('2021-dzn') ||
-        Dispatcher.dataSegment.startsWith('2016-dzn'))
-    )
-      return
+    if (source.brandingClass === 'ason') {
+      if (
+        Dispatcher.dataDirection === 'arrivals' &&
+        (Dispatcher.dataSegment.startsWith('2021-dzn') ||
+          Dispatcher.dataSegment.startsWith('2016-dzn'))
+      )
+        return
+    } else if (source.brandingClass === 'statsnz') {
+      if (Dispatcher.dataSegment.includes('2018')) return
+    }
 
     const meshblock = e.features[0]
     if (meshblock != null) {
@@ -168,12 +172,16 @@ const bindMapboxEvents = (map, tooltipCallback) => {
 
   map.on('click', 'dzn-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (
-      Dispatcher.dataDirection !== 'arrivals' ||
-      (!Dispatcher.dataSegment.startsWith('2021-dzn') &&
-        !Dispatcher.dataSegment.startsWith('2016-dzn'))
-    )
-      return
+    if (source.brandingClass === 'ason') {
+      if (
+        Dispatcher.dataDirection !== 'arrivals' ||
+        (!Dispatcher.dataSegment.startsWith('2021-dzn') &&
+          !Dispatcher.dataSegment.startsWith('2016-dzn'))
+      )
+        return
+    } else if (source.brandingClass === 'statsnz') {
+      if (Dispatcher.dataSegment.includes('2023')) return
+    }
 
     const meshblock = e.features[0]
     if (meshblock != null) {
