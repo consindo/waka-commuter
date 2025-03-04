@@ -1,10 +1,12 @@
 <script>
   import { getSource } from './sources.js'
+  import Dispatcher from './dispatcher.js'
 
   import Branding from './components/branding/Branding.svelte'
   import Map from './components/map/Map.svelte'
   import Splash from './components/splash/Splash.svelte'
   import Details from './components/details/Details.svelte'
+  import { onMount } from 'svelte'
 
   const source = getSource()
   let sa2Data = fetch(source.shapeFile).then((res) => res.json())
@@ -22,7 +24,11 @@
           features: [...sa2.features, ...secondary.features],
         })
         window.sa2Data = newData
-        regionNames = getRegionNames(window.sa2Data)
+        if (source.brandingClass === 'ason') {
+          regionNames = getRegionNames(newData)
+        } else {
+          regionNames = getRegionNames(sa2)
+        }
 
         if (source.tertiaryShapeFile) {
           tertiaryData = fetch(source.tertiaryShapeFile)
@@ -83,7 +89,7 @@
       .sort((a, b) => a.name.localeCompare(b.name, undefined, {}))
   }
 
-  let regionNames = $state(getRegionNames(window.sa2Data))
+  let regionNames = $state({ features: [] })
 
   let [lng, lat, zoom] = $state([...source.initialPosition])
 
@@ -92,6 +98,22 @@
     lat = parseFloat(props.lat) + rand
     lng = parseFloat(props.lng) + rand
     zoom = parseFloat(props.zoom)
+  }
+
+  // rebuilds the region list based on the selected years sa2s
+  let year = $state('2023')
+  if (source.brandingClass === 'statsnz') {
+    Dispatcher.bind('load-blocks', async () => {
+      if (Dispatcher.dataSegment.includes('2018') && year === '2023') {
+        year = '2018'
+        const data = await secondaryData
+        regionNames = getRegionNames(data)
+      } else if (Dispatcher.dataSegment.includes('2023') && year === '2018') {
+        year = '2023'
+        const data = await sa2Data
+        regionNames = getRegionNames(data)
+      }
+    })
   }
 </script>
 
