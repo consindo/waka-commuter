@@ -8,6 +8,22 @@
 
   let inputValue = $state('')
 
+  // this is because the html datalist does not support a fuzzy search with macrons
+  // so we just have to remove them from the search ui
+  const removeSpecialCharacters = (str) => {
+    return str
+      .replace(/Ā/g, 'A')
+      .replace(/ā/g, 'a')
+      .replace(/Ē/g, 'E')
+      .replace(/ē/g, 'e')
+      .replace(/Ī/g, 'I')
+      .replace(/ī/g, 'i')
+      .replace(/Ō/g, 'O')
+      .replace(/ō/g, 'o')
+      .replace(/Ū/g, 'U')
+      .replace(/ū/g, 'u')
+  }
+
   const onKeyPress = (e) => {
     if (e.ctrlKey !== undefined) ctrlKey = e.ctrlKey
     if (e.metaKey !== undefined) metaKey = e.metaKey
@@ -20,7 +36,9 @@
     const value = inputValue
 
     // checks to make sure they used a precanned one
-    const match = data.find((region) => region.name === value)
+    const match = data.find(
+      (region) => removeSpecialCharacters(region.name) === value
+    )
     if (match) {
       if (match.id.startsWith('TZ')) {
         Dispatcher.dataSegment = Dispatcher.dataSegment.replace(
@@ -61,7 +79,7 @@
   />
   <datalist id="search-choice">
     {#each regions as region}
-      <option value={region.name}></option>{/each}
+      <option value={removeSpecialCharacters(region.name)}></option>{/each}
   </datalist>
 {/await}
 
