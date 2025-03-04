@@ -11,17 +11,7 @@
   // this is because the html datalist does not support a fuzzy search with macrons
   // so we just have to remove them from the search ui
   const removeSpecialCharacters = (str) => {
-    return str
-      .replace(/Ā/g, 'A')
-      .replace(/ā/g, 'a')
-      .replace(/Ē/g, 'E')
-      .replace(/ē/g, 'e')
-      .replace(/Ī/g, 'I')
-      .replace(/ī/g, 'i')
-      .replace(/Ō/g, 'O')
-      .replace(/ō/g, 'o')
-      .replace(/Ū/g, 'U')
-      .replace(/ū/g, 'u')
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
   }
 
   const onKeyPress = (e) => {
