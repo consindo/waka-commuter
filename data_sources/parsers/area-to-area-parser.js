@@ -10,27 +10,40 @@ const __dirname = path.dirname(__filename)
 const filenames = [
   {
     input: 'workplace-area-to-area.csv',
-    output: 'workplace-area-to-area.json',
+    output: '2018-workplace-area-to-area.json',
+    year: '2018',
   },
   {
     input: 'education-area-to-area.csv',
-    output: 'education-area-to-area.json',
+    output: '2018-education-area-to-area.json',
+    year: '2018',
+  },
+  {
+    input: 'workplace-area-to-area.csv',
+    output: '2023-workplace-area-to-area.json',
+    year: '2023',
+  },
+  {
+    input: 'education-area-to-area.csv',
+    output: '2023-education-area-to-area.json',
+    year: '2023',
   },
 ]
 
 // our parser
-const parse = (inputFilename, outputFilename) => {
+const parse = (inputFilename, outputFilename, year) => {
   const results = {}
   fs.createReadStream(inputFilename)
     .pipe(stripBom())
     .pipe(csv())
     .on('data', (data) => {
-      const homeAddress = data['SA2_name_usual_residence_address'].trim()
+      const homeAddress = data['SA22023_V1_00_NAME_usual_residence_address'].trim()
       const workAddress = (
-        data['SA2_name_workplace_address'] ||
-        data['SA2_name_educational_address']
+        data['SA22023_V1_00_NAME_workplace_address'] ||
+        data['SA22023_V1_00_NAME_educational_institution_address']
       ).trim()
-      const total = parseInt(data['Total'], 10)
+      const total = parseInt(data[`${year}_Total_stated`], 10)
+      if (total < 0) return
 
       if (results[homeAddress] === undefined) {
         results[homeAddress] = {
@@ -61,6 +74,7 @@ const parse = (inputFilename, outputFilename) => {
 filenames.forEach((filename) =>
   parse(
     path.join(__dirname, '../originals', filename.input),
-    path.join(__dirname, '../outputs', filename.output)
+    path.join(__dirname, '../outputs', filename.output),
+    filename.year
   )
 )
