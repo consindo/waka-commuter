@@ -105,7 +105,7 @@
 <svg {width} {height}>
   {#if attribution}
     <a
-      href="https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/"
+      href="https://datafinder.stats.govt.nz/data/category/census/2023/commuter-view/"
     >
       <text y={height - 12} x={width - 95} style="fill: #ddd; font-size: 12px;">
         Commuter View

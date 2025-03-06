@@ -31,7 +31,7 @@
     {vars.travellersCount === 1 ? 'person' : 'people'} ({vars.travellersPercentage}%
     of {mode})</strong
   >
-  travel to
+  travel {mode === 'arrivals' ? 'to' : 'from'}
   <span class="less-emphasis">{vars.place}</span>
   for {vars.destination.length > 0 ? vars.destination.join(' & ') : ''}, while
   <strong class="wfh"

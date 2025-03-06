@@ -42,10 +42,10 @@ geojson.features = geojson.features
       return true
     }
     const isEmpty = !(
-      data.education.departTo ||
-      data.education.arriveFrom ||
-      data.workplace.departTo ||
-      data.workplace.arriveFrom
+      data['2023-education'].departTo ||
+      data['2023-education'].arriveFrom ||
+      data['2023-workplace'].departTo ||
+      data['2023-workplace'].arriveFrom
     )
     const isWater =
       i.properties.name.includes('Oceanic') ||

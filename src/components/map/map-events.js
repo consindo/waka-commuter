@@ -47,7 +47,7 @@ const bindMapboxEvents = (map, tooltipCallback) => {
         friendlyName: meshblock.properties.friendlyName,
         showOnly:
           Dispatcher.dataSegment.startsWith('2021-dzn') ||
-          Dispatcher.dataSegment.startsWith('2016-dzn')
+            Dispatcher.dataSegment.startsWith('2016-dzn')
             ? Dispatcher.dataDirection
             : null,
         populationCount: meshblock.properties.populationCount,
@@ -151,8 +151,6 @@ const bindMapboxEvents = (map, tooltipCallback) => {
           Dispatcher.dataSegment.startsWith('2016-dzn'))
       )
         return
-    } else if (source.brandingClass === 'statsnz') {
-      if (Dispatcher.dataSegment.includes('2018')) return
     }
 
     const meshblock = e.features[0]
@@ -179,8 +177,6 @@ const bindMapboxEvents = (map, tooltipCallback) => {
           !Dispatcher.dataSegment.startsWith('2016-dzn'))
       )
         return
-    } else if (source.brandingClass === 'statsnz') {
-      if (Dispatcher.dataSegment.includes('2023')) return
     }
 
     const meshblock = e.features[0]
@@ -472,19 +468,6 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         loading: false,
         data: tooltipData,
       })
-
-      // STATS NZ SPECIFIC CODE - 'DZN' is secondaryShapeFile
-      if (segment === '2023-all') {
-        map.setLayoutProperty('sa2-lines', 'visibility', 'visible')
-        map.setLayoutProperty('sa2-fill', 'visibility', 'visible')
-        map.setLayoutProperty('dzn-lines', 'visibility', 'none')
-        map.setLayoutProperty('dzn-fill', 'visibility', 'none')
-      } else if (segment === '2018-all') {
-        map.setLayoutProperty('sa2-lines', 'visibility', 'none')
-        map.setLayoutProperty('sa2-fill', 'visibility', 'none')
-        map.setLayoutProperty('dzn-lines', 'visibility', 'visible')
-        map.setLayoutProperty('dzn-fill', 'visibility', 'visible')
-      }
 
       // ASON SPECIFIC CODE
       if (segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) {

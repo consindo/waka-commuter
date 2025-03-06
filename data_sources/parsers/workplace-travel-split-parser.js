@@ -9,42 +9,44 @@ const __dirname = path.dirname(__filename)
 
 const filenames = [
   {
-    input: 'workplace-commute-in.csv',
-    output: 'workplace-commute-in.json',
-  },
-  {
-    input: 'workplace-commute-out.csv',
-    output: 'workplace-commute-out.json',
-  },
-  {
-    input: 'education-commute-in.csv',
-    output: 'education-commute-in.json',
-  },
-  {
-    input: 'education-commute-out.csv',
-    output: 'education-commute-out.json',
-  },
+    input: 'commute.csv'
+  }
 ]
 
 // our parser
 const parse = (inputFilename, outputFilename) => {
-  const results = {}
+  const results = {
+    "2018-education": {},
+    "2018-workplace": {},
+    "2018-all": {},
+    "2023-education": {},
+    "2023-workplace": {},
+    "2023-all": {},
+  }
   fs.createReadStream(inputFilename)
     .pipe(stripBom())
     .pipe(csv())
     .on('data', (data) => {
       // doing a big aggregate
-      if (results[data['Area'].trim()] === undefined) {
-        results[data['Area'].trim()] = {}
+      const areaKey = data['Area'].trim()
+      if (results["2018-education"][areaKey] === undefined) {
+        results["2018-education"][areaKey] = { departureModes: {}, arrivalModes: {} },
+          results["2018-workplace"][areaKey] = { departureModes: {}, arrivalModes: {} },
+          results["2018-all"][areaKey] = { departureModes: {}, arrivalModes: {} },
+          results["2023-education"][areaKey] = { departureModes: {}, arrivalModes: {} },
+          results["2023-workplace"][areaKey] = { departureModes: {}, arrivalModes: {} },
+          results["2023-all"][areaKey] = { departureModes: {}, arrivalModes: {} }
       }
 
-      let key =
-        data['Main means of travel to work'] ||
-        data['Main means of travel to education']
+      let key = data['Variable codes']
 
-      // because in the data set it's "Total people - main means of travel to education/work"
-      if (key.includes('Total')) {
-        key = 'Total'
+      // because in the data set it's "Total stated - main means of travel to education/work"
+      if (key.toLowerCase().includes('total')) {
+        if (key.includes('Total stated')) {
+          key = 'Total'
+        } else {
+          return // there's another field but skip it otherwise
+        }
       }
 
       // these are basically the same
@@ -66,11 +68,32 @@ const parse = (inputFilename, outputFilename) => {
         key = 'Work at home'
       }
 
-      results[data['Area'].trim()][key] = parseInt(data['Value'], 10)
+      const value = parseInt(data['OBS_VALUE'], 10) || 0
+      const year = data['CEN23_YEAR_001']
+
+      if (data['CEN23_TBT_IND_003'].startsWith('tee')) {
+        results[`${year}-education`][areaKey].arrivalModes[key] = value
+        results[`${year}-all`][areaKey].arrivalModes[key] = results[`${year}-all`][areaKey].arrivalModes[key] || 0
+        results[`${year}-all`][areaKey].arrivalModes[key] += value
+      } else if (data['CEN23_TBT_IND_003'].startsWith('teu')) {
+        results[`${year}-education`][areaKey].departureModes[key] = value
+        results[`${year}-all`][areaKey].departureModes[key] = results[`${year}-all`][areaKey].departureModes[key] || 0
+        results[`${year}-all`][areaKey].departureModes[key] += value
+      } else if (data['CEN23_TBT_IND_003'].startsWith('tww')) {
+        results[`${year}-workplace`][areaKey].arrivalModes[key] = value
+        results[`${year}-all`][areaKey].arrivalModes[key] = results[`${year}-all`][areaKey].arrivalModes[key] || 0
+        results[`${year}-all`][areaKey].arrivalModes[key] += value
+      } else if (data['CEN23_TBT_IND_003'].startsWith('twu')) {
+        results[`${year}-workplace`][areaKey].departureModes[key] = value
+        results[`${year}-all`][areaKey].departureModes[key] = results[`${year}-all`][areaKey].departureModes[key] || 0
+        results[`${year}-all`][areaKey].departureModes[key] += value
+      }
     })
     .on('end', () => {
-      fs.writeFileSync(outputFilename, JSON.stringify(results, '', 2))
-      console.log(`Converted ${inputFilename} into ${outputFilename}`)
+      Object.keys(results).forEach(i => {
+        fs.writeFileSync(path.join(outputFilename, `${i}-commute.json`), JSON.stringify(results[i], '', 2))
+        console.log(`Converted ${inputFilename} into ${outputFilename}/${i}-commute.json`)
+      })
     })
 }
 
@@ -78,6 +101,6 @@ const parse = (inputFilename, outputFilename) => {
 filenames.forEach((filename) =>
   parse(
     path.join(__dirname, '../originals', filename.input),
-    path.join(__dirname, '../outputs', filename.output)
+    path.join(__dirname, '../outputs')
   )
 )

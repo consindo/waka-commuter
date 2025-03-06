@@ -1,26 +1,12 @@
 import sa22023 from '../static/shapes/sa2-2023-optimized.json?url'
 import sa22023small from '../static/shapes/sa2-2023-small-optimized.json?url'
-import sa22018 from '../static/shapes/sa2-2018-optimized.json?url'
-import sa22018small from '../static/shapes/sa2-2018-small-optimized.json?url'
 
 const sources = {
   commuterview: {
     shapeFile: sa22023small,
-    // todo: this really should be dataset2, but secondary is a bit easier to work with in code
-    secondaryShapeFile: sa22018small,
     dynamicShapeFiles: [
       {
         url: sa22023,
-        bbox: [
-          [161, -48],
-          [186, -32],
-        ],
-        zoom: 6,
-      },
-    ],
-    dynamicSecondaryShapeFiles: [
-      {
-        url: sa22018,
         bbox: [
           [161, -48],
           [186, -32],

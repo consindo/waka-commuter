@@ -76,8 +76,13 @@
     }
     Dispatcher.setSegment(finalSegment)
   }
-  let path = $derived(transformFilename(firstRegion))
-  run(() => {
+  // removes the macrons for the stats nz link
+  const path = $derived(
+    transformFilename(firstRegion)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+  )
+  $effect(() => {
     setSegmentWithMode(Dispatcher.dataSegment, selection)
   })
 </script>
@@ -139,7 +144,7 @@
         {#if populationLink}
           <a
             class="population-link"
-            href="https://www.stats.govt.nz/tools/2018-census-place-summaries/{path}#population-and-dwellings"
+            href="https://tools.summaries.stats.govt.nz/places/SA2/{path}"
             target="_blank"
             rel="noopener noreferrer"
           >
