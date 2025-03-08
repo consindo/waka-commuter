@@ -3,7 +3,7 @@
   import Search from './Search.svelte'
   import Dispatcher from '../../dispatcher.js'
   import ason from '/static/css/ason.png'
-  import icon from '/static/css/icon.png'
+  import icon from '/static/css/icon.avif'
   import wsp from '/static/css/wsp.svg'
 
   let { regionNames } = $props()

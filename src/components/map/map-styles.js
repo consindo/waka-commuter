@@ -1,32 +1,57 @@
 const colors = [
   'case',
   ['==', ['feature-state', 'selected'], 1],
-  '#BADC58',
+  '#84cc16',
   [
     'interpolate-hcl',
     ['linear'],
     ['feature-state', 'population'],
     -250,
-    '#0D47A1',
+    '#1e40af',
     -50,
-    '#2196F3',
+    '#2563eb',
     -10,
-    '#BBDEFB',
+    '#93c5fd',
     0,
-    '#BA68C8',
+    '#e879f9',
     10,
-    '#FFCDD2',
+    '#f87171',
     50,
-    '#F44336',
+    '#dc2626',
     250,
-    '#B71C1C',
+    '#991b1b',
   ],
 ]
 
-const hoverState = [
+const darkColors = [
+  'case',
+  ['==', ['feature-state', 'selected'], 1],
+  '#bef264',
+  [
+    'interpolate-hcl',
+    ['linear'],
+    ['feature-state', 'population'],
+    -250,
+    '#1d4ed8',
+    -50,
+    '#3b82f6',
+    -10,
+    '#bae6fd',
+    0,
+    '#f5d0fe',
+    10,
+    '#fca5a5',
+    50,
+    '#ef4444',
+    250,
+    '#b91c1c',
+  ],
+]
+
+const getHoverState = (isDark) => [
   'case',
   ['boolean', ['feature-state', 'hover'], false],
-  'rgba(255,255,255,0.35)',
+  isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.25)',
   'rgba(0,0,0,0)',
 ]
 
@@ -60,7 +85,7 @@ const hoverOpacity = [
   0.7,
 ]
 
-export const areaFill = {
+export const getAreaFill = (isDark) => ({
   'fill-outline-color': 'rgba(0,0,0,0)',
   'fill-opacity': [
     'case',
@@ -71,15 +96,15 @@ export const areaFill = {
   'fill-color': [
     'case',
     ['!=', ['feature-state', 'population'], null],
-    colors,
-    hoverState,
+    isDark ? darkColors : colors,
+    getHoverState(isDark),
   ],
-}
+})
 
-export const lineFill = {
-  'line-color': '#777',
+export const getLineFill = (isDark) => ({
+  'line-color': isDark ? '#777' : '#ccc',
   'line-width': 1,
-}
+})
 
 export const pointsFill = {
   // Size circle radius by earthquake magnitude and zoom level

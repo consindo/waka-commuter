@@ -4,12 +4,14 @@
   function handleClick() {
     let newStyle = 'satellite'
     if (style === 'satellite') {
-      style = 'map'
+      style = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'light'
+        : 'dark'
     }
     styleChange(newStyle)
   }
 
-  const label = $derived(style === 'map' ? 'Satellite Map' : 'Street Map')
+  const label = $derived(style === 'satellite' ? 'Street Map' : 'Satellite Map')
 </script>
 
 <button class={style} onclick={handleClick} title={label} aria-label={label}>
@@ -43,7 +45,8 @@
   button:active {
     background-color: #ccc;
   }
-  button.map {
+  button.light,
+  button.dark {
     background-image: url(/static/icons/satellite.svg);
   }
   button.satellite {

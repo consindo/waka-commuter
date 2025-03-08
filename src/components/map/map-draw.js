@@ -1,8 +1,13 @@
-import { areaFill, lineFill, pointsFill } from './map-styles.js'
+import { getAreaFill, getLineFill, pointsFill } from './map-styles.js'
 
 export const drawMap = (map, datasets, areaLabels) => {
   const data = datasets[0]
   const secondaryData = datasets[1]
+
+  // todo: pass this in from state
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const lineFill = getLineFill(isDark)
+  const areaFill = getAreaFill(isDark)
 
   map.addSource('sa2', {
     type: 'geojson',

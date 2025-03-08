@@ -20,7 +20,9 @@
   let isLoaded = false
   let map = $state(null)
 
-  let style = $state('map')
+  let style = $state(
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  )
   const styleChange = (newStyle) => {
     style = newStyle
     if (isLoaded) {
@@ -28,6 +30,11 @@
       map.setStyle(styleUrls[style])
     }
   }
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (event) => {
+      styleChange(event.matches ? 'dark' : 'light')
+    })
 
   const source = getSource()
 
@@ -60,7 +67,8 @@
   })
 
   const styleUrls = {
-    map: 'mapbox://styles/mapbox/dark-v11?optimize=true',
+    light: 'mapbox://styles/mapbox/light-v11?optimize=true',
+    dark: 'mapbox://styles/mapbox/dark-v11?optimize=true',
     satellite: 'mapbox://styles/mapbox/satellite-v9?optimize=true',
   }
 
@@ -106,6 +114,9 @@
         if (isLoaded) return
         isLoaded = true
 
+        if (source.dynamicShapeFiles) {
+          source.dynamicShapeFiles.forEach((i) => (i.isLoaded = false))
+        }
         const data = await Promise.all([mapData, secondaryData, tertiaryData])
         drawMap(map, data, source.isMapAreaLabelsEnabled)
 

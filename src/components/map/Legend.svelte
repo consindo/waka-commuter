@@ -27,6 +27,11 @@
     user-select: none;
     overflow: hidden;
   }
+  @media (prefers-color-scheme: dark) {
+    .map-legend {
+      background: rgba(1, 1, 1, 0.6);
+    }
+  }
 
   /* Warning: map-styles.js is source of truth for this */
   .map-legend-colors {
@@ -34,11 +39,11 @@
     border-radius: 2px;
     background-image: linear-gradient(
       90deg,
-      #0d47a1,
-      #2196f3,
-      #ba68c8,
-      #f44336,
-      #b71c1c
+      #1d4ed8,
+      #3b82f6,
+      #e879f9,
+      #ef4444,
+      #b91c1c
     );
     margin: 5px;
   }
