@@ -16,13 +16,14 @@
 <style>
   .map-legend {
     width: 220px;
-    background: rgba(20, 20, 20, 0.6);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(2px);
     border-radius: 4px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     position: absolute;
     bottom: 10px;
     left: 49px;
-    color: #fff;
+    color: var(--surface-text);
     user-select: none;
     overflow: hidden;
   }

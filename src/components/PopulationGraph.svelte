@@ -80,7 +80,7 @@
       .append('g')
       .attr('class', 'grid')
       .attr('transform', 'translate(0,' + height + ')')
-      .style('color', '#555')
+      .style('color', 'var(--surface-gridlines)')
       .call(d3.axisBottom(x).ticks(5).tickSize(-height).tickFormat(''))
 
     svg

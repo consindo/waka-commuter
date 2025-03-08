@@ -45,7 +45,7 @@
 <style>
   div {
     padding: 0 var(--sidebar-padding);
-    color: #ccc;
+    color: var(--surface-text-subtle);
   }
   p {
     margin: -0.5rem 0 2rem;
@@ -55,7 +55,7 @@
   }
 
   a {
-    color: #90caf9;
+    color: var(--surface-text-interactive);
     text-decoration: none;
   }
 

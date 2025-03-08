@@ -74,10 +74,7 @@
     left: 0;
     z-index: 1;
     padding: 0.75rem;
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
     user-select: none;
-    letter-spacing: -0.5px;
   }
 
   .branding img {
@@ -116,10 +113,14 @@
   }
 
   a {
+    display: inline-block;
     font-size: 0.9rem;
-    color: #ddd;
+    color: var(--surface-text-color);
     text-decoration: none;
     padding: 0 0.15rem;
+    backdrop-filter: blur(1px);
+    border-radius: 3px;
+    text-shadow: 0 1px 1px var(--surface-bg);
   }
 
   a:first-child {
@@ -127,7 +128,6 @@
   }
 
   a.selected {
-    color: #fff;
     font-weight: bold;
   }
   a:hover {

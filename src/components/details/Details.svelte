@@ -602,4 +602,41 @@
     padding: 0 1em;
     font-size: 1.125rem;
   }
+
+  .location-inner {
+    background: var(--surface-bg-subtle);
+    border-radius: 0 10px 10px 0;
+    border: var(--border);
+    border-left: 0;
+    margin-bottom: 2rem;
+  }
+
+  .mode-container {
+    min-width: 300px;
+    overflow-x: hidden;
+  }
+
+  .mode-inner {
+    width: 300px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1.5rem 0;
+    border-radius: 5px 0 0 5px;
+    height: 100%;
+  }
+
+  .mode-container h4 {
+    color: var(--surface-text);
+    margin: 0 1.25rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .mode-container h4 a {
+    color: var(--surface-text-subtle);
+    font-weight: normal;
+    text-decoration: none;
+  }
+  .mode-container h4 a:hover {
+    text-decoration: underline;
+  }
 </style>
