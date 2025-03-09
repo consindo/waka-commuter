@@ -1,22 +1,30 @@
 <script>
   let { style, styleChange } = $props()
 
-  function handleClick() {
-    let newStyle = 'satellite'
-    if (style === 'satellite') {
-      style = 'map'
-    }
+  let visible = $state(false)
+
+  function toggleVisible() {
+    visible = !visible
+  }
+
+  const handleClick = (newStyle) => () => {
+    visible = false
     styleChange(newStyle)
   }
 
-  const label = $derived(style === 'map' ? 'Satellite Map' : 'Street Map')
+  const label = $derived(style === 'satellite' ? 'Street Map' : 'Satellite Map')
 </script>
 
-<button class={style} onclick={handleClick} title={label} aria-label={label}>
+<button class="style" onclick={toggleVisible} title={label} aria-label={label}>
 </button>
+<div class="options" class:visible>
+  <button onclick={handleClick('light')}>Light</button>
+  <button onclick={handleClick('dark')}>Dark</button>
+  <button onclick={handleClick('satellite')}>Satellite</button>
+</div>
 
 <style>
-  button {
+  button.style {
     margin: 0;
     background-color: #fff;
     background-repeat: no-repeat;
@@ -36,6 +44,8 @@
     padding-top: 14px;
     padding-bottom: 15px;
     cursor: pointer;
+    background-image: url(/static/icons/map.svg);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   }
   button:hover {
     background-color: #ddd;
@@ -43,10 +53,27 @@
   button:active {
     background-color: #ccc;
   }
-  button.map {
-    background-image: url(/static/icons/satellite.svg);
+  .options {
+    position: absolute;
+    bottom: 142px;
+    left: 10px;
+    flex-direction: column;
+    background: var(--surface-bg);
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    display: none;
   }
-  button.satellite {
-    background-image: url(/static/icons/map.svg);
+  .options.visible {
+    display: flex;
+  }
+  .options button {
+    text-align: left;
+    border: 0;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    cursor: pointer;
+  }
+  .options button:hover {
+    color: var(--surface-text-interactive);
   }
 </style>
