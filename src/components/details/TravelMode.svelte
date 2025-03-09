@@ -241,10 +241,10 @@
     font-family: 'Fira Sans Condensed', 'Fira Sans', sans-serif;
   }
   .axis {
-    color: #eee;
+    color: var(--surface-text);
     user-select: none;
   }
   .grid {
-    color: #555;
+    color: var(--surface-gridlines);
   }
 </style>

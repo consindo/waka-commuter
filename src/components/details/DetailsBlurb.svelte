@@ -66,15 +66,15 @@
     line-height: 1.35;
   }
   .wfh {
-    color: #badc58;
+    color: var(--surface-text-success);
   }
   .departures {
-    color: #f44336;
+    color: var(--surface-text-danger);
   }
   .arrivals {
-    color: #90caf9;
+    color: var(--surface-text-interactive);
   }
   .less-emphasis {
-    color: #bbb;
+    color: var(--surface-text-subtle);
   }
 </style>

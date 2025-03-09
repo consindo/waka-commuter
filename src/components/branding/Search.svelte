@@ -75,8 +75,8 @@
 
 <style>
   input {
-    background: #222;
-    color: #fff;
+    background: var(--surface-bg);
+    color: var(--surface-text);
     font-family: 'Fira Sans';
     font-size: 15px;
     padding: 0.35rem 0.5rem;
@@ -85,9 +85,10 @@
     margin-bottom: 3px;
     outline: 0;
     border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   }
   input:focus {
-    background: #111;
-    border-color: #000;
+    background: var(--surface-bg);
+    border-color: var(--surface-text-interactive);
   }
 </style>

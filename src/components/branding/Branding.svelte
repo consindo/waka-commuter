@@ -3,10 +3,10 @@
   import Search from './Search.svelte'
   import Dispatcher from '../../dispatcher.js'
   import ason from '/static/css/ason.png'
-  import icon from '/static/css/icon.png'
+  import icon from '/static/css/icon.avif'
   import wsp from '/static/css/wsp.svg'
 
-  let { regionNames } = $props()
+  let { regionNames, style } = $props()
 
   const source = getSource()
   const brandingClass = source.brandingClass
@@ -27,7 +27,7 @@
   Dispatcher.bind('load-blocks', loadBlocks)
 </script>
 
-<div class="wrapper">
+<div class="wrapper" {style}>
   <div class={brandingClass} class:branding={true}>
     <a href="https://turbomaps.io" class="turbomaps-logo">
       <img src={icon} alt="Waka Commuter" width="48" height="48" />
@@ -74,10 +74,7 @@
     left: 0;
     z-index: 1;
     padding: 0.75rem;
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
     user-select: none;
-    letter-spacing: -0.5px;
   }
 
   .branding img {
@@ -108,7 +105,7 @@
     float: left;
   }
   .branding.statsnz .turbomaps-logo img {
-    margin: 0.25rem 0.5rem 0.25rem 0;
+    margin: 0.25rem 0.25rem 0.25rem 0;
   }
 
   .hide {
@@ -116,10 +113,14 @@
   }
 
   a {
+    display: inline-block;
     font-size: 0.9rem;
-    color: #ddd;
+    color: var(--surface-text);
     text-decoration: none;
     padding: 0 0.15rem;
+    backdrop-filter: blur(1px);
+    border-radius: 3px;
+    text-shadow: 0 1px 1px var(--surface-bg);
   }
 
   a:first-child {
@@ -127,7 +128,6 @@
   }
 
   a.selected {
-    color: #fff;
     font-weight: bold;
   }
   a:hover {

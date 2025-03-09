@@ -47,7 +47,7 @@ const bindMapboxEvents = (map, tooltipCallback) => {
         friendlyName: meshblock.properties.friendlyName,
         showOnly:
           Dispatcher.dataSegment.startsWith('2021-dzn') ||
-            Dispatcher.dataSegment.startsWith('2016-dzn')
+          Dispatcher.dataSegment.startsWith('2016-dzn')
             ? Dispatcher.dataDirection
             : null,
         populationCount: meshblock.properties.populationCount,

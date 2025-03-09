@@ -11,7 +11,7 @@
   const source = getSource()
 
   const getImageUrl = (name) =>
-    new URL(`/static/css/${name}.jpg`, import.meta.url).href
+    new URL(`/static/css/${name}.avif`, import.meta.url).href
 </script>
 
 <div class="details-splash">
@@ -50,7 +50,7 @@
     />
     <DataSourcesAu />
   {:else}
-    <Banner dataSource="2018 Census" />
+    <Banner dataSource="2023 & 2018 Census" />
     <Regions
       {setLocation}
       enabledRegions={[

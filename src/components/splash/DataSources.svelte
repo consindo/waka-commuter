@@ -10,7 +10,8 @@
     <a href="mailto:info@stats.govt.nz">info@stats.govt.nz</a>.
   </p>
   <p>
-    This app is built with data from the 2018 Census. It primarily uses the
+    This app is built with data from the 2023 & 2018 Census. It primarily uses
+    the
     <a
       href="https://datafinder.stats.govt.nz/data/category/census/2018/commuter-view/"
       >commuter view dataset</a
@@ -48,7 +49,7 @@
   }
 
   a {
-    color: #90caf9;
+    color: var(--surface-text-interactive);
     text-decoration: none;
   }
 
@@ -58,7 +59,7 @@
 
   footer {
     padding: 0 var(--sidebar-padding) 3rem;
-    color: #999;
+    color: var(--surface-text-subtle);
     font-size: 0.9rem;
   }
   footer a {

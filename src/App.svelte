@@ -129,7 +129,6 @@
     width: 900px;
     border-left: var(--border);
     overflow-y: auto;
-    background: #111;
   }
 
   @media (max-width: 1650px) {

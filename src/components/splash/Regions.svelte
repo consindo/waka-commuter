@@ -150,10 +150,10 @@
 <style>
   nav {
     font-size: 0;
-    padding: 0.75rem;
+    padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
+    gap: 0.75rem;
     border: 0;
 
     @media (max-width: 1650px) {
@@ -168,6 +168,7 @@
     border: 0;
     border-radius: 5px;
     transition: 100ms ease transform;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   }
   h3 {
     height: 140px;

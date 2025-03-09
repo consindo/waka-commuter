@@ -151,12 +151,12 @@
     color: #999;
   }
   .wfh {
-    color: #badc58;
+    color: var(--surface-text-success);
   }
   .departures {
-    color: #f44336;
+    color: var(--surface-text-danger);
   }
   .arrivals {
-    color: #90caf9;
+    color: #7dd3fc;
   }
 </style>
