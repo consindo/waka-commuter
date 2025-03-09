@@ -54,6 +54,16 @@
         url('/static/css/splash-dark.avif');
     }
   }
+  :global(.dark) .splash-bg {
+    background-image:
+      linear-gradient(
+        0deg,
+        var(--surface-bg) 0%,
+        rgba(0, 0, 0, 0.5) 30%,
+        rgba(0, 0, 0, 0.05) 100%
+      ),
+      url('/static/css/splash-dark.avif');
+  }
 
   h2 {
     font-size: 2.25rem;

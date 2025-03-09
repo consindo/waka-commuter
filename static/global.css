@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light dark;
   --surface-bg: #fafafa;
   --surface-bg-subtle: #f4f4f5;
 
@@ -12,20 +13,17 @@
   --sidebar-padding: 1.25rem;
   --border: 1px solid rgba(0,0,0,0.1);
   --real-height: 100vh;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --surface-bg: #111;
-    --surface-bg-subtle: #222;
-    --border: 1px solid #000;
+  /* we redeclare until we get better browser support for this function */
+  --surface-bg: light-dark(#fafafa, #111);
+  --surface-bg-subtle: light-dark(#f4f4f5, #222);
+  --border: 1px solid light-dark(rgba(0,0,0,0.1), #000);
 
-    --surface-gridlines: #444;
+  --surface-gridlines: light-dark(#ccc, #444);
 
-    --surface-text: #fff;
-    --surface-text-interactive: #7dd3fc;
-    --surface-text-subtle: #d4d4d4;
-  }
+  --surface-text: light-dark(#09090b, #fff);
+  --surface-text-interactive: light-dark(#0074e4, #7dd3fc);
+  --surface-text-subtle: light-dark(#52525b, #d4d4d4);
 }
 
 body,
@@ -36,6 +34,10 @@ html {
   color: var(--surface-text);
   font-family: 'Fira Sans', sans-serif;
   overflow: hidden;
+}
+
+body.dark {
+  color-scheme: only dark;
 }
 
 /* needs to be moved to svelte native */

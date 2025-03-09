@@ -6,7 +6,7 @@
   import icon from '/static/css/icon.avif'
   import wsp from '/static/css/wsp.svg'
 
-  let { regionNames } = $props()
+  let { regionNames, style } = $props()
 
   const source = getSource()
   const brandingClass = source.brandingClass
@@ -27,7 +27,7 @@
   Dispatcher.bind('load-blocks', loadBlocks)
 </script>
 
-<div class="wrapper">
+<div class="wrapper" {style}>
   <div class={brandingClass} class:branding={true}>
     <a href="https://turbomaps.io" class="turbomaps-logo">
       <img src={icon} alt="Waka Commuter" width="48" height="48" />
@@ -105,7 +105,7 @@
     float: left;
   }
   .branding.statsnz .turbomaps-logo img {
-    margin: 0.25rem 0.5rem 0.25rem 0;
+    margin: 0.25rem 0.25rem 0.25rem 0;
   }
 
   .hide {
@@ -115,7 +115,7 @@
   a {
     display: inline-block;
     font-size: 0.9rem;
-    color: var(--surface-text-color);
+    color: var(--surface-text);
     text-decoration: none;
     padding: 0 0.15rem;
     backdrop-filter: blur(1px);

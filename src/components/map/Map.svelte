@@ -117,8 +117,11 @@
         if (source.dynamicShapeFiles) {
           source.dynamicShapeFiles.forEach((i) => (i.isLoaded = false))
         }
-        const data = await Promise.all([mapData, secondaryData, tertiaryData])
+        let data = await Promise.all([mapData, secondaryData, tertiaryData])
         drawMap(map, data, source.isMapAreaLabelsEnabled)
+
+        // handles dynamic loading when the style changes
+        map.setZoom(map.getZoom() + 0.001)
 
         if (Dispatcher.currentRegion.length > 0) {
           Dispatcher.setRegions(Dispatcher.currentRegion)
@@ -133,6 +136,10 @@
         tooltipCallback
       )
     })
+  })
+
+  $effect(() => {
+    document.body.className = style !== 'light' ? 'dark' : ''
   })
 </script>
 

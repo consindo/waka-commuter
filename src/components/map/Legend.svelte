@@ -17,6 +17,7 @@
   .map-legend {
     width: 220px;
     background: rgba(255, 255, 255, 0.6);
+    background: light-dark(rgba(255, 255, 255, 0.6), rgba(1, 1, 1, 0.6));
     backdrop-filter: blur(2px);
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
@@ -26,11 +27,6 @@
     color: var(--surface-text);
     user-select: none;
     overflow: hidden;
-  }
-  @media (prefers-color-scheme: dark) {
-    .map-legend {
-      background: rgba(1, 1, 1, 0.6);
-    }
   }
 
   /* Warning: map-styles.js is source of truth for this */
