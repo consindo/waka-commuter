@@ -1,4 +1,13 @@
 <script>
+  import {
+    axisLeft,
+    scaleLinear,
+    max,
+    scaleBand,
+    select,
+    axisBottom,
+    stack,
+  } from 'd3'
   import GraphTooltip from './GraphTooltip.svelte'
 
   const data = $props()
@@ -128,15 +137,13 @@
   const paddedHeight = height - 25
 
   const x = $derived(
-    d3
-      .scaleLinear()
+    scaleLinear()
       .range([0, paddedWidth])
-      .domain([0, d3.max(rows, (d) => d.total)])
+      .domain([0, max(rows, (d) => d.total)])
       .nice()
   )
   const y = $derived(
-    d3
-      .scaleBand()
+    scaleBand()
       .range([paddedHeight, 0])
       .paddingInner(0.05)
       .align(0.1)
@@ -146,9 +153,8 @@
   // generate grid
   let grid = $state(null)
   $effect(() =>
-    d3
-      .select(grid)
-      .call(d3.axisBottom(x).ticks(5).tickSize(-paddedHeight).tickFormat(''))
+    select(grid)
+      .call(axisBottom(x).ticks(5).tickSize(-paddedHeight).tickFormat(''))
       .select('.domain')
       .style('display', 'none')
   )
@@ -156,9 +162,8 @@
   // generate axis
   let yaxis = $state(null)
   $effect(() =>
-    d3
-      .select(yaxis)
-      .call(d3.axisLeft(y).tickSize(0))
+    select(yaxis)
+      .call(axisLeft(y).tickSize(0))
       .style('font-family', 'inherit')
       .style('font-size', '0.6875rem')
       .selectAll('text')
@@ -167,16 +172,15 @@
 
   let xaxis = $state(null)
   $effect(() =>
-    d3
-      .select(xaxis)
-      .call(d3.axisBottom(x).ticks(5, 's'))
+    select(xaxis)
+      .call(axisBottom(x).ticks(5, 's'))
       .style('font-family', 'inherit')
       .style('font-size', '0.6875rem')
       .selectAll('text')
       .style('transform', 'translate(0, 4px)')
   )
 
-  const stack = $derived(d3.stack().keys(keys)(rows))
+  const stacked = $derived(stack().keys(keys)(rows))
 
   let tooltipOpacity = $state(0)
   let tooltipPosition = $state([0, 0])
@@ -198,7 +202,7 @@
       onpointermove={(e) => {
         tooltipPosition = [e.clientX, e.clientY]
         const keyName = e.target.dataset.name
-        const keyValue = e.target.dataset.value
+        const keyValue = parseInt(e.target.dataset.value)
 
         tooltipContent = [
           [
@@ -208,7 +212,7 @@
         ]
       }}
     >
-      {#each stack as bar}
+      {#each stacked as bar}
         <g fill={getColor(bar.key)}>
           {#each bar as segment}
             {@const dataValue = segment.data[bar.key]}

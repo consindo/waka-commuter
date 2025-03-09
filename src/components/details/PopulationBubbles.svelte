@@ -1,4 +1,14 @@
 <script>
+  import {
+    scaleLinear,
+    scaleSqrt,
+    interpolateHcl,
+    forceSimulation,
+    forceCenter,
+    forceManyBody,
+    forceCollide,
+    hsl,
+  } from 'd3'
   import Dispatcher from '../../dispatcher.js'
   import MapTooltip from '../map/MapTooltip.svelte'
 
@@ -11,16 +21,15 @@
   let tooltipPosition = $state([0, 0])
   let tooltipOpacity = $state(0)
 
-  const size = d3.scaleSqrt().domain([0, 1]).range([25, 85])
-  const color = d3
-    .scaleLinear()
+  const size = scaleSqrt().domain([0, 1]).range([25, 85])
+  const color = scaleLinear()
     .domain([0, 10, 50, 250, 1000, 5000])
     .range(
       showOnly === 'arrivals'
         ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4777', '#001']
         : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#220000', '#100']
     )
-    .interpolate(d3.interpolateHcl)
+    .interpolate(interpolateHcl)
 
   const parsedData = $derived(
     data
@@ -65,14 +74,12 @@
 
   let positions = $state({})
   $effect(() => {
-    const simulation = d3
-      .forceSimulation()
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('charge', d3.forceManyBody().strength(0.1))
+    const simulation = forceSimulation()
+      .force('center', forceCenter(width / 2, height / 2))
+      .force('charge', forceManyBody().strength(0.1))
       .force(
         'collide',
-        d3
-          .forceCollide()
+        forceCollide()
           .strength(0.2)
           .radius((d) => size(d.percentage) + 3)
           .iterations(1)
@@ -107,7 +114,11 @@
     <a
       href="https://datafinder.stats.govt.nz/data/category/census/2023/commuter-view/"
     >
-      <text y={height - 12} x={width - 95} style="fill: #ddd; font-size: 12px;">
+      <text
+        y={height - 12}
+        x={width - 95}
+        style="fill: var(--surface-text-subtle); font-size: 12px;"
+      >
         Commuter View
       </text>
     </a>
@@ -139,8 +150,8 @@
           fill={color(d.value)}
         />
         <text
-          fill={d3.hsl(color(d.value)).l > 0.6 ? '#111' : '#fff'}
-          style="text-shadow: 0 1px 0 {d3.hsl(color(d.value)).l > 0.6
+          fill={hsl(color(d.value)).l > 0.6 ? '#111' : '#fff'}
+          style="text-shadow: 0 1px 0 {hsl(color(d.value)).l > 0.6
             ? 'rgba(255, 255, 255, 0.25)'
             : 'rgba(0, 0, 0, 0.4)'};"
           y={label.length * lineHeight * -0.5 - 3}
