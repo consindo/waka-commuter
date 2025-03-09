@@ -39,6 +39,9 @@ html {
 body.dark {
   color-scheme: only dark;
 }
+body.light {
+  color-scheme: only light;
+}
 
 /* needs to be moved to svelte native */
 .map-view .btn-expand {

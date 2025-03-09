@@ -1,11 +1,9 @@
 import { getAreaFill, getLineFill, pointsFill } from './map-styles.js'
 
-export const drawMap = (map, datasets, areaLabels) => {
+export const drawMap = (map, datasets, areaLabels, isDark) => {
   const data = datasets[0]
   const secondaryData = datasets[1]
 
-  // todo: pass this in from state
-  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   const lineFill = getLineFill(isDark)
   const areaFill = getAreaFill(isDark)
 

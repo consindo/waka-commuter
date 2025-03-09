@@ -118,7 +118,7 @@
           source.dynamicShapeFiles.forEach((i) => (i.isLoaded = false))
         }
         let data = await Promise.all([mapData, secondaryData, tertiaryData])
-        drawMap(map, data, source.isMapAreaLabelsEnabled)
+        drawMap(map, data, source.isMapAreaLabelsEnabled, style === 'dark')
 
         // handles dynamic loading when the style changes
         map.setZoom(map.getZoom() + 0.001)
@@ -139,7 +139,7 @@
   })
 
   $effect(() => {
-    document.body.className = style !== 'light' ? 'dark' : ''
+    document.body.className = style !== 'light' ? 'dark' : 'light'
   })
 </script>
 
