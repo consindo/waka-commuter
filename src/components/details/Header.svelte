@@ -2,7 +2,7 @@
   import { run } from 'svelte/legacy'
 
   import expand from '/static/expand.svg'
-  import ason from '/static/css/ason.avif'
+  import ason from '/static/css/ason.avif?url'
   import { transformFilename } from '../../data.js'
   import Dispatcher from '../../dispatcher.js'
   import { getSource } from '../../sources.js'
