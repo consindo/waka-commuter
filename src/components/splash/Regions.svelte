@@ -2,7 +2,7 @@
   let { enabledRegions, setLocation } = $props()
 
   const getImageUrl = (name) =>
-    new URL(`/static/css/regions/${name}.jpg`, import.meta.url).href
+    new URL(`/static/css/regions/${name}.avif`, import.meta.url).href
 
   const regions = [
     {
@@ -11,7 +11,7 @@
       secondaryName: 'Auckland',
       lat: '-36.9',
       lng: '174.7',
-      zoom: '10.5',
+      zoom: '10',
     },
     {
       id: 'nz-chc',
@@ -25,16 +25,8 @@
       id: 'nz-wlg',
       primaryName: 'Te Whanganui-a-Tara',
       secondaryName: 'Wellington',
-      lat: '-41.2',
-      lng: '174.8',
-      zoom: '10.5',
-    },
-    {
-      id: 'nz-trg',
-      primaryName: 'Tauranga',
-      secondaryName: '',
-      lat: '-37.7',
-      lng: '176.2',
+      lat: '-41.3',
+      lng: '174.75',
       zoom: '11',
     },
     {
@@ -46,11 +38,35 @@
       zoom: '11.5',
     },
     {
+      id: 'nz-trg',
+      primaryName: 'Tauranga',
+      secondaryName: '',
+      lat: '-37.7',
+      lng: '176.2',
+      zoom: '11',
+    },
+    {
+      id: 'nz-hutt',
+      primaryName: 'Te Awa Kairangi ki Tai',
+      secondaryName: 'Lower Hutt',
+      lat: '-41.2',
+      lng: '174.9',
+      zoom: '11',
+    },
+    {
       id: 'nz-dud',
       primaryName: 'Ōtepoti',
       secondaryName: 'Dunedin',
       lat: '-45.9',
       lng: '170.5',
+      zoom: '11',
+    },
+    {
+      id: 'nz-pmr',
+      primaryName: 'Te Papa-i-Oea',
+      secondaryName: 'Palmerston North',
+      lat: '-40.35',
+      lng: '175.6',
       zoom: '11',
     },
     {
@@ -152,12 +168,12 @@
     font-size: 0;
     padding: 1rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 280px 280px 280px;
     gap: 0.75rem;
     border: 0;
 
     @media (max-width: 1650px) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 280px 280px;
     }
   }
   button {

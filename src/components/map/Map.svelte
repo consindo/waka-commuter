@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte'
+  import mapboxgl from 'mapbox-gl'
 
   import { getSource } from '../../sources.js'
   import SatelliteButton from './SatelliteButton.svelte'

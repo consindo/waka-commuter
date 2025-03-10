@@ -57,9 +57,11 @@
         'nz-akl',
         'nz-chc',
         'nz-wlg',
-        'nz-trg',
         'nz-hlz',
+        'nz-trg',
+        'nz-hutt',
         'nz-dud',
+        'nz-pmr',
       ]}
     />
     <DataSources />
