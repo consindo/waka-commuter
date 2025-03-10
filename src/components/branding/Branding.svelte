@@ -2,7 +2,7 @@
   import { getSource } from '../../sources.js'
   import Search from './Search.svelte'
   import Dispatcher from '../../dispatcher.js'
-  import ason from '/static/css/ason.png'
+  import ason from '/static/css/ason.avif'
   import icon from '/static/css/icon.avif'
   import wsp from '/static/css/wsp.svg'
 
