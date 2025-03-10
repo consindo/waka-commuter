@@ -36,31 +36,19 @@
       ),
       url('/static/css/splash.avif');
     background-size: cover;
-    background-position: 50% 100%;
+    background-position: 50% 75%;
     height: 315px;
     padding: 4rem 1.25rem;
     box-sizing: border-box;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .splash-bg {
-      background-image:
-        linear-gradient(
-          0deg,
-          var(--surface-bg) 0%,
-          rgba(0, 0, 0, 0.5) 30%,
-          rgba(0, 0, 0, 0.05) 100%
-        ),
-        url('/static/css/splash-dark.avif');
-    }
-  }
   :global(.dark) .splash-bg {
     background-image:
       linear-gradient(
         0deg,
         var(--surface-bg) 0%,
         rgba(0, 0, 0, 0.5) 30%,
-        rgba(0, 0, 0, 0.05) 100%
+        rgba(0, 0, 0, 0.05) 75%
       ),
       url('/static/css/splash-dark.avif');
   }

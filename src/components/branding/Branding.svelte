@@ -2,7 +2,7 @@
   import { getSource } from '../../sources.js'
   import Search from './Search.svelte'
   import Dispatcher from '../../dispatcher.js'
-  import ason from '/static/css/ason.png'
+  import ason from '/static/css/ason.avif'
   import icon from '/static/css/icon.avif'
   import wsp from '/static/css/wsp.svg'
 
@@ -29,15 +29,19 @@
 
 <div class="wrapper" {style}>
   <div class={brandingClass} class:branding={true}>
-    <a href="https://turbomaps.io" class="turbomaps-logo">
-      <img src={icon} alt="Waka Commuter" width="48" height="48" />
-    </a>
-    <a href="https://asongroup.com.au" class="ason-logo">
-      <img src={ason} alt="Ason Group" height="39" />
-    </a>
-    <a href="https://wsp.com" class="wsp-logo">
-      <img src={wsp} alt="WSP" height="24" />
-    </a>
+    {#if brandingClass === 'statsnz'}
+      <a href="https://turbomaps.io" class="turbomaps-logo">
+        <img src={icon} alt="Waka Commuter" width="48" height="48" />
+      </a>
+    {:else if brandingClass === 'ason'}
+      <a href="https://asongroup.com.au" class="ason-logo">
+        <img src={ason} alt="Ason Group" height="39" />
+      </a>
+    {:else if brandingClass === 'wsp'}
+      <a href="https://wsp.com" class="wsp-logo">
+        <img src={wsp} alt="WSP" height="24" />
+      </a>
+    {/if}
   </div>
   <Search {regionNames} />
   <nav class="controls">
@@ -105,7 +109,7 @@
     float: left;
   }
   .branding.statsnz .turbomaps-logo img {
-    margin: 0.25rem 0.25rem 0.25rem 0;
+    margin: 0.25rem 0.75rem 0.25rem 0;
   }
 
   .hide {
