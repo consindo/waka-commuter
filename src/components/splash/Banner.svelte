@@ -1,55 +1,78 @@
 <script>
   import expand from '/static/expand.svg'
-  export let dataSource, background
+  let { dataSource, background } = $props()
 </script>
 
 <div class="splash-bg" style={`background-image: ${background}`}>
   <div class="splash-content">
     <h2>Explore how we travel</h2>
-    <p>
-      Discover how we get around, using travel data from the {dataSource}.
-      <span class="desktop"
-        >Get started by choosing an area on the map, or jump to a region below.</span
-      >
-    </p>
   </div>
   <div class="splash-controls">
     <button
       title="Learn More"
       class="btn-expand"
-      on:click={() =>
+      onclick={() =>
         document.getElementById('app').classList.toggle('map-view')}
     >
       <img alt="Toggle Details" src={expand} />
     </button>
   </div>
 </div>
+<p>
+  Discover how we get around, using travel data from the {dataSource}.
+  <span class="desktop"
+    >Get started by choosing an area on the map, or jump to a region below.</span
+  >
+</p>
 
 <style>
   .splash-bg {
-    background-image: linear-gradient(
-        120deg,
-        rgba(10, 0, 20, 0.8) 50%,
-        rgba(10, 0, 20, 0.4)
+    background-image:
+      linear-gradient(
+        0deg,
+        var(--surface-bg) 0%,
+        rgba(255, 255, 255, 0.5) 30%,
+        rgba(255, 255, 255, 0.05) 100%
       ),
-      url('/static/css/splash.jpg');
+      url('/static/css/splash.avif');
     background-size: cover;
-    background-position: 50% 50%;
-    height: 400px;
-    padding: 4rem 2.5rem;
+    background-position: 50% 100%;
+    height: 315px;
+    padding: 4rem 1.25rem;
     box-sizing: border-box;
   }
 
+  @media (prefers-color-scheme: dark) {
+    .splash-bg {
+      background-image:
+        linear-gradient(
+          0deg,
+          var(--surface-bg) 0%,
+          rgba(0, 0, 0, 0.5) 30%,
+          rgba(0, 0, 0, 0.05) 100%
+        ),
+        url('/static/css/splash-dark.avif');
+    }
+  }
+  :global(.dark) .splash-bg {
+    background-image:
+      linear-gradient(
+        0deg,
+        var(--surface-bg) 0%,
+        rgba(0, 0, 0, 0.5) 30%,
+        rgba(0, 0, 0, 0.05) 100%
+      ),
+      url('/static/css/splash-dark.avif');
+  }
+
   h2 {
-    font-size: 3rem;
-    margin: 3.5rem 0 1rem;
-    text-shadow: 0 1px 3px #000;
+    font-size: 2.25rem;
+    margin: 12.5rem 0 0;
   }
   p {
-    font-size: 1.35rem;
-    text-shadow: 0 1px 2px #000;
+    margin: 0 1.25rem 1rem;
+    font-size: 1rem;
     max-width: 600px;
-    margin: 0;
     line-height: 1.35;
   }
 
@@ -77,12 +100,6 @@
     vertical-align: top;
     width: 24px;
     height: 24px;
-  }
-  button.btn-close:hover {
-    background: #000;
-  }
-  button.btn-close:active {
-    background: #333;
   }
 
   @media (max-width: 1020px) {

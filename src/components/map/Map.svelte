@@ -1,5 +1,5 @@
 <script>
-  import { onMount, afterUpdate } from 'svelte'
+  import { onMount } from 'svelte'
 
   import { getSource } from '../../sources.js'
   import SatelliteButton from './SatelliteButton.svelte'
@@ -9,34 +9,68 @@
   import { bindMapEvents } from './map-events.js'
 
   import Legend from './Legend.svelte'
+  import MapTooltip from './MapTooltip.svelte'
 
   const token = import.meta.env.VITE_MAPBOX_TOKEN
   const isMobile = document.documentElement.clientWidth <= 1020
 
+  const { mapData, secondaryData, tertiaryData, dataset2, lat, lng, zoom } =
+    $props()
+
+  let isLoaded = false
+  let map = $state(null)
+
+  let style = $state(
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  )
+  const styleChange = (newStyle) => {
+    style = newStyle
+    if (isLoaded) {
+      isLoaded = false
+      map.setStyle(styleUrls[style])
+    }
+  }
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (event) => {
+      styleChange(event.matches ? 'dark' : 'light')
+    })
+
   const source = getSource()
+
+  let tooltipProps = $state({
+    loading: false,
+    position: [0, 0],
+    data: {
+      currentRegions: [],
+      mode: [],
+      arriveData: [],
+      departData: [],
+    },
+  })
+  const tooltipCallback = (props) => {
+    tooltipProps = { ...tooltipProps, ...props }
+  }
 
   mapboxgl.accessToken = token
 
-  export let mapData,
-    secondaryData,
-    tertiaryData,
-    dataset2,
-    lat,
-    lng,
-    zoom,
-    style
-
-  // gross hack
-  let oldLat = lat
-  let oldLng = lng
+  $effect(() => {
+    if (map) {
+      map.flyTo({
+        center: [lng, lat],
+        zoom,
+        essential: true,
+      })
+      // on mobile, hides menu
+      document.getElementById('app').classList.add('map-view')
+    }
+  })
 
   const styleUrls = {
-    map: 'mapbox://styles/mapbox/dark-v11?optimize=true',
+    light: 'mapbox://styles/mapbox/light-v11?optimize=true',
+    dark: 'mapbox://styles/mapbox/dark-v11?optimize=true',
     satellite: 'mapbox://styles/mapbox/satellite-v9?optimize=true',
   }
-
-  let isLoaded = false
-  let map = null
 
   onMount(async () => {
     map = new mapboxgl.Map({
@@ -80,8 +114,14 @@
         if (isLoaded) return
         isLoaded = true
 
-        const data = await Promise.all([mapData, secondaryData, tertiaryData])
-        drawMap(map, data, source.isMapAreaLabelsEnabled)
+        if (source.dynamicShapeFiles) {
+          source.dynamicShapeFiles.forEach((i) => (i.isLoaded = false))
+        }
+        let data = await Promise.all([mapData, secondaryData, tertiaryData])
+        drawMap(map, data, source.isMapAreaLabelsEnabled, style === 'dark')
+
+        // handles dynamic loading when the style changes
+        map.setZoom(map.getZoom() + 0.001)
 
         if (Dispatcher.currentRegion.length > 0) {
           Dispatcher.setRegions(Dispatcher.currentRegion)
@@ -92,36 +132,22 @@
       bindMapEvents(
         map,
         Promise.all([mapData, secondaryData, tertiaryData]),
-        dataset2
+        dataset2,
+        tooltipCallback
       )
     })
   })
 
-  afterUpdate(() => {
-    if (oldLat !== lat || oldLng !== lng) {
-      map.flyTo({
-        center: [lng, lat],
-        zoom,
-        essential: true,
-      })
-      oldLat = lat
-      oldLng = lng
-      return
-    }
-
-    if (isLoaded) {
-      isLoaded = false
-      map.setStyle(styleUrls[style])
-    }
-    document.getElementById('app').classList.add('map-view')
+  $effect(() => {
+    document.body.className = style !== 'light' ? 'dark' : 'light'
   })
 </script>
 
 <div id="map" class:expanded={source.brandingClass === 'ason'}>
-  <div id="map-content" />
+  <div id="map-content"></div>
   <Legend />
-  <SatelliteButton on:styleChange />
-  <map-tooltip />
+  <SatelliteButton {style} {styleChange} />
+  <MapTooltip {...tooltipProps} />
 </div>
 
 <style>

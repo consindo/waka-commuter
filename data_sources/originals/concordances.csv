@@ -1,0 +1,2713 @@
+SA22023_CODE,SA22023,Type,SA22018_CODE,SA22018
+100100,North Cape,Simple Map,100100,North Cape
+100200,Rangaunu Harbour,Simple Map,100200,Rangaunu Harbour
+100301,Inlets Far North District,Many To Many Map,100300,Inlets Far North District
+100400,Karikari Peninsula,Simple Map,100400,Karikari Peninsula
+100500,Tangonge,Simple Map,100500,Tangonge
+100600,Ahipara,Simple Map,100600,Ahipara
+100700,Kaitaia East,Simple Map,100700,Kaitaia East
+100800,Kaitaia West,Simple Map,100800,Kaitaia West
+100900,Rangitihi,Simple Map,100900,Rangitihi
+101000,Oruru-Parapara,Simple Map,101000,Oruru-Parapara
+101101,Doubtless Bay,Simple Map,101100,Taumarumaru
+101200,Herekino-Takahue,Simple Map,101200,Herekino-Takahue
+101300,Peria,Simple Map,101300,Peria
+101400,Taemaro-Oruaiti,Simple Map,101400,Taemaro-Oruaiti
+101500,Whakapaku,Simple Map,101500,Whakapaku
+101600,Hokianga North,Simple Map,101600,Hokianga North
+101700,Kohukohu-Broadwood,Simple Map,101700,Kohukohu-Broadwood
+101801,Whakarara,Many To Many Map,100300,Inlets Far North District
+101801,Whakarara,Many To Many Map,101800,Whakarara
+101900,Kaeo,Simple Map,101900,Kaeo
+102000,Omahuta Forest-Horeke,Simple Map,102000,Omahuta Forest-Horeke
+102100,Hokianga South,Simple Map,102100,Hokianga South
+102201,Lake Manuwai-Kapiro,Many To Many Map,102200,Lake Manuwai-Kapiro
+102300,Okaihau,Simple Map,102300,Okaihau
+102401,Rangitane-Purerua,Many To Many Map,102400,Rangitane-Purerua
+102401,Rangitane-Purerua,Many To Many Map,100300,Inlets Far North District
+102501,Waipapa,Many To Many Map,102500,Waipapa
+102600,Puketotara,Simple Map,102600,Puketotara
+102700,Waima Forest,Simple Map,102700,Waima Forest
+102801,Riverview,Many To Many Map,102800,Riverview
+102801,Riverview,Many To Many Map,102200,Lake Manuwai-Kapiro
+102801,Riverview,Many To Many Map,102500,Waipapa
+102900,Waipoua Forest,Simple Map,102900,Waipoua Forest
+103000,Kerikeri Central,Simple Map,103000,Kerikeri Central
+103101,Kerikeri South,Many To Many Map,103100,Kerikeri South
+103200,Ohaeawai-Waimate North,Simple Map,103200,Ohaeawai-Waimate North
+103301,Puketona-Waitangi,Many To Many Map,103300,Puketona-Waitangi
+103301,Puketona-Waitangi,Many To Many Map,103100,Kerikeri South
+103401,Ngapuhi,Many To Many Map,103400,Ngapuhi
+103501,Kaikohe,Many To Many Map,103400,Ngapuhi
+103501,Kaikohe,Many To Many Map,103500,Kaikohe
+103600,Pakaraka,Simple Map,103600,Pakaraka
+103700,Haruru,Simple Map,103700,Haruru
+103800,Russell,Simple Map,103800,Russell
+103900,Paihia,Simple Map,103900,Paihia
+104000,Mataraua Forest,Simple Map,104000,Mataraua Forest
+104101,Matawaia-Taumarere,Many To Many Map,104100,Matawaia-Taumarere
+104200,Russell Peninsula,Simple Map,104200,Russell Peninsula
+104301,Opua (Far North District),Many To Many Map,100300,Inlets Far North District
+104301,Opua (Far North District),Many To Many Map,104300,Opua (Far North District)
+104400,Russell Forest-Rawhiti,Simple Map,104400,Russell Forest-Rawhiti
+104501,Moerewa,Many To Many Map,104500,Moerewa
+104501,Moerewa,Many To Many Map,104100,Matawaia-Taumarere
+104600,Kawakawa,Simple Map,104600,Kawakawa
+104700,Maromaku,Simple Map,104700,Maromaku
+104800,Mangakahia-Hukerenui,Simple Map,104800,Mangakahia-Hukerenui
+104900,Whangaruru,Simple Map,104900,Whangaruru
+105001,Inlets other Whangarei District,Many To Many Map,105000,Inlets other Whangarei District
+105101,Matarau,Many To Many Map,105100,Matarau
+105200,Hikurangi,Simple Map,105200,Hikurangi
+105300,Kauri,Simple Map,105300,Kauri
+105400,Maungatapere,Simple Map,105400,Maungatapere
+105500,Kamo West,Simple Map,105500,Kamo West
+105601,Matapouri-Tutukaka,Many To Many Map,105600,Matapouri-Tutukaka
+105601,Matapouri-Tutukaka,Many To Many Map,105000,Inlets other Whangarei District
+105700,Kiripaka,Simple Map,105700,Kiripaka
+105800,Kamo East,Simple Map,105800,Kamo East
+105901,Granfield Reserve,Many To Many Map,105100,Matarau
+105901,Granfield Reserve,Many To Many Map,105900,Granfield Reserve
+106000,Kamo Central,Simple Map,106000,Kamo Central
+106100,Whau Valley,Simple Map,106100,Whau Valley
+106201,Tikipunga North,Many To Many Map,106200,Tikipunga North
+106201,Tikipunga North,Many To Many Map,106400,Otangarei
+106301,Pukenui,Many To Many Map,106300,Pukenui
+106401,Otangarei,Many To Many Map,106400,Otangarei
+106501,Tikipunga South,Simple Map,106500,Tikipunga South
+106600,Kensington (Whangarei District),Simple Map,106600,Kensington (Whangarei District)
+106700,Abbey Caves-Glenbervie,Simple Map,106700,Abbey Caves-Glenbervie
+106800,Mairtown,Simple Map,106800,Mairtown
+106901,Maunu,Many To Many Map,106900,Maunu-Horahora
+106901,Maunu,Many To Many Map,106300,Pukenui
+106902,Horahora,Many To Many Map,106900,Maunu-Horahora
+107000,Woodhill-Vinetown,Simple Map,107000,Woodhill-Vinetown
+107100,Whangarei Central,Simple Map,107100,Whangarei Central
+107200,Riverside,Simple Map,107200,Riverside
+107300,Raumanga,Simple Map,107300,Raumanga
+107401,Tarewa,Many To Many Map,107400,Tarewa
+107401,Tarewa,Many To Many Map,107900,Port-Limeburners
+107501,Morningside (Whangarei District),Many To Many Map,107500,Morningside (Whangarei District)
+107501,Morningside (Whangarei District),Many To Many Map,107900,Port-Limeburners
+107600,Ngunguru,Simple Map,107600,Ngunguru
+107700,Otaika-Portland,Simple Map,107700,Otaika-Portland
+107800,Oakleigh-Mangapai,Simple Map,107800,Oakleigh-Mangapai
+107901,Port-Limeburners,Many To Many Map,107900,Port-Limeburners
+108000,Pataua,Simple Map,108000,Pataua
+108100,Onerahi Park,Simple Map,108100,Onerahi Park
+108200,Sherwood Rise,Simple Map,108200,Sherwood Rise
+108300,Onerahi,Simple Map,108300,Onerahi
+108400,Inlet Whangarei Harbour,Simple Map,108400,Inlet Whangarei Harbour
+108500,Parua Bay,Simple Map,108500,Parua Bay
+108601,Bream Bay,Many To Many Map,108600,Bream Bay
+108601,Bream Bay,Many To Many Map,108700,Marsden Bay
+108701,One Tree Point,Many To Many Map,108700,Marsden Bay
+108701,One Tree Point,Many To Many Map,108600,Bream Bay
+108800,Ruakaka,Simple Map,108800,Ruakaka
+108900,Bream Head,Simple Map,108900,Bream Head
+109003,Waipu,Many To One Map,109000,Waipu
+109004,Waipu Rural,Many To One Map,109000,Waipu
+109101,Kaipara Coastal,Many To Many Map,109100,Kaipara Coastal
+109200,Maungaru,Simple Map,109200,Maungaru
+109301,Dargaville,Many To Many Map,109100,Kaipara Coastal
+109301,Dargaville,Many To Many Map,109300,Dargaville
+109400,Ruawai-Matakohe,Simple Map,109400,Ruawai-Matakohe
+109500,Otamatea (Kaipara District),Simple Map,109500,Otamatea (Kaipara District)
+109600,Maungaturoto,Simple Map,109600,Maungaturoto
+109700,Kaiwaka,Simple Map,109700,Kaiwaka
+109800,Mangawhai Rural,Simple Map,109800,Mangawhai Rural
+109900,Mangawhai Heads,Simple Map,109900,Mangawhai Heads
+110000,Inlet Mangawhai Harbour,Simple Map,110000,Inlet Mangawhai Harbour
+110100,Mangawhai,Simple Map,110100,Mangawhai
+110201,Okahukura Peninsula,Many To Many Map,110200,Okahukura Peninsula
+110300,Inlet Kaipara Harbour South,Simple Map,110300,Inlet Kaipara Harbour South
+110400,Cape Rodney,Simple Map,110400,Cape Rodney
+110501,Wellsford,Many To Many Map,110200,Okahukura Peninsula
+110501,Wellsford,Many To Many Map,110500,Wellsford
+110600,Oceanic Auckland Region East,Simple Map,110600,Oceanic Auckland Region East
+110700,South Head,Simple Map,110700,South Head
+110800,Kaipara Hills,Simple Map,110800,Kaipara Hills
+110900,Dome Valley-Matakana,Simple Map,110900,Dome Valley-Matakana
+111000,Oceanic Auckland Region West,Simple Map,111000,Oceanic Auckland Region West
+111100,Warkworth West,Simple Map,111100,Warkworth West
+111200,Puhoi Valley,Simple Map,111200,Puhoi Valley
+111300,Warkworth East,Simple Map,111300,Warkworth East
+111400,Sandspit,Simple Map,111400,Sandspit
+111500,Tawharanui Peninsula,Simple Map,111500,Tawharanui Peninsula
+111601,Kaukapakapa,Many To Many Map,111600,Te Kuru
+111602,Kaukapakapa Rural,Many To Many Map,112100,Wainui-Waiwera
+111602,Kaukapakapa Rural,Many To Many Map,111600,Te Kuru
+111700,Snells Beach,Simple Map,111700,Snells Beach
+111801,Barrier Islands,Many To Many Map,111800,Barrier Islands
+111801,Barrier Islands,Many To Many Map,112000,Inlets other Auckland
+111901,Mahurangi Peninsula,Simple Map,111900,Algies Bay-Scotts Landing
+112001,Inlets other Auckland,Many To Many Map,112000,Inlets other Auckland
+112101,Wainui-Waiwera,Many To Many Map,112100,Wainui-Waiwera
+112102,Ara Hill,Many To Many Map,112100,Wainui-Waiwera
+112200,Parakai,Simple Map,112200,Parakai
+112301,Helensville Rural,Many To Many Map,112300,Helensville Rural
+112401,Helensville,Many To Many Map,112300,Helensville Rural
+112401,Helensville,Many To Many Map,112400,Helensville
+112500,Waitoki,Simple Map,112500,Waitoki
+112600,Waikoukou Valley,Simple Map,112600,Waikoukou Valley
+112701,Orewa North,Many To One Map,112700,Orewa North
+112702,Orewa West,Many To One Map,112700,Orewa North
+112800,Hatfields Beach,Simple Map,112800,Hatfields Beach
+112901,Orewa South,Many To One Map,112900,Orewa South
+112902,Millwater North,Many To One Map,112900,Orewa South
+113000,Orewa Central,Simple Map,113000,Orewa Central
+113101,Millwater Central,Simple Map,113100,Millwater North
+113201,Waipatukahu,Many To Many Map,113200,Waipatukahu
+113201,Waipatukahu,Many To Many Map,114200,Waimauku
+113300,Millwater South,Simple Map,113300,Millwater South
+113401,Milldale,Many To Many Map,112100,Wainui-Waiwera
+113401,Milldale,Many To Many Map,113400,Dairy Flat North
+113402,Dairy Flat North,Many To Many Map,113400,Dairy Flat North
+113500,Dairy Flat West,Simple Map,113500,Dairy Flat West
+113600,Kingsway,Simple Map,113600,Kingsway
+113700,Riverhead Forest,Simple Map,113700,Riverhead Forest
+113800,Silverdale Central (Auckland),Simple Map,113800,Silverdale Central (Auckland)
+113900,Red Beach West,Simple Map,113900,Red Beach West
+114000,Red Beach East,Simple Map,114000,Red Beach East
+114101,Silverdale South (Auckland),Many To Many Map,114100,Silverdale South (Auckland)
+114101,Silverdale South (Auckland),Many To Many Map,114800,Okura Bush
+114102,Stillwater,Many To Many Map,114100,Silverdale South (Auckland)
+114201,Waimauku,Many To Many Map,114200,Waimauku
+114300,Gulf Islands,Simple Map,114300,Gulf Islands
+114400,Vipond,Simple Map,114400,Vipond
+114500,Muriwai,Simple Map,114500,Muriwai
+114600,Stanmore Bay West,Simple Map,114600,Stanmore Bay West
+114701,Kumeu Rural West,Many To Many Map,114700,Kumeu Rural West
+114801,Okura Bush,Many To Many Map,114800,Okura Bush
+114901,Whangaparaoa Central,Many To One Map,114900,Whangaparoa Central
+114902,Wade Heads-Arkles Bay,Many To One Map,114900,Whangaparoa Central
+115001,Kumeu-Huapai North,Many To Many Map,115000,Kumeu-Huapai
+115001,Kumeu-Huapai North,Many To Many Map,116100,Kumeu Rural East
+115001,Kumeu-Huapai North,Many To Many Map,114700,Kumeu Rural West
+115002,Kumeu-Huapai South,Many To Many Map,115000,Kumeu-Huapai
+115100,Stanmore Bay East,Simple Map,115100,Stanmore Bay East
+115200,Manly West,Simple Map,115200,Manly West
+115300,Muriwai Valley-Bethells Beach,Simple Map,115300,Muriwai Valley-Bethells Beach
+115400,Tindalls-Matakatia,Simple Map,115400,Tindalls-Matakatia
+115501,Coatesville,Many To Many Map,115500,Coatesville
+115601,Dairy Flat South,Many To Many Map,115600,Dairy Flat South
+115700,Gulf Harbour North,Simple Map,115700,Gulf Harbour North
+115800,Manly East,Simple Map,115800,Manly East
+115901,Riverhead,Many To Many Map,115900,Riverhead
+116000,Army Bay,Simple Map,116000,Army Bay
+116101,Kumeu Rural East,Many To Many Map,116100,Kumeu Rural East
+116101,Kumeu Rural East,Many To Many Map,115900,Riverhead
+116200,Gulf Harbour South,Simple Map,116200,Gulf Harbour South
+116300,Paremoremo West,Simple Map,116300,Paremoremo West
+116401,Taupaki,Many To Many Map,116400,Taupaki
+116500,Long Bay,Simple Map,116500,Long Bay
+116601,Paremoremo East,Many To Many Map,115500,Coatesville
+116601,Paremoremo East,Many To Many Map,116600,Paremoremo East
+116701,Albany Heights,Many To Many Map,115600,Dairy Flat South
+116701,Albany Heights,Many To Many Map,116700,Albany Heights
+116801,Awaruku,Many To Many Map,116800,Awaruku
+116900,Fairview Heights,Simple Map,116900,Fairview Heights
+117001,Whenuapai,Many To Many Map,117000,Whenuapai
+117002,Whenuapai West,Many To Many Map,117000,Whenuapai
+117003,Massey Red Hills,Many To Many Map,116400,Taupaki
+117003,Massey Red Hills,Many To Many Map,117000,Whenuapai
+117100,Waitakere Ranges North,Simple Map,117100,Waitakere Ranges North
+117201,Torbay West,Many To Many Map,116800,Awaruku
+117201,Torbay West,Many To Many Map,117200,Torbay
+117202,Torbay East,Many To Many Map,117200,Torbay
+117300,Albany Central,Simple Map,117300,Albany Central
+117400,Albany West,Simple Map,117400,Albany West
+117500,Glamorgan,Simple Map,117500,Glamorgan
+117600,Oteha East,Simple Map,117600,Oteha East
+117700,Northcross,Simple Map,117700,Northcross
+117800,Oteha West,Simple Map,117800,Oteha West
+117900,Waiake,Simple Map,117900,Waiake
+118001,Waitakere,Many To Many Map,118000,Waitakere
+118100,Albany South,Simple Map,118100,Albany South
+118200,Browns Bay South West,Simple Map,118200,Browns Bay South West
+118300,Browns Bay Central,Simple Map,118300,Browns Bay Central
+118400,Schnapper Rock,Simple Map,118400,Schnapper Rock
+118501,Pinehill North,Many To One Map,118500,Pinehill
+118502,Pinehill South,Many To One Map,118500,Pinehill
+118600,North Harbour,Simple Map,118600,North Harbour
+118700,Browns Bay South East,Simple Map,118700,Browns Bay South East
+118800,Westgate Central,Simple Map,118800,Westgate Central
+118900,Greenhithe West,Simple Map,118900,Greenhithe West
+119000,Rothesay Bay,Simple Map,119000,Rothesay Bay
+119100,Greenhithe East,Simple Map,119100,Greenhithe East
+119201,Hobsonville,Many To Many Map,117000,Whenuapai
+119201,Hobsonville,Many To Many Map,119200,Hobsonville
+119301,Inlet Waitemata Harbour,Many To Many Map,139200,Orakei West
+119301,Inlet Waitemata Harbour,Many To Many Map,119300,Inlet Waitemata Harbour
+119301,Inlet Waitemata Harbour,Many To Many Map,128100,Northcote Tuff Crater
+119400,Greenhithe South,Simple Map,119400,Greenhithe South
+119500,Murrays Bay West,Simple Map,119500,Murrays Bay West
+119600,Westgate South,Simple Map,119600,Westgate South
+119700,Windsor Park,Simple Map,119700,Windsor Park
+119800,West Harbour West,Simple Map,119800,West Harbour West
+119901,Unsworth Heights West,Many To Many Map,121900,Totara Vale South
+119901,Unsworth Heights West,Many To Many Map,119900,Unsworth Heights West
+120000,Murrays Bay East,Simple Map,120000,Murrays Bay East
+120101,Birdwood West,Many To Many Map,118000,Waitakere
+120101,Birdwood West,Many To Many Map,120100,Birdwood West
+120201,Hobsonville Point Catalina Bay,Many To One Map,120200,Hobsonville Point
+120202,Hobsonville Point Park,Many To One Map,120200,Hobsonville Point
+120203,Hobsonville Scott Point,Many To One Map,120200,Hobsonville Point
+120301,West Harbour Clearwater Cove,Many To Many Map,120300,West Harbour Clearwater Cove
+120400,Unsworth Heights East,Simple Map,120400,Unsworth Heights East
+120500,Mairangi Bay North,Simple Map,120500,Mairangi Bay North
+120600,Massey Central,Simple Map,120600,Massey Central
+120701,West Harbour Luckens Point,Many To Many Map,120300,West Harbour Clearwater Cove
+120701,West Harbour Luckens Point,Many To Many Map,120700,West Harbour Luckens Point
+120800,Mairangi Bay South,Simple Map,120800,Mairangi Bay South
+120900,Massey Royal Road West,Simple Map,120900,Massey Royal Road West
+121001,Bayview East (Auckland),Simple Map,121000,Bayview East
+121100,Swanson Rural,Simple Map,121100,Swanson Rural
+121200,Sunnynook South,Simple Map,121200,Sunnynook South
+121300,Sunnynook North,Simple Map,121300,Sunnynook North
+121401,Bayview West (Auckland),Simple Map,121400,Bayview West
+121500,Totara Vale North,Simple Map,121500,Totara Vale North
+121600,Royal Heights North,Simple Map,121600,Royal Heights North
+121701,Massey West,Many To Many Map,121700,Massey West
+121701,Massey West,Many To Many Map,122900,Massey South
+121800,Beach Haven West,Simple Map,121800,Beach Haven West
+121901,Totara Vale South,Many To Many Map,121900,Totara Vale South
+122001,Swanson,Many To Many Map,120100,Birdwood West
+122001,Swanson,Many To Many Map,122000,Swanson
+122101,Bayview South (Auckland),Simple Map,122100,Bayview South
+122200,Campbells Bay,Simple Map,122200,Campbells Bay
+122300,Royal Heights South,Simple Map,122300,Royal Heights South
+122400,Beach Haven East,Simple Map,122400,Beach Haven East
+122501,Massey Keegan,Simple Map,122500,Massey East
+122600,Forrest Hill North,Simple Map,122600,Forrest Hill North
+122700,Glenfield North,Simple Map,122700,Glenfield North
+122801,Birkdale North,Many To Many Map,122800,Birkdale North
+122802,Birkdale Central,Many To Many Map,122800,Birkdale North
+122802,Birkdale Central,Many To Many Map,124400,Birkdale South
+122901,Massey South,Many To Many Map,122900,Massey South
+123000,Ranui North,Simple Map,123000,Ranui North
+123100,Glenfield West,Simple Map,123100,Glenfield West
+123200,Te Atatu Peninsula North West,Simple Map,123200,Te Atatu Peninsula North West
+123300,Glenfield South West,Simple Map,123300,Glenfield South West
+123400,Forrest Hill West,Simple Map,123400,Forrest Hill West
+123500,Wairau Valley,Simple Map,123500,Wairau Valley
+123600,Forrest Hill East,Simple Map,123600,Forrest Hill East
+123701,Castor Bay North,Many To One Map,123700,Castor Bay
+123702,Castor Bay South,Many To One Map,123700,Castor Bay
+123800,Ranui Domain,Simple Map,123800,Ranui Domain
+123900,Beach Haven South,Simple Map,123900,Beach Haven South
+124000,Glenfield Central,Simple Map,124000,Glenfield Central
+124100,Piha,Simple Map,124100,Piha
+124200,Ranui South West,Simple Map,124200,Ranui South West
+124301,Henderson Larnoch,Many To Many Map,124300,Henderson Larnoch
+124401,Birkdale South,Many To Many Map,124400,Birkdale South
+124401,Birkdale South,Many To Many Map,125200,Birkenhead West
+124500,Te Atatu Peninsula Central,Simple Map,124500,Te Atatu Peninsula Central
+124600,Glenfield East,Simple Map,124600,Glenfield East
+124700,Henderson Valley,Simple Map,124700,Henderson Valley
+124800,Te Atatu Peninsula West,Simple Map,124800,Te Atatu Peninsula West
+124900,Henderson Lincoln West,Simple Map,124900,Henderson Lincoln West
+125000,Ranui South East,Simple Map,125000,Ranui South East
+125100,Henderson Lincoln East,Simple Map,125100,Henderson Lincoln East
+125201,Birkenhead West,Many To Many Map,125200,Birkenhead West
+125202,Birkenhead North West,Many To Many Map,125200,Birkenhead West
+125300,Te Atatu Peninsula East,Simple Map,125300,Te Atatu Peninsula East
+125400,Milford West,Simple Map,125400,Milford West
+125500,Westlake,Simple Map,125500,Westlake
+125600,Hillcrest North (Auckland),Simple Map,125600,Hillcrest North (Auckland)
+125701,Henderson Lincoln South,Many To Many Map,125700,Henderson Lincoln South
+125701,Henderson Lincoln South,Many To Many Map,124300,Henderson Larnoch
+125800,Hillcrest West (Auckland),Simple Map,125800,Hillcrest West (Auckland)
+125900,Milford Central,Simple Map,125900,Milford Central
+126000,Summerland South,Simple Map,126000,Summerland South
+126100,Summerland North,Simple Map,126100,Summerland North
+126200,Hillcrest East (Auckland),Simple Map,126200,Hillcrest East (Auckland)
+126300,Chatswood,Simple Map,126300,Chatswood
+126401,Te Atatu South-Edmonton,Many To Many Map,126400,Te Atatu South-Edmonton
+126500,Birkenhead North,Simple Map,126500,Birkenhead North
+126601,Takapuna West,Many To Many Map,126600,Takapuna West
+126701,Henderson North,Many To Many Map,126700,Henderson North
+126702,Henderson West,Many To Many Map,126700,Henderson North
+126702,Henderson West,Many To Many Map,126900,Western Heights (Auckland)
+126801,Takapuna Central,Many To Many Map,126600,Takapuna West
+126801,Takapuna Central,Many To Many Map,126800,Takapuna Central
+126901,Western Heights (Auckland),Many To Many Map,126900,Western Heights (Auckland)
+127001,Te Atatu South-North,Many To Many Map,127000,Te Atatu South-Central
+127001,Te Atatu South-North,Many To Many Map,119300,Inlet Waitemata Harbour
+127002,Te Atatu South-Central,Many To Many Map,126400,Te Atatu South-Edmonton
+127002,Te Atatu South-Central,Many To Many Map,127000,Te Atatu South-Central
+127002,Te Atatu South-Central,Many To Many Map,127700,Te Atatu South-McLeod North
+127002,Te Atatu South-Central,Many To Many Map,128500,Te Atatu South-McLeod South
+127100,Northcote Central (Auckland),Simple Map,127100,Northcote Central (Auckland)
+127200,Akoranga,Simple Map,127200,Akoranga
+127300,Northcote South (Auckland),Simple Map,127300,Northcote South (Auckland)
+127400,Birkenhead South,Simple Map,127400,Birkenhead South
+127500,Henderson Central,Simple Map,127500,Henderson Central
+127601,Waiatarua,Many To Many Map,127600,Waiatarua
+127601,Waiatarua,Many To Many Map,128300,McLaren Park
+127701,Te Atatu South-McLeod North,Many To Many Map,127700,Te Atatu South-McLeod North
+127801,Henderson Valley Park,Many To Many Map,127800,Henderson Valley Park
+127801,Henderson Valley Park,Many To Many Map,128300,McLaren Park
+127900,Henderson North East,Simple Map,127900,Henderson North East
+128000,Waitakere Ranges South,Simple Map,128000,Waitakere Ranges South
+128101,Northcote Tuff Crater,Many To Many Map,128100,Northcote Tuff Crater
+128200,Northcote Point (Auckland),Simple Map,128200,Northcote Point (Auckland)
+128301,McLaren Memorial Park,Many To Many Map,128300,McLaren Park
+128401,Henderson East,Many To Many Map,128400,Henderson East
+128401,Henderson East,Many To Many Map,129100,Sunnyvale East
+128501,Te Atatu South-McLeod South,Many To Many Map,128500,Te Atatu South-McLeod South
+128601,Takapuna South,Many To Many Map,126600,Takapuna West
+128601,Takapuna South,Many To Many Map,128600,Takapuna South
+128700,Rosebank Peninsula,Simple Map,128700,Rosebank Peninsula
+128800,Hauraki,Simple Map,128800,Hauraki
+128901,Glendene North West,Many To One Map,128900,Glendene North
+128902,Glendene North East,Many To One Map,128900,Glendene North
+129000,Sunnyvale West-Parrs Park,Simple Map,129000,Sunnyvale West-Parrs Park
+129101,Sunnyvale East,Many To Many Map,129100,Sunnyvale East
+129201,Point Chevalier West,Many To Many Map,129200,Point Chevalier West
+129300,Belmont (Auckland),Simple Map,129300,Belmont (Auckland)
+129400,Bayswater,Simple Map,129400,Bayswater
+129501,Glendene South,Many To Many Map,119300,Inlet Waitemata Harbour
+129501,Glendene South,Many To Many Map,129500,Glendene South
+129600,Glen Eden West,Simple Map,129600,Glen Eden West
+129700,Herne Bay,Simple Map,129700,Herne Bay
+129800,Westmere North,Simple Map,129800,Westmere North
+129901,Point Chevalier North,Many To Many Map,129200,Point Chevalier West
+129901,Point Chevalier North,Many To Many Map,129900,Point Chevalier East
+129902,Point Chevalier East,Many To Many Map,129900,Point Chevalier East
+130000,Oratia,Simple Map,130000,Oratia
+130100,Glen Eden Rosier,Simple Map,130100,Glen Eden Rosier
+130200,Saint Marys Bay,Simple Map,130200,Saint Marys Bay
+130300,Westmere South-Western Springs,Simple Map,130300,Westmere South-Western Springs
+130400,Ponsonby West,Simple Map,130400,Ponsonby West
+130500,Kelston North,Simple Map,130500,Kelston North
+130601,Avondale Rosebank (Auckland),Many To Many Map,130600,Avondale Rosebank
+130700,Narrow Neck,Simple Map,130700,Narrow Neck
+130801,Glen Eden North,Many To Many Map,129100,Sunnyvale East
+130801,Glen Eden North,Many To Many Map,130800,Glen Eden North
+130901,Glen Eden Woodglen,Many To Many Map,130900,Glen Eden Woodglen
+130902,Glen Eden Konini,Many To Many Map,130900,Glen Eden Woodglen
+130902,Glen Eden Konini,Many To Many Map,132500,Konini
+131000,Kelston South,Simple Map,131000,Kelston South
+131100,Waterview,Simple Map,131100,Waterview
+131200,Ponsonby East,Simple Map,131200,Ponsonby East
+131300,Wynyard-Viaduct,Simple Map,131300,Wynyard-Viaduct
+131400,Stanley Point,Simple Map,131400,Stanley Point
+131500,Glen Eden Central,Simple Map,131500,Glen Eden Central
+131600,Grey Lynn North,Simple Map,131600,Grey Lynn North
+131700,Avondale West (Auckland),Simple Map,131700,Avondale West (Auckland)
+131801,Freemans Bay,Many To One Map,131800,Freemans Bay
+131802,College Hill,Many To One Map,131800,Freemans Bay
+131900,Mount Albert West,Simple Map,131900,Mount Albert West
+132001,Avondale North West (Auckland),Many To Many Map,132000,Avondale North (Auckland)
+132001,Avondale North West (Auckland),Many To Many Map,130600,Avondale Rosebank
+132002,Avondale North East (Auckland),Many To Many Map,132000,Avondale North (Auckland)
+132100,Grey Lynn West,Simple Map,132100,Grey Lynn West
+132200,Mount Albert North,Simple Map,132200,Mount Albert North
+132300,New Lynn North,Simple Map,132300,New Lynn North
+132400,Victoria Park,Simple Map,132400,Victoria Park
+132501,Konini Road,Many To Many Map,132500,Konini
+132600,New Lynn North West,Simple Map,132600,New Lynn North West
+132700,Hobson Ridge North,Simple Map,132700,Hobson Ridge North
+132800,Grey Lynn Central,Simple Map,132800,Grey Lynn Central
+132900,Fruitvale,Simple Map,132900,Fruitvale
+133000,Devonport,Simple Map,133000,Devonport
+133100,Avondale Central (Auckland),Simple Map,133100,Avondale Central (Auckland)
+133200,Queen Street,Simple Map,133200,Queen Street
+133301,Quay Street-Customs Street,Simple Map,133300,Quay Street-Customs Street
+133400,Hobson Ridge Central,Simple Map,133400,Hobson Ridge Central
+133500,Grey Lynn East,Simple Map,133500,Grey Lynn East
+133600,Morningside (Auckland),Simple Map,133600,Morningside (Auckland)
+133700,Shortland Street,Simple Map,133700,Shortland Street
+133800,Hobson Ridge South,Simple Map,133800,Hobson Ridge South
+133900,New Lynn Central,Simple Map,133900,New Lynn Central
+134000,Cheltenham,Simple Map,134000,Cheltenham
+134100,Queen Street South West,Simple Map,134100,Queen Street South West
+134200,Mount Albert Central,Simple Map,134200,Mount Albert Central
+134301,Karangahape West,Many To One Map,134300,Karangahape
+134302,Karangahape East,Many To One Map,134300,Karangahape
+134400,Kingsland,Simple Map,134400,Kingsland
+134500,Anzac Avenue,Simple Map,134500,Anzac Avenue
+134600,Waima-Woodlands Park,Simple Map,134600,Waima-Woodlands Park
+134700,Kaurilands,Simple Map,134700,Kaurilands
+134800,Auckland-University,Simple Map,134800,Auckland-University
+134900,New Lynn Seabrook,Simple Map,134900,New Lynn Seabrook
+135000,Avondale South (Auckland),Simple Map,135000,Avondale South (Auckland)
+135100,Symonds Street North West,Simple Map,135100,Symonds Street North West
+135200,Mount Albert South,Simple Map,135200,Mount Albert South
+135300,Symonds Street West,Simple Map,135300,Symonds Street West
+135401,Titirangi East,Simple Map,135400,West Lynn
+135500,Owairaka West,Simple Map,135500,Owairaka West
+135600,New Lynn Central South,Simple Map,135600,New Lynn Central South
+135700,The Strand,Simple Map,135700,The Strand
+135800,St Lukes,Simple Map,135800,St Lukes
+135900,Symonds Street East,Simple Map,135900,Symonds Street East
+136001,Eden Terrace,Many To One Map,136000,Eden Terrace
+136002,Grafton West,Many To One Map,136000,Eden Terrace
+136100,Grafton,Simple Map,136100,Grafton
+136200,Eden Park,Simple Map,136200,Eden Park
+136300,Sandringham North,Simple Map,136300,Sandringham North
+136400,Parnell West,Simple Map,136400,Parnell West
+136501,New Lynn South,Many To One Map,136500,New Lynn South
+136502,New Lynn South East,Many To One Map,136500,New Lynn South
+136601,New Windsor North,Simple Map,136600,New Windsor North
+136700,Titirangi South,Simple Map,136700,Titirangi South
+136801,Owairaka East,Many To Many Map,136800,Owairaka East
+136801,Owairaka East,Many To Many Map,137900,Wesley West
+136900,Eden Valley,Simple Map,136900,Eden Valley
+137000,Sandringham Central,Simple Map,137000,Sandringham Central
+137100,Glenavon,Simple Map,137100,Glenavon
+137201,Blockhouse Bay North,Many To Many Map,137200,Blockhouse Bay North
+137202,Blockhouse Bay Central,Many To Many Map,137200,Blockhouse Bay North
+137202,Blockhouse Bay Central,Many To Many Map,139500,Blockhouse Bay East
+137202,Blockhouse Bay Central,Many To Many Map,138900,Blockhouse Bay South
+137300,Green Bay North,Simple Map,137300,Green Bay North
+137400,Parnell East,Simple Map,137400,Parnell East
+137500,Laingholm,Simple Map,137500,Laingholm
+137600,Sandringham West,Simple Map,137600,Sandringham West
+137701,Mount Eden North East,Many To Many Map,137700,Mount Eden North East
+137800,Mount Eden North,Simple Map,137800,Mount Eden North
+137901,Wesley West,Many To Many Map,137900,Wesley West
+138000,Green Bay South,Simple Map,138000,Green Bay South
+138100,Balmoral,Simple Map,138100,Balmoral
+138200,Sandringham East,Simple Map,138200,Sandringham East
+138301,New Windsor South,Many To One Map,138300,New Windsor South
+138302,New Windsor East,Many To One Map,138300,New Windsor South
+138400,Mount Eden West,Simple Map,138400,Mount Eden West
+138501,Newmarket,Many To Many Map,138500,Newmarket
+138501,Newmarket,Many To Many Map,137700,Mount Eden North East
+138502,Newmarket Park,Many To Many Map,138500,Newmarket
+138600,Blockhouse Bay North East,Simple Map,138600,Blockhouse Bay North East
+138700,Epsom North,Simple Map,138700,Epsom North
+138800,Wesley South,Simple Map,138800,Wesley South
+138901,Blockhouse Bay South,Many To Many Map,138900,Blockhouse Bay South
+139000,Mount Eden East,Simple Map,139000,Mount Eden East
+139100,Wesley East,Simple Map,139100,Wesley East
+139201,Orakei West,Many To Many Map,119300,Inlet Waitemata Harbour
+139201,Orakei West,Many To Many Map,139200,Orakei West
+139300,Maungawhau,Simple Map,139300,Maungawhau
+139400,Remuera West,Simple Map,139400,Remuera West
+139501,Blockhouse Bay East,Many To Many Map,139500,Blockhouse Bay East
+139601,Mount Roskill West,Simple Map,139600,Lynfield North
+139700,Mount Roskill North,Simple Map,139700,Mount Roskill North
+139801,Mount Roskill White Swan,Many To One Map,139800,Mount Roskill White Swan
+139802,Mount Roskill Nirvana,Many To One Map,139800,Mount Roskill White Swan
+139900,Mount Eden South,Simple Map,139900,Mount Eden South
+140000,Remuera Waitaramoa,Simple Map,140000,Remuera Waitaramoa
+140100,Orakei East,Simple Map,140100,Orakei East
+140200,Epsom Central-North,Simple Map,140200,Epsom Central-North
+140300,Mount St John,Simple Map,140300,Mount St John
+140400,Mount Roskill Central North,Simple Map,140400,Mount Roskill Central North
+140500,Remuera North,Simple Map,140500,Remuera North
+140601,Mount Roskill North East,Simple Map,140600,Three Kings West
+140700,Mount Roskill Central South,Simple Map,140700,Mount Roskill Central South
+140800,Epsom Central-South,Simple Map,140800,Epsom Central-South
+140901,Lynfield Central,Many To One Map,140900,Lynfield South
+140902,Lynfield Harbour View,Many To One Map,140900,Lynfield South
+141000,Remuera South,Simple Map,141000,Remuera South
+141101,Mission Bay,Many To One Map,141100,Mission Bay
+141102,Mission Bay Eastridge,Many To One Map,141100,Mission Bay
+141201,Three Kings North,Simple Map,141200,Three Kings East
+141300,Mount Roskill South,Simple Map,141300,Mount Roskill South
+141400,Inlet Manukau Harbour,Simple Map,141400,Inlet Manukau Harbour
+141500,Epsom East,Simple Map,141500,Epsom East
+141600,Remuera Waiata,Simple Map,141600,Remuera Waiata
+141700,Epsom South,Simple Map,141700,Epsom South
+141801,Kohimarama Bay,Many To One Map,141800,Kohimarama
+141802,Kohimarama Stadium,Many To One Map,141800,Kohimarama
+141900,Meadowbank West,Simple Map,141900,Meadowbank West
+142001,Three Kings South,Many To Many Map,142000,Hillsborough North (Auckland)
+142002,Hillsborough North (Auckland),Many To Many Map,142000,Hillsborough North (Auckland)
+142002,Hillsborough North (Auckland),Many To Many Map,144100,Onehunga West
+142101,Mount Roskill Central East,Simple Map,142100,Hillsborough West (Auckland)
+142201,Greenlane North,Many To One Map,142200,Greenlane North
+142202,Greenlane Central,Many To One Map,142200,Greenlane North
+142301,Mount Roskill South East,Simple Map,142300,Waikowhai North
+142400,Remuera East,Simple Map,142400,Remuera East
+142501,Waikowhai Bay,Simple Map,142500,Waikowhai South
+142600,Royal Oak West (Auckland),Simple Map,142600,Royal Oak West (Auckland)
+142700,Saint Heliers West,Simple Map,142700,Saint Heliers West
+142801,One Tree Hill Oranga,Many To One Map,142800,One Tree Hill
+142802,One Tree Hill Amaru,Many To One Map,142800,One Tree Hill
+142901,Hillsborough Central (Auckland),Simple Map,142900,Hillsborough East (Auckland)
+143000,Saint Heliers North,Simple Map,143000,Saint Heliers North
+143100,Remuera Abbotts Park,Simple Map,143100,Remuera Abbotts Park
+143200,Meadowbank East,Simple Map,143200,Meadowbank East
+143301,Ellerslie Central,Many To Many Map,143300,Ellerslie Central
+143301,Ellerslie Central,Many To Many Map,144200,Ellerslie West
+143400,Royal Oak East (Auckland),Simple Map,143400,Royal Oak East (Auckland)
+143500,Saint Heliers South,Simple Map,143500,Saint Heliers South
+143600,Hillsborough South (Auckland),Simple Map,143600,Hillsborough South (Auckland)
+143700,Saint Johns West,Simple Map,143700,Saint Johns West
+143800,Greenlane South,Simple Map,143800,Greenlane South
+143900,Remuera Waiatarua,Simple Map,143900,Remuera Waiatarua
+144001,Glendowie North,Many To Many Map,144000,Glendowie North
+144101,Onehunga West,Many To Many Map,144100,Onehunga West
+144201,Ellerslie West,Many To Many Map,144200,Ellerslie West
+144300,Onehunga North,Simple Map,144300,Onehunga North
+144400,Ellerslie East,Simple Map,144400,Ellerslie East
+144500,Saint Johns East,Simple Map,144500,Saint Johns East
+144600,Oneroa West,Simple Map,144600,Oneroa West
+144700,Glen Innes West,Simple Map,144700,Glen Innes West
+144800,Ellerslie South,Simple Map,144800,Ellerslie South
+144900,Stonefields West,Simple Map,144900,Stonefields West
+145000,Onehunga Central,Simple Map,145000,Onehunga Central
+145101,Glendowie South West,Many To Many Map,144000,Glendowie North
+145101,Glendowie South West,Many To Many Map,145100,Glendowie South
+145102,Glendowie South East,Many To Many Map,145100,Glendowie South
+145102,Glendowie South East,Many To Many Map,144000,Glendowie North
+145200,Oranga,Simple Map,145200,Oranga
+145300,Mount Wellington North West,Simple Map,145300,Mount Wellington North West
+145400,Panmure Glen Innes Industrial,Simple Map,145400,Panmure Glen Innes Industrial
+145500,Onehunga-Te Papapa Industrial,Simple Map,145500,Onehunga-Te Papapa Industrial
+145600,Te Papapa,Simple Map,145600,Te Papapa
+145700,Stonefields East,Simple Map,145700,Stonefields East
+145800,Glen Innes East-Wai O Taiki Bay,Simple Map,145800,Glen Innes East-Wai O Taiki Bay
+145900,Penrose,Simple Map,145900,Penrose
+146000,Mount Wellington North East,Simple Map,146000,Mount Wellington North East
+146100,Mangere Bridge Ambury,Simple Map,146100,Mangere Bridge Ambury
+146201,Mount Wellington Ferndale,Many To Many Map,146200,Mount Wellington Ferndale
+146301,Point England North,Many To One Map,146300,Point England
+146302,Point England South,Many To One Map,146300,Point England
+146400,Bucklands Beach North,Simple Map,146400,Bucklands Beach North
+146501,Mount Wellington East,Many To Many Map,146200,Mount Wellington Ferndale
+146501,Mount Wellington East,Many To Many Map,146500,Mount Wellington East
+146600,Mount Wellington West,Simple Map,146600,Mount Wellington West
+146700,Panmure West,Simple Map,146700,Panmure West
+146800,Mangere Bridge,Simple Map,146800,Mangere Bridge
+146900,Oneroa East-Palm Beach,Simple Map,146900,Oneroa East-Palm Beach
+147001,Tamaki West,Many To One Map,147000,Tamaki
+147002,Tamaki East,Many To One Map,147000,Tamaki
+147100,Panmure East,Simple Map,147100,Panmure East
+147201,Mount Wellington Central,Many To Many Map,147200,Mount Wellington Central
+147201,Mount Wellington Central,Many To Many Map,146500,Mount Wellington East
+147202,Mount Wellington Hamlin,Many To Many Map,147200,Mount Wellington Central
+147202,Mount Wellington Hamlin,Many To Many Map,146200,Mount Wellington Ferndale
+147300,Bays Waiheke Island,Simple Map,147300,Bays Waiheke Island
+147400,Sylvia Park,Simple Map,147400,Sylvia Park
+147500,Mangere Mountain View,Simple Map,147500,Mangere Mountain View
+147600,Surfdale,Simple Map,147600,Surfdale
+147700,Mount Wellington Industrial,Simple Map,147700,Mount Wellington Industrial
+147800,Half Moon Bay West,Simple Map,147800,Half Moon Bay West
+147900,Auckland Airport,Simple Map,147900,Auckland Airport
+148000,Eastern Beach,Simple Map,148000,Eastern Beach
+148101,Sunnyhills West,Many To Many Map,148400,Farm Cove
+148101,Sunnyhills West,Many To Many Map,148100,Sunnyhills West-Pakuranga North
+148102,Pakuranga North,Many To Many Map,148100,Sunnyhills West-Pakuranga North
+148102,Pakuranga North,Many To Many Map,149000,Pakuranga West
+148200,Favona North,Simple Map,148200,Favona North
+148300,Bucklands Beach Central,Simple Map,148300,Bucklands Beach Central
+148401,Farm Cove,Many To Many Map,148400,Farm Cove
+148501,Mangere North,Many To Many Map,148500,Mangere North
+148501,Mangere North,Many To Many Map,148900,Mangere West
+148600,Favona West,Simple Map,148600,Favona West
+148700,Ostend,Simple Map,148700,Ostend
+148800,Half Moon Bay North East,Simple Map,148800,Half Moon Bay North East
+148901,Mangere West,Many To Many Map,148900,Mangere West
+149001,Pakuranga West,Many To Many Map,149000,Pakuranga West
+149100,Mount Wellington South West,Simple Map,149100,Mount Wellington South West
+149200,Sunnyhills East,Simple Map,149200,Sunnyhills East
+149300,Half Moon Bay South East,Simple Map,149300,Half Moon Bay South East
+149400,Favona East,Simple Map,149400,Favona East
+149500,Mount Wellington South East,Simple Map,149500,Mount Wellington South East
+149600,Otahuhu Industrial,Simple Map,149600,Otahuhu Industrial
+149701,Bucklands Beach Murvale,Many To One Map,149700,Bucklands Beach South
+149702,Bucklands Beach South,Many To One Map,149700,Bucklands Beach South
+149800,Pakuranga Central,Simple Map,149800,Pakuranga Central
+149901,Awhitu,Many To Many Map,149900,Awhitu
+150000,Harania North,Simple Map,150000,Harania North
+150101,Otahuhu Central,Many To Many Map,150100,Otahuhu Central
+150200,Mangere Central,Simple Map,150200,Mangere Central
+150301,Otahuhu North West,Many To Many Map,150300,Otahuhu North
+150301,Otahuhu North West,Many To Many Map,150100,Otahuhu Central
+150302,Otahuhu North East,Many To Many Map,150300,Otahuhu North
+150400,Howick West,Simple Map,150400,Howick West
+150500,Pakuranga Heights North West,Simple Map,150500,Pakuranga Heights North West
+150600,Mellons Bay,Simple Map,150600,Mellons Bay
+150700,Pakuranga Heights East,Simple Map,150700,Pakuranga Heights East
+150800,Sutton Park,Simple Map,150800,Sutton Park
+150900,Otahuhu East,Simple Map,150900,Otahuhu East
+151000,Mangere South,Simple Map,151000,Mangere South
+151100,Onetangi,Simple Map,151100,Onetangi
+151200,Harania South,Simple Map,151200,Harania South
+151301,Highland Park (Auckland),Many To Many Map,151300,Highland Park (Auckland)
+151400,Otahuhu South West,Simple Map,151400,Otahuhu South West
+151500,Pakuranga Heights South West,Simple Map,151500,Pakuranga Heights South West
+151600,Mangere Mascot,Simple Map,151600,Mangere Mascot
+151700,Waiheke East,Simple Map,151700,Waiheke East
+151800,Massey Road West,Simple Map,151800,Massey Road West
+151900,Otahuhu South,Simple Map,151900,Otahuhu South
+152000,Howick Central,Simple Map,152000,Howick Central
+152101,Massey Road North,Many To Many Map,152100,Massey Road North
+152201,Botany Downs West,Many To Many Map,152200,Botany Downs West
+152201,Botany Downs West,Many To Many Map,151300,Highland Park (Auckland)
+152300,East Tamaki,Simple Map,152300,East Tamaki
+152400,Howick East,Simple Map,152400,Howick East
+152500,Burswood,Simple Map,152500,Burswood
+152600,Massey Road South,Simple Map,152600,Massey Road South
+152700,Middlemore,Simple Map,152700,Middlemore
+152800,Mangere South East,Simple Map,152800,Mangere South East
+152900,Botany Downs East,Simple Map,152900,Botany Downs East
+153000,Grange,Simple Map,153000,Grange
+153100,Golflands,Simple Map,153100,Golflands
+153200,Aorere North,Simple Map,153200,Aorere North
+153301,Mangere East,Many To Many Map,152100,Massey Road North
+153301,Mangere East,Many To Many Map,153300,Mangere East
+153400,Cockle Bay,Simple Map,153400,Cockle Bay
+153500,Otara West,Simple Map,153500,Otara West
+153600,Aorere Central,Simple Map,153600,Aorere Central
+153700,Northpark North,Simple Map,153700,Northpark North
+153800,Somerville,Simple Map,153800,Somerville
+153900,Northpark South,Simple Map,153900,Northpark South
+154001,Papatoetoe North,Many To Many Map,154000,Papatoetoe North
+154101,Dingwall,Many To Many Map,154100,Dingwall
+154201,Aorere South West,Many To Many Map,154200,Aorere South
+154202,Aorere South East,Many To Many Map,154200,Aorere South
+154202,Aorere South East,Many To Many Map,155900,Papatoetoe South West
+154300,Shelly Park,Simple Map,154300,Shelly Park
+154400,Otara Central,Simple Map,154400,Otara Central
+154500,Huntington Park,Simple Map,154500,Huntington Park
+154600,Botany Central,Simple Map,154600,Botany Central
+154701,Dannemora North-Shamrock Park,Simple Map,154700,Botany North
+154801,Papatoetoe North West,Many To Many Map,153300,Mangere East
+154801,Papatoetoe North West,Many To Many Map,154800,Papatoetoe West
+154802,Papatoetoe West,Many To Many Map,155900,Papatoetoe South West
+154802,Papatoetoe West,Many To Many Map,154800,Papatoetoe West
+154901,Papatoetoe Central West,Many To Many Map,154900,Papatoetoe Central
+154901,Papatoetoe Central West,Many To Many Map,154000,Papatoetoe North
+154902,Papatoetoe Central East,Many To Many Map,154900,Papatoetoe Central
+155000,Sunkist Bay,Simple Map,155000,Sunkist Bay
+155100,Otara East,Simple Map,155100,Otara East
+155200,Redcastle,Simple Map,155200,Redcastle
+155301,Dannemora South,Simple Map,155300,Botany East
+155401,Armoy,Many To Many Map,156100,Dannemora North
+155401,Armoy,Many To Many Map,155400,Botany South
+155500,Manukau Central,Simple Map,155500,Manukau Central
+155601,Papatoetoe North East,Many To Many Map,154100,Dingwall
+155601,Papatoetoe North East,Many To Many Map,155600,Papatoetoe East
+155602,Papatoetoe East,Many To Many Map,155600,Papatoetoe East
+155602,Papatoetoe East,Many To Many Map,156200,Papatoetoe South
+155701,Otara South West,Many To Many Map,155700,Otara South
+155702,Otara South,Many To Many Map,155700,Otara South
+155702,Otara South,Many To Many Map,155800,Ferguson
+155801,Ferguson,Many To Many Map,155800,Ferguson
+155901,Papatoetoe South West,Many To Many Map,155900,Papatoetoe South West
+156000,Botany Junction,Simple Map,156000,Botany Junction
+156101,Middlefield,Many To Many Map,156100,Dannemora North
+156101,Middlefield,Many To Many Map,155400,Botany South
+156201,Papatoetoe South,Many To Many Map,156200,Papatoetoe South
+156301,Point View,Simple Map,156300,East Tamaki Heights
+156400,Te Puru,Simple Map,156400,Te Puru
+156500,Puhinui North,Simple Map,156500,Puhinui North
+156601,Savonna,Simple Map,156600,Dannemora South
+156700,Puhinui South,Simple Map,156700,Puhinui South
+156800,Rongomai West,Simple Map,156800,Rongomai West
+156901,Baverstock,Many To Many Map,157100,Turanga
+156901,Baverstock,Many To Many Map,156900,Baverstock
+157000,Puhinui East,Simple Map,157000,Puhinui East
+157101,Turanga,Many To Many Map,157100,Turanga
+157200,Rongomai East,Simple Map,157200,Rongomai East
+157301,Ormiston North,Many To Many Map,157300,Ormiston North
+157400,Maraetai,Simple Map,157400,Maraetai
+157500,Chapel Downs,Simple Map,157500,Chapel Downs
+157600,Wiri West,Simple Map,157600,Wiri West
+157701,Clover Park North,Many To Many Map,157700,Clover Park North
+157701,Clover Park North,Many To Many Map,157900,Clover Park South
+157702,Clover Park East,Many To Many Map,157700,Clover Park North
+157702,Clover Park East,Many To Many Map,157900,Clover Park South
+157800,Mission Heights North,Simple Map,157800,Mission Heights North
+157901,Clover Park South,Many To Many Map,157900,Clover Park South
+158001,Donegal Park West,Many To One Map,158000,Donegal Park
+158002,Donegal Park East,Many To One Map,158000,Donegal Park
+158101,Ormiston Central,Many To Many Map,157300,Ormiston North
+158101,Ormiston Central,Many To Many Map,158100,Ormiston South
+158102,Ormiston South,Many To Many Map,158100,Ormiston South
+158200,Mission Heights South,Simple Map,158200,Mission Heights South
+158300,Hilltop (Auckland),Simple Map,158300,Hilltop (Auckland)
+158401,Wiri North,Many To One Map,158400,Wiri East
+158402,Wiri East,Many To One Map,158400,Wiri East
+158501,Goodwood Heights West,Many To One Map,158500,Goodwood Heights
+158502,Goodwood Heights East,Many To One Map,158500,Goodwood Heights
+158601,Ormiston East,Many To One Map,158600,Ormiston East
+158602,Bremner Ridge,Many To One Map,158600,Ormiston East
+158603,Ormiston South East,Many To One Map,158600,Ormiston East
+158700,Clendon Park North,Simple Map,158700,Clendon Park North
+158800,Burbank,Simple Map,158800,Burbank
+158900,Tuscany Heights,Simple Map,158900,Tuscany Heights
+159000,Totara Heights,Simple Map,159000,Totara Heights
+159101,Homai East,Many To Many Map,159100,Homai East
+159201,Homai West,Many To Many Map,159200,Homai West
+159202,Homai Central,Many To Many Map,159100,Homai East
+159202,Homai Central,Many To Many Map,159200,Homai West
+159301,The Gardens (Auckland),Many To Many Map,160400,Alfriston
+159301,The Gardens (Auckland),Many To Many Map,159300,The Gardens (Auckland)
+159401,Clarks Beach,Many To Many Map,159400,Clarks Beach
+159500,Clendon Park West,Simple Map,159500,Clendon Park West
+159600,Hillpark North,Simple Map,159600,Hillpark North
+159700,Clendon Park East,Simple Map,159700,Clendon Park East
+159801,Karaka Creek,Many To Many Map,159800,Karaka Creek
+159801,Karaka Creek,Many To Many Map,159400,Clarks Beach
+159900,Rowandale West,Simple Map,159900,Rowandale West
+160000,Rowandale East,Simple Map,160000,Rowandale East
+160100,Manurewa Central,Simple Map,160100,Manurewa Central
+160201,Weymouth West,Many To Many Map,160200,Weymouth North
+160202,Weymouth Central,Many To Many Map,160200,Weymouth North
+160202,Weymouth Central,Many To Many Map,160500,Weymouth East
+160300,Hillpark South,Simple Map,160300,Hillpark South
+160401,Alfriston,Many To Many Map,160400,Alfriston
+160501,Weymouth East,Many To Many Map,160500,Weymouth East
+160601,Leabank,Many To Many Map,160600,Leabank
+160700,Weymouth South,Simple Map,160700,Weymouth South
+160800,Manurewa East,Simple Map,160800,Manurewa East
+160901,Manurewa West,Many To Many Map,160600,Leabank
+160901,Manurewa West,Many To Many Map,160900,Manurewa South
+160902,Manurewa South,Many To Many Map,160900,Manurewa South
+161000,Randwick Park East,Simple Map,161000,Randwick Park East
+161100,Wattle Downs West,Simple Map,161100,Wattle Downs West
+161201,Wattle Downs North,Many To Many Map,161200,Wattle Downs North
+161201,Wattle Downs North,Many To Many Map,160500,Weymouth East
+161300,Randwick Park West,Simple Map,161300,Randwick Park West
+161400,Kingseat-Karaka,Simple Map,161400,Kingseat-Karaka
+161500,Wattle Downs East,Simple Map,161500,Wattle Downs East
+161600,Takanini North,Simple Map,161600,Takanini North
+161700,Takanini Industrial,Simple Map,161700,Takanini Industrial
+161800,Conifer Grove West,Simple Map,161800,Conifer Grove West
+161900,Conifer Grove East,Simple Map,161900,Conifer Grove East
+162000,Takanini West,Simple Map,162000,Takanini West
+162101,Takanini South,Many To One Map,162100,Takanini South
+162102,Takanini East,Many To One Map,162100,Takanini South
+162200,Takanini Central,Simple Map,162200,Takanini Central
+162300,Ardmore,Simple Map,162300,Ardmore
+162400,Glenbrook,Simple Map,162400,Glenbrook
+162500,Hingaia,Simple Map,162500,Hingaia
+162601,Takanini South East,Many To One Map,162600,Takanini South East
+162602,Takanini McLennan,Many To One Map,162600,Takanini South East
+162701,Kawakawa Bay-Orere,Many To Many Map,162700,Kawakawa Bay-Orere
+162701,Kawakawa Bay-Orere,Many To Many Map,162900,Clevedon
+162800,Papakura West,Simple Map,162800,Papakura West
+162901,Clevedon,Many To Many Map,162900,Clevedon
+163001,Papakura North,Many To Many Map,163000,Papakura North
+163100,Pahurehure,Simple Map,163100,Pahurehure
+163200,Papakura Central,Simple Map,163200,Papakura Central
+163301,Papakura North East,Many To One Map,163300,Papakura North East
+163302,Twin Parks Rise,Many To One Map,163300,Papakura North East
+163400,Karaka Lakes,Simple Map,163400,Karaka Lakes
+163501,Papakura Kelvin,Many To Many Map,163000,Papakura North
+163501,Papakura Kelvin,Many To Many Map,163500,Papakura Kelvin
+163502,Papakura Eastburn,Many To Many Map,163500,Papakura Kelvin
+163600,Papakura Massey Park,Simple Map,163600,Papakura Massey Park
+163700,Rosehill,Simple Map,163700,Rosehill
+163801,Patumahoe,Many To Many Map,163800,Patumahoe
+163803,Patumahoe Rural,Many To Many Map,165100,Ramarama
+163803,Patumahoe Rural,Many To Many Map,163800,Patumahoe
+163901,Papakura East,Many To Many Map,163900,Papakura East
+163902,Harbour View Heights,Many To Many Map,164200,Red Hill
+163902,Harbour View Heights,Many To Many Map,163900,Papakura East
+164001,Opaheke,Many To Many Map,164300,Drury
+164001,Opaheke,Many To Many Map,164000,Opaheke
+164100,Papakura Industrial,Simple Map,164100,Papakura Industrial
+164201,Red Hill,Many To Many Map,164200,Red Hill
+164301,Drury West,Many To Many Map,164300,Drury
+164302,Drury East,Many To Many Map,164300,Drury
+164401,Tamakae,Many To Many Map,149900,Awhitu
+164401,Tamakae,Many To Many Map,164400,Tamakae
+164500,Hamilton Estate,Simple Map,164500,Hamilton Estate
+164601,Runciman,Many To Many Map,164300,Drury
+164601,Runciman,Many To Many Map,164600,Drury Rural
+164601,Runciman,Many To Many Map,165100,Ramarama
+164602,Drury South Crossing,Many To Many Map,164600,Drury Rural
+164602,Drury South Crossing,Many To Many Map,166300,Bombay Hills
+164603,Waihoehoe,Many To Many Map,164600,Drury Rural
+164700,Waiuku Central,Simple Map,164700,Waiuku Central
+164800,Waiuku East,Simple Map,164800,Waiuku East
+164900,Kendallvale,Simple Map,164900,Kendallvale
+165001,Puni,Many To Many Map,165000,Puni
+165001,Puni,Many To Many Map,165900,Cloverlea (Auckland)
+165101,Ramarama,Many To Many Map,165100,Ramarama
+165200,Hunua,Simple Map,165200,Hunua
+165301,Pukekohe North,Many To One Map,165300,Pukekohe North West
+165302,Pukekohe North West,Many To One Map,165300,Pukekohe North West
+165400,Anselmi Ridge,Simple Map,165400,Anselmi Ridge
+165501,Pukekohe West,Many To Many Map,165500,Pukekohe West
+165502,Pukekohe South West,Many To Many Map,165500,Pukekohe West
+165502,Pukekohe South West,Many To Many Map,165000,Puni
+165600,Cape Hill,Simple Map,165600,Cape Hill
+165700,Rosa Birch Park,Simple Map,165700,Rosa Birch Park
+165800,Rooseville Park,Simple Map,165800,Rooseville Park
+165901,Cloverlea (Auckland),Many To Many Map,165900,Cloverlea (Auckland)
+166000,Pukekohe Central,Simple Map,166000,Pukekohe Central
+166100,Pukekohe Hospital,Simple Map,166100,Pukekohe Hospital
+166200,Buckland,Simple Map,166200,Buckland
+166301,Bombay Hills,Many To Many Map,166300,Bombay Hills
+166400,Ararimu,Simple Map,166400,Ararimu
+166500,Colville,Simple Map,166500,Colville
+166600,Islands Thames-Coromandel District,Simple Map,166600,Islands Thames-Coromandel District
+166700,Coromandel,Simple Map,166700,Coromandel
+166801,Inlets Thames-Coromandel District,Many To Many Map,166800,Inlets Thames-Coromandel District
+166900,Mercury Bay North,Simple Map,166900,Mercury Bay North
+167000,Whitianga North,Simple Map,167000,Whitianga North
+167101,Whitianga South,Many To One Map,167100,Whitianga South
+167102,Whitianga Waterways,Many To One Map,167100,Whitianga South
+167200,Thames Coast,Simple Map,167200,Thames Coast
+167300,Cooks Beach-Ferry Landing,Simple Map,167300,Cooks Beach-Ferry Landing
+167400,Mercury Bay South,Simple Map,167400,Mercury Bay South
+167501,Kauaeranga,Many To Many Map,167500,Kauaeranga
+167600,Thames North,Simple Map,167600,Thames North
+167700,Thames Central,Simple Map,167700,Thames Central
+167800,Thames South,Simple Map,167800,Thames South
+167900,Hikuai,Simple Map,167900,Hikuai
+168001,Totora-Kopu,Many To Many Map,167500,Kauaeranga
+168001,Totora-Kopu,Many To Many Map,168000,Totora-Kopu
+168101,Tairua,Many To Many Map,168100,Tairua
+168101,Tairua,Many To Many Map,166800,Inlets Thames-Coromandel District
+168200,Pauanui,Simple Map,168200,Pauanui
+168300,Matatoki-Puriri,Simple Map,168300,Matatoki-Puriri
+168400,Whangamata Rural,Simple Map,168400,Whangamata Rural
+168501,Whangamata West,Many To Many Map,168500,Whangamata
+168502,Whangamata East,Many To Many Map,168500,Whangamata
+168502,Whangamata East,Many To Many Map,166800,Inlets Thames-Coromandel District
+168600,Miranda-Pukorokoro,Simple Map,168600,Miranda-Pukorokoro
+168701,Hauraki Plains North,Many To Many Map,168700,Hauraki Plains North
+168701,Hauraki Plains North,Many To Many Map,168900,Ngatea
+168800,Hauraki Plains East,Simple Map,168800,Hauraki Plains East
+168901,Ngatea,Many To Many Map,168900,Ngatea
+169000,Hauraki Plains South,Simple Map,169000,Hauraki Plains South
+169100,Paeroa Rural,Simple Map,169100,Paeroa Rural
+169200,Paeroa,Simple Map,169200,Paeroa
+169301,Waihi Rural,Many To Many Map,169300,Waihi Rural
+169401,Waihi North,Many To Many Map,169400,Waihi North
+169401,Waihi North,Many To Many Map,169300,Waihi Rural
+169500,Waihi East,Simple Map,169500,Waihi East
+169600,Waihi South,Simple Map,169600,Waihi South
+169700,Aka Aka,Simple Map,169700,Aka Aka
+169800,Mangatangi,Simple Map,169800,Mangatangi
+169901,Tuakau Rural,Many To Many Map,169900,Tuakau Rural
+170001,Tuakau North,Many To Many Map,169900,Tuakau Rural
+170001,Tuakau North,Many To Many Map,170000,Tuakau North
+170101,Onewhero,Many To Many Map,170100,Onewhero
+170101,Onewhero,Many To Many Map,170900,Te Akau
+170201,Pokeno Rural,Many To Many Map,170200,Pokeno Rural
+170300,Tuakau South,Simple Map,170300,Tuakau South
+170400,Port Waikato-Waikaretu,Simple Map,170400,Port Waikato-Waikaretu
+170501,Pokeno North,Many To Many Map,170200,Pokeno Rural
+170501,Pokeno North,Many To Many Map,170500,Pokeno
+170502,Pokeno South,Many To Many Map,170200,Pokeno Rural
+170502,Pokeno South,Many To Many Map,170500,Pokeno
+170600,Pukekawa,Simple Map,170600,Pukekawa
+170700,Maramarua,Simple Map,170700,Maramarua
+170802,Te Kauwhata West,Many To Many Map,170800,Rangiriri
+170803,Whangamarino,Many To Many Map,170800,Rangiriri
+170901,Te Akau,Many To Many Map,170900,Te Akau
+171000,Inlets Waikato District,Simple Map,171000,Inlets Waikato District
+171101,Te Kauwhata East,Many To Many Map,171100,Te Kauwhata
+171101,Te Kauwhata East,Many To Many Map,170800,Rangiriri
+171201,Huntly Rural,Many To Many Map,171200,Huntly Rural
+171300,Waerenga,Simple Map,171300,Waerenga
+171400,Huntly West,Simple Map,171400,Huntly West
+171501,Huntly East,Many To Many Map,171500,Huntly East
+171501,Huntly East,Many To Many Map,171200,Huntly Rural
+171502,Huntly South,Many To Many Map,171500,Huntly East
+171601,Raglan,Many To Many Map,171600,Raglan
+171601,Raglan,Many To Many Map,171800,Te Uku
+171700,Whitikahu,Simple Map,171700,Whitikahu
+171801,Te Uku,Many To Many Map,171800,Te Uku
+171803,Whale Bay,Many To Many Map,171800,Te Uku
+171901,Taupiri-Lake Kainui,Many To Many Map,171900,Taupiri-Lake Kainui
+172001,Ngaruawahia North,Many To Many Map,171900,Taupiri-Lake Kainui
+172001,Ngaruawahia North,Many To Many Map,172000,Ngaruawahia North
+172100,Ngaruawahia Central,Simple Map,172100,Ngaruawahia Central
+172201,Ngaruawahia South,Many To Many Map,172400,Te Kowhai
+172201,Ngaruawahia South,Many To Many Map,172200,Ngaruawahia South
+172300,Kainui-Gordonton,Simple Map,172300,Kainui-Gordonton
+172401,Te Kowhai,Many To Many Map,172400,Te Kowhai
+172500,Whatawhata West,Simple Map,172500,Whatawhata West
+172601,Horotiu,Many To Many Map,172400,Te Kowhai
+172601,Horotiu,Many To Many Map,172600,Horotiu
+172700,Horsham Downs,Simple Map,172700,Horsham Downs
+172800,Whatawhata East,Simple Map,172800,Whatawhata East
+172900,Rotokauri,Simple Map,172900,Rotokauri
+173000,Hamilton Park,Simple Map,173000,Hamilton Park
+173100,Eureka-Tauwhare,Simple Map,173100,Eureka-Tauwhare
+173201,Tamahere North,Many To One Map,173200,Tamahere North
+173202,Tamahere West,Many To One Map,173200,Tamahere North
+173300,Pukemoremore,Simple Map,173300,Pukemoremore
+173400,Tamahere South,Simple Map,173400,Tamahere South
+173500,Tahuna-Mangateparu,Simple Map,173500,Tahuna-Mangateparu
+173600,Mangaiti,Simple Map,173600,Mangaiti
+173700,Tatuanui,Simple Map,173700,Tatuanui
+173801,Tahuroa,Many To Many Map,173800,Tahuroa
+173901,Morrinsville North,Many To Many Map,173800,Tahuroa
+173901,Morrinsville North,Many To Many Map,173900,Morrinsville East
+173902,Morrinsville East,Many To Many Map,173900,Morrinsville East
+174001,Morrinsville West,Many To Many Map,174000,Morrinsville West
+174001,Morrinsville West,Many To Many Map,173800,Tahuroa
+174100,Te Aroha East,Simple Map,174100,Te Aroha East
+174200,Te Aroha West,Simple Map,174200,Te Aroha West
+174300,Waihou-Manawaru,Simple Map,174300,Waihou-Manawaru
+174400,Waitoa-Ngarua,Simple Map,174400,Waitoa-Ngarua
+174500,Richmond Downs-Wardville,Simple Map,174500,Richmond Downs-Wardville
+174601,Waharoa-Peria,Many To Many Map,174600,Waharoa-Peria
+174701,Okauia,Many To Many Map,174700,Okauia
+174801,Hinuera,Many To Many Map,174800,Hinuera
+174901,Matamata North,Many To Many Map,174700,Okauia
+174901,Matamata North,Many To Many Map,174900,Matamata North
+174901,Matamata North,Many To Many Map,174600,Waharoa-Peria
+175001,Matamata West,Many To Many Map,174600,Waharoa-Peria
+175001,Matamata West,Many To Many Map,175000,Matamata South
+175002,Matamata East,Many To Many Map,174800,Hinuera
+175002,Matamata East,Many To Many Map,175000,Matamata South
+175100,Te Poi,Simple Map,175100,Te Poi
+175201,Te Rapa North,Many To Many Map,175200,Te Rapa North
+175301,Flagstaff North West,Many To Many Map,175500,Flagstaff South
+175301,Flagstaff North West,Many To Many Map,175300,Flagstaff North
+175302,Flagstaff North East,Many To Many Map,175300,Flagstaff North
+175401,Burbush-Baverstock,Simple Map,175400,Rotokauri-Waiwhakareke
+175501,Flagstaff South,Many To Many Map,175500,Flagstaff South
+175601,Rototuna North,Many To Many Map,175600,Rototuna North
+175700,Pukete West,Simple Map,175700,Pukete West
+175801,Flagstaff East,Many To Many Map,175800,Flagstaff East
+175801,Flagstaff East,Many To Many Map,175500,Flagstaff South
+175901,Rototuna West,Many To Many Map,175900,Rototuna Central
+175902,Rototuna East,Many To Many Map,175600,Rototuna North
+175902,Rototuna East,Many To Many Map,175900,Rototuna Central
+176000,Pukete East,Simple Map,176000,Pukete East
+176101,Te Manatu,Many To Many Map,176100,Te Manatu
+176101,Te Manatu,Many To Many Map,175900,Rototuna Central
+176201,Rototuna South West,Many To One Map,176200,Rototuna South
+176202,Rototuna South East,Many To One Map,176200,Rototuna South
+176301,Te Rapa South,Many To Many Map,175200,Te Rapa North
+176301,Te Rapa South,Many To Many Map,176300,Te Rapa South
+176400,Saint Andrews West,Simple Map,176400,Saint Andrews West
+176500,Saint Andrews East,Simple Map,176500,Saint Andrews East
+176600,Queenwood (Hamilton City),Simple Map,176600,Queenwood (Hamilton City)
+176700,St James,Simple Map,176700,St James
+176800,Crawshaw,Simple Map,176800,Crawshaw
+176900,Huntington,Simple Map,176900,Huntington
+177000,Western Heights (Hamilton City),Simple Map,177000,Western Heights (Hamilton City)
+177100,Nawton West,Simple Map,177100,Nawton West
+177200,Nawton East,Simple Map,177200,Nawton East
+177300,Chartwell,Simple Map,177300,Chartwell
+177400,Forest Lake (Hamilton City),Simple Map,177400,Forest Lake (Hamilton City)
+177500,Chedworth,Simple Map,177500,Chedworth
+177600,Beerescourt,Simple Map,177600,Beerescourt
+177700,Miropiko,Simple Map,177700,Miropiko
+177800,Porritt,Simple Map,177800,Porritt
+177901,Dinsdale North,Many To Many Map,177900,Dinsdale North
+178000,Maeroa,Simple Map,178000,Maeroa
+178100,Dinsdale South,Simple Map,178100,Dinsdale South
+178201,Fairfield North (Hamilton City),Many To One Map,178200,Fairfield (Hamilton City)
+178202,Fairfield South (Hamilton City),Many To One Map,178200,Fairfield (Hamilton City)
+178301,Whitiora,Many To Many Map,178300,Whitiora
+178400,Enderley North,Simple Map,178400,Enderley North
+178500,Fairview Downs,Simple Map,178500,Fairview Downs
+178600,Temple View,Simple Map,178600,Temple View
+178701,Swarbrick,Many To Many Map,178700,Swarbrick
+178701,Swarbrick,Many To Many Map,177900,Dinsdale North
+178800,Kahikatea,Simple Map,178800,Kahikatea
+178901,Frankton Junction,Many To Many Map,178900,Frankton Junction
+178901,Frankton Junction,Many To Many Map,179000,Kirikiriroa
+179001,Kirikiriroa,Many To Many Map,179000,Kirikiriroa
+179001,Kirikiriroa,Many To Many Map,178300,Whitiora
+179100,Enderley South,Simple Map,179100,Enderley South
+179201,Greenhill Park,Many To One Map,179200,Ruakura
+179202,Ruakura,Many To One Map,179200,Ruakura
+179300,Claudelands,Simple Map,179300,Claudelands
+179401,Hamilton Central,Many To Many Map,179400,Hamilton Central
+179501,Hamilton Lake North,Many To Many Map,179500,Hamilton Lake
+179501,Hamilton Lake North,Many To Many Map,179400,Hamilton Central
+179502,Hamilton Lake South,Many To Many Map,179800,Hamilton West
+179502,Hamilton Lake South,Many To Many Map,179500,Hamilton Lake
+179600,Peachgrove,Simple Map,179600,Peachgrove
+179700,Hamilton East Village,Simple Map,179700,Hamilton East Village
+179801,Hamilton West,Many To Many Map,179800,Hamilton West
+179901,Greensboro,Many To Many Map,179900,Greensboro
+180000,Hamilton East Cook,Simple Map,180000,Hamilton East Cook
+180100,Melville North,Simple Map,180100,Melville North
+180200,Hamilton East,Simple Map,180200,Hamilton East
+180300,Melville South,Simple Map,180300,Melville South
+180400,Deanwell,Simple Map,180400,Deanwell
+180500,Bader,Simple Map,180500,Bader
+180601,Hillcrest West (Hamilton City),Many To Many Map,179900,Greensboro
+180601,Hillcrest West (Hamilton City),Many To Many Map,180600,Hillcrest West (Hamilton City)
+180700,Hillcrest East (Hamilton City),Simple Map,180700,Hillcrest East (Hamilton City)
+180800,Silverdale (Hamilton City),Simple Map,180800,Silverdale (Hamilton City)
+180900,Glenview,Simple Map,180900,Glenview
+181000,Resthill,Simple Map,181000,Resthill
+181101,Fitzroy (Hamilton City),Simple Map,181100,Fitzroy
+181200,Riverlea,Simple Map,181200,Riverlea
+181301,Peacocke,Simple Map,181300,Peacockes
+181400,Te Pahu,Simple Map,181400,Te Pahu
+181500,Ngahinapouri,Simple Map,181500,Ngahinapouri
+181600,Lake Cameron,Simple Map,181600,Lake Cameron
+181700,Lake Ngaroto,Simple Map,181700,Lake Ngaroto
+181800,Kaipaki,Simple Map,181800,Kaipaki
+181900,Pirongia,Simple Map,181900,Pirongia
+182000,Hautapu Rural,Simple Map,182000,Hautapu Rural
+182101,Pokuru,Many To Many Map,182100,Pokuru
+182201,Te Rahu,Many To Many Map,182200,Te Rahu
+182300,Fencourt,Simple Map,182300,Fencourt
+182400,Hautapu,Simple Map,182400,Hautapu
+182500,Karapiro,Simple Map,182500,Karapiro
+182600,Cambridge North,Simple Map,182600,Cambridge North
+182700,Cambridge West,Simple Map,182700,Cambridge West
+182800,Cambridge East,Simple Map,182800,Cambridge East
+182900,Cambridge Park-River Garden,Simple Map,182900,Cambridge Park-River Garden
+183000,Oaklands-St Kilda,Simple Map,183000,Oaklands-St Kilda
+183101,Pukerimu,Many To Many Map,183100,Pukerimu
+183200,Cambridge Central,Simple Map,183200,Cambridge Central
+183300,Te Awamutu North,Simple Map,183300,Te Awamutu North
+183401,Te Awamutu West,Many To Many Map,182100,Pokuru
+183401,Te Awamutu West,Many To Many Map,183400,Te Awamutu West
+183500,Leamington West,Simple Map,183500,Leamington West
+183600,Goodfellow Park,Simple Map,183600,Goodfellow Park
+183701,Leamington South,Many To Many Map,183100,Pukerimu
+183701,Leamington South,Many To Many Map,183700,Leamington South
+183800,Leamington Central,Simple Map,183800,Leamington Central
+183900,Leamington East,Simple Map,183900,Leamington East
+184000,Te Awamutu Stadium,Simple Map,184000,Te Awamutu Stadium
+184100,Te Awamutu Central,Simple Map,184100,Te Awamutu Central
+184201,Pekerau,Many To Many Map,182200,Te Rahu
+184201,Pekerau,Many To Many Map,184200,Pekerau
+184201,Pekerau,Many To Many Map,184600,Rotoorangi
+184300,Fraser Street,Simple Map,184300,Fraser Street
+184400,Sherwin Park,Simple Map,184400,Sherwin Park
+184501,St Leger,Many To Many Map,184500,St Leger
+184601,Rotoorangi,Many To Many Map,184600,Rotoorangi
+184601,Rotoorangi,Many To Many Map,184500,St Leger
+184700,Tokanui,Simple Map,184700,Tokanui
+184800,Kihikihi Central,Simple Map,184800,Kihikihi Central
+184900,Maungatautari,Simple Map,184900,Maungatautari
+185000,Rotongata,Simple Map,185000,Rotongata
+185100,Inlets Otorohanga District,Simple Map,185100,Inlets Otorohanga District
+185200,Pirongia Forest,Simple Map,185200,Pirongia Forest
+185300,Honikiwi,Simple Map,185300,Honikiwi
+185400,Te Kawa,Simple Map,185400,Te Kawa
+185500,Otorohanga,Simple Map,185500,Otorohanga
+185600,Maihiihi,Simple Map,185600,Maihiihi
+185700,Puniu,Simple Map,185700,Puniu
+185800,Tirau,Simple Map,185800,Tirau
+185900,Putaruru Rural,Simple Map,185900,Putararu Rural
+186000,Putaruru,Simple Map,186000,Putararu
+186100,Kinleith,Simple Map,186100,Kinleith
+186200,Paraonui,Simple Map,186200,Paraonui
+186300,Parkdale,Simple Map,186300,Parkdale
+186400,Matarawa,Simple Map,186400,Matarawa
+186500,Stanley Park,Simple Map,186500,Stanley Park
+186600,Strathmore (South Waikato District),Simple Map,186600,Strathmore (South Waikato District)
+186700,Tokoroa Central,Simple Map,186700,Tokoroa Central
+186800,Moananui,Simple Map,186800,Moananui
+186900,Inlet Waitomo District,Simple Map,186900,Inlet Waitomo District
+187000,Herangi,Simple Map,187000,Herangi
+187100,Hangatiki,Simple Map,187100,Hangatiki
+187200,Aria,Simple Map,187200,Aria
+187300,Te Kuiti West,Simple Map,187300,Te Kuiti West
+187400,Te Kuiti East,Simple Map,187400,Te Kuiti East
+187500,Waipa Valley,Simple Map,187500,Waipa Valley
+187600,Tiroa,Simple Map,187600,Tiroa
+187701,Marotiri,Many To One Map,187700,Marotiri
+187702,Mangakino,Many To One Map,187700,Marotiri
+187800,Ohakuri,Simple Map,187800,Ohakuri
+187900,Lake Taupo Bays,Simple Map,187900,Lake Taupo Bays
+188001,Mapara,Many To One Map,188000,Mapara
+188002,Kinloch,Many To One Map,188000,Mapara
+188100,Inland water Lake Taupo,Simple Map,188100,Inland water Lake Taupo
+188200,Wairakei-Broadlands,Simple Map,188200,Wairakei-Broadlands
+188300,Acacia Bay,Simple Map,188300,Acacia Bay
+188400,Brentwood (Taupo District),Simple Map,188400,Brentwood (Taupo District)
+188501,Nukuhau,Many To One Map,188500,Nukuhau-Rangatira Park
+188502,Rangatira Park,Many To One Map,188500,Nukuhau-Rangatira Park
+188600,Taupo Central West,Simple Map,188600,Taupo Central West
+188701,Tauhara,Many To One Map,188700,Tauhara
+188702,Centennial,Many To One Map,188700,Tauhara
+188800,Taupo Central East,Simple Map,188800,Taupo Central East
+188900,Mountview,Simple Map,188900,Mountview
+189000,Bird Area,Simple Map,189000,Bird Area
+189101,Hilltop (Taupo District),Many To One Map,189100,Hilltop (Taupo District)
+189102,Invergarry,Many To One Map,189100,Hilltop (Taupo District)
+189200,Waipahihi,Simple Map,189200,Waipahihi
+189300,Richmond Heights,Simple Map,189300,Richmond Heights
+189400,Wharewaka,Simple Map,189400,Wharewaka
+189500,Kaimanawa,Simple Map,189500,Kaimanawa
+189600,Waitahanui,Simple Map,189600,Waitahanui
+189700,Turangi,Simple Map,189700,Turangi
+189800,Rangataiki,Simple Map,189800,Rangataiki
+189900,Taharua,Simple Map,189900,Taharua
+190000,Te More,Simple Map,190000,Te More
+190100,Waiau,Simple Map,190100,Waiau
+190200,Waihi Beach-Bowentown,Simple Map,190200,Waihi Beach-Bowentown
+190300,Tahawai,Simple Map,190300,Tahawai
+190400,Athenree,Simple Map,190400,Athenree
+190501,Aongatete,Many To Many Map,190500,Aongatete
+190501,Aongatete,Many To Many Map,190600,Katikati
+190601,Katikati North,Many To Many Map,190600,Katikati
+190602,Katikati South,Many To Many Map,190500,Aongatete
+190602,Katikati South,Many To Many Map,190600,Katikati
+190700,Inlet Tauranga Harbour North,Simple Map,190700,Inlet Tauranga Harbour North
+190800,Matakana Island,Simple Map,190800,Matakana Island
+190901,Pahoia West,Many To One Map,190900,Pahoia
+190902,Pahoia East,Many To One Map,190900,Pahoia
+191001,Omokoroa North,Simple Map,191000,Omokoroa
+191101,Omokoroa South,Many To Many Map,191100,Omokoroa Rural
+191201,Te Puna,Many To Many Map,191100,Omokoroa Rural
+191201,Te Puna,Many To Many Map,191200,Te Puna
+191300,Minden,Simple Map,191300,Minden
+191400,Kaimai,Simple Map,191400,Kaimai
+191501,Kopurererua,Many To Many Map,191500,Kopurererua
+191502,Keenan Road,Many To Many Map,191500,Kopurererua
+191601,Waitao,Simple Map,191600,Kaitemako (Western Bay of Plenty District)
+191700,Waiorohi,Simple Map,191700,Waiorohi
+191801,Otawa,Many To Many Map,191800,Otawa
+191801,Otawa,Many To Many Map,191900,Te Puke West
+191901,Te Puke West,Many To Many Map,191900,Te Puke West
+192000,Rangiuru,Simple Map,192000,Rangiuru
+192101,Te Puke East,Many To Many Map,192100,Te Puke East
+192102,Te Puke South,Many To Many Map,191900,Te Puke West
+192102,Te Puke South,Many To Many Map,192100,Te Puke East
+192200,Inlets Maketu,Simple Map,192200,Inlets Maketu
+192300,Maketu,Simple Map,192300,Maketu
+192400,Pukehina Beach,Simple Map,192400,Pukehina Beach
+192500,Pongakawa,Simple Map,192500,Pongakawa
+192600,Matua North,Simple Map,192600,Matua North
+192700,Inlet Tauranga Harbour South,Simple Map,192700,Inlet Tauranga Harbour South
+192800,Mount Maunganui North,Simple Map,192800,Mount Maunganui North
+192900,Matua South,Simple Map,192900,Matua South
+193000,Bethlehem North,Simple Map,193000,Bethlehem North
+193100,Bellevue,Simple Map,193100,Bellevue
+193201,Otumoetai North,Many To Many Map,193200,Otumoetai North
+193202,Otumoetai East,Many To Many Map,193200,Otumoetai North
+193202,Otumoetai East,Many To Many Map,193300,Otumoetai South
+193301,Otumoetai South,Many To Many Map,193300,Otumoetai South
+193400,Brookfield West,Simple Map,193400,Brookfield West
+193500,Bethlehem Central,Simple Map,193500,Bethlehem Central
+193600,Brookfield East,Simple Map,193600,Brookfield East
+193700,Mount Maunganui South,Simple Map,193700,Mount Maunganui South
+193800,Tauranga Central,Simple Map,193800,Tauranga Central
+193900,Mount Maunganui Central,Simple Map,193900,Mount Maunganui Central
+194000,Judea,Simple Map,194000,Judea
+194100,Te Reti,Simple Map,194100,Te Reti
+194200,Bethlehem South,Simple Map,194200,Bethlehem South
+194300,Omanu Beach,Simple Map,194300,Omanu Beach
+194400,Tauranga Hospital,Simple Map,194400,Tauranga Hospital
+194500,Tauriko,Many To Many Map,194500,Tauriko
+194500,Tauriko,Many To Many Map,191500,Kopurererua
+194601,Gate Pa,Many To Many Map,194600,Gate Pa
+194700,Greerton South,Simple Map,194700,Greerton South
+194801,Tauranga South,Many To Many Map,194800,Tauranga South
+194802,Fraser Cove,Many To Many Map,194800,Tauranga South
+194802,Fraser Cove,Many To Many Map,194600,Gate Pa
+194900,Arataki North,Simple Map,194900,Arataki North
+195000,Matapihi,Simple Map,195000,Matapihi
+195101,Pyes Pa North West,Many To One Map,195100,Pyes Pa West
+195102,Pyes Pa West,Many To One Map,195100,Pyes Pa West
+195200,Greerton North,Simple Map,195200,Greerton North
+195300,Yatton Park,Simple Map,195300,Yatton Park
+195401,Pyes Pa North,Many To Many Map,195400,Pyes Pa North
+195500,Arataki South,Simple Map,195500,Arataki South
+195601,Pyes Pa South,Many To Many Map,195400,Pyes Pa North
+195601,Pyes Pa South,Many To Many Map,195600,Pyes Pa South
+195700,Poike,Simple Map,195700,Poike
+195800,Te Maunga North,Simple Map,195800,Te Maunga North
+195900,Maungatapu,Simple Map,195900,Maungatapu
+196000,Hairini,Simple Map,196000,Hairini
+196100,Pyes Pa East,Simple Map,196100,Pyes Pa East
+196201,Te Maunga South,Many To One Map,196200,Te Maunga South
+196202,Pacific Lakes,Many To One Map,196200,Te Maunga South
+196301,Kaitemako,Simple Map,196300,Kaitemako (Tauranga City)
+196400,Ohauiti,Simple Map,196400,Ohauiti
+196500,Baypark-Kairua,Simple Map,196500,Baypark-Kairua
+196600,Welcome Bay West,Simple Map,196600,Welcome Bay West
+196700,Welcome Bay East,Simple Map,196700,Welcome Bay East
+196800,Pacific View,Simple Map,196800,Pacific View
+196900,Welcome Bay South,Simple Map,196900,Welcome Bay South
+197000,Palm Beach North,Simple Map,197000,Palm Beach North
+197100,Palm Beach South-Gravatt,Simple Map,197100,Palm Beach South-Gravatt
+197200,Papamoa Beach North,Simple Map,197200,Papamoa Beach North
+197300,Doncaster,Many To Many Map,191800,Otawa
+197300,Doncaster,Many To Many Map,197300,Doncaster
+197400,Papamoa Beach South,Simple Map,197400,Papamoa Beach South
+197500,Motiti,Simple Map,197500,Motiti
+197601,Wairakei West,Many To One Map,197600,Wairakei
+197602,Wairakei Central,Many To One Map,197600,Wairakei
+197603,Wairakei East-Te Tumu,Many To One Map,197600,Wairakei
+197700,Tui Ridge,Simple Map,197700,Tui Ridge
+197800,Arahiwi,Simple Map,197800,Arahiwi
+197900,Ngongotaha Valley,Simple Map,197900,Ngongotaha Valley
+198000,Hamurana,Simple Map,198000,Hamurana
+198100,Ngongotaha East,Simple Map,198100,Ngongotaha East
+198200,Ngongotaha West,Simple Map,198200,Ngongotaha West
+198300,Inland water Lake Rotorua,Simple Map,198300,Inland water Lake Rotorua
+198400,Ngongotaha South,Simple Map,198400,Ngongotaha South
+198500,Selwyn Heights,Simple Map,198500,Selwyn Heights
+198600,Pleasant Heights,Simple Map,198600,Pleasant Heights
+198700,Rotoiti-Rotoehu,Simple Map,198700,Rotoiti-Rotoehu
+198800,Kawaha,Simple Map,198800,Kawaha
+198900,Fairy Springs,Simple Map,198900,Fairy Springs
+199000,Western Heights (Rotorua District),Simple Map,199000,Western Heights (Rotorua District)
+199100,Pukehangi North,Simple Map,199100,Pukehangi North
+199200,Pukehangi South,Simple Map,199200,Pukehangi South
+199300,Mangakakahi Central,Simple Map,199300,Mangakakahi Central
+199400,Koutu,Simple Map,199400,Koutu
+199500,Mangakakahi West,Simple Map,199500,Mangakakahi West
+199600,Sunnybrook,Simple Map,199600,Sunnybrook
+199700,Fordlands,Simple Map,199700,Fordlands
+199800,Kuirau,Simple Map,199800,Kuirau
+199900,Utuhina,Simple Map,199900,Utuhina
+200000,Pomare,Simple Map,200000,Pomare
+200100,Rotorua Central,Simple Map,200100,Rotorua Central
+200200,Hillcrest (Rotorua District),Simple Map,200200,Hillcrest (Rotorua District)
+200300,Victoria,Simple Map,200300,Victoria
+200401,Waiohewa,Many To Many Map,200400,Waiohewa
+200401,Waiohewa,Many To Many Map,201000,Holdens Bay-Rotokawa
+200500,Glenholme North,Simple Map,200500,Glenholme North
+200600,Springfield South,Simple Map,200600,Springfield South
+200700,Springfield North,Simple Map,200700,Springfield North
+200800,Glenholme South,Simple Map,200800,Glenholme South
+200900,Owhata West,Simple Map,200900,Owhata West
+201001,Holdens Bay-Rotokawa,Many To Many Map,201000,Holdens Bay-Rotokawa
+201100,Ngapuna,Simple Map,201100,Ngapuna
+201200,Fenton Park,Simple Map,201200,Fenton Park
+201300,Tihiotonga-Whakarewarewa,Simple Map,201300,Tihiotonga-Whakarewarewa
+201401,Owhata East,Many To Many Map,200400,Waiohewa
+201401,Owhata East,Many To Many Map,201400,Owhata East
+201501,Lynmore,Many To Many Map,201500,Lynmore
+201501,Lynmore,Many To Many Map,200400,Waiohewa
+201600,Ngakuru,Simple Map,201600,Ngakuru
+201700,Kaingaroa-Whakarewarewa,Simple Map,201700,Kaingaroa-Whakarewarewa
+201800,Golden Springs,Simple Map,201800,Golden Springs
+201900,Manawahe,Simple Map,201900,Manawahe
+202000,Matata-Otakiri,Simple Map,202000,Matata-Otakiri
+202100,Onepu Spring,Simple Map,202100,Onepu Spring
+202200,Edgecumbe,Simple Map,202200,Edgecumbe
+202300,Thornton-Awakeri,Simple Map,202300,Thornton-Awakeri
+202400,Te Teko Lakes,Simple Map,202400,Te Teko Lakes
+202500,Coastlands,Simple Map,202500,Coastlands
+202600,Whakatane West,Simple Map,202600,Whakatane West
+202700,Whakatane Central,Simple Map,202700,Whakatane Central
+202800,Trident,Simple Map,202800,Trident
+202900,Allandale,Simple Map,202900,Allandale
+203000,Mokorua Bush,Simple Map,203000,Mokorua Bush
+203100,Wainui,Simple Map,203100,Wainui
+203200,Ohope,Simple Map,203200,Ohope
+203300,Inlet Ohiwa Harbour West,Simple Map,203300,Inlet Ohiwa Harbour West
+203400,Galatea,Simple Map,203400,Galatea
+203500,Waingarara-Waimana,Simple Map,203500,Waingarara-Waimana
+203600,Murupara,Simple Map,203600,Murupara
+203700,Monika Reserve,Simple Map,203700,Monika Reserve
+203800,Kawerau Industrial,Simple Map,203800,Kawerau Industrial
+203901,Kawerau Central,Many To One Map,203900,Tarawera Park
+203902,Tarawera Park,Many To One Map,203900,Tarawera Park
+204000,Inlet Ohiwa Harbour East,Simple Map,204000,Inlet Ohiwa Harbour East
+204101,Waiotahe,Many To Many Map,204100,Waiotahi
+204101,Waiotahe,Many To Many Map,204300,Woodlands
+204200,Cape Runaway,Simple Map,204200,Cape Runaway
+204301,Woodlands,Many To Many Map,204300,Woodlands
+204400,Opotiki,Simple Map,204400,Opotiki
+204500,Otara-Tirohanga,Simple Map,204500,Otara-Tirohanga
+204600,Oponae,Simple Map,204600,Oponae
+204700,East Cape,Simple Map,204700,East Cape
+204800,Waipaoa,Simple Map,204800,Waipaoa
+204900,Ruatoria-Raukumara,Simple Map,204900,Ruatoria-Raukumara
+205000,Tokomaru,Simple Map,205000,Tokomaru
+205100,Hangaroa,Simple Map,205100,Hangaroa
+205201,Wharekaka,Many To Many Map,205200,Wharekaka
+205300,Te Arai,Simple Map,205300,Te Arai
+205401,Hexton,Many To Many Map,205400,Hexton
+205500,Lytton,Simple Map,205500,Lytton
+205601,Makaraka-Awapuni,Many To Many Map,205400,Hexton
+205601,Makaraka-Awapuni,Many To Many Map,205600,Makaraka-Awapuni
+205700,Riverdale,Simple Map,205700,Riverdale
+205800,Te Hapara North,Simple Map,205800,Te Hapara North
+205900,Mangapapa North,Simple Map,205900,Mangapapa North
+206000,Elgin,Simple Map,206000,Elgin
+206100,Te Hapara South,Simple Map,206100,Te Hapara South
+206200,Mangapapa East,Simple Map,206200,Mangapapa East
+206300,Mangapapa South,Simple Map,206300,Mangapapa South
+206400,Te Hapara East,Simple Map,206400,Te Hapara East
+206500,Centennial Crescent,Simple Map,206500,Centennial Crescent
+206601,Whataupoko East,Many To Many Map,205400,Hexton
+206601,Whataupoko East,Many To Many Map,206600,Whataupoko East
+206700,Whataupoko West,Simple Map,206700,Whataupoko West
+206801,Gisborne Central,Many To One Map,206800,Gisborne Central
+206802,Inlet Eastland Port,Many To One Map,206800,Gisborne Central
+206900,Kaiti North,Simple Map,206900,Kaiti North
+207000,Kaiti South,Simple Map,207000,Kaiti South
+207100,Outer Kaiti,Simple Map,207100,Outer Kaiti
+207200,Tamarau,Simple Map,207200,Tamarau
+207301,Wainui-Okitu,Many To Many Map,207300,Wainui-Okitu
+207301,Wainui-Okitu,Many To Many Map,205200,Wharekaka
+207400,Maungataniwha-Raupunga,Simple Map,207400,Maungataniwha-Raupunga
+207500,Inland water Lake Waikaremoana,Simple Map,207500,Inland water Lake Waikaremoana
+207600,Frasertown-Ruakituri,Simple Map,207600,Frasertown-Ruakituri
+207700,Whakaki,Simple Map,207700,Whakaki
+207800,Wairoa,Simple Map,207800,Wairoa
+207900,Mahia,Simple Map,207900,Mahia
+208001,Puketitiri-Tutira,Many To Many Map,208000,Puketitiri-Tutira
+208100,Sherenden-Crownthorpe,Simple Map,208100,Sherenden-Crownthorpe
+208200,Maraekakaho,Simple Map,208200,Maraekakaho
+208301,Puketapu-Eskdale,Many To Many Map,208000,Puketitiri-Tutira
+208301,Puketapu-Eskdale,Many To Many Map,208300,Puketapu-Eskdale
+208401,Omahu-Pakowhai,Many To Many Map,209600,Clive
+208401,Omahu-Pakowhai,Many To Many Map,208300,Puketapu-Eskdale
+208401,Omahu-Pakowhai,Many To Many Map,208400,Omahu-Pakowhai
+208500,Bridge Pa,Simple Map,208500,Bridge Pa
+208601,Twyford,Many To Many Map,208600,Twyford
+208700,Poukawa,Simple Map,208700,Poukawa
+208800,Flaxmere West,Simple Map,208800,Flaxmere West
+208901,Omahu Strip,Many To Many Map,208900,Omahu Strip
+208901,Omahu Strip,Many To Many Map,208600,Twyford
+209000,Lochain Park,Simple Map,209000,Lochain Park
+209100,Flaxmere Park,Simple Map,209100,Flaxmere Park
+209201,Flaxmere South,Many To Many Map,209300,Irongate
+209201,Flaxmere South,Many To Many Map,209200,Flaxmere South
+209301,Irongate,Many To Many Map,209300,Irongate
+209401,Frimley,Many To Many Map,209400,Frimley
+209401,Frimley,Many To Many Map,208600,Twyford
+209500,Camberley,Simple Map,209500,Camberley
+209601,Clive,Many To Many Map,209600,Clive
+209700,St Leonards,Simple Map,209700,St Leonards
+209800,Mahora,Simple Map,209800,Mahora
+209901,Raureka,Many To Many Map,209900,Raureka
+209901,Raureka,Many To Many Map,210200,Longlands-Pukahu
+210000,Cornwall Park,Simple Map,210000,Cornwall Park
+210100,Tomoana,Simple Map,210100,Tomoana
+210201,Longlands-Pukahu,Many To Many Map,210200,Longlands-Pukahu
+210300,Raceway Park,Simple Map,210300,Raceway Park
+210400,Karamu,Simple Map,210400,Karamu
+210500,Hastings Central,Simple Map,210500,Hastings Central
+210600,Tomoana Crossing,Simple Map,210600,Tomoana Crossing
+210700,Akina Park,Simple Map,210700,Akina Park
+210800,Queens Square,Simple Map,210800,Queens Square
+210900,Mayfair,Simple Map,210900,Mayfair
+211000,Parkhaven,Simple Map,211000,Parkhaven
+211100,Parkvale,Simple Map,211100,Parkvale
+211201,Mangateretere,Many To Many Map,211200,Mangateretere
+211201,Mangateretere,Many To Many Map,209600,Clive
+211201,Mangateretere,Many To Many Map,211300,Haumoana-Te Awanga
+211201,Mangateretere,Many To Many Map,212200,Kahuranaki
+211301,Haumoana,Many To Many Map,211300,Haumoana-Te Awanga
+211302,Te Awanga,Many To Many Map,211300,Haumoana-Te Awanga
+211401,Lucknow,Many To Many Map,210200,Longlands-Pukahu
+211401,Lucknow,Many To Many Map,211400,Lucknow
+211500,Karanema-St Hill,Simple Map,211500,Karanema-St Hill
+211600,Havelock North-Central,Simple Map,211600,Havelock North-Central
+211701,Brookvale,Many To Many Map,211200,Mangateretere
+211701,Brookvale,Many To Many Map,211700,Brookvale
+211800,Iona,Simple Map,211800,Iona
+211900,Hereworth,Simple Map,211900,Hereworth
+212000,Te Mata Hills,Simple Map,212000,Te Mata Hills
+212100,Havelock Hills,Simple Map,212100,Havelock Hills
+212201,Kahuranaki,Many To Many Map,211300,Haumoana-Te Awanga
+212201,Kahuranaki,Many To Many Map,211200,Mangateretere
+212201,Kahuranaki,Many To Many Map,212200,Kahuranaki
+212301,Bay View (Napier City),Simple Map,212300,Bay View
+212400,Poraiti Hills,Simple Map,212400,Poraiti Hills
+212500,Poraiti Flat,Simple Map,212500,Poraiti Flat
+212600,Westshore,Simple Map,212600,Westshore
+212700,Inlet Napier City,Simple Map,212700,Inlet Napier City
+212800,Onekawa West,Simple Map,212800,Onekawa West
+212900,Ahuriri,Simple Map,212900,Ahuriri
+213000,Taradale West,Simple Map,213000,Taradale West
+213100,Greenmeadows West,Simple Map,213100,Greenmeadows West
+213200,Taradale South,Simple Map,213200,Taradale South
+213300,Bluff Hill,Simple Map,213300,Bluff Hill
+213400,Hospital Hill,Simple Map,213400,Hospital Hill
+213500,Tamatea West,Simple Map,213500,Tamatea West
+213600,Tamatea North,Simple Map,213600,Tamatea North
+213700,Taradale Central,Simple Map,213700,Taradale Central
+213800,Tamatea East,Simple Map,213800,Tamatea East
+213900,Marewa West,Simple Map,213900,Marewa West
+214000,Greenmeadows Central,Simple Map,214000,Greenmeadows Central
+214100,Onekawa Central,Simple Map,214100,Onekawa Central
+214200,Pirimai West,Simple Map,214200,Pirimai West
+214300,Napier Central,Simple Map,214300,Napier Central
+214400,Greenmeadows South,Simple Map,214400,Greenmeadows South
+214500,Nelson Park,Simple Map,214500,Nelson Park
+214600,Bledisloe Park,Simple Map,214600,Bledisloe Park
+214700,Pirimai East,Simple Map,214700,Pirimai East
+214800,Onekawa East,Simple Map,214800,Onekawa East
+214900,Tareha Reserve,Simple Map,214900,Tareha Reserve
+215000,Marewa East,Simple Map,215000,Marewa East
+215101,Onekawa South,Many To Many Map,215100,Onekawa South
+215101,Onekawa South,Many To Many Map,215400,Meeanee-Awatoto
+215200,McLean Park,Simple Map,215200,McLean Park
+215300,Maraenui,Simple Map,215300,Maraenui
+215401,Meeanee-Awatoto,Many To Many Map,215400,Meeanee-Awatoto
+215500,Mangaonuku,Simple Map,215500,Mangaonuku
+215600,Makaretu,Simple Map,215600,Makaretu
+215700,Waipawa,Simple Map,215700,Waipawa
+215801,Waipukurau West,Many To Many Map,216100,Taurekaitai
+215801,Waipukurau West,Many To Many Map,215800,Waipukurau West
+215900,Mangarara,Simple Map,215900,Mangarara
+216000,Waipukurau East,Simple Map,216000,Waipukurau East
+216101,Taurekaitai,Many To Many Map,216100,Taurekaitai
+216200,Port Taranaki,Simple Map,216200,Port Taranaki
+216300,Spotswood,Simple Map,216300,Spotswood
+216401,Omata,Many To Many Map,216400,Omata
+216500,Oakura,Simple Map,216500,Oakura
+216600,Moturoa,Simple Map,216600,Moturoa
+216700,Kaitake,Simple Map,216700,Kaitake
+216800,Blagdon-Lynmouth,Simple Map,216800,Blagdon-Lynmouth
+216900,Kawaroa,Simple Map,216900,Kawaroa
+217000,New Plymouth Central,Simple Map,217000,New Plymouth Central
+217100,Marfell,Simple Map,217100,Marfell
+217201,Whalers Gate,Many To Many Map,216400,Omata
+217201,Whalers Gate,Many To Many Map,217200,Whalers Gate
+217300,Strandon,Simple Map,217300,Strandon
+217400,Westown,Simple Map,217400,Westown
+217501,Bell Block West,Many To Many Map,217500,Bell Block West
+217502,Bell Block Central,Many To Many Map,217600,Bell Block East
+217502,Bell Block Central,Many To Many Map,217500,Bell Block West
+217601,Bell Block East-Puketapu,Many To Many Map,217600,Bell Block East
+217701,Waiwhakaiho-Bell Block South,Many To Many Map,218400,Fitzroy-Glen Avon
+217701,Waiwhakaiho-Bell Block South,Many To Many Map,217700,Waiwhakaiho-Bell Block South
+217800,Lower Vogeltown,Simple Map,217800,Lower Vogeltown
+217901,Hurdon,Many To Many Map,217900,Hurdon
+217901,Hurdon,Many To Many Map,216400,Omata
+218001,Frankleigh Park,Many To Many Map,216400,Omata
+218001,Frankleigh Park,Many To Many Map,218000,Frankleigh Park
+218100,Merrilands,Simple Map,218100,Merrilands
+218201,Ferndale,Many To Many Map,218200,Ferndale
+218201,Ferndale,Many To Many Map,216400,Omata
+218301,Welbourn,Many To Many Map,218400,Fitzroy-Glen Avon
+218301,Welbourn,Many To Many Map,218300,Welbourn
+218401,Fitzroy (New Plymouth District),Many To Many Map,218400,Fitzroy-Glen Avon
+218402,Glen Avon,Many To Many Map,218400,Fitzroy-Glen Avon
+218500,Waitara West,Simple Map,218500,Waitara West
+218600,Upper Vogeltown,Simple Map,218600,Upper Vogeltown
+218700,Highlands Park (New Plymouth District),Simple Map,218700,Highlands Park (New Plymouth District)
+218801,Paraite,Many To Many Map,218400,Fitzroy-Glen Avon
+218801,Paraite,Many To Many Map,218800,Paraite
+218901,Waitara East,Many To Many Map,218900,Waitara East
+218901,Waitara East,Many To Many Map,219400,Tikorangi
+219000,Lepperton-Brixton,Simple Map,219000,Lepperton-Brixton
+219100,Mangorei,Simple Map,219100,Mangorei
+219200,Mount Messenger,Simple Map,219200,Mount Messenger
+219301,Mangaoraka,Many To Many Map,218400,Fitzroy-Glen Avon
+219301,Mangaoraka,Many To Many Map,219300,Mangaoraka
+219401,Tikorangi,Many To Many Map,219400,Tikorangi
+219501,Everett Park,Many To Many Map,219500,Everett Park
+219601,Inglewood,Many To Many Map,219500,Everett Park
+219601,Inglewood,Many To Many Map,219600,Inglewood
+219700,Tarata,Simple Map,219700,Tarata
+219800,Pembroke,Simple Map,219800,Pembroke
+219900,Douglas,Simple Map,219900,Douglas
+220001,Toko,Many To Many Map,220000,Toko
+220101,Stratford North,Many To Many Map,220000,Toko
+220101,Stratford North,Many To Many Map,220100,Stratford North
+220200,Whangamomona,Simple Map,220200,Whangamomona
+220301,Stratford Central,Many To Many Map,220300,Stratford Central
+220301,Stratford Central,Many To Many Map,220000,Toko
+220400,Stratford South,Simple Map,220400,Stratford South
+220501,Parihaka,Simple Map,220500,Cape Egmont
+220600,Taungatara,Simple Map,220600,Taungatara
+220700,Opunake,Simple Map,220700,Opunake
+220800,Kaponga-Mangatoki,Simple Map,220800,Kaponga-Mangatoki
+220901,Manaia,Many To One Map,220900,Manaia-Kapuni
+220902,Kapuni,Many To One Map,220900,Manaia-Kapuni
+221001,Eltham,Many To Many Map,221200,Te Roti-Moeroa
+221001,Eltham,Many To Many Map,221000,Eltham
+221100,Okaiawa,Simple Map,221100,Okaiawa
+221201,Te Roti-Moeroa,Many To Many Map,221200,Te Roti-Moeroa
+221301,Hawera West,Simple Map,221300,Egmont Showgrounds
+221401,Normanby (South Taranaki District),Many To One Map,221400,Normanby-Tawhiti
+221402,Tawhiti,Many To One Map,221400,Normanby-Tawhiti
+221500,Ohangai,Simple Map,221500,Ohangai
+221600,Turuturu,Simple Map,221600,Turuturu
+221700,King Edward Park,Simple Map,221700,King Edward Park
+221800,Ramanui,Simple Map,221800,Ramanui
+221900,Hawera Central,Simple Map,221900,Hawera Central
+222000,Mangawhio,Simple Map,222000,Mangawhio
+222101,Manutahi-Waitotora,Many To Many Map,222100,Manutahi-Waitotora
+222201,Patea,Many To Many Map,222100,Manutahi-Waitotora
+222201,Patea,Many To Many Map,222200,Patea
+222300,Otangiwai-Ohura,Simple Map,222300,Otangiwai-Ohura
+222400,Ngapuke,Simple Map,222400,Ngapuke
+222500,Taumarunui North,Simple Map,222500,Taumarunui North
+222600,Taumarunui Central,Simple Map,222600,Taumarunui Central
+222700,Taumarunui East,Simple Map,222700,Taumarunui East
+222800,National Park,Simple Map,222800,National Park
+222900,Tangiwai,Simple Map,222900,Tangiwai
+223000,Raetihi,Simple Map,223000,Raetihi
+223100,Ohakune,Simple Map,223100,Ohakune
+223200,Waiouru,Simple Map,223200,Waiouru
+223300,Upper Whanganui,Simple Map,223300,Upper Whanganui
+223400,Mowhanau,Simple Map,223400,Mowhanau
+223501,Brunswick-Papaiti,Many To Many Map,223500,Brunswick-Papaiti
+223600,Castlecliff West,Simple Map,223600,Castlecliff West
+223701,Otamatea (Whanganui District),Many To Many Map,223500,Brunswick-Papaiti
+223701,Otamatea (Whanganui District),Many To Many Map,223700,Otamatea (Whanganui District)
+223800,Castlecliff East,Many To Many Map,223800,Castlecliff East
+223800,Castlecliff East,Many To Many Map,224700,Balgownie
+223901,Springvale North,Many To Many Map,223900,Springvale North
+223901,Springvale North,Many To Many Map,223500,Brunswick-Papaiti
+224000,Lower Aramoho,Simple Map,224000,Lower Aramoho
+224100,St Johns Hill East,Simple Map,224100,St Johns Hill East
+224200,St Johns Hill West,Simple Map,224200,St Johns Hill West
+224301,Titoki,Many To Many Map,224300,Titoki
+224401,Springvale West,Many To Many Map,224300,Titoki
+224401,Springvale West,Many To Many Map,224400,Springvale West
+224500,Springvale East,Simple Map,224500,Springvale East
+224600,Upper Aramoho,Simple Map,224600,Upper Aramoho
+224700,Balgownie,Many To Many Map,224300,Titoki
+224700,Balgownie,Many To Many Map,224700,Balgownie
+224800,Laird Park,Simple Map,224800,Laird Park
+224900,Wembley Park,Simple Map,224900,Wembley Park
+225000,College Estate,Simple Map,225000,College Estate
+225100,Whanganui East-Williams Domain,Simple Map,225100,Whanganui East-Williams Domain
+225200,Gonville West,Simple Map,225200,Gonville West
+225300,Gonville North,Simple Map,225300,Gonville North
+225400,Cornmarket,Simple Map,225400,Cornmarket
+225500,Whanganui East-Riverlands,Simple Map,225500,Whanganui East-Riverlands
+225600,Kaitoke-Fordell,Simple Map,225600,Kaitoke-Fordell
+225700,Whanganui Central,Simple Map,225700,Whanganui Central
+225800,Gonville South,Simple Map,225800,Gonville South
+225900,Bastia-Durie Hill,Simple Map,225900,Bastia-Durie Hill
+226000,Putiki,Simple Map,226000,Putiki
+226100,Mokai Patea,Simple Map,226100,Mokai Patea
+226200,Ngamatea,Simple Map,226200,Ngamatea
+226300,Turakina,Simple Map,226300,Turakina
+226400,Otairi,Simple Map,226400,Otairi
+226500,Taihape,Simple Map,226500,Taihape
+226601,Marton Rural,Many To Many Map,226700,Marton North
+226601,Marton Rural,Many To Many Map,226600,Marton Rural
+226701,Marton North,Many To Many Map,226700,Marton North
+226800,Parewanui,Simple Map,226800,Parewanui
+226900,Marton South,Simple Map,226900,Marton South
+227000,Bulls,Simple Map,227000,Bulls
+227100,Kiwitea,Simple Map,227100,Kiwitea
+227200,Tokorangi,Simple Map,227200,Tokorangi
+227300,Ohakea-Sanson,Simple Map,227300,Ohakea-Sanson
+227400,Oroua Downs,Simple Map,227400,Oroua Downs
+227500,Awahuri,Many To Many Map,227500,Awahuri
+227600,Pohangina-Apiti,Simple Map,227600,Pohangina-Apiti
+227700,Mount Taylor,Simple Map,227700,Mount Taylor
+227800,Taikorea,Simple Map,227800,Taikorea
+227900,Makino,Simple Map,227900,Makino
+228000,Sandon,Simple Map,228000,Sandon
+228100,Kimbolton North,Simple Map,228100,Kimbolton North
+228200,Warwick,Simple Map,228200,Warwick
+228300,Kimbolton West,Simple Map,228300,Kimbolton West
+228400,Feilding Central,Many To Many Map,227500,Awahuri
+228400,Feilding Central,Many To Many Map,228400,Feilding Central
+228500,Kimbolton South,Simple Map,228500,Kimbolton South
+228600,Kauwhata,Simple Map,228600,Kauwhata
+228700,Taonui,Simple Map,228700,Taonui
+228800,Newbury,Simple Map,228800,Newbury
+228901,Palmerston North Airport,Many To Many Map,228900,Palmerston North Airport
+229001,Milson North,Many To Many Map,228900,Palmerston North Airport
+229001,Milson North,Many To Many Map,229000,Milson North
+229100,Cloverlea (Palmerston North City),Simple Map,229100,Cloverlea (Palmerston North City)
+229201,Tremaine,Many To Many Map,229200,Tremaine
+229300,Milson South,Simple Map,229300,Milson South
+229400,Whakarongo,Simple Map,229400,Whakarongo
+229500,Westbrook,Simple Map,229500,Westbrook
+229600,Takaro North,Simple Map,229600,Takaro North
+229700,Pioneer West,Simple Map,229700,Pioneer West
+229800,Palmerston North Hospital,Simple Map,229800,Palmerston North Hospital
+229900,Highbury East,Simple Map,229900,Highbury East
+230000,Park West,Simple Map,230000,Park West
+230100,Takaro South,Simple Map,230100,Takaro South
+230200,Roslyn (Palmerston North City),Simple Map,230200,Roslyn (Palmerston North City)
+230300,Kelvin Grove West,Simple Map,230300,Kelvin Grove West
+230400,Kelvin Grove North,Simple Map,230400,Kelvin Grove North
+230500,Papaioea North,Simple Map,230500,Papaioea North
+230600,Palmerston North Central,Simple Map,230600,Palmerston North Central
+230700,Awapuni North,Simple Map,230700,Awapuni North
+230800,Terrace End,Simple Map,230800,Terrace End
+230900,Maraetarata,Simple Map,230900,Maraetarata
+231000,Papaioea South,Simple Map,231000,Papaioea South
+231101,Royal Oak (Palmerston North City),Many To Many Map,229200,Tremaine
+231101,Royal Oak (Palmerston North City),Many To Many Map,231100,Royal Oak (Palmerston North City)
+231200,West End,Simple Map,231200,West End
+231300,Awapuni South,Simple Map,231300,Awapuni South
+231400,Milverton,Simple Map,231400,Milverton
+231500,Ruamahanga,Simple Map,231500,Ruamahanga
+231600,Esplanade,Simple Map,231600,Esplanade
+231700,Hokowhitu Central,Simple Map,231700,Hokowhitu Central
+231800,Hokowhitu East,Simple Map,231800,Hokowhitu East
+231900,Turitea,Simple Map,231900,Turitea
+232000,Ruahine,Simple Map,232000,Ruahine
+232101,Linton Camp,Many To Many Map,232100,Linton Camp
+232101,Linton Camp,Many To Many Map,232500,Pihauatua
+232200,Ashhurst,Simple Map,232200,Ashhurst
+232300,Hokowhitu South,Simple Map,232300,Hokowhitu South
+232400,Aokautere,Simple Map,232400,Aokautere
+232501,Pihauatua,Many To Many Map,232500,Pihauatua
+232601,Aokautere Rural,Many To Many Map,232500,Pihauatua
+232601,Aokautere Rural,Many To Many Map,232600,Aokautere Rural
+232701,Poutoa,Many To One Map,232700,Poutoa
+232702,Fitzherbert,Many To One Map,232700,Poutoa
+232800,Norsewood,Simple Map,232800,Norsewood
+232900,Papatawa,Simple Map,232900,Papatawa
+233000,Mangatainoka,Simple Map,233000,Mangatainoka
+233100,Woodville,Simple Map,233100,Woodville
+233200,Dannevirke West,Simple Map,233200,Dannevirke West
+233300,Dannevirke East,Simple Map,233300,Dannevirke East
+233400,Waitahora,Simple Map,233400,Waitahora
+233500,Kaitawa,Simple Map,233500,Kaitawa
+233600,Pahiatua,Simple Map,233600,Pahiatua
+233700,Nireaha-Eketahuna,Simple Map,233700,Nireaha-Eketahuna
+233801,Owahanga,Simple Map,233800,Owhanga
+233900,Mara,Simple Map,233900,Mara
+234001,Kere Kere,Many To Many Map,234300,Foxton South
+234001,Kere Kere,Many To Many Map,234000,Kere Kere
+234100,Foxton Beach,Simple Map,234100,Foxton Beach
+234201,Foxton North,Many To Many Map,234000,Kere Kere
+234201,Foxton North,Many To Many Map,234200,Foxton North
+234301,Foxton South,Many To Many Map,234300,Foxton South
+234400,Waitarere,Simple Map,234400,Waitarere
+234500,Waikawa (Horowhenua District),Simple Map,234500,Waikawa (Horowhenua District)
+234600,Miranui,Simple Map,234600,Miranui
+234700,Donnelly Park,Simple Map,234700,Donnelly Park
+234801,Ohau-Manakau,Many To Many Map,234800,Ohau-Manakau
+234900,Kawiu South,Simple Map,234900,Kawiu South
+235000,Makomako,Simple Map,235000,Makomako
+235100,Kawiu North,Simple Map,235100,Kawiu North
+235200,Levin Central,Simple Map,235200,Levin Central
+235301,Tararua,Many To Many Map,234800,Ohau-Manakau
+235301,Tararua,Many To Many Map,235300,Tararua
+235400,Shannon,Simple Map,235400,Shannon
+235500,Queenwood (Horowhenua District),Simple Map,235500,Queenwood (Horowhenua District)
+235600,Playford Park,Simple Map,235600,Playford Park
+235700,Fairfield (Horowhenua District),Simple Map,235700,Fairfield (Horowhenua District)
+235800,Taitoko,Simple Map,235800,Taitoko
+235900,Waiopehu,Simple Map,235900,Waiopehu
+236000,Makahika,Simple Map,236000,Makahika
+236100,Kimberley,Simple Map,236100,Kimberley
+236200,Kapiti Island,Simple Map,236200,Kapiti Island
+236300,Otaki Beach,Simple Map,236300,Otaki Beach
+236401,Forest Lakes (Kapiti Coast District),Many To Many Map,236400,Forest Lakes (Kapiti Coast District)
+236500,Otaki,Simple Map,236500,Otaki
+236600,Te Horo,Simple Map,236600,Te Horo
+236701,Waitohu,Many To Many Map,236700,Waitohu
+236701,Waitohu,Many To Many Map,236400,Forest Lakes (Kapiti Coast District)
+236800,Waikanae Beach,Simple Map,236800,Waikanae Beach
+236900,Peka Peka,Simple Map,236900,Peka Peka
+237001,Paraparaumu Beach North,Many To Many Map,237400,Otaihanga
+237001,Paraparaumu Beach North,Many To Many Map,237000,Paraparaumu Beach North
+237100,Paraparaumu Beach West,Simple Map,237100,Paraparaumu Beach West
+237200,Waikanae Park,Simple Map,237200,Waikanae Park
+237300,Paraparaumu Beach East,Simple Map,237300,Paraparaumu Beach East
+237401,Otaihanga,Many To Many Map,237400,Otaihanga
+237500,Paraparaumu North,Simple Map,237500,Paraparaumu North
+237600,Waikanae West,Simple Map,237600,Waikanae West
+237700,Otaki Forks,Simple Map,237700,Otaki Forks
+237800,Paraparaumu Central,Simple Map,237800,Paraparaumu Central
+237900,Maungakotukutuku,Simple Map,237900,Maungakotukutuku
+238000,Raumati Beach West,Simple Map,238000,Raumati Beach West
+238100,Waikanae East,Simple Map,238100,Waikanae East
+238200,Tararua Forest Park,Simple Map,238200,Tararua Forest Park
+238300,Raumati Beach East,Simple Map,238300,Raumati Beach East
+238400,Paraparaumu East,Simple Map,238400,Paraparaumu East
+238500,Raumati South,Simple Map,238500,Raumati South
+238600,Paekakariki,Simple Map,238600,Paekakariki
+238700,Mana Island,Simple Map,238700,Mana Island
+238800,Pukerua Bay,Simple Map,238800,Pukerua Bay
+238900,Paekakariki Hill,Simple Map,238900,Paekakariki Hill
+239000,Plimmerton,Simple Map,239000,Plimmerton
+239100,Titahi Bay North,Simple Map,239100,Titahi Bay North
+239200,Titahi Bay South,Simple Map,239200,Titahi Bay South
+239300,Elsdon-Takapuwahia,Simple Map,239300,Elsdon-Takapuwahia
+239401,Pauatahanui,Many To Many Map,239400,Pauatahanui
+239500,Onepoto,Simple Map,239500,Onepoto
+239600,Camborne,Simple Map,239600,Camborne
+239701,Inlet Porirua Harbour,Many To Many Map,239800,Paremata
+239701,Inlet Porirua Harbour,Many To Many Map,239700,Inlet Porirua Harbour
+239801,Paremata,Many To Many Map,239800,Paremata
+239900,Porirua Central,Simple Map,239900,Porirua Central
+240000,Papakowhai,Simple Map,240000,Papakowhai
+240100,Aotea,Simple Map,240100,Aotea
+240201,Postgate,Many To Many Map,240200,Postgate
+240201,Postgate,Many To Many Map,240400,Whitby
+240300,Ascot Park,Simple Map,240300,Ascot Park
+240401,Whitby,Many To Many Map,240400,Whitby
+240500,Porirua East,Simple Map,240500,Porirua East
+240601,Endeavour West,Many To Many Map,239400,Pauatahanui
+240601,Endeavour West,Many To Many Map,240600,Endeavour
+240602,Endeavour East,Many To Many Map,240600,Endeavour
+240700,Cannons Creek North,Simple Map,240700,Cannons Creek North
+240801,Waitangirua Tairangi,Many To One Map,240800,Waitangirua
+240802,Waitangirua Corinna,Many To One Map,240800,Waitangirua
+240900,Ranui Heights,Simple Map,240900,Ranui Heights
+241000,Cannons Creek East,Simple Map,241000,Cannons Creek East
+241100,Cannons Creek South,Simple Map,241100,Cannons Creek South
+241200,Akatarawa,Simple Map,241200,Akatarawa
+241300,Riverstone Terraces,Simple Map,241300,Riverstone Terraces
+241400,Heretaunga,Simple Map,241400,Heretaunga
+241500,Birchville-Brown Owl,Simple Map,241500,Birchville-Brown Owl
+241600,Poets Block,Simple Map,241600,Poets Block
+241700,Brentwood (Upper Hutt City),Simple Map,241700,Brentwood (Upper Hutt City)
+241800,Silverstream (Upper Hutt City),Simple Map,241800,Silverstream (Upper Hutt City)
+241900,Elderslea,Simple Map,241900,Elderslea
+242000,Trentham North,Simple Map,242000,Trentham North
+242100,Totara Park,Simple Map,242100,Totara Park
+242200,Trentham South,Simple Map,242200,Trentham South
+242300,Mangaroa,Simple Map,242300,Mangaroa
+242400,Ebdentown,Simple Map,242400,Ebdentown
+242500,Wallaceville,Simple Map,242500,Wallaceville
+242600,Maoribank,Simple Map,242600,Maoribank
+242700,Te Marua,Simple Map,242700,Te Marua
+242800,Pinehaven,Simple Map,242800,Pinehaven
+242900,Clouston Park,Simple Map,242900,Clouston Park
+243000,Upper Hutt Central,Simple Map,243000,Upper Hutt Central
+243100,Belmont Park,Simple Map,243100,Belmont Park
+243200,Maungaraki,Simple Map,243200,Maungaraki
+243300,Korokoro,Simple Map,243300,Korokoro
+243400,Kelson,Simple Map,243400,Kelson
+243500,Normandale,Simple Map,243500,Normandale
+243600,Belmont (Lower Hutt City),Simple Map,243600,Belmont (Lower Hutt City)
+243700,Petone Central,Simple Map,243700,Petone Central
+243800,Tirohanga,Simple Map,243800,Tirohanga
+243900,Manor Park,Simple Map,243900,Manor Park
+244000,Alicetown-Melling,Simple Map,244000,Alicetown-Melling
+244100,Taita North,Simple Map,244100,Taita North
+244200,Boulcott,Simple Map,244200,Boulcott
+244300,Hutt Central North,Simple Map,244300,Hutt Central North
+244400,Avalon West,Simple Map,244400,Avalon West
+244500,Stokes Valley Central,Simple Map,244500,Stokes Valley Central
+244600,Taita South,Simple Map,244600,Taita South
+244700,Petone East,Simple Map,244700,Petone East
+244800,Hutt Central South,Simple Map,244800,Hutt Central South
+244900,Stokes Valley North,Simple Map,244900,Stokes Valley North
+245000,Petone Esplanade,Simple Map,245000,Petone Esplanade
+245100,Epuni West,Simple Map,245100,Epuni West
+245200,Avalon East,Simple Map,245200,Avalon East
+245300,Woburn,Simple Map,245300,Woburn
+245400,Naenae Central,Simple Map,245400,Naenae Central
+245500,Waterloo West,Simple Map,245500,Waterloo West
+245600,Epuni East,Simple Map,245600,Epuni East
+245700,Gracefield,Simple Map,245700,Gracefield
+245800,Moera,Simple Map,245800,Moera
+245900,Delaney,Simple Map,245900,Delaney
+246001,Waiwhetu North,Many To One Map,246000,Waiwhetu
+246002,Waiwhetu South,Many To One Map,246000,Waiwhetu
+246100,Waterloo East,Simple Map,246100,Waterloo East
+246200,Naenae North,Simple Map,246200,Naenae North
+246300,Manuka,Simple Map,246300,Manuka
+246400,Naenae South,Simple Map,246400,Naenae South
+246500,Towai,Simple Map,246500,Towai
+246600,Arakura,Simple Map,246600,Arakura
+246700,Eastern Bays,Simple Map,246700,Eastern Bays
+246800,Pencarrow,Simple Map,246800,Pencarrow
+246900,Wainuiomata West,Simple Map,246900,Wainuiomata West
+247000,Glendale,Simple Map,247000,Glendale
+247100,Wainuiomata Central,Simple Map,247100,Wainuiomata Central
+247200,Eastbourne,Simple Map,247200,Eastbourne
+247300,Homedale East,Simple Map,247300,Homedale East
+247400,Homedale West,Simple Map,247400,Homedale West
+247501,Makara-Ohariu,Many To Many Map,247500,Makara-Ohariu
+247600,Tawa North,Simple Map,247600,Tawa North
+247700,Linden,Simple Map,247700,Linden
+247800,Tawa South,Simple Map,247800,Tawa South
+247900,Tawa Central,Simple Map,247900,Tawa Central
+248000,Grenada North,Simple Map,248000,Grenada North
+248101,Churton Park North,Many To Many Map,248100,Churton Park North
+248102,Glenside-Churton Park East,Many To Many Map,248300,Churton Park South
+248102,Glenside-Churton Park East,Many To Many Map,248100,Churton Park North
+248200,Takapu-Horokiwi,Simple Map,248200,Takapu-Horokiwi
+248301,Churton Park South,Many To Many Map,247500,Makara-Ohariu
+248301,Churton Park South,Many To Many Map,248300,Churton Park South
+248400,Johnsonville West,Simple Map,248400,Johnsonville West
+248500,Grenada Village,Simple Map,248500,Grenada Village
+248600,Johnsonville North,Simple Map,248600,Johnsonville North
+248701,Paparangi,Many To Many Map,248700,Paparangi
+248800,Ngaio North,Simple Map,248800,Ngaio North
+248900,Johnsonville Central,Simple Map,248900,Johnsonville Central
+249000,Broadmeadows,Simple Map,249000,Broadmeadows
+249101,Crofton Downs,Many To Many Map,249100,Crofton Downs
+249101,Crofton Downs,Many To Many Map,247500,Makara-Ohariu
+249200,Johnsonville South,Simple Map,249200,Johnsonville South
+249300,Khandallah Reserve,Simple Map,249300,Khandallah Reserve
+249401,Karori Park,Many To Many Map,250400,Karori South
+249401,Karori Park,Many To Many Map,249400,Karori Park
+249402,Karori West,Many To Many Map,249400,Karori Park
+249501,Newlands North,Many To Many Map,249500,Newlands North
+249501,Newlands North,Many To Many Map,248700,Paparangi
+249600,Ngaio South,Simple Map,249600,Ngaio South
+249701,Newlands South,Many To Many Map,249700,Newlands South
+249702,Newlands East,Many To Many Map,249500,Newlands North
+249702,Newlands East,Many To Many Map,249700,Newlands South
+249800,Woodridge,Simple Map,249800,Woodridge
+249900,Karori North,Simple Map,249900,Karori North
+250000,Khandallah North,Simple Map,250000,Khandallah North
+250100,Wilton,Simple Map,250100,Wilton
+250200,Khandallah South,Simple Map,250200,Khandallah South
+250300,Wadestown,Simple Map,250300,Wadestown
+250401,Karori South,Many To Many Map,250400,Karori South
+250500,Onslow,Simple Map,250500,Onslow
+250600,Karori East,Simple Map,250600,Karori East
+250700,Pipitea-Kaiwharawhara,Simple Map,250700,Pipitea-Kaiwharawhara
+250800,Northland (Wellington City),Simple Map,250800,Northland (Wellington City)
+250901,Thorndon North,Many To One Map,250900,Thorndon
+250902,Thorndon South,Many To One Map,250900,Thorndon
+251000,Wellington Botanic Gardens,Simple Map,251000,Wellington Botanic Gardens
+251100,Kelburn,Simple Map,251100,Kelburn
+251200,Aro Valley,Simple Map,251200,Aro Valley
+251300,Wellington University,Simple Map,251300,Wellington University
+251400,Wellington Central,Simple Map,251400,Wellington Central
+251500,Brooklyn North,Simple Map,251500,Brooklyn North
+251601,Dixon Street West,Many To One Map,251600,Dixon Street
+251602,Dixon Street East,Many To One Map,251600,Dixon Street
+251700,Vivian West,Simple Map,251700,Vivian West
+251800,Courtenay,Simple Map,251800,Courtenay
+251900,Brooklyn East,Simple Map,251900,Brooklyn East
+252001,Mount Cook North,Many To One Map,252000,Mount Cook West
+252002,Mount Cook South,Many To One Map,252000,Mount Cook West
+252100,Vivian East,Simple Map,252100,Vivian East
+252200,Brooklyn South,Simple Map,252200,Brooklyn South
+252300,Oriental Bay,Simple Map,252300,Oriental Bay
+252400,Mount Cook East,Simple Map,252400,Mount Cook East
+252501,Mount Victoria North,Many To One Map,252500,Mount Victoria
+252502,Mount Victoria South,Many To One Map,252500,Mount Victoria
+252600,Roseneath,Simple Map,252600,Roseneath
+252700,Owhiro Bay,Simple Map,252700,Owhiro Bay
+252800,Kingston-Mornington-Vogeltown,Simple Map,252800,Kingston-Mornington-Vogeltown
+252900,Newtown North,Simple Map,252900,Newtown North
+253000,Newtown West,Simple Map,253000,Newtown West
+253101,Hataitai North West,Many To One Map,253100,Hataitai North
+253102,Hataitai North East,Many To One Map,253100,Hataitai North
+253200,Evans Bay,Simple Map,253200,Evans Bay
+253300,Berhampore,Simple Map,253300,Berhampore
+253400,Hataitai South,Simple Map,253400,Hataitai South
+253501,Maupuia,Many To Many Map,254400,Miramar Central
+253501,Maupuia,Many To Many Map,253500,Maupuia
+253600,Newtown South,Simple Map,253600,Newtown South
+253700,Kilbirnie Central,Simple Map,253700,Kilbirnie Central
+253800,Island Bay West,Simple Map,253800,Island Bay West
+253900,Melrose,Simple Map,253900,Melrose
+254000,Island Bay East,Simple Map,254000,Island Bay East
+254100,Miramar North,Simple Map,254100,Miramar North
+254200,Kilbirnie East,Simple Map,254200,Kilbirnie East
+254300,Lyall Bay,Simple Map,254300,Lyall Bay
+254401,Miramar Central,Many To Many Map,253500,Maupuia
+254401,Miramar Central,Many To Many Map,254400,Miramar Central
+254500,Southgate,Simple Map,254500,Southgate
+254600,Karaka Bay-Worser Bay,Simple Map,254600,Karaka Bay-Worser Bay
+254700,Houghton Bay,Simple Map,254700,Houghton Bay
+254800,Miramar East,Simple Map,254800,Miramar East
+254900,Miramar South,Simple Map,254900,Miramar South
+255000,Rongotai,Simple Map,255000,Rongotai
+255100,Strathmore (Wellington City),Simple Map,255100,Strathmore (Wellington City)
+255200,Seatoun,Simple Map,255200,Seatoun
+255300,Kopuaranga,Simple Map,255300,Kopuaranga
+255401,Upper Plain,Many To Many Map,255400,Upper Plain
+255501,Opaki,Many To Many Map,255500,Opaki
+255601,Ngaumutawa,Many To Many Map,255400,Upper Plain
+255601,Ngaumutawa,Many To Many Map,255600,Ngaumutawa
+255700,Solway North,Simple Map,255700,Solway North
+255800,Lansdowne West,Simple Map,255800,Lansdowne West
+255900,Masterton Central,Simple Map,255900,Masterton Central
+256000,Kuripuni,Simple Map,256000,Kuripuni
+256100,Douglas Park,Simple Map,256100,Douglas Park
+256200,Solway South,Simple Map,256200,Solway South
+256301,Lansdowne East,Many To Many Map,256300,Lansdowne East
+256301,Lansdowne East,Many To Many Map,255500,Opaki
+256400,Cameron and Soldiers Park,Simple Map,256400,Cameron and Soldiers Park
+256500,Whareama,Simple Map,256500,Whareama
+256600,Homebush-Te Ore Ore,Simple Map,256600,Homebush-Te Ore Ore
+256700,McJorrow Park,Simple Map,256700,McJorrow Park
+256800,Mount Holdsworth,Simple Map,256800,Mount Holdsworth
+256900,Carterton North,Simple Map,256900,Carterton North
+257000,Kokotau,Simple Map,257000,Kokotau
+257100,Carterton South,Simple Map,257100,Carterton South
+257200,Gladstone (Carterton District),Simple Map,257200,Gladstone (Carterton District)
+257300,Tauherenikau,Simple Map,257300,Tauherenikau
+257400,Kahutara,Simple Map,257400,Kahutara
+257500,Featherston,Simple Map,257500,Featherston
+257600,Inland water Lake Wairarapa,Simple Map,257600,Inland water Lake Wairarapa
+257700,Greytown,Simple Map,257700,Greytown
+257801,Aorangi Forest,Many To Many Map,257800,Aorangi Forest
+257901,Martinborough,Many To Many Map,257800,Aorangi Forest
+257901,Martinborough,Many To Many Map,257900,Martinborough
+258000,Oceanic Three Kings Islands,Simple Map,258000,Oceanic Three Kings Islands
+258100,Three Kings Islands,Simple Map,258100,Three Kings Islands
+258200,Oceanic Northland Region,Simple Map,258200,Oceanic Northland Region
+258300,Inlet Doubtless Bay,Simple Map,258300,Inlet Doubtless Bay
+258400,Inlet Kaipara Harbour North,Simple Map,258400,Inlet Kaipara Harbour North
+258500,Oceanic Waikato Region East,Simple Map,258500,Oceanic Waikato Region East
+258600,Inlets Waikato Region,Simple Map,258600,Inlets Waikato Region
+258700,Oceanic Waikato Region West,Simple Map,258700,Oceanic Waikato Region West
+258800,Oceanic Bay of Plenty Region,Simple Map,258800,Oceanic Bay of Plenty Region
+258900,Islands Bay of Plenty Region,Simple Map,258900,Islands Bay of Plenty Region
+259000,Oceanic Taranaki Region,Simple Map,259000,Oceanic Taranaki Region
+259100,Inlet Port Taranaki,Simple Map,259100,Inlet Port Taranaki
+259200,Oceanic Gisborne Region,Simple Map,259200,Oceanic Gisborne Region
+259300,Oceanic Manawatu-Whanganui Region West,Simple Map,259300,Oceanic Manawatu-Wanganui Region West
+259400,Oceanic Hawke's Bay Region,Simple Map,259400,Oceanic Hawke's Bay Region
+259500,Inlet Port Napier,Simple Map,259500,Inlet Port Napier
+259600,Oceanic Wellington Region,Simple Map,259600,Oceanic Wellington Region
+259700,Inlet Wellington Harbour,Simple Map,259700,Inlet Wellington Harbour
+259800,Bare Island,Simple Map,259800,Bare Island
+259900,Oceanic Manawatu-Whanganui Region East,Simple Map,259900,Oceanic Manawatu-Wanganui Region East
+300200,Oceanic Tasman Region,Simple Map,300200,Oceanic Tasman Region
+300301,Golden Bay/Mohua,Many To Many Map,300300,Golden Bay/Mohua
+300401,Inlets Golden Bay,Many To Many Map,300300,Golden Bay/Mohua
+300401,Inlets Golden Bay,Many To Many Map,300400,Inlets Golden Bay
+300500,Takaka,Simple Map,300500,Takaka
+300601,Pohara-Abel Tasman,Many To Many Map,300400,Inlets Golden Bay
+300601,Pohara-Abel Tasman,Many To Many Map,300600,Pohara-Abel Tasman
+300700,Takaka Hills,Simple Map,300700,Takaka Hills
+300801,Kaiteriteri-Riwaka,Many To Many Map,300800,Kaiteriteri-Riwaka
+300801,Kaiteriteri-Riwaka,Many To Many Map,301100,Motueka North
+300900,Upper Moutere,Simple Map,300900,Upper Moutere
+301000,Lower Moutere,Simple Map,301000,Lower Moutere
+301101,Motueka North,Many To Many Map,301100,Motueka North
+301200,Motueka West,Simple Map,301200,Motueka West
+301301,Motueka East,Many To Many Map,301300,Motueka East
+301301,Motueka East,Many To Many Map,301400,Inlets Motueka
+301401,Inlets Motueka,Many To Many Map,301400,Inlets Motueka
+301500,Golden Downs,Simple Map,301500,Golden Downs
+301601,Moutere Hills,Many To Many Map,301600,Moutere Hills
+301602,Waimea Inlet,Many To Many Map,301600,Moutere Hills
+301602,Waimea Inlet,Many To Many Map,302100,Waimea West
+301703,Ruby Bay,Many To Many Map,301700,Ruby Bay-Mapua
+301703,Ruby Bay,Many To Many Map,301600,Moutere Hills
+301704,Mapua,Many To Many Map,301700,Ruby Bay-Mapua
+301800,Murchison-Nelson Lakes,Simple Map,301800,Murchison-Nelson Lakes
+301900,Inlet Waimea West,Simple Map,301900,Inlet Waimea West
+302000,Islands Tasman District,Simple Map,302000,Islands Tasman District
+302101,Waimea West,Many To Many Map,301600,Moutere Hills
+302101,Waimea West,Many To Many Map,302100,Waimea West
+302201,Appleby (Tasman District),Many To Many Map,302200,Appleby
+302201,Appleby (Tasman District),Many To Many Map,302700,Hope
+302300,Wakefield,Simple Map,302300,Wakefield
+302400,Richmond West (Tasman District),Simple Map,302400,Richmond West (Tasman District)
+302500,Wakefield Rural,Simple Map,302500,Wakefield Rural
+302600,Brightwater,Simple Map,302600,Brightwater
+302701,Hope,Many To Many Map,302700,Hope
+302800,Richmond Central (Tasman District),Simple Map,302800,Richmond Central (Tasman District)
+302900,Ben Cooper Park,Simple Map,302900,Ben Cooper Park
+303001,Richmond South (Tasman District),Many To Many Map,302200,Appleby
+303001,Richmond South (Tasman District),Many To Many Map,303000,Richmond South (Tasman District)
+303100,Wilkes Park,Simple Map,303100,Wilkes Park
+303200,Templemore,Simple Map,303200,Templemore
+303300,Easby Park,Simple Map,303300,Easby Park
+303400,Fairose,Simple Map,303400,Fairose
+303500,Aniseed Valley,Simple Map,303500,Aniseed Valley
+303600,Nelson Rural,Simple Map,303600,Nelson Rural
+303701,Inlets Nelson City,Many To Many Map,303700,Inlets Nelson City
+303800,Marybank,Simple Map,303800,Marybank
+303901,Port Nelson,Many To Many Map,303700,Inlets Nelson City
+303901,Port Nelson,Many To Many Map,303900,Port Nelson
+304000,Nelson Airport,Simple Map,304000,Nelson Airport
+304100,Tahunanui,Simple Map,304100,Tahunanui
+304200,Britannia,Simple Map,304200,Britannia
+304300,Atawhai,Simple Map,304300,Atawhai
+304400,Broadgreen-Monaco,Simple Map,304400,Broadgreen-Monaco
+304500,Washington,Simple Map,304500,Washington
+304600,Tahuna Hills,Simple Map,304600,Tahuna Hills
+304700,Nelson Central-Trafalgar,Simple Map,304700,Nelson Central-Trafalgar
+304800,The Wood,Simple Map,304800,The Wood
+304900,Toi Toi,Simple Map,304900,Toi Toi
+305000,Nayland,Simple Map,305000,Nayland
+305100,Aldinga,Simple Map,305100,Aldinga
+305200,Victory,Simple Map,305200,Victory
+305300,Rutherford,Simple Map,305300,Rutherford
+305400,Maitlands,Simple Map,305400,Maitlands
+305500,Maitai,Simple Map,305500,Maitai
+305600,Grampians,Simple Map,305600,Grampians
+305700,Saxton,Simple Map,305700,Saxton
+305800,Suffolk,Simple Map,305800,Suffolk
+305900,Omaio,Simple Map,305900,Omaio
+306000,Enner Glynn,Simple Map,306000,Enner Glynn
+306100,Daelyn,Simple Map,306100,Daelyn
+306200,The Brook,Simple Map,306200,The Brook
+306301,Marlborough Sounds West,Many To Many Map,306300,Marlborough Sounds West
+306301,Marlborough Sounds West,Many To Many Map,306400,Marlborough Sounds Coastal Marine
+306401,Marlborough Sounds Coastal Marine,Many To Many Map,306400,Marlborough Sounds Coastal Marine
+306501,Marlborough Sounds East,Many To Many Map,306500,Marlborough Sounds East
+306600,Upper Wairau,Simple Map,306600,Upper Wairau
+306701,Waikawa (Marlborough District),Many To Many Map,306500,Marlborough Sounds East
+306701,Waikawa (Marlborough District),Many To Many Map,306400,Marlborough Sounds Coastal Marine
+306701,Waikawa (Marlborough District),Many To Many Map,306700,Waikawa (Marlborough District)
+306801,Waitohi (Marlborough District),Many To Many Map,306800,Waitohi (Marlborough District)
+306801,Waitohi (Marlborough District),Many To Many Map,306400,Marlborough Sounds Coastal Marine
+306900,Tuamarina,Simple Map,306900,Tuamarina
+307000,Awatere,Simple Map,307000,Awatere
+307100,Renwick,Simple Map,307100,Renwick
+307200,Lower Wairau,Simple Map,307200,Lower Wairau
+307301,Woodbourne,Many To Many Map,307300,Woodbourne
+307400,Spring Creek-Grovetown,Simple Map,307400,Spring Creek-Grovetown
+307501,Springlands,Many To Many Map,307300,Woodbourne
+307501,Springlands,Many To Many Map,307500,Springlands
+307601,Yelverton,Many To Many Map,307300,Woodbourne
+307601,Yelverton,Many To Many Map,307600,Yelverton
+307700,Mayfield,Simple Map,307700,Mayfield
+307801,Whitney West,Many To Many Map,307800,Whitney West
+307802,Burleigh,Many To Many Map,307300,Woodbourne
+307802,Burleigh,Many To Many Map,307800,Whitney West
+307900,Blenheim Central,Simple Map,307900,Blenheim Central
+308000,Riversdale-Islington,Simple Map,308000,Riversdale-Islington
+308100,Whitney East,Simple Map,308100,Whitney East
+308200,Redwoodtown West,Simple Map,308200,Redwoodtown West
+308300,Witherlea West,Simple Map,308300,Witherlea West
+308400,Redwoodtown East,Simple Map,308400,Redwoodtown East
+308500,Riverlands,Simple Map,308500,Riverlands
+308600,Witherlea East,Simple Map,308600,Witherlea East
+308700,Inlet Wairau River,Simple Map,308700,Inlet Wairau River
+308800,Kaikoura Ranges,Simple Map,308800,Kaikoura Ranges
+308900,Kaikoura,Simple Map,308900,Kaikoura
+309000,Karamea,Simple Map,309000,Karamea
+309101,Inlets Buller District,Many To Many Map,309100,Inlets Buller District
+309201,Westport North,Many To Many Map,309200,Westport North
+309201,Westport North,Many To Many Map,309100,Inlets Buller District
+309300,Westport Rural,Simple Map,309300,Westport Rural
+309400,Westport South,Simple Map,309400,Westport South
+309500,Buller Coalfields,Simple Map,309500,Buller Coalfields
+309600,Charleston (Buller District),Simple Map,309600,Charleston (Buller District)
+309700,Inangahua,Simple Map,309700,Inangahua
+309800,Reefton,Simple Map,309800,Reefton
+309900,Barrytown,Simple Map,309900,Barrytown
+310000,Runanga,Simple Map,310000,Runanga
+310101,Cobden,Many To One Map,310100,Cobden
+310102,Inlet Grey River,Many To One Map,310100,Cobden
+310200,Blaketown,Simple Map,310200,Blaketown
+310300,Greymouth Central,Simple Map,310300,Greymouth Central
+310400,King Park,Simple Map,310400,King Park
+310500,Marsden,Simple Map,310500,Marsden
+310600,Karoro,Simple Map,310600,Karoro
+310700,Rutherglen-Camerons,Simple Map,310700,Rutherglen-Camerons
+310801,Greymouth Rural,Many To Many Map,310800,Greymouth Rural
+310901,Dobson,Many To Many Map,310800,Greymouth Rural
+310901,Dobson,Many To Many Map,310900,Dobson
+311000,Nelson Creek,Simple Map,311000,Nelson Creek
+311101,Lake Brunner,Many To Many Map,311100,Lake Brunner
+311101,Lake Brunner,Many To Many Map,310900,Dobson
+311200,Haast,Simple Map,311200,Haast
+311300,Westland Glaciers-Bruce Bay,Simple Map,311300,Westland Glaciers-Bruce Bay
+311401,Arahura-Kumara,Many To Many Map,311700,Hokitika Rural
+311401,Arahura-Kumara,Many To Many Map,311400,Arahura-Kumara
+311501,Hokitika,Many To Many Map,311500,Hokitika
+311501,Hokitika,Many To Many Map,311700,Hokitika Rural
+311600,Inlets Westland District,Simple Map,311600,Inlets Westland District
+311701,Hokitika Rural,Many To Many Map,311700,Hokitika Rural
+311800,Waitaha,Simple Map,311800,Waitaha
+311900,Whataroa-Harihari,Simple Map,311900,Whataroa-Harihari
+312001,Hokitika Valley-Otira,Many To Many Map,311700,Hokitika Rural
+312001,Hokitika Valley-Otira,Many To Many Map,312000,Hokitika Valley-Otira
+312100,Hanmer Range,Simple Map,312100,Hanmer Range
+312200,Amuri,Simple Map,312200,Amuri
+312300,Hanmer Springs,Simple Map,312300,Hanmer Springs
+312400,Upper Hurunui,Simple Map,312400,Upper Hurunui
+312500,Parnassus,Simple Map,312500,Parnassus
+312600,Ashley Forest,Simple Map,312600,Ashley Forest
+312700,Omihi,Simple Map,312700,Omihi
+312801,Balcairn,Many To Many Map,312800,Balcairn
+312901,Amberley,Many To Many Map,312900,Amberley
+312901,Amberley,Many To Many Map,312800,Balcairn
+313000,Okuku,Simple Map,313000,Okuku
+313100,Ashley Gorge,Simple Map,313100,Ashley Gorge
+313200,Oxford,Simple Map,313200,Oxford
+313300,Starvation Hill-Cust,Simple Map,313300,Starvation Hill-Cust
+313400,Loburn,Simple Map,313400,Loburn
+313500,Eyrewell,Simple Map,313500,Eyrewell
+313600,West Eyreton,Simple Map,313600,West Eyreton
+313700,Ashley-Sefton,Simple Map,313700,Ashley-Sefton
+313801,Fernside,Many To Many Map,313800,Fernside
+313900,Rangiora North West,Simple Map,313900,Rangiora North West
+314000,Kingsbury,Simple Map,314000,Kingsbury
+314100,Ashgrove,Simple Map,314100,Ashgrove
+314200,Rangiora North East,Simple Map,314200,Rangiora North East
+314301,Oxford Estate,Many To Many Map,314300,Oxford Estate
+314301,Oxford Estate,Many To Many Map,313800,Fernside
+314400,Rangiora Central,Simple Map,314400,Rangiora Central
+314501,Rangiora South West,Many To Many Map,313800,Fernside
+314501,Rangiora South West,Many To Many Map,314500,Rangiora South West
+314600,Lilybrook,Simple Map,314600,Lilybrook
+314701,Waikuku,Many To One Map,314700,Waikuku
+314702,Ravenswood,Many To One Map,314700,Waikuku
+314703,Waikuku Beach,Many To One Map,314700,Waikuku
+314801,Mandeville,Many To One Map,314800,Mandeville-Ohoka
+314802,Ohoka,Many To One Map,314800,Mandeville-Ohoka
+314900,Rangiora South East,Simple Map,314900,Rangiora South East
+315001,Southbrook,Many To Many Map,313800,Fernside
+315001,Southbrook,Many To Many Map,315000,Southbrook
+315100,Swannanoa-Eyreton,Simple Map,315100,Swannanoa-Eyreton
+315200,Tuahiwi,Simple Map,315200,Tuahiwi
+315301,Woodend,Many To Many Map,315300,Woodend
+315301,Woodend,Many To Many Map,315600,Pegasus Bay
+315400,Pegasus,Simple Map,315400,Pegasus
+315500,Clarkville,Simple Map,315500,Clarkville
+315601,Pegasus Bay,Many To Many Map,315600,Pegasus Bay
+315700,Kaiapoi North West,Simple Map,315700,Kaiapoi North West
+315800,Silverstream (Waimakariri District),Simple Map,315800,Silverstream (Waimakariri District)
+315901,Sovereign Palms,Many To Many Map,315900,Sovereign Palms
+315901,Sovereign Palms,Many To Many Map,315600,Pegasus Bay
+316000,Kaiapoi West,Simple Map,316000,Kaiapoi West
+316100,Kaiapoi Central,Simple Map,316100,Kaiapoi Central
+316200,Kaiapoi South,Simple Map,316200,Kaiapoi South
+316300,Kaiapoi East,Simple Map,316300,Kaiapoi East
+316401,McLeans Island,Many To Many Map,316400,McLeans Island
+316401,McLeans Island,Many To Many Map,317200,Styx
+316500,Paparua,Simple Map,316500,Paparua
+316600,Yaldhurst,Simple Map,316600,Yaldhurst
+316700,Christchurch Airport,Simple Map,316700,Christchurch Airport
+316800,Clearwater,Simple Map,316800,Clearwater
+316900,Belfast West,Simple Map,316900,Belfast West
+317000,Harewood,Simple Map,317000,Harewood
+317100,Brooklands-Spencerville,Simple Map,317100,Brooklands-Spencerville
+317201,Styx,Many To Many Map,317200,Styx
+317301,Belfast East,Many To Many Map,317300,Belfast East
+317301,Belfast East,Many To Many Map,318400,Marshland
+317400,Northwood,Simple Map,317400,Northwood
+317501,Burnside West,Simple Map,317500,Russley
+317600,Regents Park,Simple Map,317600,Regents Park
+317701,Russley,Many To Many Map,317700,Hawthornden
+317800,Bishopdale North,Simple Map,317800,Bishopdale North
+317900,Casebrook,Simple Map,317900,Casebrook
+318000,Bishopdale West,Simple Map,318000,Bishopdale West
+318100,Templeton,Simple Map,318100,Templeton
+318200,Islington,Simple Map,318200,Islington
+318300,Burnside Park,Simple Map,318300,Burnside Park
+318401,Marshland,Many To Many Map,318400,Marshland
+318401,Marshland,Many To Many Map,317300,Belfast East
+318402,Burlington-Oakbridge,Many To Many Map,318400,Marshland
+318501,Avonhead North,Many To Many Map,317700,Hawthornden
+318501,Avonhead North,Many To Many Map,318500,Avonhead North
+318600,Redwood North,Simple Map,318600,Redwood North
+318700,Broomfield,Simple Map,318700,Broomfield
+318800,Redwood West,Simple Map,318800,Redwood West
+318901,Avonhead West,Many To Many Map,317700,Hawthornden
+318901,Avonhead West,Many To Many Map,318900,Avonhead West
+319000,Bishopdale South,Simple Map,319000,Bishopdale South
+319101,Islington-Hornby Industrial,Many To Many Map,319100,Islington-Hornby Industrial
+319101,Islington-Hornby Industrial,Many To Many Map,321900,Awatea North
+319200,Burnside,Simple Map,319200,Burnside
+319300,Hei Hei,Simple Map,319300,Hei Hei
+319400,Papanui North,Simple Map,319400,Papanui North
+319500,Avonhead East,Simple Map,319500,Avonhead East
+319600,Redwood East,Simple Map,319600,Redwood East
+319700,Avonhead South,Simple Map,319700,Avonhead South
+319800,Riccarton Racecourse,Simple Map,319800,Riccarton Racecourse
+319900,Bryndwr North,Simple Map,319900,Bryndwr North
+320000,Northlands (Christchurch City),Simple Map,320000,Northlands (Christchurch City)
+320100,Papanui West,Simple Map,320100,Papanui West
+320200,Ilam North,Simple Map,320200,Ilam North
+320300,Hornby West,Simple Map,320300,Hornby West
+320400,Hornby Central,Simple Map,320400,Hornby Central
+320501,Northcote (Christchurch City),Many To Many Map,320500,Northcote (Christchurch City)
+320501,Northcote (Christchurch City),Many To Many Map,321700,Mairehau North
+320600,Jellie Park,Simple Map,320600,Jellie Park
+320700,Ilam South,Simple Map,320700,Ilam South
+320800,Bryndwr South,Simple Map,320800,Bryndwr South
+320900,Papanui East,Simple Map,320900,Papanui East
+321000,Sockburn North,Simple Map,321000,Sockburn North
+321101,Hornby South,Many To Many Map,321100,Hornby South
+321102,Branston,Many To Many Map,321100,Hornby South
+321102,Branston,Many To Many Map,321900,Awatea North
+321200,Ilam University,Simple Map,321200,Ilam University
+321301,Prestons,Many To Many Map,321300,Prestons
+321302,Prestons Park,Many To Many Map,324000,Travis Wetlands
+321302,Prestons Park,Many To Many Map,321300,Prestons
+321400,Strowan,Simple Map,321400,Strowan
+321500,Fendalton,Simple Map,321500,Fendalton
+321600,Waitikiri,Simple Map,321600,Waitikiri
+321701,Mairehau North,Many To Many Map,321700,Mairehau North
+321701,Mairehau North,Many To Many Map,320500,Northcote (Christchurch City)
+321800,Bush Inn,Simple Map,321800,Bush Inn
+321901,Awatea North,Many To Many Map,321900,Awatea North
+322000,Upper Riccarton,Simple Map,322000,Upper Riccarton
+322100,Malvern,Simple Map,322100,Malvern
+322200,Rutland,Simple Map,322200,Rutland
+322300,Sockburn South,Simple Map,322300,Sockburn South
+322400,Deans Bush,Simple Map,322400,Deans Bush
+322500,Wigram North,Simple Map,322500,Wigram North
+322600,Holmwood,Simple Map,322600,Holmwood
+322700,Wharenui,Simple Map,322700,Wharenui
+322800,Wigram West,Simple Map,322800,Wigram West
+322900,Awatea South,Simple Map,322900,Awatea South
+323000,Merivale,Simple Map,323000,Merivale
+323100,Mairehau South,Simple Map,323100,Mairehau South
+323200,Mona Vale,Simple Map,323200,Mona Vale
+323300,Riccarton West,Simple Map,323300,Riccarton West
+323400,Shirley West,Simple Map,323400,Shirley West
+323500,Middleton,Simple Map,323500,Middleton
+323600,Wigram South,Simple Map,323600,Wigram South
+323700,Queenspark,Simple Map,323700,Queenspark
+323800,St Albans North,Simple Map,323800,St Albans North
+323900,St Albans West,Simple Map,323900,St Albans West
+324001,Burwood North,Many To Many Map,324000,Travis Wetlands
+324100,Wigram East,Simple Map,324100,Wigram East
+324200,Riccarton Central,Simple Map,324200,Riccarton Central
+324300,Oaklands West,Simple Map,324300,Oaklands West
+324400,Riccarton South,Simple Map,324400,Riccarton South
+324501,Halswell West,Many To Many Map,324500,Halswell West
+324502,Halswell South West,Many To Many Map,324500,Halswell West
+324502,Halswell South West,Many To Many Map,326300,Oaklands East
+324600,Shirley East,Simple Map,324600,Shirley East
+324700,Broken Run,Simple Map,324700,Broken Run
+324800,St Albans East,Simple Map,324800,St Albans East
+324900,Hagley Park,Simple Map,324900,Hagley Park
+325000,Hillmorton,Simple Map,325000,Hillmorton
+325100,Parklands,Simple Map,325100,Parklands
+325200,Riccarton East,Simple Map,325200,Riccarton East
+325301,Edgeware North,Many To One Map,325300,Edgeware
+325302,Edgeware South,Many To One Map,325300,Edgeware
+325400,Aidanfield,Simple Map,325400,Aidanfield
+325500,Tower Junction,Simple Map,325500,Tower Junction
+325601,Burwood South,Simple Map,325600,Burwood
+325700,Christchurch Central-West,Simple Map,325700,Christchurch Central-West
+325800,Christchurch Central-North,Simple Map,325800,Christchurch Central-North
+325900,Richmond North (Christchurch City),Simple Map,325900,Richmond North (Christchurch City)
+326000,Waimairi Beach,Simple Map,326000,Waimairi Beach
+326100,Addington West,Simple Map,326100,Addington West
+326200,Otakaro-Avon River Corridor,Simple Map,326200,Otakaro-Avon River Corridor
+326301,Oaklands East,Many To Many Map,326300,Oaklands East
+326400,Addington North,Simple Map,326400,Addington North
+326500,Dallington,Simple Map,326500,Dallington
+326600,Christchurch Central,Simple Map,326600,Christchurch Central
+326701,Hoon Hay West,Many To Many Map,327300,Halswell North
+326701,Hoon Hay West,Many To Many Map,326700,Hoon Hay West
+326800,Richmond South (Christchurch City),Simple Map,326800,Richmond South (Christchurch City)
+326900,Spreydon West,Simple Map,326900,Spreydon West
+327000,Christchurch Central-East,Simple Map,327000,Christchurch Central-East
+327100,Christchurch Central-South,Simple Map,327100,Christchurch Central-South
+327200,North Beach,Simple Map,327200,North Beach
+327301,Halswell North,Many To Many Map,327300,Halswell North
+327400,Addington East,Simple Map,327400,Addington East
+327500,Avondale (Christchurch City),Simple Map,327500,Avondale (Christchurch City)
+327600,Spreydon North,Simple Map,327600,Spreydon North
+327700,Hoon Hay East,Simple Map,327700,Hoon Hay East
+327800,Avonside,Simple Map,327800,Avonside
+327901,Stanmore,Many To One Map,327900,Linwood West
+327902,Linwood Central,Many To One Map,327900,Linwood West
+328001,Halswell South,Many To Many Map,328000,Halswell South
+328100,Sydenham Central,Simple Map,328100,Sydenham Central
+328200,Spreydon South,Simple Map,328200,Spreydon South
+328300,Rawhiti,Simple Map,328300,Rawhiti
+328400,Wainoni,Simple Map,328400,Wainoni
+328500,Linwood North,Simple Map,328500,Linwood North
+328600,Aranui,Simple Map,328600,Aranui
+328700,Sydenham West,Simple Map,328700,Sydenham West
+328800,Lancaster Park,Simple Map,328800,Lancaster Park
+328900,Phillipstown,Simple Map,328900,Phillipstown
+329001,Kennedys Bush,Many To Many Map,329000,Kennedys Bush
+329002,Halswell South East,Many To Many Map,328000,Halswell South
+329002,Halswell South East,Many To Many Map,329000,Kennedys Bush
+329100,Somerfield East,Simple Map,329100,Somerfield East
+329200,Somerfield West,Simple Map,329200,Somerfield West
+329300,Linwood East,Simple Map,329300,Linwood East
+329400,Sydenham North,Simple Map,329400,Sydenham North
+329500,Hoon Hay South,Simple Map,329500,Hoon Hay South
+329600,Charleston (Christchurch City),Simple Map,329600,Charleston (Christchurch City)
+329700,Sydenham South,Simple Map,329700,Sydenham South
+329800,Bexley,Simple Map,329800,Bexley
+329900,Waltham,Simple Map,329900,Waltham
+330000,Westmorland,Simple Map,330000,Westmorland
+330100,Woolston North,Simple Map,330100,Woolston North
+330200,New Brighton,Simple Map,330200,New Brighton
+330300,Cashmere West,Simple Map,330300,Cashmere West
+330400,Bromley South,Simple Map,330400,Bromley South
+330500,Ensors,Simple Map,330500,Ensors
+330600,Beckenham,Simple Map,330600,Beckenham
+330700,Bromley North,Simple Map,330700,Bromley North
+330800,St Martins,Simple Map,330800,St Martins
+330900,Opawa,Simple Map,330900,Opawa
+331000,Woolston West,Simple Map,331000,Woolston West
+331100,Woolston East,Simple Map,331100,Woolston East
+331200,Huntsbury,Simple Map,331200,Huntsbury
+331300,Cashmere East,Simple Map,331300,Cashmere East
+331400,Hillsborough (Christchurch City),Simple Map,331400,Hillsborough (Christchurch City)
+331500,Woolston South,Simple Map,331500,Woolston South
+331600,Port Hills,Simple Map,331600,Port Hills
+331700,South New Brighton,Simple Map,331700,South New Brighton
+331801,Brookhaven-Ferrymead,Many To Many Map,331800,Brookhaven-Ferrymead
+331900,Heathcote Valley,Simple Map,331900,Heathcote Valley
+332000,Mount Pleasant,Simple Map,332000,Mount Pleasant
+332100,Redcliffs,Simple Map,332100,Redcliffs
+332200,Governors Bay,Simple Map,332200,Governors Bay
+332301,Inlets other Christchurch City,Many To Many Map,331800,Brookhaven-Ferrymead
+332301,Inlets other Christchurch City,Many To Many Map,332300,Inlets other Christchurch City
+332400,Clifton Hill,Simple Map,332400,Clifton Hill
+332501,Lyttelton,Many To Many Map,332500,Lyttelton
+332501,Lyttelton,Many To Many Map,332600,Inlet Port Lyttelton
+332601,Inlet Port Lyttelton,Many To Many Map,332600,Inlet Port Lyttelton
+332700,Sumner,Simple Map,332700,Sumner
+332801,Teddington,Many To Many Map,332800,Teddington
+332801,Teddington,Many To Many Map,332900,Diamond Harbour
+332901,Diamond Harbour,Many To Many Map,332900,Diamond Harbour
+332901,Diamond Harbour,Many To Many Map,333200,Eastern Bays-Banks Peninsula
+333000,Inland water Lake Ellesmere/Te Waihora South,Simple Map,333000,Inland water Lake Ellesmere/Te Waihora South
+333100,Banks Peninsula South,Simple Map,333100,Banks Peninsula South
+333201,Banks Peninsula Eastern Bays,Many To Many Map,333200,Eastern Bays-Banks Peninsula
+333300,Akaroa Harbour,Simple Map,333300,Akaroa Harbour
+333400,Inlet Akaroa Harbour,Simple Map,333400,Inlet Akaroa Harbour
+333500,Akaroa,Simple Map,333500,Akaroa
+333600,Craigieburn,Simple Map,333600,Craigieburn
+333700,Torlesse,Simple Map,333700,Torlesse
+333800,Glenroy-Hororata,Simple Map,333800,Glenroy-Hororata
+333901,Glentunnel,Many To Many Map,333900,Glentunnel
+334001,Darfield,Many To Many Map,334000,Darfield
+334001,Darfield,Many To Many Map,333900,Glentunnel
+334100,Kirwee,Simple Map,334100,Kirwee
+334200,Bankside,Simple Map,334200,Bankside
+334300,Charing Cross,Simple Map,334300,Charing Cross
+334400,Halkett,Simple Map,334400,Halkett
+334501,Newtons Road,Many To Many Map,334500,Newtons Road
+334501,Newtons Road,Many To Many Map,334600,West Melton
+334601,West Melton,Many To Many Map,334600,West Melton
+334700,Burnham Camp,Simple Map,334700,Burnham Camp
+334801,Rolleston Izone,Many To Many Map,334800,Rolleston Izone
+334801,Rolleston Izone,Many To Many Map,334500,Newtons Road
+334901,Rolleston North Central,Simple Map,334900,Rolleston North West
+335001,Springston,Many To Many Map,335000,Springston
+335101,Rolleston Central,Many To Many Map,335300,Rolleston South West
+335101,Rolleston Central,Many To Many Map,335100,Rolleston Central
+335201,Rolleston Tauwharekakaho,Many To Many Map,335200,Rolleston North East
+335201,Rolleston Tauwharekakaho,Many To Many Map,335100,Rolleston Central
+335202,Rolleston North East,Many To Many Map,335200,Rolleston North East
+335301,Rolleston South West,Many To Many Map,335300,Rolleston South West
+335302,Rolleston South Central,Many To Many Map,335300,Rolleston South West
+335400,Southbridge,Simple Map,335400,Southbridge
+335501,Faringdon,Many To One Map,335500,Rolleston South East
+335502,Rolleston South East,Many To One Map,335500,Rolleston South East
+335600,Trents,Simple Map,335600,Trents
+335701,Prebbleton North,Many To Many Map,335700,Prebbleton
+335702,Prebbleton South,Many To Many Map,335700,Prebbleton
+335702,Prebbleton South,Many To Many Map,335900,Ladbrooks
+335800,Irwell,Simple Map,335800,Irwell
+335901,Ladbrooks,Many To Many Map,335900,Ladbrooks
+336001,Lincoln West,Many To Many Map,336000,Lincoln West
+336002,Lincoln South,Many To Many Map,335000,Springston
+336002,Lincoln South,Many To Many Map,336000,Lincoln West
+336101,Lincoln North,Many To One Map,336100,Lincoln East
+336102,Lincoln East,Many To One Map,336100,Lincoln East
+336200,Leeston,Simple Map,336200,Leeston
+336301,Tai Tapu,Simple Map,336300,Tai Tapu
+336400,Motukarara,Simple Map,336400,Motukarara
+336500,Inland water Lake Ellesmere/Te Waihora North,Simple Map,336500,Inland water Lake Ellesmere/Te Waihora North
+336600,Ashburton Lakes,Simple Map,336600,Ashburton Lakes
+336701,Cairnbrae,Many To Many Map,336700,Cairnbrae
+336800,Ashburton Forks,Simple Map,336800,Ashburton Forks
+336901,Methven,Many To Many Map,336700,Cairnbrae
+336901,Methven,Many To Many Map,336900,Methven
+337000,Ealing-Lowcliffe,Simple Map,337000,Ealing-Lowcliffe
+337100,Eiffelton,Simple Map,337100,Eiffelton
+337200,Chertsey,Simple Map,337200,Chertsey
+337301,Winchmore-Wakanui,Many To Many Map,337300,Winchmore-Wakanui
+337400,Allenton North,Simple Map,337400,Allenton North
+337500,Allenton South,Simple Map,337500,Allenton South
+337600,Rakaia,Simple Map,337600,Rakaia
+337700,Ashburton North,Simple Map,337700,Ashburton North
+337800,Allenton East,Simple Map,337800,Allenton East
+337900,Tinwald North,Simple Map,337900,Tinwald North
+338000,Ashburton Central,Simple Map,338000,Ashburton Central
+338100,Ashburton West,Simple Map,338100,Ashburton West
+338200,Tinwald South,Simple Map,338200,Tinwald South
+338300,Ashburton East,Simple Map,338300,Ashburton East
+338401,Netherby,Many To Many Map,337300,Winchmore-Wakanui
+338401,Netherby,Many To Many Map,338400,Netherby
+338501,Hampstead,Many To Many Map,338500,Hampstead
+338501,Hampstead,Many To Many Map,337300,Winchmore-Wakanui
+338600,Ben McLeod,Simple Map,338600,Ben McLeod
+338700,Arundel,Simple Map,338700,Arundel
+338800,Levels Valley,Simple Map,338800,Levels Valley
+338901,Geraldine,Many To Many Map,339000,Rangitata
+338901,Geraldine,Many To Many Map,338900,Geraldine
+339002,Rangitata,Many To Many Map,339000,Rangitata
+339100,Waitohi (Timaru District),Simple Map,339100,Waitohi (Timaru District)
+339200,Pleasant Point,Simple Map,339200,Pleasant Point
+339300,Temuka West,Simple Map,339300,Temuka West
+339400,Hadlow,Simple Map,339400,Hadlow
+339500,Levels,Simple Map,339500,Levels
+339600,Temuka East,Simple Map,339600,Temuka East
+339700,Gleniti North,Simple Map,339700,Gleniti North
+339800,Washdyke,Simple Map,339800,Washdyke
+339900,Fairview,Simple Map,339900,Fairview
+340000,Gleniti South,Simple Map,340000,Gleniti South
+340100,Glenwood,Simple Map,340100,Glenwood
+340200,Marchwiel West,Simple Map,340200,Marchwiel West
+340300,Marchwiel East,Simple Map,340300,Marchwiel East
+340400,Highfield North,Simple Map,340400,Highfield North
+340500,Highfield South,Simple Map,340500,Highfield South
+340601,Waimataitai-Maori Hill,Many To Many Map,340600,Waimataitai-Maori Hill
+340700,Fraser Park,Simple Map,340700,Fraser Park
+340801,Seaview,Many To Many Map,341100,Timaru Central
+340801,Seaview,Many To Many Map,340800,Seaview
+340900,Inlet Port Timaru,Simple Map,340900,Inlet Port Timaru
+341000,Watlington,Simple Map,341000,Watlington
+341101,Timaru Central,Many To Many Map,341100,Timaru Central
+341201,Timaru East,Many To Many Map,340600,Waimataitai-Maori Hill
+341201,Timaru East,Many To Many Map,341200,Timaru East
+341300,Parkside,Simple Map,341300,Parkside
+341400,Kensington (Timaru District),Simple Map,341400,Kensington (Timaru District)
+341501,Mackenzie Lakes,Many To Many Map,341800,Twizel
+341501,Mackenzie Lakes,Many To Many Map,341500,Mackenzie Lakes
+341600,Inland water Lake Pukaki,Simple Map,341600,Inland water Lake Pukaki
+341700,Inland water Lake Tekapo,Simple Map,341700,Inland water Lake Tekapo
+341801,Twizel,Many To Many Map,341800,Twizel
+341801,Twizel,Many To Many Map,341500,Mackenzie Lakes
+341900,Opua (Mackenzie District),Simple Map,341900,Opua (Mackenzie District)
+342000,Fairlie,Simple Map,342000,Fairlie
+342100,Hakataramea,Simple Map,342100,Hakataramea
+342200,Maungati,Simple Map,342200,Maungati
+342300,Lyalldale,Simple Map,342300,Lyalldale
+342400,Makikihi-Willowbridge,Simple Map,342400,Makikihi-Willowbridge
+342500,Waimate North,Simple Map,342500,Waimate North
+342600,Morven-Glenavy-Ikawai,Simple Map,342600,Morven-Glenavy-Ikawai
+342700,Waimate West,Simple Map,342700,Waimate West
+342800,Waimate East,Simple Map,342800,Waimate East
+342900,Oceanic Chatham Islands,Simple Map,342900,Oceanic Chatham Islands
+343000,Chatham Islands,Simple Map,343000,Chatham Islands
+343100,Aviemore,Simple Map,343100,Aviemore
+343200,Inland water Lake Ohau,Simple Map,343200,Inland water Lake Ohau
+343300,Danseys Pass,Simple Map,343300,Danseys Pass
+343400,Ngapara,Simple Map,343400,Ngapara
+343501,Lower Waitaki,Many To Many Map,343800,Weston
+343501,Lower Waitaki,Many To Many Map,343500,Lower Waitaki
+343600,Waihemo,Simple Map,343600,Waihemo
+343700,Maheno,Simple Map,343700,Maheno
+343801,Weston,Many To Many Map,343800,Weston
+343900,Oamaru North Milner Park,Simple Map,343900,Oamaru North Milner Park
+344000,Oamaru North Orana Park,Simple Map,344000,Oamaru North Orana Park
+344100,Oamaru Gardens,Simple Map,344100,Oamaru Gardens
+344200,Glen Warren,Simple Map,344200,Glen Warren
+344300,Holmes Hill,Simple Map,344300,Holmes Hill
+344400,Oamaru Central,Simple Map,344400,Oamaru Central
+344500,South Hill,Simple Map,344500,South Hill
+344600,Inlet Port Oamaru,Simple Map,344600,Inlet Port Oamaru
+344700,Palmerston,Simple Map,344700,Palmerston
+344800,Lindis-Nevis Valleys,Simple Map,344800,Lindis-Nevis Valleys
+344900,Cromwell West,Simple Map,344900,Cromwell West
+345000,Cromwell East,Simple Map,345000,Cromwell East
+345100,Manuherikia-Ida Valleys,Simple Map,345100,Manuherikia-Ida Valleys
+345200,Earnscleugh,Simple Map,345200,Earnscleugh
+345300,Dunstan-Galloway,Simple Map,345300,Dunstan-Galloway
+345400,Clyde,Simple Map,345400,Clyde
+345500,Alexandra North,Simple Map,345500,Alexandra North
+345600,Alexandra South,Simple Map,345600,Alexandra South
+345700,Maniototo,Simple Map,345700,Maniototo
+345800,Teviot Valley,Simple Map,345800,Teviot Valley
+345900,Outer Wanaka,Simple Map,345900,Outer Wanaka
+346000,Glenorchy,Simple Map,346000,Glenorchy
+346100,Inland water Lake Wanaka,Simple Map,346100,Inland water Lake Wanaka
+346201,Outer Wakatipu,Many To Many Map,346200,Outer Wakatipu
+346201,Outer Wakatipu,Many To Many Map,347400,Arthurs Point
+346300,Inland water Lake Hawea,Simple Map,346300,Inland water Lake Hawea
+346400,Cardrona,Simple Map,346400,Cardrona
+346500,Inland water Lake Wakatipu,Simple Map,346500,Inland water Lake Wakatipu
+346600,Wanaka Waterfront,Simple Map,346600,Wanaka Waterfront
+346701,Wanaka North,Many To Many Map,346700,Wanaka North
+346702,Northlake,Many To Many Map,346700,Wanaka North
+346702,Northlake,Many To Many Map,346900,Albert Town
+346800,Wanaka West,Simple Map,346800,Wanaka West
+346901,Albert Town,Many To Many Map,346900,Albert Town
+347000,Wanaka Central,Simple Map,347000,Wanaka Central
+347101,Lake Hawea,Many To Many Map,347100,Lake Hawea
+347101,Lake Hawea,Many To Many Map,347200,Upper Clutha Valley
+347201,Upper Clutha Valley,Many To Many Map,347200,Upper Clutha Valley
+347300,Kingston,Simple Map,347300,Kingston
+347401,Arthurs Point,Many To Many Map,347400,Arthurs Point
+347501,Wakatipu Basin,Many To Many Map,347500,Wakatipu Basin
+347600,Queenstown Hill,Simple Map,347600,Queenstown Hill
+347700,Warren Park,Simple Map,347700,Warren Park
+347801,Sunshine Bay-Fernhill,Many To Many Map,346200,Outer Wakatipu
+347801,Sunshine Bay-Fernhill,Many To Many Map,347800,Sunshine Bay-Fernhill
+347901,Arrowtown,Many To Many Map,347500,Wakatipu Basin
+347901,Arrowtown,Many To Many Map,347900,Arrowtown
+348000,Quail Rise,Simple Map,348000,Quail Rise
+348100,Queenstown Central,Simple Map,348100,Queenstown Central
+348200,Queenstown East,Simple Map,348200,Queenstown East
+348300,Frankton Arm,Simple Map,348300,Frankton Arm
+348400,Frankton,Simple Map,348400,Frankton
+348500,Lake Hayes,Simple Map,348500,Lake Hayes
+348600,Kelvin Heights,Simple Map,348600,Kelvin Heights
+348700,Shotover Country,Simple Map,348700,Shotover Country
+348801,Lake Hayes Estate,Many To Many Map,348800,Lake Hayes Estate
+348801,Lake Hayes Estate,Many To Many Map,347500,Wakatipu Basin
+348901,Jacks Point,Many To Many Map,346200,Outer Wakatipu
+348901,Jacks Point,Many To Many Map,348900,Jacks Point
+349000,Strath Taieri,Simple Map,349000,Strath Taieri
+349100,Bucklands Crossing,Simple Map,349100,Bucklands Crossing
+349200,Waikouaiti,Simple Map,349200,Waikouaiti
+349300,Momona,Simple Map,349300,Momona
+349401,Taieri,Many To Many Map,349400,Taieri
+349500,Inlets other Dunedin City,Simple Map,349500,Inlets other Dunedin City
+349601,Mount Cargill,Many To Many Map,349600,Mount Cargill
+349601,Mount Cargill,Many To Many Map,350800,Inlet Otago Harbour
+349700,Bush Road,Simple Map,349700,Bush Road
+349801,Mosgiel East,Many To Many Map,349400,Taieri
+349801,Mosgiel East,Many To Many Map,349800,Mosgiel East
+349900,Mosgiel Central,Simple Map,349900,Mosgiel Central
+350000,Seddon Park,Simple Map,350000,Seddon Park
+350100,Wingatui,Simple Map,350100,Wingatui
+350201,Saddle Hill-Chain Hills,Many To Many Map,350200,Saddle Hill-Chain Hills
+350201,Saddle Hill-Chain Hills,Many To Many Map,350400,Halfway Bush
+350300,East Taieri,Simple Map,350300,East Taieri
+350401,Halfway Bush,Many To Many Map,350400,Halfway Bush
+350500,Helensburgh,Simple Map,350500,Helensburgh
+350600,Glenleith,Simple Map,350600,Glenleith
+350700,Fairfield (Dunedin City),Simple Map,350700,Fairfield (Dunedin City)
+350801,Inlet Otago Harbour,Many To Many Map,351800,Roseneath-Sawyers Bay
+350801,Inlet Otago Harbour,Many To Many Map,350800,Inlet Otago Harbour
+350900,Brockville,Simple Map,350900,Brockville
+351000,Wakari,Simple Map,351000,Wakari
+351100,Abbotsford,Simple Map,351100,Abbotsford
+351200,Brighton,Simple Map,351200,Brighton
+351300,Pine Hill-Dalmore,Simple Map,351300,Pine Hill-Dalmore
+351400,Kaikorai-Bradford,Simple Map,351400,Kaikorai-Bradford
+351500,Maori Hill,Simple Map,351500,Maori Hill
+351600,Roslyn (Dunedin City),Simple Map,351600,Roslyn (Dunedin City)
+351700,North East Valley Chingford,Simple Map,351700,North East Valley Chingford
+351801,Roseneath-Sawyers Bay,Many To Many Map,351800,Roseneath-Sawyers Bay
+351901,Normanby (Dunedin City),Simple Map,351900,Normanby
+352000,North East Valley Knox,Simple Map,352000,North East Valley Knox
+352100,Belleknowes,Simple Map,352100,Belleknowes
+352200,Gardens (Dunedin City),Simple Map,352200,Gardens (Dunedin City)
+352300,Kenmure,Simple Map,352300,Kenmure
+352400,Campus West,Simple Map,352400,Campus West
+352500,Waldronville,Simple Map,352500,Waldronville
+352600,Green Island,Simple Map,352600,Green Island
+352701,Port Chalmers,Many To Many Map,352700,Port Chalmers
+352701,Port Chalmers,Many To Many Map,350800,Inlet Otago Harbour
+352800,Royal Terrace,Simple Map,352800,Royal Terrace
+352900,Arthur Street,Simple Map,352900,Arthur Street
+353000,Opoho,Simple Map,353000,Opoho
+353100,Campus North,Simple Map,353100,Campus North
+353200,Campus South,Simple Map,353200,Campus South
+353300,Mornington,Simple Map,353300,Mornington
+353400,Dunedin Central,Simple Map,353400,Dunedin Central
+353500,Maryhill,Simple Map,353500,Maryhill
+353600,Ravensbourne-St Leonards,Simple Map,353600,Ravensbourne-St Leonards
+353701,Harbourside,Many To Many Map,350800,Inlet Otago Harbour
+353701,Harbourside,Many To Many Map,353700,Harbourside
+353800,Fernhill,Simple Map,353800,Fernhill
+353900,Otago Peninsula,Simple Map,353900,Otago Peninsula
+354000,Concord,Simple Map,354000,Concord
+354100,Calton Hill,Simple Map,354100,Calton Hill
+354200,Caversham,Simple Map,354200,Caversham
+354300,Hillside-Portsmouth Drive,Simple Map,354300,Hillside-Portsmouth Drive
+354400,Kew (Dunedin City),Simple Map,354400,Kew (Dunedin City)
+354500,Corstorphine,Simple Map,354500,Corstorphine
+354600,Forbury,Simple Map,354600,Forbury
+354701,South Dunedin,Simple Map,354700,Bathgate Park
+354800,St Clair,Simple Map,354800,St Clair
+354901,Waverley (Dunedin City),Simple Map,354900,Waverley
+355000,Macandrew Bay-Company Bay,Simple Map,355000,Macandrew Bay-Company Bay
+355100,Broad Bay-Portobello,Simple Map,355100,Broad Bay-Portobello
+355200,St Kilda South,Simple Map,355200,St Kilda South
+355300,Musselburgh,Simple Map,355300,Musselburgh
+355400,Shiel Hill,Simple Map,355400,Shiel Hill
+355500,St Kilda North,Simple Map,355500,St Kilda North
+355600,Andersons Bay,Simple Map,355600,Andersons Bay
+355700,Tainui,Simple Map,355700,Tainui
+355800,West Otago,Simple Map,355800,West Otago
+355900,Tuapeka,Simple Map,355900,Tuapeka
+356000,Clinton,Simple Map,356000,Clinton
+356100,Clutha Valley,Simple Map,356100,Clutha Valley
+356200,Bruce,Simple Map,356200,Bruce
+356300,Catlins,Simple Map,356300,Catlins
+356400,Milton,Simple Map,356400,Milton
+356500,Balclutha South,Simple Map,356500,Balclutha South
+356600,Balclutha North,Simple Map,356600,Balclutha North
+356700,Benhar-Stirling,Simple Map,356700,Benhar-Stirling
+356800,Kaitangata-Matau,Simple Map,356800,Kaitangata-Matau
+356900,Inlet Catlins,Simple Map,356900,Inlet Catlins
+357000,Fiordland,Many To Many Map,357000,Fiordland
+357000,Fiordland,Many To Many Map,357100,Inlets Fiordland
+357100,Inlets Fiordland,Many To Many Map,357100,Inlets Fiordland
+357100,Inlets Fiordland,Many To Many Map,357000,Fiordland
+357200,Inland water Lake Te Anau,Simple Map,357200,Inland water Lake Te Anau
+357300,Mararoa,Simple Map,357300,Mararoa
+357400,Inland water Lake Manapouri,Simple Map,357400,Inland water Lake Manapouri
+357501,Te Anau,Many To Many Map,357500,Te Anau
+357501,Te Anau,Many To Many Map,357600,Whitestone
+357601,Whitestone,Many To Many Map,357600,Whitestone
+357700,Mossburn,Simple Map,357700,Mossburn
+357800,Inland water Lake Hauroko,Simple Map,357800,Inland water Lake Hauroko
+357900,Longwood Forest,Simple Map,357900,Longwood Forest
+358000,Ohai-Nightcaps,Simple Map,358000,Ohai-Nightcaps
+358100,Riversdale-Piano Flat,Simple Map,358100,Riversdale-Piano Flat
+358200,Lumsden-Balfour,Simple Map,358200,Lumsden-Balfour
+358300,Oreti River,Simple Map,358300,Oreti River
+358400,Otautau,Simple Map,358400,Otautau
+358500,Hedgehope,Simple Map,358500,Hedgehope
+358600,Winton,Simple Map,358600,Winton
+358700,Waianiwa,Simple Map,358700,Waianiwa
+358801,Riverton,Many To Many Map,358800,Riverton
+358801,Riverton,Many To Many Map,359200,Inlets other Southland District
+358900,Wallacetown,Simple Map,358900,Wallacetown
+359000,Grove Bush,Simple Map,359000,Grove Bush
+359100,Edendale-Woodlands,Simple Map,359100,Edendale-Woodlands
+359201,Inlets other Southland District,Many To Many Map,359200,Inlets other Southland District
+359300,Stewart Island,Simple Map,359300,Stewart Island
+359400,Awarua Plains,Simple Map,359400,Awarua Plains
+359500,Wyndham-Catlins,Simple Map,359500,Wyndham-Catlins
+359600,Waikaka,Simple Map,359600,Waikaka
+359700,Waimumu-Kaiwera,Simple Map,359700,Waimumu-Kaiwera
+359800,Gore North,Simple Map,359800,Gore North
+359900,Gore West,Simple Map,359900,Gore West
+360000,East Gore,Simple Map,360000,East Gore
+360100,Gore Central,Simple Map,360100,Gore Central
+360200,Gore Main,Simple Map,360200,Gore Main
+360300,Gore South,Simple Map,360300,Gore South
+360400,Mataura,Simple Map,360400,Mataura
+360500,West Plains-Makarewa,Simple Map,360500,West Plains-Makarewa
+360601,Prestonville-Grasmere,Many To Many Map,360700,Donovan Park
+360601,Prestonville-Grasmere,Many To Many Map,360600,Prestonville-Grasmere
+360701,Waikiwi,Many To Many Map,360600,Prestonville-Grasmere
+360701,Waikiwi,Many To Many Map,360700,Donovan Park
+360701,Waikiwi,Many To Many Map,360800,Myross Bush
+360801,Myross Bush,Many To Many Map,360800,Myross Bush
+360900,Otatara,Simple Map,360900,Otatara
+361000,Invercargill Central,Simple Map,361000,Invercargill Central
+361100,Gladstone (Invercargill City),Simple Map,361100,Gladstone (Invercargill City)
+361201,Rosedale-Hargest,Many To Many Map,361200,Rosedale
+361201,Rosedale-Hargest,Many To Many Map,361400,Hargest
+361300,Avenal,Simple Map,361300,Avenal
+361501,Windsor,Many To Many Map,361400,Hargest
+361501,Windsor,Many To Many Map,361200,Rosedale
+361501,Windsor,Many To Many Map,361500,Windsor
+361502,Waverley (Invercargill City),Many To Many Map,361400,Hargest
+361502,Waverley (Invercargill City),Many To Many Map,361500,Windsor
+361601,Richmond (Invercargill City),Many To Many Map,361600,Richmond (Invercargill City)
+361701,Glengarry,Many To Many Map,361700,Glengarry
+361701,Glengarry,Many To Many Map,361600,Richmond (Invercargill City)
+361800,Inlet New River Estuary,Simple Map,361800,Inlet New River Estuary
+361900,Turnbull Thompson Park,Simple Map,361900,Turnbull Thompson Park
+362001,Appleby North (Invercargill City),Simple Map,362000,Crinan
+362100,Georgetown,Simple Map,362100,Georgetown
+362201,Appleby South (Invercargill City),Many To Many Map,362200,Kew (Invercargill City)
+362301,Kennington-Tisbury,Many To Many Map,362300,Kennington-Tisbury
+362401,Newfield,Many To Many Map,362400,Newfield
+362402,Rockdale,Many To Many Map,362300,Kennington-Tisbury
+362402,Rockdale,Many To Many Map,362400,Newfield
+362402,Rockdale,Many To Many Map,362600,Elizabeth Park
+362501,Strathern,Many To Many Map,362700,Aurora
+362501,Strathern,Many To Many Map,362900,Kingswell
+362501,Strathern,Many To Many Map,362500,Strathern
+362501,Strathern,Many To Many Map,362800,Moulson
+362601,Heidelberg,Many To Many Map,362600,Elizabeth Park
+362601,Heidelberg,Many To Many Map,362700,Aurora
+362601,Heidelberg,Many To Many Map,362800,Moulson
+362901,Kingswell,Many To Many Map,362800,Moulson
+362901,Kingswell,Many To Many Map,362900,Kingswell
+363001,Clifton-Kew,Many To Many Map,362200,Kew (Invercargill City)
+363001,Clifton-Kew,Many To Many Map,363000,Clifton
+363100,Woodend-Greenhills,Simple Map,363100,Woodend-Greenhills
+363201,Inlet Bluff Harbour,Many To Many Map,363200,Inlet Bluff Harbour
+363301,Bluff,Many To Many Map,363200,Inlet Bluff Harbour
+363301,Bluff,Many To Many Map,363300,Bluff
+363400,Oceanic West Coast Region,Simple Map,363400,Oceanic West Coast Region
+363500,Oceanic Nelson Region,Simple Map,363500,Oceanic Nelson Region
+363600,Oceanic Marlborough Region,Simple Map,363600,Oceanic Marlborough Region
+363700,Oceanic Southland Region,Simple Map,363700,Oceanic Southland Region
+363800,Oceanic Canterbury Region,Many To One Map,363800,Oceanic Canterbury Region
+363900,Oceanic Otago Region,Simple Map,363900,Oceanic Otago Region
+364000,Motunau Island,Many To One Map,363800,Oceanic Canterbury Region
+400001,New Zealand Economic Zone,Simple Map,400001,New Zealand Economic Zone
+400002,Oceanic Kermadec Islands,Simple Map,400002,Oceanic Kermadec Islands
+400003,Kermadec Islands,Simple Map,400003,Kermadec Islands
+400004,Oceanic Oil Rig Taranaki,Simple Map,400004,Oceanic Oil Rig Taranaki
+400005,Oceanic Campbell Island,Simple Map,400005,Oceanic Campbell Island
+400006,Campbell Island,Simple Map,400006,Campbell Island
+400007,Oceanic Oil Rig Southland,Simple Map,400007,Oceanic Oil Rig Southland
+400008,Oceanic Auckland Islands,Simple Map,400008,Oceanic Auckland Islands
+400009,Auckland Islands,Simple Map,400009,Auckland Islands
+400010,Oceanic Bounty Islands,Simple Map,400010,Oceanic Bounty Islands
+400011,Bounty Islands,Simple Map,400011,Bounty Islands
+400012,Oceanic Snares Islands,Simple Map,400012,Oceanic Snares Islands
+400013,Snares Islands,Simple Map,400013,Snares Islands
+400014,Oceanic Antipodes Islands,Simple Map,400014,Oceanic Antipodes Islands
+400015,Antipodes Islands,Simple Map,400015,Antipodes Islands
+400016,Ross Dependency,Simple Map,400016,Ross Dependency

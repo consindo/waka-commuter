@@ -13,43 +13,48 @@
   } from '../../data.js'
 
   import { modes } from './ModeMap.js'
-  import { setDetails, hideDetails } from '../../views/details-render.js'
 
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
+  import DetailsBlurb from './DetailsBlurb.svelte'
   import PopulationGraph from '../PopulationGraph.svelte'
   import PopulationPredictions from './PopulationPredictions.svelte'
+  import TravelMode from './TravelMode.svelte'
+  import PopulationBubbles from './PopulationBubbles.svelte'
 
-  export let mapData
+  let { mapData } = $props()
 
-  let detailsTitle = null
-  let documentTitle = null
-  let firstRegion = ''
-  let populationLabel = ''
+  let detailsTitle = $state(null)
+  let documentTitle = $state(null)
+  let firstRegion = $state('')
+  let populationLabel = $state('')
+  let populationCount = $state('')
 
-  let hideArrivals = false
-  let hideDepartures = false
-  let invalidArrival = false
-  let invalidDeparture = false
+  let hideArrivals = $state(false)
+  let hideDepartures = $state(false)
+  let invalidArrival = $state(false)
+  let invalidDeparture = $state(false)
 
-  let tooltip = null
-  let arrivals = null
-  let departures = null
-  let hiddenArrivals = []
-  let hiddenDepartures = []
+  let tooltip = $state(null)
+  let arrivals = $state(null)
+  let departures = $state(null)
+  let hiddenArrivals = $state([])
+  let hiddenDepartures = $state([])
 
-  let populationPredictions = {}
+  let populationPredictions = $state({})
+
+  let currentRegions = $state(null)
+  let dataSegment = $state(null)
+  let arriveMode = $state(null)
+  let departureMode = $state(null)
+
+  let initialLocation = $state(null)
 
   const source = getSource()
 
-  $: document.title = `${documentTitle ? `${documentTitle} - ` : ''}${
-    source.title || 'Commuter - Waka'
-  }`
+  Dispatcher.dataSegment = source.segments[0]
 
-  if (!source.isAllSegmentEnabled) {
-    Dispatcher.dataSegment = source.segments[0]
-  }
-
+  // todo: this needs to be removed from onmount
   onMount(() => {
     const friendlyNames = {}
     mapData.then((data) => {
@@ -68,7 +73,10 @@
         )
 
       Dispatcher.bind('clear-blocks', () => {
-        hideDetails()
+        // todo: make this more svelte
+        document.querySelector('.details-splash').classList.remove('hidden')
+        document.querySelector('.details-location').classList.add('hidden')
+
         documentTitle = null
       })
 
@@ -143,8 +151,6 @@
                   ]
                 } else if (dataSource[segment] != null) {
                   return [dataSource[segment]]
-                } else if (segment === 'all') {
-                  return source.segments.map((key) => dataSource[key])
                 } else {
                   console.warn('Could not find segment', segment)
                   return defaultSource
@@ -163,11 +169,7 @@
             // relies on no colons being in the keyNames
             const sourceKeys = regionName
               .map((i) => {
-                if (segment === 'all') {
-                  return source.segments.map((key) => [i, key].join(':'))
-                } else {
-                  return [[i, segment].join(':')]
-                }
+                return [[i, segment].join(':')]
               })
               .flat()
 
@@ -283,8 +285,10 @@
             hiddenDepartures.sort((a, b) => b.value - a.value)
           }
 
+          currentRegions = regionName.map(regionNameMapper)
+
           const tooltipData = {
-            currentRegions: regionName.map(regionNameMapper),
+            currentRegions,
             arriveData: arriveDataFriendly,
             departData: departDataFriendly,
             mode: ['work', 'study'],
@@ -294,13 +298,12 @@
           } else if (segment === 'education') {
             tooltipData.mode = ['study']
           }
-          const tooltipJSON = JSON.stringify(tooltipData)
 
-          if (segment === 'all') {
+          if (segment.endsWith('-all')) {
             populationLabel = 'Resident Workers & Students:'
-          } else if (segment === 'workplace') {
+          } else if (segment.endsWith('-workplace')) {
             populationLabel = 'Resident Workers:'
-          } else if (segment === 'education') {
+          } else if (segment.endsWith('-education')) {
             populationLabel = 'Resident Students:'
           } else if (
             segment.startsWith('2021-sa2') ||
@@ -351,31 +354,55 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
-          tooltip = tooltipJSON
+          arriveMode = arriveModeData
+          departureMode = departureModeData
+
+          tooltip = tooltipData
 
           // also consuming the tooltip data in the population bubbles
-          const initialLocation = getLocation(features, regionName[0])
-          setDetails(
-            initialLocation,
-            arriveDataFriendly,
-            departDataFriendly,
-            arriveModeData,
-            departureModeData,
-            tooltipJSON,
-            segment
-          )
+          initialLocation = getLocation(features, regionName[0])
+
+          // todo: make this more svelte
+          document.querySelector('.details-splash').classList.add('hidden')
+          document.querySelector('.details-location').classList.remove('hidden')
+
+          let pop = 'Unknown'
+          if (
+            departureModeData != null &&
+            departureModeData.Total.Total !== undefined
+          ) {
+            pop = departureModeData.Total.Total.toLocaleString()
+          } else if (
+            arriveModeData != null &&
+            arriveModeData.Total.Total !== undefined
+          ) {
+            pop = arriveModeData.Total.Total.toLocaleString()
+          }
+          if (source.isModeGraphsEnabled) {
+            populationCount = pop
+          }
+
+          dataSegment = segment
         }
       )
     })
   })
 </script>
 
+<svelte:head>
+  <title
+    >{documentTitle ? `${documentTitle} - ` : ''}{source.title ||
+      'Commuter - Waka'}</title
+  >
+</svelte:head>
+
 <div class="details-location hidden">
   <Header
     title={detailsTitle}
     {firstRegion}
     {populationLabel}
-    populationLink={source === 'statsnz'}
+    populationLink={source.brandingClass === 'statsnz'}
+    {populationCount}
   />
   <div class="arrive-from warning" class:hidden={!invalidArrival}>
     <p>
@@ -385,11 +412,30 @@
   </div>
   <div class:hidden={hideArrivals || invalidArrival}>
     <h3>Arrivals</h3>
-    <div class="arrive-from blurb-container" />
+    {#if currentRegions}
+      <DetailsBlurb
+        mode="arrivals"
+        {currentRegions}
+        segment={dataSegment}
+        destinationData={arrivals}
+        modeData={arriveMode}
+      />
+    {/if}
     <div class="arrive-from graph-container">
       <div class="location-container">
         <div class="location-inner">
-          <div class="location" />
+          {#if initialLocation}
+            <PopulationBubbles
+              scale={initialLocation}
+              data={arrivals}
+              tooltipData={tooltip}
+              showOnly="arrivals"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          {/if}
+          <div class="location"></div>
         </div>
         <div class="location-graph">
           {#key arrivals}
@@ -421,13 +467,16 @@
             {#if source.brandingClass === 'statsnz'}
               <small
                 ><a
-                  href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-                  >(NZ.Stat)</a
+                  href="https://explore.data.stats.govt.nz/vis?tm=Totals%20by%20topic%20for%20individuals&pg=0&hc%5B2023%20Census%5D=Totals%20by%20topic&snb=3&df%5Bds%5D=ds-nsiws-disseminate&df%5Bid%5D=CEN23_TBT_008&df%5Bag%5D=STATSNZ&df%5Bvs%5D=1.0&dq=rc+pc+asTotal5Y+asMed+biTotal+bpTotal+egTotal+mdTotal+lsTotal+liTotal+geTotal+sbTotal+rbTotal+rsTotal+psTotal+cbTotal+cbmea+raTotal+csTotal+diTotal+dcTotal+dhTotal+drTotal+dsTotal+dwTotal+ddTotal+hoTotal+yuTotal+yumea+yaTotal+yamea+spTotal+teuTotal+teeTotal+hqTotal+qiTotal+piTotal+ibTotal+ibmed+wsTotal+seTotal+upTotal+hwTotal+hwmea+inuTotal+inwTotal+ocuTotal+ocoTotal+twuTotal+twwTotal+soTotal+cdTotal+ctTotal+siTotal+1yTotal+5yTotal+sqTotal+pqTotal+jsTotal.12+13+14+15+16+17+18+99+9999+01+02+03+04+05+06+07+08+09.2013+2018+2023&ly%5Brw%5D=CEN23_TBT_IND_003&ly%5Bcl%5D=CEN23_YEAR_001&ly%5Brs%5D=CEN23_TBT_GEO_006&to%5BTIME%5D=false"
+                  >(Aotearoa Data Explorer)</a
                 ></small
               >
             {/if}
           </h4>
-          <div class="mode" />
+          {#if arriveMode}
+            <TravelMode data={arriveMode.Total} />
+          {/if}
+          <div class="mode"></div>
         </div>
       </div>
     </div>
@@ -440,11 +489,30 @@
   </div>
   <div class:hidden={hideDepartures || invalidDeparture}>
     <h3>Departures</h3>
-    <div class="depart-to blurb-container" />
+    {#if currentRegions}
+      <DetailsBlurb
+        mode="departures"
+        {currentRegions}
+        segment={dataSegment}
+        destinationData={departures}
+        modeData={departureMode}
+      />
+    {/if}
     <div class="depart-to graph-container">
       <div class="location-container">
         <div class="location-inner">
-          <div class="location" />
+          {#if initialLocation}
+            <PopulationBubbles
+              scale={initialLocation}
+              data={departures}
+              tooltipData={tooltip}
+              showOnly="departures"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          {/if}
+          <div class="location"></div>
         </div>
         <div class="location-graph">
           {#key departures}
@@ -476,13 +544,16 @@
             {#if source.brandingClass === 'statsnz'}
               <small
                 ><a
-                  href="http://nzdotstat.stats.govt.nz/WBOS/Index.aspx?DataSetCode=TABLECODE8296"
-                  >(NZ.Stat)</a
+                  href="https://explore.data.stats.govt.nz/vis?tm=Totals%20by%20topic%20for%20individuals&pg=0&hc%5B2023%20Census%5D=Totals%20by%20topic&snb=3&df%5Bds%5D=ds-nsiws-disseminate&df%5Bid%5D=CEN23_TBT_008&df%5Bag%5D=STATSNZ&df%5Bvs%5D=1.0&dq=rc+pc+asTotal5Y+asMed+biTotal+bpTotal+egTotal+mdTotal+lsTotal+liTotal+geTotal+sbTotal+rbTotal+rsTotal+psTotal+cbTotal+cbmea+raTotal+csTotal+diTotal+dcTotal+dhTotal+drTotal+dsTotal+dwTotal+ddTotal+hoTotal+yuTotal+yumea+yaTotal+yamea+spTotal+teuTotal+teeTotal+hqTotal+qiTotal+piTotal+ibTotal+ibmed+wsTotal+seTotal+upTotal+hwTotal+hwmea+inuTotal+inwTotal+ocuTotal+ocoTotal+twuTotal+twwTotal+soTotal+cdTotal+ctTotal+siTotal+1yTotal+5yTotal+sqTotal+pqTotal+jsTotal.12+13+14+15+16+17+18+99+9999+01+02+03+04+05+06+07+08+09.2013+2018+2023&ly%5Brw%5D=CEN23_TBT_IND_003&ly%5Bcl%5D=CEN23_YEAR_001&ly%5Brs%5D=CEN23_TBT_GEO_006&to%5BTIME%5D=false"
+                  >(Aotearoa Data Explorer)</a
                 ></small
               >
             {/if}
           </h4>
-          <div class="mode" />
+          {#if departureMode}
+            <TravelMode data={departureMode.Total} />
+          {/if}
+          <div class="mode"></div>
         </div>
       </div>
     </div>
@@ -530,5 +601,42 @@
   .warning {
     padding: 0 1em;
     font-size: 1.125rem;
+  }
+
+  .location-inner {
+    background: var(--surface-bg-subtle);
+    border-radius: 0 10px 10px 0;
+    border: var(--border);
+    border-left: 0;
+    margin-bottom: 2rem;
+  }
+
+  .mode-container {
+    min-width: 300px;
+    overflow-x: hidden;
+  }
+
+  .mode-inner {
+    width: 300px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1.5rem 0;
+    border-radius: 5px 0 0 5px;
+    height: 100%;
+  }
+
+  .mode-container h4 {
+    color: var(--surface-text);
+    margin: 0 1.25rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .mode-container h4 a {
+    color: var(--surface-text-subtle);
+    font-weight: normal;
+    text-decoration: none;
+  }
+  .mode-container h4 a:hover {
+    text-decoration: underline;
   }
 </style>

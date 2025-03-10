@@ -9,8 +9,12 @@
   const source = getSource()
   let sa2Data = fetch(source.shapeFile).then((res) => res.json())
   window.sa2Data = sa2Data
+  sa2Data.then((data) => {
+    regionNames = getRegionNames(data)
+  })
 
-  let secondaryData, tertiaryData
+  let secondaryData = $state(),
+    tertiaryData = $state()
   if (source.secondaryShapeFile) {
     secondaryData = fetch(source.secondaryShapeFile)
       .then((res) => res.json())
@@ -21,7 +25,11 @@
           features: [...sa2.features, ...secondary.features],
         })
         window.sa2Data = newData
-        regionNames = getRegionNames(window.sa2Data)
+        if (source.brandingClass === 'ason') {
+          regionNames = getRegionNames(newData)
+        } else {
+          regionNames = getRegionNames(sa2)
+        }
 
         if (source.tertiaryShapeFile) {
           tertiaryData = fetch(source.tertiaryShapeFile)
@@ -42,11 +50,13 @@
       })
   }
 
-  let dataset2
+  let dataset2 = $state()
   if (source.dataset2ShapeFile) {
     dataset2 = Promise.all([
       fetch(source.dataset2ShapeFile).then((res) => res.json()),
-      fetch(source.dataset2SecondaryShapeFile).then((res) => res.json()),
+      source.dataset2SecondaryShapeFile
+        ? fetch(source.dataset2SecondaryShapeFile).then((res) => res.json())
+        : { features: [] },
     ]).then(async (data) => {
       const sa2 = await window.sa2Data
       await secondaryData
@@ -80,20 +90,15 @@
       .sort((a, b) => a.name.localeCompare(b.name, undefined, {}))
   }
 
-  let regionNames = getRegionNames(window.sa2Data)
+  let regionNames = $state({ features: [] })
 
-  let style = 'map'
-  let [lng, lat, zoom] = [...source.initialPosition]
+  let [lng, lat, zoom] = $state([...source.initialPosition])
 
-  const flyTo = (e) => {
-    const rand = Math.random() * 0.001
-    lat = parseFloat(e.detail.lat) + rand
-    lng = parseFloat(e.detail.lng) + rand
-    zoom = parseFloat(e.detail.zoom)
-  }
-
-  const changeStyle = (e) => {
-    style = e.detail.style
+  const flyTo = (props) => {
+    const rand = Math.random() * 0.00001
+    lat = parseFloat(props.lat) + rand
+    lng = parseFloat(props.lng) + rand
+    zoom = parseFloat(props.zoom)
   }
 </script>
 
@@ -107,11 +112,9 @@
     {lat}
     {lng}
     {zoom}
-    {style}
-    on:styleChange={changeStyle}
   />
   <section>
-    <Splash on:locationChange={flyTo} />
+    <Splash setLocation={flyTo} />
     <Details mapData={sa2Data} />
   </section>
 </div>
@@ -126,7 +129,6 @@
     width: 900px;
     border-left: var(--border);
     overflow-y: auto;
-    background: #111;
   }
 
   @media (max-width: 1650px) {

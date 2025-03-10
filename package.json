@@ -9,9 +9,9 @@
     "build:ason": "npm run process:ason && npm run shapes:ason && npm run build:js",
     "build:wsp": "npm run process:wsp && npm run shapes:wsp && npm run build:js",
     "build:js": "vite build",
-    "process": "npm run process:area && npm run process:travel && npm run process:ethnicity && npm run process:combine && npm run process:copy",
+    "process": "npm run process:area && npm run process:travel && npm run process:combine && npm run process:copy",
     "process:area": "node data_sources/parsers/area-to-area-parser.js",
-    "process:ethnicity": "node data_sources/parsers/ethnicity-parser.js",
+    "process:concordance": "node data_sources/parsers/concordance.js",
     "process:travel": "node data_sources/parsers/workplace-travel-split-parser.js",
     "process:combine": "node data_sources/parsers/combine-files.js",
     "process:copy": "node data_sources/parsers/split-regions.js data_sources/outputs",
@@ -36,22 +36,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev --host",
     "start": "vite preview",
-    "format": "prettier --write src/**/*.svelte src/**/*.js"
+    "format": "prettier --write ./src"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit-element": "^3.3.3",
-    "mapbox-gl": "^2.15.0",
-    "polylabel": "^1.1.0"
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "mapbox-gl": "^3.10.0",
+    "polylabel": "^2.0.1"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.4.4",
-    "csv-parser": "^3.0.0",
-    "prettier": "^3.0.1",
-    "prettier-plugin-svelte": "^3.0.3",
+    "csv-parser": "^3.2.0",
+    "prettier": "^3.5.2",
+    "prettier-plugin-svelte": "^3.3.3",
     "strip-bom-stream": "^5.0.0",
-    "svelte": "^4.1.2",
-    "vite": "^4.4.9"
+    "svelte": "^5.20.2",
+    "vite": "^6.1.1"
   }
 }

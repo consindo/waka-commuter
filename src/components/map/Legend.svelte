@@ -4,7 +4,7 @@
 
 <div class="map-legend hidden all">
   <HeatmapToggle />
-  <div class="map-legend-colors" />
+  <div class="map-legend-colors"></div>
   <ul>
     <li class="hide-departures hide-all">Less Arrivals</li>
     <li class="hide-departures">More Arrivals</li>
@@ -16,13 +16,15 @@
 <style>
   .map-legend {
     width: 220px;
-    background: rgba(20, 20, 20, 0.6);
+    background: rgba(255, 255, 255, 0.6);
+    background: light-dark(rgba(255, 255, 255, 0.6), rgba(1, 1, 1, 0.6));
+    backdrop-filter: blur(2px);
     border-radius: 4px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     position: absolute;
     bottom: 10px;
     left: 49px;
-    color: #fff;
+    color: var(--surface-text);
     user-select: none;
     overflow: hidden;
   }
@@ -33,11 +35,11 @@
     border-radius: 2px;
     background-image: linear-gradient(
       90deg,
-      #0d47a1,
-      #2196f3,
-      #ba68c8,
-      #f44336,
-      #b71c1c
+      #1d4ed8,
+      #3b82f6,
+      #e879f9,
+      #ef4444,
+      #b91c1c
     );
     margin: 5px;
   }

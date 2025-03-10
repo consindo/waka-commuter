@@ -28,7 +28,7 @@ class Dispatcher extends Events {
 
   dataDirection = 'all'
 
-  dataSegment = 'all'
+  dataSegment = 'unknown'
 
   concordance = {}
 
@@ -59,12 +59,15 @@ class Dispatcher extends Events {
 
   // lots of ason specific code in here
   setRegions = (regionName, animate) => {
-    if (this.dataSegment.startsWith('2021-dzn') || this.dataSegment.startsWith('2016-dzn')) {
+    if (
+      this.dataSegment.startsWith('2021-dzn') ||
+      this.dataSegment.startsWith('2016-dzn')
+    ) {
       const isDZN = (regionName[0] || '').startsWith('DZN')
       if (isDZN && this.dataDirection === 'departures') {
-        this.dataDirection = 'arrivals'  
+        this.dataDirection = 'arrivals'
       } else if (!isDZN && this.dataDirection === 'arrivals') {
-        this.dataDirection = 'departures'  
+        this.dataDirection = 'departures'
       }
     }
 
@@ -90,9 +93,15 @@ class Dispatcher extends Events {
   }
 
   setSegment = (segment) => {
-    if ((segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) && this.dataDirection === 'all') {
+    if (
+      (segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) &&
+      this.dataDirection === 'all'
+    ) {
       this.dataDirection = 'arrivals' // TM-206: should cause an error message when changed
-    } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2')) {
+    } else if (
+      segment.startsWith('2021-sa2') ||
+      segment.startsWith('2016-sa2')
+    ) {
       if ((this.currentRegion[0] || '').startsWith('DZN')) {
         this.currentRegion = []
       }
