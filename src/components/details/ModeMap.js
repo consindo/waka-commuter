@@ -5,11 +5,13 @@ const source = getSource()
 const modeList = [
   { id: 'mode-1', icon: '🚆', name: 'Train' },
   { id: 'mode-2', icon: '🚍', name: 'Bus' },
+  { id: 'mode-18', icon: '🚍', name: 'School bus' },
   { id: 'mode-3', icon: '⛴️', name: 'Ferry' },
   { id: 'mode-4', icon: '🚈', name: 'Tram/light rail' },
   { id: 'mode-5', icon: '🚖', name: 'Taxi/ride-share service' },
   { id: 'mode-6', icon: '🚘', name: 'Car, as driver' },
   { id: 'mode-7', icon: '🚘', name: 'Car, as passenger' },
+  { id: 'mode-17', icon: '🚘', name: 'Drive a company car, truck or van' },
   { id: 'mode-8', icon: '🚛', name: 'Truck' },
   { id: 'mode-9', icon: '🏍️', name: 'Motorbike/scooter' },
   { id: 'mode-10', icon: '🚲', name: 'Bicycle' },
@@ -23,10 +25,12 @@ const modeList = [
 
 export let modes = modeList
 if (source.brandingClass === 'statsnz') {
-  modes[5].name = 'Car, truck, or van, as driver'
-  modes[6].name = 'Car, truck, van, or company bus as passenger'
-  modes[11].name = 'Walk or jog'
-  modes[12].name = 'Worked/studied at home'
+  modes[1].name = 'Public bus'
+  modes[6].name = 'Drive a private car, truck or van'
+  modes[7].name = 'Passenger in a car, truck, van, or company bus'
+  modes[12].name = 'Other'
+  modes[13].name = 'Walk or jog'
+  modes[14].name = 'Work/study at home'
   modes = modes.filter(i => [
     'mode-1',
     'mode-2',
@@ -37,6 +41,10 @@ if (source.brandingClass === 'statsnz') {
     'mode-11',
     'mode-12',
     'mode-13',
+    'mode-17',
+    'mode-18',
   ].includes(i.id))
+} else {
+  modes = modes.filter(i => i.id !== 'mode-17' && i.id !== 'mode-18')
 }
 

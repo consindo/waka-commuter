@@ -19,8 +19,6 @@
   let position = $state([0, 0])
   let opacity = $state(0)
 
-  $inspect(opacity)
-
   // takes 30 hottest results
   const graphData = data
     .sort((a, b) => {

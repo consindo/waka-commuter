@@ -119,10 +119,33 @@
                     } else if (segment.startsWith('2016-sa2')) {
                       departureModes = dataSource['2016-sa2']?.departureModes
                       arrivalModes = dataSource['2016-sa2']?.arrivalModes
+                    } else if (segment.startsWith('2023-education')) {
+                      departureModes =
+                        dataSource['2023-education']?.departureModes
+                      arrivalModes = dataSource['2023-education']?.arrivalModes
+                    } else if (segment.startsWith('2023-workplace')) {
+                      departureModes =
+                        dataSource['2023-workplace']?.departureModes
+                      arrivalModes = dataSource['2023-workplace']?.arrivalModes
+                    } else if (segment.startsWith('2023-all')) {
+                      departureModes = dataSource['2023-all']?.departureModes
+                      arrivalModes = dataSource['2023-all']?.arrivalModes
+                    } else if (segment.startsWith('2018-education')) {
+                      departureModes =
+                        dataSource['2018-education']?.departureModes
+                      arrivalModes = dataSource['2018-education']?.arrivalModes
+                    } else if (segment.startsWith('2018-workplace')) {
+                      departureModes =
+                        dataSource['2018-workplace']?.departureModes
+                      arrivalModes = dataSource['2018-workplace']?.arrivalModes
+                    } else if (segment.startsWith('2018-all')) {
+                      departureModes = dataSource['2018-all']?.departureModes
+                      arrivalModes = dataSource['2018-all']?.arrivalModes
                     }
                     const name = modes.find(
                       (i) => i.id === `mode-${key.split('mode-')[1]}`
                     ).name
+                    console.log(name)
                     if (departureModes) {
                       data.departureModes = {
                         [name]: departureModes[name],
@@ -299,7 +322,13 @@
             tooltipData.mode = ['study']
           }
 
-          if (segment.endsWith('-all')) {
+          if (segment.includes('-education-mode-')) {
+            populationLabel = 'Filtered Students:'
+          } else if (segment.includes('-workplace-mode-')) {
+            populationLabel = 'Filtered Workers:'
+          } else if (segment.includes('-all-mode-')) {
+            populationLabel = 'Filtered Population:'
+          } else if (segment.endsWith('-all')) {
             populationLabel = 'Resident Workers & Students:'
           } else if (segment.endsWith('-workplace')) {
             populationLabel = 'Resident Workers:'
@@ -378,6 +407,7 @@
           ) {
             pop = arriveModeData.Total.Total.toLocaleString()
           }
+          console.log(departureModeData)
           if (source.isModeGraphsEnabled) {
             populationCount = pop
           }

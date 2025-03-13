@@ -69,6 +69,7 @@ combineFile('2018-education-mode-10-area-to-area.json', '2018-education-mode-10'
 combineFile('2018-education-mode-11-area-to-area.json', '2018-education-mode-11')
 combineFile('2018-education-mode-12-area-to-area.json', '2018-education-mode-12')
 combineFile('2018-education-mode-13-area-to-area.json', '2018-education-mode-13')
+combineFile('2018-education-mode-18-area-to-area.json', '2018-education-mode-18')
 
 // 2018 workplace
 combineFile('2018-workplace-area-to-area.json', '2018-workplace')
@@ -81,6 +82,7 @@ combineFile('2018-workplace-mode-10-area-to-area.json', '2018-workplace-mode-10'
 combineFile('2018-workplace-mode-11-area-to-area.json', '2018-workplace-mode-11')
 combineFile('2018-workplace-mode-12-area-to-area.json', '2018-workplace-mode-12')
 combineFile('2018-workplace-mode-13-area-to-area.json', '2018-workplace-mode-13')
+combineFile('2018-workplace-mode-17-area-to-area.json', '2018-workplace-mode-17')
 
 // 2018 all - education
 combineFile('2018-education-area-to-area.json', '2018-all')
@@ -93,6 +95,7 @@ combineFile('2018-education-mode-10-area-to-area.json', '2018-all-mode-10')
 combineFile('2018-education-mode-11-area-to-area.json', '2018-all-mode-11')
 combineFile('2018-education-mode-12-area-to-area.json', '2018-all-mode-12')
 combineFile('2018-education-mode-13-area-to-area.json', '2018-all-mode-13')
+combineFile('2018-education-mode-18-area-to-area.json', '2018-all-mode-18')
 
 // 2018 all - workplace
 combineFile('2018-workplace-area-to-area.json', '2018-all')
@@ -105,6 +108,7 @@ combineFile('2018-workplace-mode-10-area-to-area.json', '2018-all-mode-10')
 combineFile('2018-workplace-mode-11-area-to-area.json', '2018-all-mode-11')
 combineFile('2018-workplace-mode-12-area-to-area.json', '2018-all-mode-12')
 combineFile('2018-workplace-mode-13-area-to-area.json', '2018-all-mode-13')
+combineFile('2018-workplace-mode-17-area-to-area.json', '2018-all-mode-17')
 
 // 2018 commute
 combineFile('2018-education-commute.json', '2018-education')
@@ -122,6 +126,7 @@ combineFile('2023-education-mode-10-area-to-area.json', '2023-education-mode-10'
 combineFile('2023-education-mode-11-area-to-area.json', '2023-education-mode-11')
 combineFile('2023-education-mode-12-area-to-area.json', '2023-education-mode-12')
 combineFile('2023-education-mode-13-area-to-area.json', '2023-education-mode-13')
+combineFile('2023-education-mode-18-area-to-area.json', '2023-education-mode-18')
 
 // 2023 workplace
 combineFile('2023-workplace-area-to-area.json', '2023-workplace')
@@ -134,6 +139,7 @@ combineFile('2023-workplace-mode-10-area-to-area.json', '2023-workplace-mode-10'
 combineFile('2023-workplace-mode-11-area-to-area.json', '2023-workplace-mode-11')
 combineFile('2023-workplace-mode-12-area-to-area.json', '2023-workplace-mode-12')
 combineFile('2023-workplace-mode-13-area-to-area.json', '2023-workplace-mode-13')
+combineFile('2023-workplace-mode-17-area-to-area.json', '2023-workplace-mode-17')
 
 // 2023 all - education
 combineFile('2023-education-area-to-area.json', '2023-all')
@@ -146,6 +152,7 @@ combineFile('2023-education-mode-10-area-to-area.json', '2023-all-mode-10')
 combineFile('2023-education-mode-11-area-to-area.json', '2023-all-mode-11')
 combineFile('2023-education-mode-12-area-to-area.json', '2023-all-mode-12')
 combineFile('2023-education-mode-13-area-to-area.json', '2023-all-mode-13')
+combineFile('2023-education-mode-18-area-to-area.json', '2023-all-mode-18')
 
 // 2023 all - workplace
 combineFile('2023-workplace-area-to-area.json', '2023-all')
@@ -158,6 +165,7 @@ combineFile('2023-workplace-mode-10-area-to-area.json', '2023-all-mode-10')
 combineFile('2023-workplace-mode-11-area-to-area.json', '2023-all-mode-11')
 combineFile('2023-workplace-mode-12-area-to-area.json', '2023-all-mode-12')
 combineFile('2023-workplace-mode-13-area-to-area.json', '2023-all-mode-13')
+combineFile('2023-workplace-mode-17-area-to-area.json', '2023-all-mode-17')
 
 // 2023 commute
 combineFile('2023-education-commute.json', '2023-education')

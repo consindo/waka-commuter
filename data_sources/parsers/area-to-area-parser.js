@@ -30,8 +30,13 @@ const filenames = [
   },
   {
     input: 'workplace-area-to-area.csv',
+    output: '2018-workplace-mode-17-area-to-area.json',
+    field: '2018_Drive_a_company_car_truck_or_van',
+  },
+  {
+    input: 'workplace-area-to-area.csv',
     output: '2018-workplace-mode-6-area-to-area.json',
-    field: '2018_Drive_a_private_car_truck_or_van&2018_Drive_a_company_car_truck_or_van',
+    field: '2018_Drive_a_private_car_truck_or_van',
   },
   {
     input: 'workplace-area-to-area.csv',
@@ -71,7 +76,12 @@ const filenames = [
   {
     input: 'education-area-to-area.csv',
     output: '2018-education-mode-2-area-to-area.json',
-    field: '2018_School_bus&2018_Public_bus',
+    field: '2018_Public_bus',
+  },
+  {
+    input: 'education-area-to-area.csv',
+    output: '2018-education-mode-18-area-to-area.json',
+    field: '2018_School_bus',
   },
   {
     input: 'education-area-to-area.csv',
@@ -130,8 +140,13 @@ const filenames = [
   },
   {
     input: 'workplace-area-to-area.csv',
+    output: '2023-workplace-mode-17-area-to-area.json',
+    field: '2023_Drive_a_company_car_truck_or_van',
+  },
+  {
+    input: 'workplace-area-to-area.csv',
     output: '2023-workplace-mode-6-area-to-area.json',
-    field: '2023_Drive_a_private_car_truck_or_van&2023_Drive_a_company_car_truck_or_van',
+    field: '2023_Drive_a_private_car_truck_or_van',
   },
   {
     input: 'workplace-area-to-area.csv',
@@ -171,7 +186,12 @@ const filenames = [
   {
     input: 'education-area-to-area.csv',
     output: '2023-education-mode-2-area-to-area.json',
-    field: '2023_School_bus&2023_Public_bus',
+    field: '2023_Public_bus',
+  },
+  {
+    input: 'education-area-to-area.csv',
+    output: '2023-education-mode-18-area-to-area.json',
+    field: '2023_School_bus',
   },
   {
     input: 'education-area-to-area.csv',
@@ -222,21 +242,8 @@ const parse = (inputFilename, outputFilename, field) => {
         data['SA22023_V1_00_NAME_workplace_address'] ||
         data['SA22023_V1_00_NAME_educational_institution_address']
       ).trim()
-      // just handle 2
-      let total = 0
-      if (field.includes('&')) {
-        const [field1, field2] = field.split('&')
-        const total1 = parseInt(data[field1], 10) 
-        const total2 = parseInt(data[field2], 10) 
-        if (total1 > 0) total += total1
-        if (total2 > 0) total += total2
-
-        // if both are -999
-        if (total1 < 0 && total2 < 0) return
-      } else {
-        total = parseInt(data[field], 10)
-        if (total < 0) return
-      }
+      const total = parseInt(data[field], 10)
+      if (total < 0) return
 
       if (results[homeAddress] === undefined) {
         results[homeAddress] = {

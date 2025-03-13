@@ -58,6 +58,8 @@
       'mode-11',
       'mode-12',
       'mode-13',
+      'mode-17',
+      'mode-18',
     ]
   }
 </script>
@@ -88,6 +90,9 @@
       </li>
     {/each}
   </ul>
+  <p>
+    Please note that filtering by mode is less accurate due to confidentiality.
+  </p>
 </div>
 
 <style>
@@ -149,5 +154,12 @@
   }
   button.active {
     color: var(--surface-text-interactive);
+  }
+  p {
+    max-width: 300px;
+    padding: 0.5rem 0.25rem;
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--surface-text-subtle);
   }
 </style>
