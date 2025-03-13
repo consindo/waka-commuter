@@ -1,4 +1,8 @@
-export const modes = [
+import { getSource } from "../../sources"
+
+const source = getSource()
+
+const modeList = [
   { id: 'mode-1', icon: '🚆', name: 'Train' },
   { id: 'mode-2', icon: '🚍', name: 'Bus' },
   { id: 'mode-3', icon: '⛴️', name: 'Ferry' },
@@ -16,3 +20,22 @@ export const modes = [
   { id: 'mode-15', icon: '❓', name: 'Not stated' },
   { id: 'mode-16', icon: '🚫', name: 'Not applicable' },
 ]
+
+export let modes = modeList
+if (source.brandingClass === 'statsnz') {
+  modes[5].name = 'Car, truck, or van, as driver'
+  modes[6].name = 'Car, truck, van, or company bus as passenger'
+  modes[11].name = 'Walk or jog'
+  modes = modes.filter(i => [
+    'mode-1',
+    'mode-2',
+    'mode-3',
+    'mode-6',
+    'mode-7',
+    'mode-10',
+    'mode-11',
+    'mode-12',
+    'mode-13',
+  ].includes(i.id))
+}
+

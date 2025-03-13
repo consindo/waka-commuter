@@ -1,8 +1,11 @@
 <script>
   import { run } from 'svelte/legacy'
+  import { getSource } from '../../sources.js'
 
   import filterIcon from '../../../static/icons/filter.svg'
   import { modes } from './ModeMap'
+
+  const source = getSource()
 
   let { selection = $bindable([]) } = $props()
   let internalSelection = $state(modes.map((i) => i.id))
@@ -27,22 +30,36 @@
   }
 
   // TM-206: don't want modes 15 & 16 to show by default
-  internalSelection = [
-    'mode-1',
-    'mode-2',
-    'mode-3',
-    'mode-4',
-    'mode-5',
-    'mode-6',
-    'mode-7',
-    'mode-8',
-    'mode-9',
-    'mode-10',
-    'mode-11',
-    'mode-12',
-    'mode-13',
-    'mode-14',
-  ]
+  if (source.brandingClass === 'ason') {
+    internalSelection = [
+      'mode-1',
+      'mode-2',
+      'mode-3',
+      'mode-4',
+      'mode-5',
+      'mode-6',
+      'mode-7',
+      'mode-8',
+      'mode-9',
+      'mode-10',
+      'mode-11',
+      'mode-12',
+      'mode-13',
+      'mode-14',
+    ]
+  } else if (source.brandingClass === 'statsnz') {
+    internalSelection = [
+      'mode-1',
+      'mode-2',
+      'mode-3',
+      'mode-6',
+      'mode-7',
+      'mode-10',
+      'mode-11',
+      'mode-12',
+      'mode-13',
+    ]
+  }
 </script>
 
 <button onclick={toggleFilter} title="Filter Mode" class:active={overlayVisible}
@@ -76,14 +93,15 @@
 <style>
   .overlay {
     position: absolute;
-    background: #222;
-    color: #fff;
+    background: var(--surface-bg-subtle);
+    color: var(--surface-text);
     right: 1.25rem;
+    margin-top: 0.25rem;
     padding: 0.5rem 0.25rem;
     border-radius: 5px;
     display: none;
     text-align: left;
-    box-shadow: 0 1px 3px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     border: var(--border);
   }
   .visible {
@@ -105,24 +123,31 @@
     padding-right: 1rem;
   }
   label:hover {
-    background: #111;
+    background: var(--surface-bg);
+    color: var(--surface-text-interactive);
   }
   button {
     margin-bottom: 0;
     vertical-align: top;
     border-radius: 3px;
+    margin-top: 2px;
     padding: 0.25rem 0.25rem 0.25rem 0.5rem;
     line-height: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
   button:hover {
-    color: #fff;
+    color: var(--surface-text-interactive);
   }
   button img {
     vertical-align: top;
     width: 18px;
     height: 18px;
+    filter: invert(100%);
+  }
+  :global(.dark) button img {
+    filter: none;
   }
   button.active {
-    background: #000;
+    color: var(--surface-text-interactive);
   }
 </style>
