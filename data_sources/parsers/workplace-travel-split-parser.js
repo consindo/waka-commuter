@@ -65,7 +65,7 @@ const parse = (inputFilename, outputFilename) => {
 
       // again, better grouping
       if (key === 'Study at home') {
-        key = 'Work at home'
+        key = 'Work/study at home'
       }
 
       const value = parseInt(data['OBS_VALUE'], 10) || 0

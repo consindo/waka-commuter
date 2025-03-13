@@ -173,7 +173,7 @@
           </li>
         {/each}
       </ul>
-      {#if source.brandingClass === 'ason'}
+      {#if source.brandingClass === 'ason' || source.brandingClass === 'statsnz'}
         <div class="mode-wrapper" class:hidden={isControlsHidden}>
           <ModeToggle bind:selection />
         </div>

@@ -30,9 +30,8 @@ export const humanRegionName = (nameArray, mode) => {
       .slice(0, -1)
       .join(', ')}, and ${nameArray.slice(-1)}`
   } else if (mode === 'title') {
-    return `${nameArray[0]} & ${nameArray.length - 1} other ${
-      isZone ? 'zones' : 'areas'
-    }`
+    return `${nameArray[0]} & ${nameArray.length - 1} other ${isZone ? 'zones' : 'areas'
+      }`
   }
   // should never get here
   return nameArray.join(', ')
