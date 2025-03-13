@@ -26,6 +26,7 @@ if (source.brandingClass === 'statsnz') {
   modes[5].name = 'Car, truck, or van, as driver'
   modes[6].name = 'Car, truck, van, or company bus as passenger'
   modes[11].name = 'Walk or jog'
+  modes[12].name = 'Worked/studied at home'
   modes = modes.filter(i => [
     'mode-1',
     'mode-2',
