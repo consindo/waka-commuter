@@ -42,9 +42,9 @@ export const getVars = ({
   topRegionPercentage = Math.round(topRegionPercentage * 100)
 
   let destination = ['work', 'school']
-  if (segment === 'workplace') {
+  if (segment.includes('workplace')) {
     destination = ['work']
-  } else if (segment === 'education') {
+  } else if (segment.includes('education')) {
     destination = ['school']
   }
 

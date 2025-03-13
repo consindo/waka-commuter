@@ -40,22 +40,27 @@
     of arrivals)</strong
   >
   {vars.travellersCount > 0 ? 'also' : ''} live {vars.destination.length > 0
-    ? `& ${vars.destination.join('/')}`
-    : ''} within {vars.placeReduced}. People arrive from
-  <strong class={mode}
-    >{vars.regionCount} different
-    {vars.regionCount === 1 ? 'area' : 'areas'}</strong
-  >, the largest external {mode === 'arrivals' ? 'origin' : 'destination'} being
-  <strong
-    >{humanRegionName([vars.topRegion], 'full')} ({vars.topRegionCount} people—{vars.topRegionPercentage}%
-    of {mode})</strong
-  >.
-  {#if mode === 'arrivals'}
-    The most common way to arrive is
-  {:else if mode === 'departures'}
-    People in {vars.placeReduced} most often depart by
+    ? `& ${vars.destination.join('/').replace('school', 'learn')}`
+    : ''} within {vars.placeReduced}.
+  {#if vars.regionCount > 0}
+    People arrive from
+    <strong class={mode}
+      >{vars.regionCount} different
+      {vars.regionCount === 1 ? 'area' : 'areas'}</strong
+    >, the largest external {mode === 'arrivals' ? 'origin' : 'destination'} being
+    <strong
+      >{humanRegionName([vars.topRegion], 'full')} ({vars.topRegionCount} people—{vars.topRegionPercentage}%
+      of {mode})</strong
+    >.
   {/if}
-  <strong>{humanMode(vars.popularMode)} ({vars.popularPercentage}%)</strong>.
+  {#if !isNaN(vars.popularPercentage) && vars.popularPercentage >= 0}
+    {#if mode === 'arrivals'}
+      The most common way to arrive is
+    {:else if mode === 'departures'}
+      People in {vars.placeReduced} most often depart by
+    {/if}
+    <strong>{humanMode(vars.popularMode)} ({vars.popularPercentage}%)</strong>.
+  {/if}
 </p>
 
 <style>
