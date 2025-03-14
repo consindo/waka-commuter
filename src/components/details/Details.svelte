@@ -89,6 +89,15 @@
 
           firstRegion = regionName[0]
 
+          const objectDelta = (target, object1, object2) => {
+            new Set([...Object.keys(object1), ...Object.keys(object2)]).forEach(
+              (i) => {
+                target[i] = (object1[i] || 0) - (object2[i] || 0)
+              }
+            )
+            return target
+          }
+
           getData(regionName).then((data) => {
             // depending on the toggle, filter out workspace or education data
             const dataSources = data
@@ -107,45 +116,42 @@
 
                     let departureModes = null
                     let arrivalModes = null
-                    if (segment.startsWith('2021-dzn')) {
-                      departureModes = dataSource['2021-dzn']?.departureModes
-                      arrivalModes = dataSource['2021-dzn']?.arrivalModes
-                    } else if (segment.startsWith('2021-sa2')) {
-                      departureModes = dataSource['2021-sa2']?.departureModes
-                      arrivalModes = dataSource['2021-sa2']?.arrivalModes
-                    } else if (segment.startsWith('2016-dzn')) {
-                      departureModes = dataSource['2016-dzn']?.departureModes
-                      arrivalModes = dataSource['2016-dzn']?.arrivalModes
-                    } else if (segment.startsWith('2016-sa2')) {
-                      departureModes = dataSource['2016-sa2']?.departureModes
-                      arrivalModes = dataSource['2016-sa2']?.arrivalModes
-                    } else if (segment.startsWith('2023-education')) {
-                      departureModes =
-                        dataSource['2023-education']?.departureModes
-                      arrivalModes = dataSource['2023-education']?.arrivalModes
-                    } else if (segment.startsWith('2023-workplace')) {
-                      departureModes =
-                        dataSource['2023-workplace']?.departureModes
-                      arrivalModes = dataSource['2023-workplace']?.arrivalModes
-                    } else if (segment.startsWith('2023-all')) {
-                      departureModes = dataSource['2023-all']?.departureModes
-                      arrivalModes = dataSource['2023-all']?.arrivalModes
-                    } else if (segment.startsWith('2018-education')) {
-                      departureModes =
-                        dataSource['2018-education']?.departureModes
-                      arrivalModes = dataSource['2018-education']?.arrivalModes
-                    } else if (segment.startsWith('2018-workplace')) {
-                      departureModes =
-                        dataSource['2018-workplace']?.departureModes
-                      arrivalModes = dataSource['2018-workplace']?.arrivalModes
-                    } else if (segment.startsWith('2018-all')) {
-                      departureModes = dataSource['2018-all']?.departureModes
-                      arrivalModes = dataSource['2018-all']?.arrivalModes
+
+                    const rootPortion = segment.split('-').slice(0, 2).join('-')
+                    if (rootPortion.includes('comparison')) {
+                      const segment1 =
+                        dataSource[rootPortion.replace('comparison', '2023')]
+                      const segment2 =
+                        dataSource[rootPortion.replace('comparison', '2018')]
+                      departureModes = objectDelta(
+                        {},
+                        segment1?.departureModes,
+                        segment2?.departureModes
+                      )
+                      arrivalModes = objectDelta(
+                        {},
+                        segment1?.arrivalModes,
+                        segment2?.arrivalModes
+                      )
+                      data.arriveFrom = objectDelta(
+                        {},
+                        segment1.arriveFrom,
+                        segment2.arriveFrom
+                      )
+                      data.departTo = objectDelta(
+                        {},
+                        segment1.departTo,
+                        segment2.departTo
+                      )
+                    } else {
+                      departureModes = dataSource[rootPortion]?.departureModes
+                      arrivalModes = dataSource[rootPortion]?.arrivalModes
                     }
+
                     const name = modes.find(
                       (i) => i.id === `mode-${key.split('mode-')[1]}`
                     ).name
-                    console.log(name)
+
                     if (departureModes) {
                       data.departureModes = {
                         [name]: departureModes[name],
@@ -172,6 +178,18 @@
                       return acc
                     }, {}),
                   ]
+                } else if (segment.includes('comparison')) {
+                  const segment1 =
+                    dataSource[segment.replace('comparison', '2023')]
+                  const segment2 =
+                    dataSource[segment.replace('comparison', '2018')]
+
+                  const delta = {}
+                  Object.keys(segment1).forEach((i) => {
+                    delta[i] = delta[i] || {}
+                    objectDelta(delta[i], segment1[i], segment2[i])
+                  })
+                  return delta
                 } else if (dataSource[segment] != null) {
                   return [dataSource[segment]]
                 } else {
@@ -346,6 +364,9 @@
               populationLabel = 'Resident 15+ Population:'
             }
           }
+          if (segment.includes('comparison')) {
+            populationLabel = 'Change in ' + populationLabel
+          }
 
           if (
             (segment.startsWith('2021-dzn') ||
@@ -407,7 +428,6 @@
           ) {
             pop = arriveModeData.Total.Total.toLocaleString()
           }
-          console.log(departureModeData)
           if (source.isModeGraphsEnabled) {
             populationCount = pop
           }
