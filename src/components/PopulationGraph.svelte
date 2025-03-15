@@ -1,10 +1,23 @@
 <script>
   import { onMount } from 'svelte'
+  import {
+    select,
+    scaleBand,
+    interpolateHcl,
+    axisBottom,
+    axisLeft,
+    scaleLinear,
+  } from 'd3'
+
   import Dispatcher from '../dispatcher.js'
+  import MapTooltip from './map/MapTooltip.svelte'
 
-  export let data, mode, tooltipData
+  let { data, mode, tooltipData } = $props()
 
-  let needFrame = true
+  let id = $state(null)
+  let loading = $state(false)
+  let position = $state([0, 0])
+  let opacity = $state(0)
 
   // takes 30 hottest results
   const graphData = data
@@ -14,12 +27,13 @@
     })
     .slice(0, 30)
 
-  let el
+  let el = $state()
   onMount(() => {
     const tooltipclick = (d) => {
+      console.log(d)
       if (
-        d3.event.ctrlKey ||
-        d3.event.metaKey ||
+        // d3.event.ctrlKey ||
+        // d3.event.metaKey ||
         Dispatcher.currentRegion.includes(d.originalKey)
       ) {
         Dispatcher.addRegion(d.originalKey)
@@ -28,29 +42,19 @@
       }
 
       // element will be disposed when the next page loads
-      mapTooltip.setAttribute('loading', true)
+      loading = true
     }
     const tooltipover = () => {
-      d3.select(this).style('opacity', 0.8)
-      mapTooltip.setAttribute('opacity', 1)
+      select(this).style('opacity', 0.8)
+      opacity = 1
     }
     const tooltipleave = () => {
-      d3.select(this).style('opacity', 1)
-      mapTooltip.setAttribute('opacity', 0)
+      select(this).style('opacity', 1)
+      opacity = 0
     }
     const tooltipmove = (d) => {
-      if (needFrame) {
-        needFrame = false
-        const x = d3.event.pageX
-        const y = d3.event.pageY
-        const id = d.key
-        requestAnimationFrame(() => {
-          needFrame = true
-          mapTooltip.setAttribute('id', id)
-          mapTooltip.setAttribute('x', x)
-          mapTooltip.setAttribute('y', y)
-        })
-      }
+      id = d.currentTarget.dataset.key
+      position = [d.clientX, d.clientY]
     }
 
     if (graphData.length === 0) return
@@ -58,26 +62,24 @@
       width = 580 - margin.left - margin.right,
       height = 14 * graphData.length + margin.top + margin.bottom
 
-    const svg = d3
-      .select(el)
+    const svg = select(el)
       .append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-    const x = d3.scaleLinear().domain([0, graphData[0].value]).range([0, width])
+    const x = scaleLinear().domain([0, graphData[0].value]).range([0, width])
 
     // Y axis
-    const y = d3
-      .scaleBand()
+    const y = scaleBand()
       .range([0, height])
       .domain(graphData.map((d) => d.key))
       .paddingInner(0.1)
 
     svg
       .append('g')
-      .call(d3.axisLeft(y).tickSize(0))
+      .call(axisLeft(y).tickSize(0))
       .selectAll('text')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
       .style('font-size', '0.6875rem')
@@ -86,19 +88,18 @@
       .append('g')
       .attr('class', 'grid')
       .attr('transform', 'translate(0,' + height + ')')
-      .style('color', '#555')
-      .call(d3.axisBottom(x).ticks(5).tickSize(-height).tickFormat(''))
+      .style('color', 'var(--surface-gridlines)')
+      .call(axisBottom(x).ticks(5).tickSize(-height).tickFormat(''))
 
     svg
       .append('g')
       .attr('transform', 'translate(0,' + height + ')')
-      .call(d3.axisBottom(x).ticks(5, 's'))
+      .call(axisBottom(x).ticks(5, 's'))
       .selectAll('text')
       .style('font-size', '0.6875rem')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
 
-    const color = d3
-      .scaleLinear()
+    const color = scaleLinear()
       .domain([
         0,
         graphData[0].value / 25,
@@ -111,7 +112,7 @@
           ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4888']
           : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#660000']
       )
-      .interpolate(d3.interpolateHcl)
+      .interpolate(interpolateHcl)
 
     //Bars
     svg
@@ -124,18 +125,11 @@
       .attr('width', (d) => x(d.value))
       .attr('height', y.bandwidth())
       .attr('fill', (d) => color(d.value))
+      .attr('data-key', (d) => d.key)
       .on('click', tooltipclick)
       .on('mouseover', tooltipover)
       .on('mouseleave', tooltipleave)
       .on('mousemove', tooltipmove)
-
-    const mapTooltip = document.createElement('map-tooltip')
-    mapTooltip.setAttribute('data', tooltipData)
-    mapTooltip.setAttribute('locationContext', 'single')
-    mapTooltip.setAttribute('percentage', 'true')
-    mapTooltip.setAttribute('showOnly', mode)
-    mapTooltip.setAttribute('opacity', 0)
-    el.appendChild(mapTooltip)
   })
 </script>
 
@@ -143,6 +137,18 @@
   <h3>Top {mode}</h3>
 {/if}
 <div bind:this={el}></div>
+{#if tooltipData && id}
+  <MapTooltip
+    data={tooltipData}
+    locationContext="single"
+    percentage
+    {id}
+    {position}
+    showOnly={mode}
+    {loading}
+    {opacity}
+  />
+{/if}
 
 <style>
   h3 {

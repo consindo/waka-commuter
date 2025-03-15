@@ -6,7 +6,7 @@
 
 <style>
   a {
-    color: #90caf9;
+    color: var(--surface-text-interactive);
     text-decoration: none;
   }
 
@@ -16,7 +16,7 @@
 
   footer {
     padding: 1rem var(--sidebar-padding) 3rem;
-    color: #999;
+    color: var(--surface-text-subtle);
     font-size: 0.9rem;
   }
   footer a {

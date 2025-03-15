@@ -1,6 +1,9 @@
-import './components/map-tooltip.js'
+import { mount } from 'svelte'
 import App from './App.svelte'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
-const app = new App({
+const app = mount(App, {
   target: document.getElementById('svelte-app'),
 })
+
+export default app

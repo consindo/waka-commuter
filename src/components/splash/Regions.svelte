@@ -1,11 +1,8 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
-
-  export let enabledRegions
+  let { enabledRegions, setLocation } = $props()
 
   const getImageUrl = (name) =>
-    new URL(`/static/css/regions/${name}.jpg`, import.meta.url).href
+    new URL(`/static/css/regions/${name}.avif`, import.meta.url).href
 
   const regions = [
     {
@@ -14,7 +11,7 @@
       secondaryName: 'Auckland',
       lat: '-36.9',
       lng: '174.7',
-      zoom: '10.5',
+      zoom: '10',
     },
     {
       id: 'nz-chc',
@@ -28,16 +25,8 @@
       id: 'nz-wlg',
       primaryName: 'Te Whanganui-a-Tara',
       secondaryName: 'Wellington',
-      lat: '-41.2',
-      lng: '174.8',
-      zoom: '10.5',
-    },
-    {
-      id: 'nz-trg',
-      primaryName: 'Tauranga',
-      secondaryName: '',
-      lat: '-37.7',
-      lng: '176.2',
+      lat: '-41.3',
+      lng: '174.75',
       zoom: '11',
     },
     {
@@ -49,11 +38,35 @@
       zoom: '11.5',
     },
     {
+      id: 'nz-trg',
+      primaryName: 'Tauranga',
+      secondaryName: '',
+      lat: '-37.7',
+      lng: '176.2',
+      zoom: '11',
+    },
+    {
+      id: 'nz-hutt',
+      primaryName: 'Te Awa Kairangi ki Tai',
+      secondaryName: 'Lower Hutt',
+      lat: '-41.2',
+      lng: '174.9',
+      zoom: '11',
+    },
+    {
       id: 'nz-dud',
       primaryName: 'Ōtepoti',
       secondaryName: 'Dunedin',
       lat: '-45.9',
       lng: '170.5',
+      zoom: '11',
+    },
+    {
+      id: 'nz-pmr',
+      primaryName: 'Te Papa-i-Oea',
+      secondaryName: 'Palmerston North',
+      lat: '-40.35',
+      lng: '175.6',
       zoom: '11',
     },
     {
@@ -133,37 +146,45 @@
 
 <nav>
   {#each regions as region}
-    <div
-      class="region-option"
-      data-lat={region.lat}
-      data-lng={region.lng}
-      data-zoom={region.zoom}
-      on:click={() =>
-        dispatch('locationChange', {
+    <button
+      style="background-image: url({getImageUrl(region.id)})"
+      onclick={() =>
+        setLocation({
           lat: region.lat,
           lng: region.lng,
           zoom: region.zoom,
         })}
     >
-      <h3 style="background-image: url({getImageUrl(region.id)})">
+      <h3>
         <strong>{region.primaryName}</strong>
         <span>{region.secondaryName}</span>
       </h3>
-    </div>
+    </button>
   {/each}
 </nav>
 
 <style>
   nav {
     font-size: 0;
-    padding: 0.75rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 280px 280px 280px;
+    gap: 0.75rem;
+    border: 0;
+
+    @media (max-width: 1650px) {
+      grid-template-columns: 280px 280px;
+    }
   }
-  div {
-    width: 33.33%;
-    display: inline-block;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    vertical-align: top;
+  button {
+    padding: 0;
+    background-color: #222;
+    background-size: cover;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    transition: 100ms ease transform;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   }
   h3 {
     height: 140px;
@@ -172,25 +193,21 @@
     line-height: 1;
     font-size: 0.9rem;
     text-align: center;
-    background-color: #222;
-    border-radius: 5px;
     font-weight: 300;
     margin: 0;
-    transition: 100ms ease transform;
     user-select: none;
     display: flex;
     flex-direction: column;
     align-content: flex-end;
     justify-content: flex-end;
-    background-size: cover;
     text-shadow:
       0 1px 1px #000,
       0 0px 3px #000;
   }
-  h3:hover {
+  button:hover {
     transform: scale(1.02);
   }
-  h3:active {
+  button:active {
     transform: scale(1);
   }
   strong {
@@ -200,11 +217,6 @@
   }
   span {
     display: block;
-  }
-  @media (max-width: 1650px) {
-    div {
-      width: 50%;
-    }
   }
   @media (max-width: 500px) {
     h3 {

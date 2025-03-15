@@ -6,19 +6,17 @@ const source = getSource()
 
 const datasets = {}
 
-export const bindMapEvents = (map, dataset1, dataset2) => {
+export const bindMapEvents = (map, dataset1, dataset2, tooltipCallback) => {
   datasets.dataset1 = dataset1
   datasets.dataset2 = dataset2
 
-  bindMapboxEvents(map)
-  bindDispatcherEvents(map)
+  bindMapboxEvents(map, tooltipCallback)
+  bindDispatcherEvents(map, tooltipCallback)
 }
 
-const bindMapboxEvents = (map) => {
-  const mapTooltip = document.querySelector('#map map-tooltip')
+const bindMapboxEvents = (map, tooltipCallback) => {
   let activeBlock = null
   let activeDznBlock = null
-  let needFrame = true
   let isTouch = false
   map.on('touchstart', 'sa2-fill', () => (isTouch = true))
   map.on('mousemove', 'sa2-fill', (e) => {
@@ -44,32 +42,22 @@ const bindMapboxEvents = (map) => {
           hover: true,
         }
       )
-
-      mapTooltip.setAttribute('id', meshblock.id)
-      mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
-      if (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn')) {
-        mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
-      } else {
-        mapTooltip.removeAttribute('showOnly')
-      }
-      if (meshblock.properties.populationCount != null) {
-        mapTooltip.setAttribute(
-          'populationCount',
-          meshblock.properties.populationCount
-        )
-      }
-      mapTooltip.setAttribute('opacity', 1)
-    }
-
-    if (needFrame) {
-      needFrame = false
-      const { pageX, pageY } = e.originalEvent
-      requestAnimationFrame(() => {
-        needFrame = true
-        mapTooltip.setAttribute('x', pageX)
-        mapTooltip.setAttribute('y', pageY)
+      tooltipCallback({
+        id: meshblock.id,
+        friendlyName: meshblock.properties.friendlyName,
+        showOnly:
+          Dispatcher.dataSegment.startsWith('2021-dzn') ||
+          Dispatcher.dataSegment.startsWith('2016-dzn')
+            ? Dispatcher.dataDirection
+            : null,
+        populationCount: meshblock.properties.populationCount,
+        opacity: 1,
       })
     }
+    const { pageX, pageY } = e.originalEvent
+    tooltipCallback({
+      position: [pageX, pageY],
+    })
   })
 
   map.on('mousemove', 'dzn-fill', (e) => {
@@ -96,41 +84,32 @@ const bindMapboxEvents = (map) => {
         }
       )
 
-      if (Dispatcher.dataDirection === 'arrivals' && (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn'))) return
-
-      mapTooltip.setAttribute('id', meshblock.id)
-      mapTooltip.setAttribute('friendlyName', meshblock.properties.friendlyName)
-      mapTooltip.setAttribute('showOnly', Dispatcher.dataDirection)
-      if (meshblock.properties.populationCount != null) {
-        mapTooltip.setAttribute(
-          'populationCount',
-          meshblock.properties.populationCount
-        )
-      }
-      mapTooltip.setAttribute('opacity', 1)
-    }
-
-    if (needFrame) {
-      needFrame = false
-      const { pageX, pageY } = e.originalEvent
-      requestAnimationFrame(() => {
-        needFrame = true
-        mapTooltip.setAttribute('x', pageX)
-        mapTooltip.setAttribute('y', pageY)
+      if (
+        Dispatcher.dataDirection === 'arrivals' &&
+        (Dispatcher.dataSegment.startsWith('2021-dzn') ||
+          Dispatcher.dataSegment.startsWith('2016-dzn'))
+      )
+        return
+      tooltipCallback({
+        id: meshblock.id,
+        friendlyName: meshblock.properties.friendlyName,
+        showOnly: Dispatcher.dataDirection,
+        populationCount: meshblock.properties.populationCount,
+        opacity: 1,
       })
     }
+
+    const { pageX, pageY } = e.originalEvent
+    tooltipCallback({
+      position: [pageX, pageY],
+    })
   })
 
   map.on('drag', (e) => {
-    if (needFrame) {
-      needFrame = false
-      const { pageX, pageY } = e.originalEvent
-      requestAnimationFrame(() => {
-        needFrame = true
-        mapTooltip.setAttribute('x', pageX)
-        mapTooltip.setAttribute('y', pageY)
-      })
-    }
+    const { pageX, pageY } = e.originalEvent
+    tooltipCallback({
+      position: [pageX, pageY],
+    })
   })
 
   map.on('mouseleave', 'sa2-fill', (e) => {
@@ -145,7 +124,7 @@ const bindMapboxEvents = (map) => {
       }
     )
     activeBlock = null
-    mapTooltip.setAttribute('opacity', 0)
+    tooltipCallback({ opacity: 0 })
   })
 
   map.on('mouseleave', 'dzn-fill', (e) => {
@@ -160,17 +139,28 @@ const bindMapboxEvents = (map) => {
       }
     )
     activeDznBlock = null
-    mapTooltip.setAttribute('opacity', 0)
+    tooltipCallback({ opacity: 0 })
   })
 
   map.on('click', 'sa2-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection === 'arrivals' && (Dispatcher.dataSegment.startsWith('2021-dzn') || Dispatcher.dataSegment.startsWith('2016-dzn'))) return
+    if (source.brandingClass === 'ason') {
+      if (
+        Dispatcher.dataDirection === 'arrivals' &&
+        (Dispatcher.dataSegment.startsWith('2021-dzn') ||
+          Dispatcher.dataSegment.startsWith('2016-dzn'))
+      )
+        return
+    }
 
     const meshblock = e.features[0]
     if (meshblock != null) {
-      mapTooltip.setAttribute('loading', true)
-      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey || Dispatcher.currentRegion.includes(meshblock.id)) {
+      tooltipCallback({ loading: true })
+      if (
+        e.originalEvent.ctrlKey ||
+        e.originalEvent.metaKey ||
+        Dispatcher.currentRegion.includes(meshblock.id)
+      ) {
         Dispatcher.addRegion(meshblock.id)
       } else {
         Dispatcher.setRegions([meshblock.id])
@@ -180,12 +170,23 @@ const bindMapboxEvents = (map) => {
 
   map.on('click', 'dzn-fill', (e) => {
     // ason specific, we use the other event otherwise
-    if (Dispatcher.dataDirection !== 'arrivals' || (!Dispatcher.dataSegment.startsWith('2021-dzn') && !Dispatcher.dataSegment.startsWith('2016-dzn'))) return
+    if (source.brandingClass === 'ason') {
+      if (
+        Dispatcher.dataDirection !== 'arrivals' ||
+        (!Dispatcher.dataSegment.startsWith('2021-dzn') &&
+          !Dispatcher.dataSegment.startsWith('2016-dzn'))
+      )
+        return
+    }
 
     const meshblock = e.features[0]
     if (meshblock != null) {
-      mapTooltip.setAttribute('loading', true)
-      if (e.originalEvent.ctrlKey || e.originalEvent.metaKey || Dispatcher.currentRegion.includes(meshblock.id)) {
+      tooltipCallback({ loading: true })
+      if (
+        e.originalEvent.ctrlKey ||
+        e.originalEvent.metaKey ||
+        Dispatcher.currentRegion.includes(meshblock.id)
+      ) {
         Dispatcher.addRegion(meshblock.id)
       } else {
         Dispatcher.setRegions([meshblock.id])
@@ -214,13 +215,31 @@ const bindMapboxEvents = (map) => {
       const center = map.getCenter()
       dynamicFilter(source.dynamicShapeFiles, zoom, center, 'sa2', 'dataset1')
       if (source.dynamicSecondaryShapeFiles) {
-        dynamicFilter(source.dynamicSecondaryShapeFiles, zoom, center, 'dzn', 'dataset1')
+        dynamicFilter(
+          source.dynamicSecondaryShapeFiles,
+          zoom,
+          center,
+          'dzn',
+          'dataset1'
+        )
       }
       if (source.dataset2DynamicShapeFiles) {
-        dynamicFilter(source.dataset2DynamicShapeFiles, zoom, center, 'sa2', 'dataset2')
+        dynamicFilter(
+          source.dataset2DynamicShapeFiles,
+          zoom,
+          center,
+          'sa2',
+          'dataset2'
+        )
       }
       if (source.dataset2DynamicSecondaryShapeFiles) {
-        dynamicFilter(source.dataset2DynamicSecondaryShapeFiles, zoom, center, 'dzn', 'dataset2') 
+        dynamicFilter(
+          source.dataset2DynamicSecondaryShapeFiles,
+          zoom,
+          center,
+          'dzn',
+          'dataset2'
+        )
       }
     })
   }
@@ -249,20 +268,34 @@ const bindMapboxEvents = (map) => {
         return i
       }),
     }
-    if ((datasetName === 'dataset1' && !Dispatcher.dataSegment.startsWith('2016-sa2') || datasetName === 'dataset2' && Dispatcher.dataSegment.startsWith('2016-sa2')) && (!Dispatcher.dataSegment.startsWith('2021-tz') && !Dispatcher.dataSegment.startsWith('2016-tz'))) {
+    if (
+      ((datasetName === 'dataset1' &&
+        !Dispatcher.dataSegment.startsWith('2016-sa2')) ||
+        (datasetName === 'dataset2' &&
+          Dispatcher.dataSegment.startsWith('2016-sa2'))) &&
+      !Dispatcher.dataSegment.startsWith('2021-tz') &&
+      !Dispatcher.dataSegment.startsWith('2016-tz')
+    ) {
       map.getSource(mapSource).setData(augmentedData)
     }
     if (mapSource === 'sa2') {
-      datasets[datasetName] = Promise.all([Promise.resolve(augmentedData), dataset[1], dataset[2]])
+      datasets[datasetName] = Promise.all([
+        Promise.resolve(augmentedData),
+        dataset[1],
+        dataset[2],
+      ])
     } else if (mapSource === 'dzn') {
-      datasets[datasetName] = Promise.all([dataset[0], Promise.resolve(augmentedData), dataset[2]])
+      datasets[datasetName] = Promise.all([
+        dataset[0],
+        Promise.resolve(augmentedData),
+        dataset[2],
+      ])
     }
     console.info('dynamically loaded', url)
   }
 }
 
-const bindDispatcherEvents = (map) => {
-  const mapTooltip = document.querySelector('#map map-tooltip')
+const bindDispatcherEvents = (map, tooltipCallback) => {
   let selectedAreas = []
 
   const setMap = async (arriveData, departData, regionName, animate) => {
@@ -315,7 +348,12 @@ const bindDispatcherEvents = (map) => {
         const feature = data.features.find(
           (i) => i.properties.name === regionName[0]
         )
-        map.flyTo({ center: polylabel(feature.geometry.coordinates) })
+        const options = { center: polylabel(feature.geometry.coordinates) }
+        // will zoom the user in a bit if they are too far out
+        if (map.getZoom() < 10) {
+          options.zoom = 10
+        }
+        map.flyTo(options)
       })
     }
 
@@ -391,22 +429,28 @@ const bindDispatcherEvents = (map) => {
     document.querySelector('.map-legend').classList.add('hidden')
 
     setMap([], [], [])
-    mapTooltip.removeAttribute('loading')
-    mapTooltip.setAttribute(
-      'data',
-      JSON.stringify({
+    tooltipCallback({
+      loading: false,
+      data: {
         currentRegions: [],
         mode: [],
         arriveData: [],
         departData: [],
-      })
-    )
+      },
+    })
   })
 
   // map
   Dispatcher.bind(
     'update-blocks',
-    async ({ regionName, direction, arriveData, departData, segment, animate }) => {
+    async ({
+      regionName,
+      direction,
+      arriveData,
+      departData,
+      segment,
+      animate,
+    }) => {
       document.querySelector('.map-legend').classList.remove('hidden')
 
       const tooltipData = {
@@ -420,9 +464,10 @@ const bindDispatcherEvents = (map) => {
       } else if (segment === 'education') {
         tooltipData.mode = ['study']
       }
-      const tooltipJSON = JSON.stringify(tooltipData)
-      mapTooltip.setAttribute('data', tooltipJSON)
-      mapTooltip.removeAttribute('loading')
+      tooltipCallback({
+        loading: false,
+        data: tooltipData,
+      })
 
       // ASON SPECIFIC CODE
       if (segment.startsWith('2021-dzn') || segment.startsWith('2016-dzn')) {
@@ -433,7 +478,12 @@ const bindDispatcherEvents = (map) => {
         } else if (direction === 'arrivals') {
           map.moveLayer('sa2-fill', 'dzn-fill')
         }
-      } else if (segment.startsWith('2021-sa2') || segment.startsWith('2016-sa2') || segment.startsWith('2021-tz') || segment.startsWith('2016-tz')) {
+      } else if (
+        segment.startsWith('2021-sa2') ||
+        segment.startsWith('2016-sa2') ||
+        segment.startsWith('2021-tz') ||
+        segment.startsWith('2016-tz')
+      ) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'none')
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')
       }

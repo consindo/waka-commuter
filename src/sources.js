@@ -1,14 +1,32 @@
-import sa2 from '../static/shapes/sa2-optimized.json?url'
+import sa22023 from '../static/shapes/sa2-2023-optimized.json?url'
+import sa22023small from '../static/shapes/sa2-2023-small-optimized.json?url'
 
 const sources = {
   commuterview: {
-    shapeFile: sa2,
+    shapeFile: sa22023small,
+    dynamicShapeFiles: [
+      {
+        url: sa22023,
+        bbox: [
+          [161, -48],
+          [186, -32],
+        ],
+        zoom: 6,
+      },
+    ],
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
-    isAllSegmentEnabled: true,
     isMapAreaLabelsEnabled: false,
-    segments: ['workplace', 'education'],
+    segments: [
+      '2023-all',
+      '2023-workplace',
+      '2023-education',
+      '2018-all',
+      '2018-workplace',
+      '2018-education',
+    ],
     detailsControls: ['All', 'Workplace', 'Education'],
+    detailsSecondaryControls: ['2023', '2018'],
     brandingClass: 'statsnz',
   },
   ason: {
@@ -19,156 +37,239 @@ const sources = {
     dynamicShapeFiles: [
       {
         url: '/shapes/australia-sa2-2021-nsw.json',
-        bbox: [[141, -37.5], [154, -28]],
+        bbox: [
+          [141, -37.5],
+          [154, -28],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2021-vic.json',
-        bbox: [[141, -39], [151, -34]],
+        bbox: [
+          [141, -39],
+          [151, -34],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2021-qld.json',
-        bbox: [[138, -29], [153, -10]],
+        bbox: [
+          [138, -29],
+          [153, -10],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2021-wa.json',
-        bbox: [[112, -35], [129, -12]],
+        bbox: [
+          [112, -35],
+          [129, -12],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2021-sa.json',
-        bbox: [[129, -38], [141, -26]],
+        bbox: [
+          [129, -38],
+          [141, -26],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2021-tas.json',
-        bbox: [[143, -44], [149, -39]],
+        bbox: [
+          [143, -44],
+          [149, -39],
+        ],
         zoom: 6,
-      },      
+      },
       {
         url: '/shapes/australia-sa2-2021-nt.json',
-        bbox: [[129, -26], [138, -10]],
+        bbox: [
+          [129, -26],
+          [138, -10],
+        ],
         zoom: 5,
-      }
+      },
     ],
     dynamicSecondaryShapeFiles: [
       {
         url: '/shapes/australia-dzn-2021-nsw.json',
-        bbox: [[141, -37.5], [154, -28]],
+        bbox: [
+          [141, -37.5],
+          [154, -28],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2021-vic.json',
-        bbox: [[141, -39], [151, -34]],
+        bbox: [
+          [141, -39],
+          [151, -34],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2021-qld.json',
-        bbox: [[138, -29], [153, -10]],
+        bbox: [
+          [138, -29],
+          [153, -10],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2021-wa.json',
-        bbox: [[112, -35], [129, -12]],
+        bbox: [
+          [112, -35],
+          [129, -12],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2021-sa.json',
-        bbox: [[129, -38], [141, -26]],
+        bbox: [
+          [129, -38],
+          [141, -26],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2021-tas.json',
-        bbox: [[143, -44], [149, -39]],
+        bbox: [
+          [143, -44],
+          [149, -39],
+        ],
         zoom: 6,
-      },      
+      },
       {
         url: '/shapes/australia-dzn-2021-nt.json',
-        bbox: [[129, -26], [138, -10]],
+        bbox: [
+          [129, -26],
+          [138, -10],
+        ],
         zoom: 5,
-      }
+      },
     ],
     dataset2ShapeFile: '/shapes/australia-sa2-2016-truncated.json',
     dataset2SecondaryShapeFile: '/shapes/australia-dzn-2016-truncated.json',
     dataset2DynamicShapeFiles: [
       {
         url: '/shapes/australia-sa2-2016-nsw.json',
-        bbox: [[141, -37.5], [154, -28]],
+        bbox: [
+          [141, -37.5],
+          [154, -28],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2016-vic.json',
-        bbox: [[141, -39], [151, -34]],
+        bbox: [
+          [141, -39],
+          [151, -34],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2016-qld.json',
-        bbox: [[138, -29], [153, -10]],
+        bbox: [
+          [138, -29],
+          [153, -10],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2016-wa.json',
-        bbox: [[112, -35], [129, -12]],
+        bbox: [
+          [112, -35],
+          [129, -12],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2016-sa.json',
-        bbox: [[129, -38], [141, -26]],
+        bbox: [
+          [129, -38],
+          [141, -26],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-sa2-2016-tas.json',
-        bbox: [[143, -44], [149, -39]],
+        bbox: [
+          [143, -44],
+          [149, -39],
+        ],
         zoom: 6,
-      },      
+      },
       {
         url: '/shapes/australia-sa2-2016-nt.json',
-        bbox: [[129, -26], [138, -10]],
+        bbox: [
+          [129, -26],
+          [138, -10],
+        ],
         zoom: 5,
-      }
+      },
     ],
     dataset2DynamicSecondaryShapeFiles: [
       {
         url: '/shapes/australia-dzn-2016-nsw.json',
-        bbox: [[141, -37.5], [154, -28]],
+        bbox: [
+          [141, -37.5],
+          [154, -28],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2016-vic.json',
-        bbox: [[141, -39], [151, -34]],
+        bbox: [
+          [141, -39],
+          [151, -34],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2016-qld.json',
-        bbox: [[138, -29], [153, -10]],
+        bbox: [
+          [138, -29],
+          [153, -10],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2016-wa.json',
-        bbox: [[112, -35], [129, -12]],
+        bbox: [
+          [112, -35],
+          [129, -12],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2016-sa.json',
-        bbox: [[129, -38], [141, -26]],
+        bbox: [
+          [129, -38],
+          [141, -26],
+        ],
         zoom: 6,
       },
       {
         url: '/shapes/australia-dzn-2016-tas.json',
-        bbox: [[143, -44], [149, -39]],
+        bbox: [
+          [143, -44],
+          [149, -39],
+        ],
         zoom: 6,
-      },      
+      },
       {
         url: '/shapes/australia-dzn-2016-nt.json',
-        bbox: [[129, -26], [138, -10]],
+        bbox: [
+          [129, -26],
+          [138, -10],
+        ],
         zoom: 5,
-      }
+      },
     ],
     initialPosition: [133, -25, 4],
     isModeGraphsEnabled: true,
-    isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: false,
     segments: ['2021-sa2', '2021-dzn', '2016-sa2', '2016-dzn'],
     detailsControls: ['SA2', 'DZN', 'TZ'],
@@ -180,7 +281,6 @@ const sources = {
     shapeFile: '/shapes/wsp-zones-optimized.json',
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
-    isAllSegmentEnabled: false,
     isMapAreaLabelsEnabled: 'friendlyName',
     segments: [
       '2018-am2hr',
