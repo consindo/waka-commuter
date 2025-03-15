@@ -21,6 +21,7 @@
   import PopulationPredictions from './PopulationPredictions.svelte'
   import TravelMode from './TravelMode.svelte'
   import PopulationBubbles from './PopulationBubbles.svelte'
+  import DetailsDeltaBlurb from './DetailsDeltaBlurb.svelte'
 
   let { mapData } = $props()
 
@@ -120,18 +121,20 @@
                     const rootPortion = segment.split('-').slice(0, 2).join('-')
                     if (rootPortion.includes('comparison')) {
                       const segment1 =
-                        dataSource[rootPortion.replace('comparison', '2023')]
+                        dataSource[key.replace('comparison', '2023')] ||
+                        defaultSource
                       const segment2 =
-                        dataSource[rootPortion.replace('comparison', '2018')]
+                        dataSource[key.replace('comparison', '2018')] ||
+                        defaultSource
                       departureModes = objectDelta(
                         {},
-                        segment1?.departureModes,
-                        segment2?.departureModes
+                        segment1?.departureModes || {},
+                        segment2?.departureModes || {}
                       )
                       arrivalModes = objectDelta(
                         {},
-                        segment1?.arrivalModes,
-                        segment2?.arrivalModes
+                        segment1?.arrivalModes || {},
+                        segment2?.arrivalModes || {}
                       )
                       data.arriveFrom = objectDelta(
                         {},
@@ -437,6 +440,8 @@
       )
     })
   })
+
+  const isComparison = $derived((dataSegment || '').includes('comparison'))
 </script>
 
 <svelte:head>
@@ -460,9 +465,17 @@
       arrivals.
     </p>
   </div>
+  {#if isComparison}
+    <DetailsDeltaBlurb
+      {arrivals}
+      {departures}
+      arrivalModeData={arriveMode}
+      departureModeData={departureMode}
+    />
+  {/if}
   <div class:hidden={hideArrivals || invalidArrival}>
     <h3>Arrivals</h3>
-    {#if currentRegions}
+    {#if currentRegions && !isComparison}
       <DetailsBlurb
         mode="arrivals"
         {currentRegions}
@@ -473,8 +486,8 @@
     {/if}
     <div class="arrive-from graph-container">
       <div class="location-container">
-        <div class="location-inner">
-          {#if initialLocation}
+        {#if initialLocation && !isComparison}
+          <div class="location-inner">
             <PopulationBubbles
               scale={initialLocation}
               data={arrivals}
@@ -484,12 +497,11 @@
               width="580"
               height="400"
             />
-          {/if}
-          <div class="location"></div>
-        </div>
+          </div>
+        {/if}
         <div class="location-graph">
           {#key arrivals}
-            {#if arrivals !== null}
+            {#if arrivals !== null && arrivals.length > 0}
               <PopulationGraph
                 data={arrivals}
                 mode="arrivals"
@@ -550,8 +562,8 @@
     {/if}
     <div class="depart-to graph-container">
       <div class="location-container">
-        <div class="location-inner">
-          {#if initialLocation}
+        {#if initialLocation && !isComparison}
+          <div class="location-inner">
             <PopulationBubbles
               scale={initialLocation}
               data={departures}
@@ -561,12 +573,11 @@
               width="580"
               height="400"
             />
-          {/if}
-          <div class="location"></div>
-        </div>
+          </div>
+        {/if}
         <div class="location-graph">
           {#key departures}
-            {#if departures !== null}
+            {#if departures !== null && departures.length > 0}
               <PopulationGraph
                 data={departures}
                 mode="departures"

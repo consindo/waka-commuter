@@ -2,13 +2,16 @@
   import {
     axisLeft,
     scaleLinear,
+    min,
     max,
     scaleBand,
     select,
     axisBottom,
     stack,
+    stackOffsetDiverging,
   } from 'd3'
   import GraphTooltip from './GraphTooltip.svelte'
+  import { getSource } from '../../sources'
 
   const data = $props()
   const width = 300
@@ -64,6 +67,10 @@
         WFH: ['home'],
         'Didn’t work': ['not go to work'],
         Other: [],
+      }
+
+      if (getSource().brandingClass === 'statsnz') {
+        delete categories['Didn’t work']
       }
     }
 
@@ -139,7 +146,13 @@
   const x = $derived(
     scaleLinear()
       .range([0, paddedWidth])
-      .domain([0, max(rows, (d) => d.total)])
+      .domain([
+        Math.min(
+          min(rows, (d) => d.total),
+          0
+        ),
+        max(rows, (d) => d.total),
+      ])
       .nice()
   )
   const y = $derived(
@@ -180,7 +193,9 @@
       .style('transform', 'translate(0, 4px)')
   )
 
-  const stacked = $derived(stack().keys(keys)(rows))
+  const stacked = $derived(
+    stack().keys(keys).offset(stackOffsetDiverging)(rows)
+  )
 
   let tooltipOpacity = $state(0)
   let tooltipPosition = $state([0, 0])
@@ -216,14 +231,14 @@
         <g fill={getColor(bar.key)}>
           {#each bar as segment}
             {@const dataValue = segment.data[bar.key]}
-            {#if dataValue > 0}
+            {#if dataValue !== 0}
               <rect
                 data-name={bar.key}
                 data-value={dataValue}
                 x={x(segment[0])}
                 y={y(segment.data.category)}
-                height={y.bandwidth() - 3}
                 width={x(segment[1]) - x(segment[0])}
+                height={y.bandwidth() - 3}
               />
             {/if}
           {/each}
