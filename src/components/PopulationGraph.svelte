@@ -20,6 +20,7 @@
 
   // takes 30 hottest results
   const graphData = data
+    .slice()
     .sort((a, b) => {
       return Math.abs(a.value) < Math.abs(b.value) ? 1 : -1
     })

@@ -98,6 +98,14 @@
             )
             return target
           }
+          const objectBaseline = (target, object1, object2) => {
+            new Set([...Object.keys(object1), ...Object.keys(object2)]).forEach(
+              (i) => {
+                target[i] = object2[i] || 0
+              }
+            )
+            return target
+          }
 
           getData(regionName).then((data) => {
             // depending on the toggle, filter out workspace or education data
@@ -190,7 +198,13 @@
                   const delta = {}
                   Object.keys(segment1).forEach((i) => {
                     delta[i] = delta[i] || {}
+                    delta[`${i}-baseline`] = delta[`${i}-baseline`] || {}
                     objectDelta(delta[i], segment1[i], segment2[i])
+                    objectBaseline(
+                      delta[`${i}-baseline`],
+                      segment1[i],
+                      segment2[i]
+                    )
                   })
                   return delta
                 } else if (dataSource[segment] != null) {
@@ -466,7 +480,10 @@
     </p>
   </div>
   {#if isComparison}
+    <h3>Comparison</h3>
     <DetailsDeltaBlurb
+      {currentRegions}
+      segment={dataSegment}
       {arrivals}
       {departures}
       arrivalModeData={arriveMode}
@@ -551,7 +568,7 @@
   </div>
   <div class:hidden={hideDepartures || invalidDeparture}>
     <h3>Departures</h3>
-    {#if currentRegions}
+    {#if currentRegions && !isComparison}
       <DetailsBlurb
         mode="departures"
         {currentRegions}
