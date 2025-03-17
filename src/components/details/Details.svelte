@@ -121,25 +121,27 @@
                 // if (segment.split('|').length > 1) {
                 if (segment.split('-mode-').length > 1) {
                   const combinedSegments = segment.split('|').map((key) => {
-                    const data = dataSource[key] || defaultSource
+                    const data = structuredClone(defaultSource)
 
                     let departureModes = null
                     let arrivalModes = null
+                    let departureModesBaseline = null
+                    let arrivalModesBaseline = null
 
                     const rootPortion = segment.split('-').slice(0, 2).join('-')
                     if (rootPortion.includes('comparison')) {
                       const segment1 =
-                        dataSource[key.replace('comparison', '2023')] ||
+                        dataSource[rootPortion.replace('comparison', '2023')] ||
                         defaultSource
                       const segment2 =
-                        dataSource[key.replace('comparison', '2018')] ||
+                        dataSource[rootPortion.replace('comparison', '2018')] ||
                         defaultSource
                       departureModes = objectDelta(
                         {},
                         segment1?.departureModes || {},
                         segment2?.departureModes || {}
                       )
-                      data['departureModes-baseline'] = objectBaseline(
+                      departureModesBaseline = objectBaseline(
                         {},
                         segment1?.departureModes || {},
                         segment2?.departureModes || {}
@@ -149,7 +151,7 @@
                         segment1?.arrivalModes || {},
                         segment2?.arrivalModes || {}
                       )
-                      data['arrivalModes-baseline'] = objectBaseline(
+                      arrivalModesBaseline = objectBaseline(
                         {},
                         segment1?.arrivalModes || {},
                         segment2?.arrivalModes || {}
@@ -189,10 +191,22 @@
                         Total: departureModes[name],
                       }
                     }
+                    if (departureModesBaseline) {
+                      data['departureModes-baseline'] = {
+                        [name]: departureModesBaseline[name],
+                        Total: departureModesBaseline[name],
+                      }
+                    }
                     if (arrivalModes) {
                       data.arrivalModes = {
                         [name]: arrivalModes[name],
                         Total: arrivalModes[name],
+                      }
+                    }
+                    if (arrivalModesBaseline) {
+                      data['arrivalModes-baseline'] = {
+                        [name]: arrivalModesBaseline[name],
+                        Total: arrivalModesBaseline[name],
                       }
                     }
                     return data
@@ -259,7 +273,7 @@
             const departData = transformData(features, dataSources, 'departTo')
 
             let arriveModeData = null
-            let arrivalModeBaseline = null
+            let arriveModeBaseline = null
             let departureModeData = null
             let departureModeBaseline = null
             if (source.isModeGraphsEnabled === true) {
@@ -270,7 +284,7 @@
               ) {
                 arriveModeData = null
               } else {
-                ;[arriveModeData, arrivalModeBaseline] = transformModeData(
+                ;[arriveModeData, arriveModeBaseline] = transformModeData(
                   dataSources,
                   sourceKeys,
                   'arrivalModes'
@@ -309,7 +323,7 @@
               arriveModeData,
               departureModeData,
               animate,
-              arrivalModeBaseline,
+              arriveModeBaseline,
               departureModeBaseline,
             })
           })
@@ -327,7 +341,7 @@
           departureModeData,
           segment,
           animate,
-          arrivalModeBaseline,
+          arriveModeBaseline,
           departureModeBaseline,
         }) => {
           // map to friendly names
@@ -447,7 +461,7 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
-          arriveMode = [arriveModeData, arrivalModeBaseline]
+          arriveMode = [arriveModeData, arriveModeBaseline]
           departureMode = [departureModeData, departureModeBaseline]
 
           tooltip = tooltipData
@@ -549,6 +563,7 @@
                 data={arrivals}
                 mode="arrivals"
                 tooltipData={tooltip}
+                isComparison={dataSegment.includes('comparison')}
               />
             {/if}
           {/key}
@@ -568,7 +583,9 @@
       <div class="mode-container">
         <div class="mode-inner">
           <h4>
-            Arrival Modes
+            {dataSegment && dataSegment.includes('comparison')
+              ? 'Change in '
+              : ''}Arrival Modes
             {#if source.brandingClass === 'statsnz'}
               <small
                 ><a
@@ -579,7 +596,11 @@
             {/if}
           </h4>
           {#if arriveMode}
-            <TravelMode data={arriveMode[0].Total} />
+            <TravelMode
+              data={arriveMode[0].Total}
+              baseline={arriveMode[1].Total}
+              isComparison={dataSegment.includes('comparison')}
+            />
           {/if}
           <div class="mode"></div>
         </div>
@@ -624,6 +645,7 @@
               <PopulationGraph
                 data={departures}
                 mode="departures"
+                isComparison={dataSegment.includes('comparison')}
                 tooltipData={tooltip}
               />
             {/if}
@@ -644,7 +666,9 @@
       <div class="mode-container">
         <div class="mode-inner">
           <h4>
-            Departure Modes
+            {dataSegment && dataSegment.includes('comparison')
+              ? 'Change in '
+              : ''}Departure Modes
             {#if source.brandingClass === 'statsnz'}
               <small
                 ><a
@@ -655,7 +679,11 @@
             {/if}
           </h4>
           {#if departureMode}
-            <TravelMode data={departureMode[0].Total} />
+            <TravelMode
+              data={departureMode[0].Total}
+              baseline={departureMode[1].Total}
+              isComparison={dataSegment.includes('comparison')}
+            />
           {/if}
           <div class="mode"></div>
         </div>

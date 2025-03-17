@@ -116,6 +116,7 @@ export const transformData = (features, dataSources, category) => {
 export const transformModeData = (dataSources, sourceKeys, category) => {
   const combinedSource = {}
   const combinedBaseline = {}
+
   sourceKeys.forEach((key, index) => {
     // sets up combined object
     const keyArr = ['Total', key.split(':')[0], key]
@@ -143,3 +144,11 @@ export const transformModeData = (dataSources, sourceKeys, category) => {
   })
   return [combinedSource, combinedBaseline]
 }
+
+export const formatPercentage = (number, isDelta = true) =>
+  isNaN(number) || number === 0
+    ? ''
+    : ` (${Math.round(number * 100)}%${isDelta ? (number >= 0 ? '↑' : '↓') : ''})`.replace(
+        'Infinity',
+        '∞'
+      )

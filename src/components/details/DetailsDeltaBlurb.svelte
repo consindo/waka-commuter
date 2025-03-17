@@ -1,5 +1,5 @@
 <script>
-  import { humanRegionName } from '../../data.js'
+  import { humanRegionName, formatPercentage } from '../../data.js'
 
   const {
     currentRegions,
@@ -39,14 +39,6 @@
   )
   const totalDepartures = $derived(getSum(actualDepartures))
   const totalDeparturesPercentage = $derived(getPercentage(actualDepartures))
-
-  const formatPercentage = (number) =>
-    isNaN(number) || number === 0
-      ? ''
-      : ` (${Math.round(number * 100)}%${number >= 0 ? '↑' : '↓'})`.replace(
-          'Infinity',
-          '∞'
-        )
 
   const wfhIncrease = $derived(
     arrivalModeData[0].Total['Work/study at home'] || 0

@@ -12,8 +12,9 @@
   } from 'd3'
   import GraphTooltip from './GraphTooltip.svelte'
   import { getSource } from '../../sources'
+  import { formatPercentage } from '../../data'
 
-  const data = $props()
+  const { data, baseline, isComparison } = $props()
   const width = 300
   const height = 300
 
@@ -127,7 +128,7 @@
   }
 
   const categorizationLevel = 2
-  const bucket = $derived(categorizeData(data, categorizationLevel).data)
+  const bucket = $derived(categorizeData({ data }, categorizationLevel).data)
 
   const keys = $derived(
     Object.keys(bucket)
@@ -147,10 +148,7 @@
     scaleLinear()
       .range([0, paddedWidth])
       .domain([
-        Math.min(
-          min(rows, (d) => d.total),
-          0
-        ),
+        Math.min(min(rows, (d) => d.total) - (isComparison ? 10 : 0), 0),
         max(rows, (d) => d.total),
       ])
       .nice()
@@ -218,11 +216,15 @@
         tooltipPosition = [e.clientX, e.clientY]
         const keyName = e.target.dataset.name
         const keyValue = parseInt(e.target.dataset.value)
+        let percentage = keyValue / total
+        if (baseline[keyName]) {
+          percentage = (baseline[keyName] + keyValue) / baseline[keyName] - 1
+        }
 
         tooltipContent = [
           [
             keyName,
-            `${keyValue.toLocaleString()} (${Math.round((keyValue / total) * 100)}%)`,
+            `${isComparison && keyValue >= 0 ? '+' : ''}${keyValue.toLocaleString()}${formatPercentage(percentage, isComparison)}`,
           ],
         ]
       }}

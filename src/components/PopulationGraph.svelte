@@ -11,7 +11,7 @@
   import Dispatcher from '../dispatcher.js'
   import MapTooltip from './map/MapTooltip.svelte'
 
-  let { data, mode, tooltipData } = $props()
+  let { data, mode, tooltipData, isComparison } = $props()
 
   let id = $state(null)
   let loading = $state(false)
@@ -113,7 +113,7 @@
 </script>
 
 {#if data.length > 0}
-  <h3>Top {mode}</h3>
+  <h3>{isComparison ? 'Greatest change in ' : 'Top'} {mode}</h3>
 {/if}
 <div>
   <svg
@@ -178,13 +178,12 @@
 
 <style>
   h3 {
-    width: 178px;
-    text-align: right;
+    text-align: left;
     font-size: 1.125rem;
     text-transform: capitalize;
     margin-bottom: 0;
     margin-top: 0;
-    margin-left: 0;
+    margin-left: 1.25rem;
   }
   div {
     text-align: left;
