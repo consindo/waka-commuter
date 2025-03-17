@@ -115,12 +115,14 @@ export const transformData = (features, dataSources, category) => {
 
 export const transformModeData = (dataSources, sourceKeys, category) => {
   const combinedSource = {}
+  const combinedBaseline = {}
   sourceKeys.forEach((key, index) => {
     // sets up combined object
     const keyArr = ['Total', key.split(':')[0], key]
     keyArr.forEach((k) => {
       if (combinedSource[k] === undefined) {
         combinedSource[k] = {}
+        combinedBaseline[k] = {}
       }
     })
 
@@ -130,9 +132,14 @@ export const transformModeData = (dataSources, sourceKeys, category) => {
         if (combinedSource[k][c] === undefined) {
           combinedSource[k][c] = 0
         }
+        if (dataSources[index][`${category}-baseline`] !== undefined) {
+          combinedBaseline[k][c] = combinedBaseline[k][c] || 0
+          combinedBaseline[k][c] +=
+            dataSources[index][`${category}-baseline`][c]
+        }
         combinedSource[k][c] += dataSources[index][category][c]
       })
     })
   })
-  return combinedSource
+  return [combinedSource, combinedBaseline]
 }

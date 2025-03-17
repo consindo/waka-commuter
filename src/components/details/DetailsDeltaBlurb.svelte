@@ -41,19 +41,43 @@
   const totalDeparturesPercentage = $derived(getPercentage(actualDepartures))
 
   const formatPercentage = (number) =>
-    `(${Math.round(number * 100)}%${number >= 0 ? '↑' : '↓'})`
+    isNaN(number) || number === 0
+      ? ''
+      : ` (${Math.round(number * 100)}%${number >= 0 ? '↑' : '↓'})`.replace(
+          'Infinity',
+          '∞'
+        )
+
+  const wfhIncrease = $derived(
+    arrivalModeData[0].Total['Work/study at home'] || 0
+  )
+  const wfhBaseline = $derived(
+    arrivalModeData[1].Total['Work/study at home'] || 0
+  )
+  const wfhPercentage = $derived((wfhBaseline + wfhIncrease) / wfhBaseline - 1)
+
+  const mode = $derived(
+    segment.includes('all')
+      ? ['work', 'school']
+      : segment.includes('workplace')
+        ? ['work']
+        : ['school']
+  )
 </script>
 
 <p>
   In 2023, there were <strong class="arrivals"
     >{Math.abs(totalArrivals).toLocaleString()}
-    {totalArrivals >= 0 ? 'more' : 'fewer'}
-    {formatPercentage(totalArrivalsPercentage)}</strong
+    {totalArrivals >= 0 ? 'more' : 'fewer'}{formatPercentage(
+      totalArrivalsPercentage
+    )}</strong
   >
   trips to
   <span class="less-emphasis">{humanRegionName(currentRegions, 'full')}</span>
-  for work & school when compared to 2018. The number of people working & learning
-  within
+  for {mode.join(' & ')} when compared to 2018. The number of people {mode
+    .join(' & ')
+    .replace('work', 'working')
+    .replace('school', 'learning')} within
   <span class="less-emphasis"
     >{humanRegionName(currentRegions, 'condensed')}</span
   >
@@ -61,19 +85,23 @@
   <strong class="wfh"
     >{totalResidents >= 0 ? 'increased' : 'decreased'} by {Math.abs(
       totalResidents
-    ).toLocaleString()}
-    {formatPercentage(totalResidentsPercentage)}</strong
+    ).toLocaleString()}{formatPercentage(totalResidentsPercentage)}</strong
   >, while trips to other areas have
   <strong class="departures"
     >{totalDepartures >= 0 ? 'increased' : 'decreased'} by {Math.abs(
       totalDepartures
-    ).toLocaleString()}
-    {formatPercentage(totalDeparturesPercentage)}</strong
-  >. The number of people <strong>working & studying from home</strong> in {humanRegionName(
-    currentRegions,
-    'condensed'
-  )} has
-  <strong>increased/decreased by x (y%)</strong>.
+    ).toLocaleString()}{formatPercentage(totalDeparturesPercentage)}</strong
+  >. The number of people
+  <strong
+    >{mode.join(' & ').replace('work', 'working').replace('school', 'studying')}
+    from home</strong
+  >
+  in {humanRegionName(currentRegions, 'condensed')} has
+  <strong
+    >{wfhIncrease >= 0 ? 'increased' : 'decreased'} by {Math.abs(
+      wfhIncrease
+    ).toLocaleString()}{formatPercentage(wfhPercentage)}</strong
+  >.
 </p>
 
 <style>

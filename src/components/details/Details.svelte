@@ -139,7 +139,17 @@
                         segment1?.departureModes || {},
                         segment2?.departureModes || {}
                       )
+                      data['departureModes-baseline'] = objectBaseline(
+                        {},
+                        segment1?.departureModes || {},
+                        segment2?.departureModes || {}
+                      )
                       arrivalModes = objectDelta(
+                        {},
+                        segment1?.arrivalModes || {},
+                        segment2?.arrivalModes || {}
+                      )
+                      data['arrivalModes-baseline'] = objectBaseline(
                         {},
                         segment1?.arrivalModes || {},
                         segment2?.arrivalModes || {}
@@ -149,7 +159,17 @@
                         segment1.arriveFrom,
                         segment2.arriveFrom
                       )
+                      data['arriveFrom-baseline'] = objectBaseline(
+                        {},
+                        segment1.arriveFrom,
+                        segment2.arriveFrom
+                      )
                       data.departTo = objectDelta(
+                        {},
+                        segment1.departTo,
+                        segment2.departTo
+                      )
+                      data['departTo-baseline'] = objectBaseline(
                         {},
                         segment1.departTo,
                         segment2.departTo
@@ -239,7 +259,9 @@
             const departData = transformData(features, dataSources, 'departTo')
 
             let arriveModeData = null
+            let arrivalModeBaseline = null
             let departureModeData = null
+            let departureModeBaseline = null
             if (source.isModeGraphsEnabled === true) {
               if (
                 (segment.startsWith('2021-dzn') ||
@@ -248,7 +270,7 @@
               ) {
                 arriveModeData = null
               } else {
-                arriveModeData = transformModeData(
+                ;[arriveModeData, arrivalModeBaseline] = transformModeData(
                   dataSources,
                   sourceKeys,
                   'arrivalModes'
@@ -261,7 +283,7 @@
               ) {
                 departureModeData = null
               } else {
-                departureModeData = transformModeData(
+                ;[departureModeData, departureModeBaseline] = transformModeData(
                   dataSources,
                   sourceKeys,
                   'departureModes'
@@ -287,6 +309,8 @@
               arriveModeData,
               departureModeData,
               animate,
+              arrivalModeBaseline,
+              departureModeBaseline,
             })
           })
         }
@@ -303,6 +327,8 @@
           departureModeData,
           segment,
           animate,
+          arrivalModeBaseline,
+          departureModeBaseline,
         }) => {
           // map to friendly names
           const friendlyMapper = (i) => ({
@@ -421,8 +447,8 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
-          arriveMode = arriveModeData
-          departureMode = departureModeData
+          arriveMode = [arriveModeData, arrivalModeBaseline]
+          departureMode = [departureModeData, departureModeBaseline]
 
           tooltip = tooltipData
 
@@ -498,7 +524,7 @@
         {currentRegions}
         segment={dataSegment}
         destinationData={arrivals}
-        modeData={arriveMode}
+        modeData={arriveMode[0]}
       />
     {/if}
     <div class="arrive-from graph-container">
@@ -553,7 +579,7 @@
             {/if}
           </h4>
           {#if arriveMode}
-            <TravelMode data={arriveMode.Total} />
+            <TravelMode data={arriveMode[0].Total} />
           {/if}
           <div class="mode"></div>
         </div>
@@ -574,7 +600,7 @@
         {currentRegions}
         segment={dataSegment}
         destinationData={departures}
-        modeData={departureMode}
+        modeData={departureMode[0]}
       />
     {/if}
     <div class="depart-to graph-container">
@@ -629,7 +655,7 @@
             {/if}
           </h4>
           {#if departureMode}
-            <TravelMode data={departureMode.Total} />
+            <TravelMode data={departureMode[0].Total} />
           {/if}
           <div class="mode"></div>
         </div>
