@@ -68,9 +68,9 @@
   .comparison-only .map-legend-colors.hide-arrivals {
     background-image: linear-gradient(
       90deg,
-      #e67e22,
-      #f39c12,
-      #f5d0fe,
+      #facc15,
+      #fef08a,
+      #fefce8,
       #ef4444,
       #b91c1c
     );
