@@ -30,25 +30,30 @@
       return a.value < b.value ? 1 : -1
     })
 
+  const maxValue = Math.max(
+    Math.abs(graphData[0]?.value || 0),
+    Math.abs(graphData.slice(-1)[0]?.value || 0)
+  )
+
   const color = scaleLinear()
     .domain([
-      graphData[0]?.value / -1,
-      graphData[0]?.value / -2,
-      graphData[0]?.value / -10,
-      graphData[0]?.value / -25,
+      maxValue / -1,
+      maxValue / -2,
+      maxValue / -10,
+      maxValue / -25,
       0,
-      graphData[0]?.value / 25,
-      graphData[0]?.value / 10,
-      graphData[0]?.value / 2,
-      graphData[0]?.value,
+      maxValue / 25,
+      maxValue / 10,
+      maxValue / 2,
+      maxValue,
     ])
     .range(
       mode === 'arrivals'
         ? [
-            '#884d0d',
-            '#a1670d',
-            '#f37e21',
-            '#fdeee3',
+            '#006666',
+            '#1cb7b7',
+            '#36e7f4',
+            '#ebfffc',
             '#fff',
             '#E3F2FD',
             '#2196F3',
@@ -56,10 +61,10 @@
             '#0D4888',
           ]
         : [
-            '#006666',
-            '#1cb7b7',
-            '#36e7f4',
-            '#ebfffc',
+            '#884d0d',
+            '#a1670d',
+            '#f37e21',
+            '#fdeee3',
             '#fff',
             '#FFEBEE',
             '#F44336',

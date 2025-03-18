@@ -95,10 +95,21 @@ noscript p {
 }
 
 .map-legend.all .hide-all,
+.map-legend .comparison-only,
 .map-legend.departures .hide-departures,
 .map-legend.arrivals .hide-arrivals {
   display: none;
 }
+
+.map-legend.comparison .main-legend {
+  display: none;
+}
+
+.map-legend.comparison .comparison-only,
+.map-legend.comparison .hide-departures.hide-all {
+  display: block;
+}
+
 
 .map-legend.arrivals .map-legend-colors {
   background-image: linear-gradient(-90deg, #1d4ed8, #3b82f6, #93c5fd);
