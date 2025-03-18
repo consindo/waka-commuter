@@ -1,5 +1,5 @@
 <script>
-  import { humanRegionName, chooseBestName } from '../../data'
+  import { humanRegionName, chooseBestName, formatPercentage } from '../../data'
   import { getSource } from '../../sources'
 
   const {
@@ -13,6 +13,7 @@
     percentage,
     showOnly,
     populationCount,
+    isComparison,
   } = $props()
 
   const parsedData = $derived({
@@ -56,12 +57,8 @@
       : 0
   )
 
-  const departPercentage = $derived(
-    Math.round((departData[1] || 0) * 10000) / 100
-  )
-  const arrivalPercentage = $derived(
-    Math.round((arriveData[1] || 0) * 10000) / 100
-  )
+  const departPercentage = $derived(departData[1] || 0)
+  const arrivalPercentage = $derived(arriveData[1] || 0)
   const singleContext = $derived(locationContext !== 'single')
 </script>
 
@@ -79,17 +76,25 @@
   {#if parsedData.currentRegions.length !== 0 && !loading && !(friendlyName || '').startsWith('TZ')}
     {#if regions === humanId}
       <strong class="wfh">
-        {departCount} live & {mode.join('/')}
+        {isComparison && departCount >= 0 ? '+' : ''}{departCount} live & {mode.join(
+          '/'
+        )}
       </strong>
       in {humanId}
       {#if percentage}
         <br />
         <small>
           {#if showOnly !== 'arrivals'}
-            ({departPercentage}% of departures)<br />
+            {formatPercentage(departPercentage, isComparison).replace(
+              ')',
+              !isComparison ? ' of departures)' : ')'
+            )}<br />
           {/if}
-          {#if showOnly !== 'departures'}
-            ({arrivalPercentage}% of arrivals)
+          {#if showOnly !== 'departures' && !(isComparison && showOnly == null && arrivalPercentage === departPercentage)}
+            {formatPercentage(arrivalPercentage, isComparison).replace(
+              ')',
+              !isComparison ? ' of arrivals)' : ')'
+            )}
           {/if}
         </small>
       {/if}
@@ -101,10 +106,10 @@
     {:else}
       {#if showOnly !== 'departures'}
         <strong class="arrivals">
-          {arrivalCount} arrivals
+          {isComparison && arrivalCount >= 0 ? '+' : ''}{arrivalCount} arrivals
         </strong>
         {#if percentage}
-          ({arrivalPercentage}%)
+          {formatPercentage(arrivalPercentage, isComparison)}
         {/if}
         {#if singleContext}
           &rarr; to {regions}
@@ -113,10 +118,10 @@
       {/if}
       {#if showOnly !== 'arrivals'}
         <strong class="departures">
-          {departCount} departures
+          {isComparison && departCount >= 0 ? '+' : ''}{departCount} departures
         </strong>
         {#if percentage}
-          ({departPercentage}%)
+          {formatPercentage(departPercentage, isComparison)}
         {/if}
         {#if singleContext}
           &larr; from {regions}

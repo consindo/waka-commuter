@@ -167,6 +167,7 @@
 </svg>
 {#if id}
   <MapTooltip
+    isComparison={false}
     data={tooltipData}
     locationContext="single"
     percentage

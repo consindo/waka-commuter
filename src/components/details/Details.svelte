@@ -752,7 +752,7 @@
     width: 300px;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 1.5rem 0;
+    padding: 0.25rem 0 1rem;
     border-radius: 5px 0 0 5px;
     height: 100%;
   }

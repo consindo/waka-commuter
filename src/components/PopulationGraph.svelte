@@ -95,11 +95,16 @@
 
   let yaxis = $state(null)
   $effect(() => {
-    select(yaxis)
-      .call(axisLeft(y).tickSize(0))
+    const axis = select(yaxis).call(axisLeft(y).tickSize(0))
+    axis
       .selectAll('text')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
       .style('font-size', '0.6875rem')
+
+    axis
+      .selectAll('text')
+      .filter((d) => tooltipData.currentRegions.includes(d))
+      .style('fill', `var(--surface-text-success)`)
   })
 
   let xaxis = $state(null)
@@ -165,6 +170,7 @@
 
 {#if tooltipData && id}
   <MapTooltip
+    {isComparison}
     data={tooltipData}
     locationContext="single"
     percentage
