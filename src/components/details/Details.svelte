@@ -21,6 +21,7 @@
   import PopulationPredictions from './PopulationPredictions.svelte'
   import TravelMode from './TravelMode.svelte'
   import PopulationBubbles from './PopulationBubbles.svelte'
+  import DetailsDeltaBlurb from './DetailsDeltaBlurb.svelte'
 
   let { mapData } = $props()
 
@@ -89,6 +90,23 @@
 
           firstRegion = regionName[0]
 
+          const objectDelta = (target, object1, object2) => {
+            new Set([...Object.keys(object1), ...Object.keys(object2)]).forEach(
+              (i) => {
+                target[i] = (object1[i] || 0) - (object2[i] || 0)
+              }
+            )
+            return target
+          }
+          const objectBaseline = (target, object1, object2) => {
+            new Set([...Object.keys(object1), ...Object.keys(object2)]).forEach(
+              (i) => {
+                target[i] = object2[i] || 0
+              }
+            )
+            return target
+          }
+
           getData(regionName).then((data) => {
             // depending on the toggle, filter out workspace or education data
             const dataSources = data
@@ -103,59 +121,92 @@
                 // if (segment.split('|').length > 1) {
                 if (segment.split('-mode-').length > 1) {
                   const combinedSegments = segment.split('|').map((key) => {
-                    const data = dataSource[key] || defaultSource
+                    const data = structuredClone(defaultSource)
 
                     let departureModes = null
                     let arrivalModes = null
-                    if (segment.startsWith('2021-dzn')) {
-                      departureModes = dataSource['2021-dzn']?.departureModes
-                      arrivalModes = dataSource['2021-dzn']?.arrivalModes
-                    } else if (segment.startsWith('2021-sa2')) {
-                      departureModes = dataSource['2021-sa2']?.departureModes
-                      arrivalModes = dataSource['2021-sa2']?.arrivalModes
-                    } else if (segment.startsWith('2016-dzn')) {
-                      departureModes = dataSource['2016-dzn']?.departureModes
-                      arrivalModes = dataSource['2016-dzn']?.arrivalModes
-                    } else if (segment.startsWith('2016-sa2')) {
-                      departureModes = dataSource['2016-sa2']?.departureModes
-                      arrivalModes = dataSource['2016-sa2']?.arrivalModes
-                    } else if (segment.startsWith('2023-education')) {
-                      departureModes =
-                        dataSource['2023-education']?.departureModes
-                      arrivalModes = dataSource['2023-education']?.arrivalModes
-                    } else if (segment.startsWith('2023-workplace')) {
-                      departureModes =
-                        dataSource['2023-workplace']?.departureModes
-                      arrivalModes = dataSource['2023-workplace']?.arrivalModes
-                    } else if (segment.startsWith('2023-all')) {
-                      departureModes = dataSource['2023-all']?.departureModes
-                      arrivalModes = dataSource['2023-all']?.arrivalModes
-                    } else if (segment.startsWith('2018-education')) {
-                      departureModes =
-                        dataSource['2018-education']?.departureModes
-                      arrivalModes = dataSource['2018-education']?.arrivalModes
-                    } else if (segment.startsWith('2018-workplace')) {
-                      departureModes =
-                        dataSource['2018-workplace']?.departureModes
-                      arrivalModes = dataSource['2018-workplace']?.arrivalModes
-                    } else if (segment.startsWith('2018-all')) {
-                      departureModes = dataSource['2018-all']?.departureModes
-                      arrivalModes = dataSource['2018-all']?.arrivalModes
+                    let departureModesBaseline = null
+                    let arrivalModesBaseline = null
+
+                    const rootPortion = segment.split('-').slice(0, 2).join('-')
+                    if (rootPortion.includes('comparison')) {
+                      const segment1 =
+                        dataSource[rootPortion.replace('comparison', '2023')] ||
+                        defaultSource
+                      const segment2 =
+                        dataSource[rootPortion.replace('comparison', '2018')] ||
+                        defaultSource
+                      departureModes = objectDelta(
+                        {},
+                        segment1?.departureModes || {},
+                        segment2?.departureModes || {}
+                      )
+                      departureModesBaseline = objectBaseline(
+                        {},
+                        segment1?.departureModes || {},
+                        segment2?.departureModes || {}
+                      )
+                      arrivalModes = objectDelta(
+                        {},
+                        segment1?.arrivalModes || {},
+                        segment2?.arrivalModes || {}
+                      )
+                      arrivalModesBaseline = objectBaseline(
+                        {},
+                        segment1?.arrivalModes || {},
+                        segment2?.arrivalModes || {}
+                      )
+                      data.arriveFrom = objectDelta(
+                        {},
+                        segment1.arriveFrom,
+                        segment2.arriveFrom
+                      )
+                      data['arriveFrom-baseline'] = objectBaseline(
+                        {},
+                        segment1.arriveFrom,
+                        segment2.arriveFrom
+                      )
+                      data.departTo = objectDelta(
+                        {},
+                        segment1.departTo,
+                        segment2.departTo
+                      )
+                      data['departTo-baseline'] = objectBaseline(
+                        {},
+                        segment1.departTo,
+                        segment2.departTo
+                      )
+                    } else {
+                      departureModes = dataSource[rootPortion]?.departureModes
+                      arrivalModes = dataSource[rootPortion]?.arrivalModes
                     }
+
                     const name = modes.find(
                       (i) => i.id === `mode-${key.split('mode-')[1]}`
                     ).name
-                    console.log(name)
+
                     if (departureModes) {
                       data.departureModes = {
                         [name]: departureModes[name],
                         Total: departureModes[name],
                       }
                     }
+                    if (departureModesBaseline) {
+                      data['departureModes-baseline'] = {
+                        [name]: departureModesBaseline[name],
+                        Total: departureModesBaseline[name],
+                      }
+                    }
                     if (arrivalModes) {
                       data.arrivalModes = {
                         [name]: arrivalModes[name],
                         Total: arrivalModes[name],
+                      }
+                    }
+                    if (arrivalModesBaseline) {
+                      data['arrivalModes-baseline'] = {
+                        [name]: arrivalModesBaseline[name],
+                        Total: arrivalModesBaseline[name],
                       }
                     }
                     return data
@@ -172,6 +223,24 @@
                       return acc
                     }, {}),
                   ]
+                } else if (segment.includes('comparison')) {
+                  const segment1 =
+                    dataSource[segment.replace('comparison', '2023')]
+                  const segment2 =
+                    dataSource[segment.replace('comparison', '2018')]
+
+                  const delta = {}
+                  Object.keys(segment1).forEach((i) => {
+                    delta[i] = delta[i] || {}
+                    delta[`${i}-baseline`] = delta[`${i}-baseline`] || {}
+                    objectDelta(delta[i], segment1[i], segment2[i])
+                    objectBaseline(
+                      delta[`${i}-baseline`],
+                      segment1[i],
+                      segment2[i]
+                    )
+                  })
+                  return delta
                 } else if (dataSource[segment] != null) {
                   return [dataSource[segment]]
                 } else {
@@ -204,7 +273,9 @@
             const departData = transformData(features, dataSources, 'departTo')
 
             let arriveModeData = null
+            let arriveModeBaseline = null
             let departureModeData = null
+            let departureModeBaseline = null
             if (source.isModeGraphsEnabled === true) {
               if (
                 (segment.startsWith('2021-dzn') ||
@@ -213,7 +284,7 @@
               ) {
                 arriveModeData = null
               } else {
-                arriveModeData = transformModeData(
+                ;[arriveModeData, arriveModeBaseline] = transformModeData(
                   dataSources,
                   sourceKeys,
                   'arrivalModes'
@@ -226,7 +297,7 @@
               ) {
                 departureModeData = null
               } else {
-                departureModeData = transformModeData(
+                ;[departureModeData, departureModeBaseline] = transformModeData(
                   dataSources,
                   sourceKeys,
                   'departureModes'
@@ -252,6 +323,8 @@
               arriveModeData,
               departureModeData,
               animate,
+              arriveModeBaseline,
+              departureModeBaseline,
             })
           })
         }
@@ -268,6 +341,8 @@
           departureModeData,
           segment,
           animate,
+          arriveModeBaseline,
+          departureModeBaseline,
         }) => {
           // map to friendly names
           const friendlyMapper = (i) => ({
@@ -346,6 +421,9 @@
               populationLabel = 'Resident 15+ Population:'
             }
           }
+          if (segment.includes('comparison')) {
+            populationLabel = 'Change in ' + populationLabel
+          }
 
           if (
             (segment.startsWith('2021-dzn') ||
@@ -383,8 +461,8 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
-          arriveMode = arriveModeData
-          departureMode = departureModeData
+          arriveMode = [arriveModeData, arriveModeBaseline]
+          departureMode = [departureModeData, departureModeBaseline]
 
           tooltip = tooltipData
 
@@ -407,7 +485,6 @@
           ) {
             pop = arriveModeData.Total.Total.toLocaleString()
           }
-          console.log(departureModeData)
           if (source.isModeGraphsEnabled) {
             populationCount = pop
           }
@@ -417,6 +494,8 @@
       )
     })
   })
+
+  const isComparison = $derived((dataSegment || '').includes('comparison'))
 </script>
 
 <svelte:head>
@@ -440,21 +519,32 @@
       arrivals.
     </p>
   </div>
+  {#if isComparison}
+    <h3>Comparison</h3>
+    <DetailsDeltaBlurb
+      {currentRegions}
+      segment={dataSegment}
+      {arrivals}
+      {departures}
+      arrivalModeData={arriveMode}
+      departureModeData={departureMode}
+    />
+  {/if}
   <div class:hidden={hideArrivals || invalidArrival}>
     <h3>Arrivals</h3>
-    {#if currentRegions}
+    {#if currentRegions && !isComparison}
       <DetailsBlurb
         mode="arrivals"
         {currentRegions}
         segment={dataSegment}
         destinationData={arrivals}
-        modeData={arriveMode}
+        modeData={arriveMode[0]}
       />
     {/if}
     <div class="arrive-from graph-container">
       <div class="location-container">
-        <div class="location-inner">
-          {#if initialLocation}
+        {#if initialLocation && !isComparison}
+          <div class="location-inner">
             <PopulationBubbles
               scale={initialLocation}
               data={arrivals}
@@ -464,16 +554,16 @@
               width="580"
               height="400"
             />
-          {/if}
-          <div class="location"></div>
-        </div>
+          </div>
+        {/if}
         <div class="location-graph">
           {#key arrivals}
-            {#if arrivals !== null}
+            {#if arrivals !== null && arrivals.length > 0}
               <PopulationGraph
                 data={arrivals}
                 mode="arrivals"
                 tooltipData={tooltip}
+                isComparison={dataSegment.includes('comparison')}
               />
             {/if}
           {/key}
@@ -493,7 +583,9 @@
       <div class="mode-container">
         <div class="mode-inner">
           <h4>
-            Arrival Modes
+            {dataSegment && dataSegment.includes('comparison')
+              ? 'Change in '
+              : ''}Arrival Modes
             {#if source.brandingClass === 'statsnz'}
               <small
                 ><a
@@ -504,7 +596,11 @@
             {/if}
           </h4>
           {#if arriveMode}
-            <TravelMode data={arriveMode.Total} />
+            <TravelMode
+              data={arriveMode[0].Total}
+              baseline={arriveMode[1].Total}
+              isComparison={dataSegment.includes('comparison')}
+            />
           {/if}
           <div class="mode"></div>
         </div>
@@ -519,19 +615,19 @@
   </div>
   <div class:hidden={hideDepartures || invalidDeparture}>
     <h3>Departures</h3>
-    {#if currentRegions}
+    {#if currentRegions && !isComparison}
       <DetailsBlurb
         mode="departures"
         {currentRegions}
         segment={dataSegment}
         destinationData={departures}
-        modeData={departureMode}
+        modeData={departureMode[0]}
       />
     {/if}
     <div class="depart-to graph-container">
       <div class="location-container">
-        <div class="location-inner">
-          {#if initialLocation}
+        {#if initialLocation && !isComparison}
+          <div class="location-inner">
             <PopulationBubbles
               scale={initialLocation}
               data={departures}
@@ -541,15 +637,15 @@
               width="580"
               height="400"
             />
-          {/if}
-          <div class="location"></div>
-        </div>
+          </div>
+        {/if}
         <div class="location-graph">
           {#key departures}
-            {#if departures !== null}
+            {#if departures !== null && departures.length > 0}
               <PopulationGraph
                 data={departures}
                 mode="departures"
+                isComparison={dataSegment.includes('comparison')}
                 tooltipData={tooltip}
               />
             {/if}
@@ -570,7 +666,9 @@
       <div class="mode-container">
         <div class="mode-inner">
           <h4>
-            Departure Modes
+            {dataSegment && dataSegment.includes('comparison')
+              ? 'Change in '
+              : ''}Departure Modes
             {#if source.brandingClass === 'statsnz'}
               <small
                 ><a
@@ -581,7 +679,11 @@
             {/if}
           </h4>
           {#if departureMode}
-            <TravelMode data={departureMode.Total} />
+            <TravelMode
+              data={departureMode[0].Total}
+              baseline={departureMode[1].Total}
+              isComparison={dataSegment.includes('comparison')}
+            />
           {/if}
           <div class="mode"></div>
         </div>
@@ -650,7 +752,7 @@
     width: 300px;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 1.5rem 0;
+    padding: 0.25rem 0 1rem;
     border-radius: 5px 0 0 5px;
     height: 100%;
   }

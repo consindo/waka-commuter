@@ -5,7 +5,7 @@
 
   --surface-text: #09090b;
   --surface-text-interactive: #0074e4;
-  --surface-text-success: #84cc16;
+  --surface-text-success: #4caf50;
   --surface-text-danger: #ef4444;
   --surface-text-subtle: #52525b;
   --surface-gridlines: #ccc;
@@ -23,6 +23,7 @@
 
   --surface-text: light-dark(#09090b, #fff);
   --surface-text-interactive: light-dark(#0074e4, #7dd3fc);
+  --surface-text-success: light-dark(#4caf50, #84cc16);
   --surface-text-subtle: light-dark(#52525b, #d4d4d4);
 }
 
@@ -94,10 +95,21 @@ noscript p {
 }
 
 .map-legend.all .hide-all,
+.map-legend .comparison-only,
 .map-legend.departures .hide-departures,
 .map-legend.arrivals .hide-arrivals {
   display: none;
 }
+
+.map-legend.comparison .main-legend {
+  display: none;
+}
+
+.map-legend.comparison .comparison-only,
+.map-legend.comparison .hide-departures.hide-all {
+  display: block;
+}
+
 
 .map-legend.arrivals .map-legend-colors {
   background-image: linear-gradient(-90deg, #1d4ed8, #3b82f6, #93c5fd);

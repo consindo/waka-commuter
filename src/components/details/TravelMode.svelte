@@ -2,15 +2,19 @@
   import {
     axisLeft,
     scaleLinear,
+    min,
     max,
     scaleBand,
     select,
     axisBottom,
     stack,
+    stackOffsetDiverging,
   } from 'd3'
   import GraphTooltip from './GraphTooltip.svelte'
+  import { getSource } from '../../sources'
+  import { formatPercentage } from '../../data'
 
-  const data = $props()
+  const { data, baseline, isComparison } = $props()
   const width = 300
   const height = 300
 
@@ -64,6 +68,10 @@
         WFH: ['home'],
         'Didn’t work': ['not go to work'],
         Other: [],
+      }
+
+      if (getSource().brandingClass === 'statsnz') {
+        delete categories['Didn’t work']
       }
     }
 
@@ -120,7 +128,7 @@
   }
 
   const categorizationLevel = 2
-  const bucket = $derived(categorizeData(data, categorizationLevel).data)
+  const bucket = $derived(categorizeData({ data }, categorizationLevel).data)
 
   const keys = $derived(
     Object.keys(bucket)
@@ -139,7 +147,10 @@
   const x = $derived(
     scaleLinear()
       .range([0, paddedWidth])
-      .domain([0, max(rows, (d) => d.total)])
+      .domain([
+        Math.min(min(rows, (d) => d.total) - (isComparison ? 10 : 0), 0),
+        max(rows, (d) => d.total),
+      ])
       .nice()
   )
   const y = $derived(
@@ -180,7 +191,9 @@
       .style('transform', 'translate(0, 4px)')
   )
 
-  const stacked = $derived(stack().keys(keys)(rows))
+  const stacked = $derived(
+    stack().keys(keys).offset(stackOffsetDiverging)(rows)
+  )
 
   let tooltipOpacity = $state(0)
   let tooltipPosition = $state([0, 0])
@@ -203,11 +216,15 @@
         tooltipPosition = [e.clientX, e.clientY]
         const keyName = e.target.dataset.name
         const keyValue = parseInt(e.target.dataset.value)
+        let percentage = keyValue / total
+        if (baseline[keyName]) {
+          percentage = (baseline[keyName] + keyValue) / baseline[keyName] - 1
+        }
 
         tooltipContent = [
           [
             keyName,
-            `${keyValue.toLocaleString()} (${Math.round((keyValue / total) * 100)}%)`,
+            `${isComparison && keyValue >= 0 ? '+' : ''}${keyValue.toLocaleString()}${formatPercentage(percentage, isComparison)}`,
           ],
         ]
       }}
@@ -216,14 +233,14 @@
         <g fill={getColor(bar.key)}>
           {#each bar as segment}
             {@const dataValue = segment.data[bar.key]}
-            {#if dataValue > 0}
+            {#if dataValue !== 0}
               <rect
                 data-name={bar.key}
                 data-value={dataValue}
                 x={x(segment[0])}
                 y={y(segment.data.category)}
-                height={y.bandwidth() - 3}
                 width={x(segment[1]) - x(segment[0])}
+                height={y.bandwidth() - 3}
               />
             {/if}
           {/each}

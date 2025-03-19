@@ -1,4 +1,4 @@
-import { getSource } from "../../sources"
+import { getSource } from '../../sources'
 
 const source = getSource()
 
@@ -31,20 +31,21 @@ if (source.brandingClass === 'statsnz') {
   modes[12].name = 'Other'
   modes[13].name = 'Walk or jog'
   modes[14].name = 'Work/study at home'
-  modes = modes.filter(i => [
-    'mode-1',
-    'mode-2',
-    'mode-3',
-    'mode-6',
-    'mode-7',
-    'mode-10',
-    'mode-11',
-    'mode-12',
-    'mode-13',
-    'mode-17',
-    'mode-18',
-  ].includes(i.id))
+  modes = modes.filter((i) =>
+    [
+      'mode-1',
+      'mode-2',
+      'mode-3',
+      'mode-6',
+      'mode-7',
+      'mode-10',
+      'mode-11',
+      'mode-12',
+      'mode-13',
+      'mode-17',
+      'mode-18',
+    ].includes(i.id)
+  )
 } else {
-  modes = modes.filter(i => i.id !== 'mode-17' && i.id !== 'mode-18')
+  modes = modes.filter((i) => i.id !== 'mode-17' && i.id !== 'mode-18')
 }
-

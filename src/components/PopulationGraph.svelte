@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
   import {
     select,
     scaleBand,
@@ -12,7 +11,7 @@
   import Dispatcher from '../dispatcher.js'
   import MapTooltip from './map/MapTooltip.svelte'
 
-  let { data, mode, tooltipData } = $props()
+  let { data, mode, tooltipData, isComparison } = $props()
 
   let id = $state(null)
   let loading = $state(false)
@@ -21,124 +20,162 @@
 
   // takes 30 hottest results
   const graphData = data
+    .slice()
+    .sort((a, b) => {
+      return Math.abs(a.value) < Math.abs(b.value) ? 1 : -1
+    })
+    .slice(0, 30)
     .sort((a, b) => {
       if (a.value === b.value) return a.key.localeCompare(b.key)
       return a.value < b.value ? 1 : -1
     })
-    .slice(0, 30)
 
-  let el = $state()
-  onMount(() => {
-    const tooltipclick = (d) => {
-      console.log(d)
-      if (
-        // d3.event.ctrlKey ||
-        // d3.event.metaKey ||
-        Dispatcher.currentRegion.includes(d.originalKey)
-      ) {
-        Dispatcher.addRegion(d.originalKey)
-      } else {
-        Dispatcher.setRegions([d.originalKey], true)
-      }
+  const maxValue = Math.max(
+    Math.abs(graphData[0]?.value || 0),
+    Math.abs(graphData.slice(-1)[0]?.value || 0)
+  )
 
-      // element will be disposed when the next page loads
-      loading = true
-    }
-    const tooltipover = () => {
-      select(this).style('opacity', 0.8)
-      opacity = 1
-    }
-    const tooltipleave = () => {
-      select(this).style('opacity', 1)
-      opacity = 0
-    }
-    const tooltipmove = (d) => {
-      id = d.currentTarget.dataset.key
-      position = [d.clientX, d.clientY]
-    }
+  const color = scaleLinear()
+    .domain([
+      maxValue / -1,
+      maxValue / -2,
+      maxValue / -10,
+      maxValue / -25,
+      0,
+      maxValue / 25,
+      maxValue / 10,
+      maxValue / 2,
+      maxValue,
+    ])
+    .range(
+      mode === 'arrivals'
+        ? [
+            '#006666',
+            '#1cb7b7',
+            '#36e7f4',
+            '#ebfffc',
+            '#fff',
+            '#E3F2FD',
+            '#2196F3',
+            '#0D47A1',
+            '#0D4888',
+          ]
+        : [
+            '#facc15',
+            '#fef08a',
+            '#fef9c3',
+            '#fefce8',
+            '#fff',
+            '#FFEBEE',
+            '#F44336',
+            '#B71C1C',
+            '#660000',
+          ]
+    )
+    .interpolate(interpolateHcl)
 
-    if (graphData.length === 0) return
-    const margin = { top: 16, right: 30, bottom: 40, left: 180 },
-      width = 580 - margin.left - margin.right,
-      height = 14 * graphData.length + margin.top + margin.bottom
+  const margin = { top: 16, right: 30, bottom: 40, left: 180 }
+  const width = 580 - margin.left - margin.right
+  const height = $derived(14 * graphData.length + margin.top + margin.bottom)
 
-    const svg = select(el)
-      .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
-      .append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  const x = $derived(
+    scaleLinear()
+      .domain([Math.min(graphData.slice(-1)[0].value, 0), graphData[0].value])
+      .range([0, width])
+      .nice()
+  )
 
-    const x = scaleLinear().domain([0, graphData[0].value]).range([0, width])
-
-    // Y axis
-    const y = scaleBand()
+  // Y axis
+  const y = $derived(
+    scaleBand()
       .range([0, height])
       .domain(graphData.map((d) => d.key))
       .paddingInner(0.1)
+  )
 
-    svg
-      .append('g')
-      .call(axisLeft(y).tickSize(0))
+  let grid = $state(null)
+  $effect(() => {
+    select(grid).call(axisBottom(x).ticks(5).tickSize(-height).tickFormat(''))
+  })
+
+  let yaxis = $state(null)
+  $effect(() => {
+    const axis = select(yaxis).call(axisLeft(y).tickSize(0))
+    axis
       .selectAll('text')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
       .style('font-size', '0.6875rem')
 
-    svg
-      .append('g')
-      .attr('class', 'grid')
-      .attr('transform', 'translate(0,' + height + ')')
-      .style('color', 'var(--surface-gridlines)')
-      .call(axisBottom(x).ticks(5).tickSize(-height).tickFormat(''))
+    axis
+      .selectAll('text')
+      .filter((d) => tooltipData.currentRegions.includes(d))
+      .style('fill', `var(--surface-text-success)`)
+  })
 
-    svg
-      .append('g')
-      .attr('transform', 'translate(0,' + height + ')')
+  let xaxis = $state(null)
+  $effect(() => {
+    select(xaxis)
       .call(axisBottom(x).ticks(5, 's'))
       .selectAll('text')
       .style('font-size', '0.6875rem')
       .style('font-family', "'Fira Sans Condensed', 'Fira Sans', sans-serif")
-
-    const color = scaleLinear()
-      .domain([
-        0,
-        graphData[0].value / 25,
-        graphData[0].value / 10,
-        graphData[0].value / 2,
-        graphData[0].value,
-      ])
-      .range(
-        mode === 'arrivals'
-          ? ['#fff', '#E3F2FD', '#2196F3', '#0D47A1', '#0D4888']
-          : ['#fff', '#FFEBEE', '#F44336', '#B71C1C', '#660000']
-      )
-      .interpolate(interpolateHcl)
-
-    //Bars
-    svg
-      .selectAll('myRect')
-      .data(graphData)
-      .enter()
-      .append('rect')
-      .attr('x', x(0))
-      .attr('y', (d) => y(d.key))
-      .attr('width', (d) => x(d.value))
-      .attr('height', y.bandwidth())
-      .attr('fill', (d) => color(d.value))
-      .attr('data-key', (d) => d.key)
-      .on('click', tooltipclick)
-      .on('mouseover', tooltipover)
-      .on('mouseleave', tooltipleave)
-      .on('mousemove', tooltipmove)
   })
 </script>
 
 {#if data.length > 0}
-  <h3>Top {mode}</h3>
+  <h3>{isComparison ? 'Greatest change in ' : 'Top'} {mode}</h3>
 {/if}
-<div bind:this={el}></div>
+<div>
+  <svg
+    width={width + margin.left + margin.right}
+    height={height + margin.top + margin.bottom}
+    viewBox="0 0 {width + margin.left + margin.right}"
+  >
+    <g transform="translate({margin.left}, {margin.top})">
+      <g bind:this={yaxis} class="axis" />
+      <g bind:this={grid} transform="translate(0, {height})" class="grid" />
+      <g bind:this={xaxis} transform="translate(0, {height})" class="axis" />
+      <g
+        onclick={(e) => {
+          const key = e.target.dataset.key
+          if (
+            e.ctrlKey ||
+            e.metaKey ||
+            Dispatcher.currentRegion.includes(key)
+          ) {
+            Dispatcher.addRegion(key)
+          } else {
+            Dispatcher.setRegions([key], true)
+          }
+
+          // element will be disposed when the next page loads
+          loading = true
+        }}
+        onpointerover={() => (opacity = 1)}
+        onpointerleave={() => (opacity = 0)}
+        onpointermove={(e) => {
+          position = [e.clientX, e.clientY]
+          id = e.target.dataset.key
+        }}
+      >
+        {#each graphData as bar}
+          <rect
+            x={x(Math.min(bar.value, 0))}
+            y={y(bar.key)}
+            width={Math.abs(x(bar.value) - x(0))}
+            height={y.bandwidth()}
+            fill={color(bar.value)}
+            data-key={bar.key}
+          />
+        {/each}
+      </g>
+    </g>
+  </svg>
+</div>
+
 {#if tooltipData && id}
   <MapTooltip
+    {isComparison}
     data={tooltipData}
     locationContext="single"
     percentage
@@ -152,15 +189,24 @@
 
 <style>
   h3 {
-    width: 178px;
-    text-align: right;
+    text-align: left;
     font-size: 1.125rem;
     text-transform: capitalize;
     margin-bottom: 0;
     margin-top: 0;
-    margin-left: 0;
+    margin-left: 1.25rem;
   }
   div {
     text-align: left;
+  }
+  .axis {
+    color: var(--surface-text);
+    user-select: none;
+  }
+  .grid {
+    color: var(--surface-gridlines);
+  }
+  rect:hover {
+    opacity: 0.8;
   }
 </style>

@@ -149,11 +149,21 @@
             rel="noopener noreferrer"
           >
             <strong class="population-label">{populationLabel}</strong>
-            <span class="population-count">{populationCount}</span>
+            <span class="population-count"
+              >{currentSegment.includes('comparison') &&
+              parseInt(populationCount) >= 0
+                ? '+'
+                : undefined}{populationCount}</span
+            >
           </a>
         {:else}
           <strong class="population-label">{populationLabel}</strong>
-          <span class="population-count">{populationCount}</span>
+          <span class="population-count"
+            >{currentSegment.includes('comparison') &&
+            parseInt(populationCount) >= 0
+              ? '+'
+              : undefined}{populationCount}</span
+          >
         {/if}
       </p>
     </div>

@@ -1,16 +1,27 @@
-<script>
-  import HeatmapToggle from './HeatmapToggle.svelte'
-</script>
-
 <div class="map-legend hidden all">
-  <HeatmapToggle />
-  <div class="map-legend-colors"></div>
-  <ul>
-    <li class="hide-departures hide-all">Less Arrivals</li>
-    <li class="hide-departures">More Arrivals</li>
-    <li class="hide-arrivals hide-all">Less Departures</li>
-    <li class="hide-arrivals">More Departures</li>
-  </ul>
+  <div class="main-legend">
+    <div class="map-legend-colors"></div>
+    <ul>
+      <li class="hide-departures hide-all">Less Arrivals</li>
+      <li class="hide-departures">More Arrivals</li>
+      <li class="hide-arrivals hide-all">Less Departures</li>
+      <li class="hide-arrivals">More Departures</li>
+    </ul>
+  </div>
+  <div class="comparison-only">
+    <div class="map-legend-colors hide-departures"></div>
+    <ul class="hide-departures">
+      <li>Reduced Arrivals</li>
+      <li>Increased Arrivals</li>
+    </ul>
+  </div>
+  <div class="comparison-only">
+    <div class="map-legend-colors hide-arrivals"></div>
+    <ul class="hide-arrivals">
+      <li>Reduced Departures</li>
+      <li>Increased Departures</li>
+    </ul>
+  </div>
 </div>
 
 <style>
@@ -42,6 +53,27 @@
       #b91c1c
     );
     margin: 5px;
+  }
+
+  .comparison-only .map-legend-colors.hide-departures {
+    background-image: linear-gradient(
+      90deg,
+      #006666,
+      #36e7f4,
+      #d0f5fe,
+      #3b82f6,
+      #1d4ed8
+    );
+  }
+  .comparison-only .map-legend-colors.hide-arrivals {
+    background-image: linear-gradient(
+      90deg,
+      #facc15,
+      #fef08a,
+      #fefce8,
+      #ef4444,
+      #b91c1c
+    );
   }
 
   ul {
