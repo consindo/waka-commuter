@@ -27,6 +27,12 @@
   --surface-text-subtle: light-dark(#52525b, #d4d4d4);
 }
 
+@media (max-width: 1020px) {
+  :root {
+    --sidebar-padding: 0.75rem;
+  }
+}
+
 body,
 html {
   margin: 0;
@@ -44,31 +50,8 @@ body.light {
   color-scheme: only light;
 }
 
-/* needs to be moved to svelte native */
-.map-view .btn-expand {
-  transform: rotate(-180deg);
-}
-
-.map-view .nav-header button.btn-expand {
-  transform: rotate(-180deg);
-}
-
-@media (max-width: 1020px) {
-  .map-view .nav-header button.btn-close {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
 button {
   font-family: inherit;
-}
-
-.blurb-container {
-  padding: 0 var(--sidebar-padding);
-  margin: 0 0 1.5rem;
-  font-size: 1.125rem;
-  line-height: 1.35;
 }
 
 .hidden {
@@ -127,19 +110,7 @@ noscript p {
   .graph-container {
     display: block;
   }
-  .location-inner {
-    border-radius: 0;
-    border-right: 0;
-    margin-bottom: 1rem;
-  }
   .mode-inner {
     margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 599px) {
-  /* aligns the svg's to the center */
-  .location-inner {
-    margin-left: calc((100vw - 580px) / 2);
   }
 }

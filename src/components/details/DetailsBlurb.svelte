@@ -69,6 +69,10 @@
     margin: 0 0 1.5rem;
     font-size: 1.125rem;
     line-height: 1.35;
+
+    @media (max-width: 1020px) {
+      font-size: 1rem;
+    }
   }
   .wfh {
     color: var(--surface-text-success);

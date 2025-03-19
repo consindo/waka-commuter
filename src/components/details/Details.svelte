@@ -741,6 +741,12 @@
     border: var(--border);
     border-left: 0;
     margin-bottom: 2rem;
+
+    @media (max-width: 1650px) {
+      border-radius: 0;
+      border-right: 0;
+      margin-bottom: 1rem;
+    }
   }
 
   .mode-container {
@@ -755,6 +761,10 @@
     padding: 0.25rem 0 1rem;
     border-radius: 5px 0 0 5px;
     height: 100%;
+
+    @media (max-width: 1650px) {
+      margin-bottom: 1rem;
+    }
   }
 
   .mode-container h4 {

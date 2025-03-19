@@ -109,7 +109,7 @@
   })
 </script>
 
-<svg {width} {height}>
+<svg {width} {height} viewBox="0 0 {width} {height}">
   {#if attribution}
     <a
       href="https://datafinder.stats.govt.nz/data/category/census/2023/commuter-view/"
@@ -180,6 +180,12 @@
 {/if}
 
 <style>
+  svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
   .node:hover {
     opacity: 0.7;
   }

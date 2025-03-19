@@ -129,6 +129,7 @@
     width: 900px;
     border-left: var(--border);
     overflow-y: auto;
+    background: var(--surface-bg);
   }
 
   @media (max-width: 1650px) {
@@ -138,6 +139,13 @@
   }
 
   @media (max-width: 1020px) {
+    section {
+      /* iphone */
+      width: 393px;
+    }
+  }
+
+  @media (max-width: 800px) {
     section {
       width: 100%;
       position: absolute;

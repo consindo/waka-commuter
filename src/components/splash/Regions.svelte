@@ -166,14 +166,29 @@
 <style>
   nav {
     font-size: 0;
-    padding: 1rem;
+    padding: 0.5rem;
     display: grid;
     grid-template-columns: 280px 280px 280px;
     gap: 0.75rem;
     border: 0;
+    align-items: center;
+    justify-content: center;
 
     @media (max-width: 1650px) {
       grid-template-columns: 280px 280px;
+    }
+
+    @media (max-width: 1020px) {
+      gap: 0.5rem;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media (max-width: 500px) {
+      grid-template-columns: 1fr 1fr;
     }
   }
   button {
@@ -185,9 +200,12 @@
     border-radius: 5px;
     transition: 100ms ease transform;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    aspect-ratio: 2 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
   }
   h3 {
-    height: 140px;
     padding: 0 0 0.5rem;
     box-sizing: border-box;
     line-height: 1;

@@ -121,7 +121,7 @@
       </button>
     </nav>
   </div>
-  <div class="nav-header-flex">
+  <div class="nav-header-grid">
     <div class="title">
       {#if source.detailsSecondaryControls}
         <nav class="secondary-controls" class:hidden={isControlsHidden}>
@@ -140,32 +140,6 @@
           </ul>
         </nav>
       {/if}
-      <p class="population-wrapper" class:hidden={isControlsHidden}>
-        {#if populationLink}
-          <a
-            class="population-link"
-            href="https://tools.summaries.stats.govt.nz/places/SA2/{path}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <strong class="population-label">{populationLabel}</strong>
-            <span class="population-count"
-              >{currentSegment.includes('comparison') &&
-              parseInt(populationCount) >= 0
-                ? '+'
-                : undefined}{populationCount}</span
-            >
-          </a>
-        {:else}
-          <strong class="population-label">{populationLabel}</strong>
-          <span class="population-count"
-            >{currentSegment.includes('comparison') &&
-            parseInt(populationCount) >= 0
-              ? '+'
-              : undefined}{populationCount}</span
-          >
-        {/if}
-      </p>
     </div>
     <nav class="controls primary-controls">
       <ul>
@@ -183,18 +157,45 @@
           </li>
         {/each}
       </ul>
-      {#if source.brandingClass === 'ason' || source.brandingClass === 'statsnz'}
-        <div class="mode-wrapper" class:hidden={isControlsHidden}>
-          <ModeToggle bind:selection />
-        </div>
-      {/if}
     </nav>
+    <p class="population-wrapper" class:hidden={isControlsHidden}>
+      {#if populationLink}
+        <a
+          class="population-link"
+          href="https://tools.summaries.stats.govt.nz/places/SA2/{path}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong class="population-label">{populationLabel}</strong>
+          <span class="population-count"
+            >{currentSegment.includes('comparison') &&
+            parseInt(populationCount) >= 0
+              ? '+'
+              : undefined}{populationCount}</span
+          >
+        </a>
+      {:else}
+        <strong class="population-label">{populationLabel}</strong>
+        <span class="population-count"
+          >{currentSegment.includes('comparison') &&
+          parseInt(populationCount) >= 0
+            ? '+'
+            : undefined}{populationCount}</span
+        >
+      {/if}
+    </p>
+    {#if source.brandingClass === 'ason' || source.brandingClass === 'statsnz'}
+      <div class="mode-wrapper" class:hidden={isControlsHidden}>
+        <ModeToggle bind:selection />
+      </div>
+    {/if}
   </div>
 </div>
 
 <style>
   .nav-header {
-    padding: 1rem var(--sidebar-padding) 1rem;
+    padding: var(--sidebar-padding) var(--sidebar-padding)
+      var(--sidebar-padding);
     background: var(--surface-bg-subtle);
     border-bottom: var(--border);
     position: sticky;
@@ -206,12 +207,23 @@
 
   .nav-header-flex {
     display: flex;
+    gap: 0.5rem;
+  }
+
+  .nav-header-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 0.375rem;
+    align-items: center;
+
+    @media (max-width: 1020px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .nav-header .title {
     flex: 1;
     overflow: hidden;
-    padding-right: 1rem;
   }
 
   .nav-header h2 {
@@ -222,6 +234,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: capitalize;
+
+    @media (max-width: 1020px) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      margin: 0 0 0.25rem;
+    }
   }
 
   .nav-header a {
@@ -238,8 +256,12 @@
     margin: 0;
   }
 
-  .nav-header .controls {
+  .nav-header .controls,
+  .mode-wrapper {
     text-align: right;
+    @media (max-width: 1020px) {
+      text-align: left;
+    }
   }
 
   .nav-header button {
@@ -255,7 +277,6 @@
   .nav-header button {
     text-align: center;
     padding: 0.25rem;
-    margin-bottom: 0.55rem;
     background: #111;
     border-radius: 50%;
     transition: 100ms ease all;
@@ -278,8 +299,7 @@
 
   .nav-header .controls a {
     display: inline-block;
-    font-size: 0.9rem;
-    padding: 0 0.25rem;
+    font-size: 0.95rem;
   }
 
   .nav-header a.selected {
@@ -291,15 +311,20 @@
     display: none;
   }
 
-  @media (max-width: 1020px) {
+  :global(.map-view) .btn-expand {
+    transform: rotate(-180deg);
+  }
+
+  @media (max-width: 800px) {
     .nav-header button.btn-expand {
-      transform: translate(36px, 0);
+      /*      transform: translate(36px, 0);*/
       display: inline-block;
     }
-    .nav-header button.btn-close {
+    /*.nav-header button.btn-close {
+      display: none;
       opacity: 0;
       pointer-events: none;
-    }
+    }*/
   }
 
   nav ul {
@@ -311,10 +336,6 @@
   nav li {
     display: inline-block;
   }
-  .primary-controls ul,
-  .secondary-controls ul {
-    margin-bottom: 0.375rem;
-  }
   .primary-controls li:not(:last-child)::after,
   .secondary-controls li:not(:last-child)::after {
     content: '·';
@@ -323,16 +344,20 @@
   .ason img.logo {
     display: none;
   }
-  .mode-wrapper {
-    text-align: right;
-  }
-  .population-wrapper {
+  p.population-wrapper {
     line-height: 26px;
+    font-size: 0.9rem;
+
+    @media (max-width: 1020px) {
+      border-top: var(--border);
+      margin-top: 0.375rem;
+      padding-top: 0.375rem;
+    }
   }
   .hidden {
     display: none;
   }
-  @media (min-width: 1020px) {
+  @media (min-width: 800px) {
     .ason {
       height: auto;
     }
@@ -344,9 +369,6 @@
   @media (max-width: 599px) {
     h2 {
       font-size: 1.5rem;
-    }
-    .population-wrapper {
-      display: none;
     }
   }
 </style>

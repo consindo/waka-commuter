@@ -6,6 +6,9 @@
 <div class="splash-bg" style={`background-image: ${background}`}>
   <div class="splash-content">
     <h2>Explore how we travel</h2>
+    <p class="mobile">
+      Discover how we get around, using travel data from the {dataSource}.
+    </p>
   </div>
   <div class="splash-controls">
     <button
@@ -40,6 +43,15 @@
     height: 315px;
     padding: 4rem 1.25rem;
     box-sizing: border-box;
+
+    @media (max-width: 1020px) {
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.8) 0%,
+          rgba(255, 255, 255, 0.8) 100%
+        ),
+        url('/static/css/splash.avif');
+    }
   }
 
   :global(.dark) .splash-bg {
@@ -51,6 +63,16 @@
         rgba(0, 0, 0, 0.05) 75%
       ),
       url('/static/css/splash-dark.avif');
+
+    @media (max-width: 1020px) {
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 100%),
+        url('/static/css/splash-dark.avif');
+    }
+
+    @media (min-width: 1651px) {
+      background-position: 50% 45%;
+    }
   }
 
   h2 {
@@ -62,6 +84,11 @@
     font-size: 1rem;
     max-width: 600px;
     line-height: 1.35;
+    position: relative;
+    top: 0;
+  }
+  p.mobile {
+    display: none;
   }
 
   .splash-controls {
@@ -92,21 +119,24 @@
 
   @media (max-width: 1020px) {
     .splash-bg {
-      padding: 1rem 1rem;
+      padding: 0.75rem 0.75rem;
       display: flex;
-      height: 128px;
+      height: 103px;
       position: sticky;
       top: 0;
       z-index: 2;
     }
     h2 {
-      margin: 0.1rem 0 0.25rem;
+      margin: 0.25rem 0 0.25rem;
       font-size: 1.5rem;
     }
     p {
-      margin: 0;
-      font-size: 0.9rem;
-      max-width: 300px;
+      display: none;
+    }
+    p.mobile {
+      display: block;
+      margin: 0 0.25rem 0 0;
+      font-size: 0.85rem;
     }
     .desktop {
       display: none;
@@ -114,6 +144,8 @@
     .splash-content {
       flex: 1;
     }
+  }
+  @media (max-width: 800px) {
     .splash-controls {
       display: block;
     }
