@@ -123,55 +123,59 @@
 </script>
 
 {#if data.length > 0}
-  <h3>{isComparison ? 'Greatest change in ' : 'Top'} {mode}</h3>
-{/if}
-<div>
-  <svg
-    width={width + margin.left + margin.right}
-    height={height + margin.top + margin.bottom}
-    viewBox="0 0 {width + margin.left + margin.right}"
-  >
-    <g transform="translate({margin.left}, {margin.top})">
-      <g bind:this={yaxis} class="axis" />
-      <g bind:this={grid} transform="translate(0, {height})" class="grid" />
-      <g bind:this={xaxis} transform="translate(0, {height})" class="axis" />
-      <g
-        onclick={(e) => {
-          const key = e.target.dataset.key
-          if (
-            e.ctrlKey ||
-            e.metaKey ||
-            Dispatcher.currentRegion.includes(key)
-          ) {
-            Dispatcher.addRegion(key)
-          } else {
-            Dispatcher.setRegions([key], true)
-          }
+  <details open={window.innerWidth > 1020 || isComparison} class:isComparison>
+    <summary
+      ><h3>{isComparison ? 'Greatest change in ' : 'Top'} {mode}</h3></summary
+    >
+    <svg
+      width={width + margin.left + margin.right}
+      height={height + margin.top + margin.bottom}
+      viewBox="0 0 {width + margin.left + margin.right} {height +
+        margin.top +
+        margin.bottom}"
+    >
+      <g transform="translate({margin.left}, {margin.top})">
+        <g bind:this={yaxis} class="axis" />
+        <g bind:this={grid} transform="translate(0, {height})" class="grid" />
+        <g bind:this={xaxis} transform="translate(0, {height})" class="axis" />
+        <g
+          onclick={(e) => {
+            const key = e.target.dataset.key
+            if (
+              e.ctrlKey ||
+              e.metaKey ||
+              Dispatcher.currentRegion.includes(key)
+            ) {
+              Dispatcher.addRegion(key)
+            } else {
+              Dispatcher.setRegions([key], true)
+            }
 
-          // element will be disposed when the next page loads
-          loading = true
-        }}
-        onpointerover={() => (opacity = 1)}
-        onpointerleave={() => (opacity = 0)}
-        onpointermove={(e) => {
-          position = [e.clientX, e.clientY]
-          id = e.target.dataset.key
-        }}
-      >
-        {#each graphData as bar}
-          <rect
-            x={x(Math.min(bar.value, 0))}
-            y={y(bar.key)}
-            width={Math.abs(x(bar.value) - x(0))}
-            height={y.bandwidth()}
-            fill={color(bar.value)}
-            data-key={bar.key}
-          />
-        {/each}
+            // element will be disposed when the next page loads
+            loading = true
+          }}
+          onpointerover={() => (opacity = 1)}
+          onpointerleave={() => (opacity = 0)}
+          onpointermove={(e) => {
+            position = [e.clientX, e.clientY]
+            id = e.target.dataset.key
+          }}
+        >
+          {#each graphData as bar}
+            <rect
+              x={x(Math.min(bar.value, 0))}
+              y={y(bar.key)}
+              width={Math.abs(x(bar.value) - x(0))}
+              height={y.bandwidth()}
+              fill={color(bar.value)}
+              data-key={bar.key}
+            />
+          {/each}
+        </g>
       </g>
-    </g>
-  </svg>
-</div>
+    </svg>
+  </details>
+{/if}
 
 {#if tooltipData && id}
   <MapTooltip
@@ -188,16 +192,34 @@
 {/if}
 
 <style>
+  details.isComparison summary {
+    pointer-events: none;
+  }
+  details.isComparison summary::marker {
+    content: '';
+  }
+  details.isComparison h3 {
+    margin-left: 0;
+  }
+  summary {
+    text-align: left;
+    margin-left: var(--sidebar-padding);
+    cursor: pointer;
+  }
+  summary::marker {
+    color: var(--surface-text-subtle);
+    font-size: 85%;
+  }
   h3 {
     text-align: left;
     font-size: 1.125rem;
     text-transform: capitalize;
-    margin-bottom: 0;
-    margin-top: 0;
-    margin-left: 1.25rem;
+    margin: 0 0 0 0.25rem;
+    display: inline-block;
   }
-  div {
-    text-align: left;
+  svg {
+    max-width: 100%;
+    height: auto;
   }
   .axis {
     color: var(--surface-text);
