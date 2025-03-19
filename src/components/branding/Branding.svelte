@@ -23,6 +23,11 @@
     const legend = document.querySelector('.map-legend')
     legend.classList.remove('all', 'departures', 'arrivals')
     legend.classList.add(currentDirection)
+    if (Dispatcher.dataSegment.includes('comparison')) {
+      legend.classList.add('comparison')
+    } else {
+      legend.classList.remove('comparison')
+    }
   }
   Dispatcher.bind('load-blocks', loadBlocks)
 </script>

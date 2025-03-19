@@ -40,6 +40,8 @@
   const source = getSource()
 
   let tooltipProps = $state({
+    isComparison: false,
+    percentage: true,
     loading: false,
     position: [0, 0],
     data: {
@@ -50,7 +52,11 @@
     },
   })
   const tooltipCallback = (props) => {
-    tooltipProps = { ...tooltipProps, ...props }
+    tooltipProps = {
+      ...tooltipProps,
+      ...props,
+      isComparison: Dispatcher.dataSegment.includes('comparison'),
+    }
   }
 
   mapboxgl.accessToken = token

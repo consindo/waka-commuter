@@ -30,8 +30,9 @@ export const humanRegionName = (nameArray, mode) => {
       .slice(0, -1)
       .join(', ')}, and ${nameArray.slice(-1)}`
   } else if (mode === 'title') {
-    return `${nameArray[0]} & ${nameArray.length - 1} other ${isZone ? 'zones' : 'areas'
-      }`
+    return `${nameArray[0]} & ${nameArray.length - 1} other ${
+      isZone ? 'zones' : 'areas'
+    }`
   }
   // should never get here
   return nameArray.join(', ')
@@ -80,12 +81,16 @@ export const transformData = (features, dataSources, category) => {
   // sums the total values together
   let totalCount = 0
   const combinedSource = {}
+  const combinedBaseline = {}
   dataSources.forEach((source) => {
     // if the key doesn't exist, just skip iteration
     if (source[category] === undefined) return
     Object.keys(source[category]).forEach((location) => {
-      if (combinedSource[location] === undefined) {
-        combinedSource[location] = 0
+      combinedSource[location] = combinedSource[location] || 0
+      // if doing percentages, we need to use a seperate object to keep track
+      if (source[`${category}-baseline`] !== undefined) {
+        combinedBaseline[location] = combinedBaseline[location] || 0
+        combinedBaseline[location] += source[`${category}-baseline`][location]
       }
       combinedSource[location] += source[category][location]
       totalCount += source[category][location]
@@ -97,7 +102,11 @@ export const transformData = (features, dataSources, category) => {
     return {
       key: i,
       value: combinedSource[i],
-      percentage: combinedSource[i] / totalCount,
+      // percentage is a percentage increase/decrease
+      percentage: combinedBaseline[i]
+        ? (combinedSource[i] + combinedBaseline[i]) / combinedBaseline[i] - 1
+        : combinedSource[i] / totalCount,
+      baseline: combinedBaseline[i],
       x: coords.lng,
       y: coords.lat,
     }
@@ -106,12 +115,15 @@ export const transformData = (features, dataSources, category) => {
 
 export const transformModeData = (dataSources, sourceKeys, category) => {
   const combinedSource = {}
+  const combinedBaseline = {}
+
   sourceKeys.forEach((key, index) => {
     // sets up combined object
     const keyArr = ['Total', key.split(':')[0], key]
     keyArr.forEach((k) => {
       if (combinedSource[k] === undefined) {
         combinedSource[k] = {}
+        combinedBaseline[k] = {}
       }
     })
 
@@ -121,9 +133,22 @@ export const transformModeData = (dataSources, sourceKeys, category) => {
         if (combinedSource[k][c] === undefined) {
           combinedSource[k][c] = 0
         }
+        if (dataSources[index][`${category}-baseline`] !== undefined) {
+          combinedBaseline[k][c] = combinedBaseline[k][c] || 0
+          combinedBaseline[k][c] +=
+            dataSources[index][`${category}-baseline`][c]
+        }
         combinedSource[k][c] += dataSources[index][category][c]
       })
     })
   })
-  return combinedSource
+  return [combinedSource, combinedBaseline]
 }
+
+export const formatPercentage = (number, isDelta = true) =>
+  isNaN(number) || number === 0
+    ? ''
+    : ` (${Math.round(number * 100)}%${isDelta ? (number >= 0 ? '↑' : '↓') : ''})`.replace(
+        'Infinity',
+        '∞'
+      )

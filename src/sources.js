@@ -26,7 +26,7 @@ const sources = {
       '2018-education',
     ],
     detailsControls: ['All', 'Workplace', 'Education'],
-    detailsSecondaryControls: ['2023', '2018'],
+    detailsSecondaryControls: ['2023', '2018', 'Comparison'],
     brandingClass: 'statsnz',
   },
   ason: {

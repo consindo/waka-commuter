@@ -373,7 +373,7 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
           }
         }
 
-        combinedObject[i.key].population += i.value * sign
+        combinedObject[i.key].population += Math.abs(i.value) * sign
         combinedObject[i.key].magnitude += i.value
       })
     })
