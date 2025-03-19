@@ -108,6 +108,11 @@
     text-align: left;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     border: var(--border);
+
+    @media (max-width: 800px) {
+      right: 0.5rem;
+      left: 0.5rem;
+    }
   }
   .visible {
     display: block;

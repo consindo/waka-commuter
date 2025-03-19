@@ -60,10 +60,15 @@
   const departPercentage = $derived(departData[1] || 0)
   const arrivalPercentage = $derived(arriveData[1] || 0)
   const singleContext = $derived(locationContext !== 'single')
+
+  const leftAlign = $derived(window.innerWidth - position[0] < 400)
+  const xpos = $derived(
+    leftAlign ? `calc(${position[0] - 10}px - 100%)` : `${position[0] + 20}px`
+  )
 </script>
 
 <div
-  style={`opacity: ${opacity}; transform: translate(${position[0] + 20}px, ${position[1]}px);`}
+  style={`opacity: ${opacity}; transform: translate(${xpos}, ${position[1]}px);`}
 >
   <h4>{name}</h4>
   {#if loading}

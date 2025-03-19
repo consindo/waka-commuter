@@ -168,7 +168,7 @@
     height: 100%;
   }
 
-  @media (max-width: 1020px) {
+  @media (max-width: 800px) {
     #map {
       height: calc(100% - 103px);
     }
