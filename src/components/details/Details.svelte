@@ -130,53 +130,64 @@
 
                     const rootPortion = segment.split('-').slice(0, 2).join('-')
                     if (rootPortion.includes('comparison')) {
-                      const segment1 =
+                      const rootSegment1 =
                         dataSource[rootPortion.replace('comparison', '2023')] ||
                         defaultSource
-                      const segment2 =
+                      const rootSegment2 =
                         dataSource[rootPortion.replace('comparison', '2018')] ||
                         defaultSource
+                      const specificSegment1 =
+                        dataSource[key.replace('comparison', '2023')] ||
+                        defaultSource
+                      const specificSegment2 =
+                        dataSource[key.replace('comparison', '2018')] ||
+                        defaultSource
+
                       departureModes = objectDelta(
                         {},
-                        segment1?.departureModes || {},
-                        segment2?.departureModes || {}
+                        rootSegment1?.departureModes || {},
+                        rootSegment2?.departureModes || {}
                       )
                       departureModesBaseline = objectBaseline(
                         {},
-                        segment1?.departureModes || {},
-                        segment2?.departureModes || {}
+                        rootSegment1?.departureModes || {},
+                        rootSegment2?.departureModes || {}
                       )
                       arrivalModes = objectDelta(
                         {},
-                        segment1?.arrivalModes || {},
-                        segment2?.arrivalModes || {}
+                        rootSegment1?.arrivalModes || {},
+                        rootSegment2?.arrivalModes || {}
                       )
                       arrivalModesBaseline = objectBaseline(
                         {},
-                        segment1?.arrivalModes || {},
-                        segment2?.arrivalModes || {}
+                        rootSegment1?.arrivalModes || {},
+                        rootSegment2?.arrivalModes || {}
                       )
                       data.arriveFrom = objectDelta(
                         {},
-                        segment1.arriveFrom,
-                        segment2.arriveFrom
+                        specificSegment1.arriveFrom,
+                        specificSegment2.arriveFrom
                       )
                       data['arriveFrom-baseline'] = objectBaseline(
                         {},
-                        segment1.arriveFrom,
-                        segment2.arriveFrom
+                        specificSegment1.arriveFrom,
+                        specificSegment2.arriveFrom
                       )
                       data.departTo = objectDelta(
                         {},
-                        segment1.departTo,
-                        segment2.departTo
+                        specificSegment1.departTo,
+                        specificSegment2.departTo
                       )
                       data['departTo-baseline'] = objectBaseline(
                         {},
-                        segment1.departTo,
-                        segment2.departTo
+                        specificSegment1.departTo,
+                        specificSegment2.departTo
                       )
                     } else {
+                      if (dataSource[key]) {
+                        data.departTo = dataSource[key]?.departTo
+                        data.arriveFrom = dataSource[key]?.arriveFrom
+                      }
                       departureModes = dataSource[rootPortion]?.departureModes
                       arrivalModes = dataSource[rootPortion]?.arrivalModes
                     }
