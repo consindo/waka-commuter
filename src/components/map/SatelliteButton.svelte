@@ -1,7 +1,11 @@
 <script>
-  let { style, styleChange } = $props()
+  let { style, styleChange, mapLabels, setMapLabels } = $props()
 
   let visible = $state(false)
+  let checked = $state(mapLabels)
+  $effect(() => {
+    setMapLabels(checked)
+  })
 
   function toggleVisible() {
     visible = !visible
@@ -18,9 +22,16 @@
 <button class="style" onclick={toggleVisible} title={label} aria-label={label}>
 </button>
 <div class="options" class:visible>
+  <h4>Map Style</h4>
   <button onclick={handleClick('light')}>Light</button>
   <button onclick={handleClick('dark')}>Dark</button>
   <button onclick={handleClick('satellite')}>Satellite</button>
+  {#if mapLabels !== undefined}
+    <label>
+      <input type="checkbox" bind:checked />
+      Area Labels
+    </label>
+  {/if}
 </div>
 
 <style>
@@ -53,6 +64,10 @@
   button:active {
     background-color: #ccc;
   }
+  h4 {
+    margin: 0.75rem 0.75rem 0.25rem;
+    font-size: 0.9rem;
+  }
   .options {
     position: absolute;
     bottom: 142px;
@@ -73,7 +88,16 @@
     background: transparent;
     cursor: pointer;
   }
-  .options button:hover {
+  .options button:hover,
+  .options label:hover {
     color: var(--surface-text-interactive);
+  }
+  label {
+    cursor: pointer;
+    padding: 0.25rem 1rem 0.75rem 0.5rem;
+    font-size: 13.3333px;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
   }
 </style>

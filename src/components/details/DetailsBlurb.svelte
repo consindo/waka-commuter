@@ -57,7 +57,7 @@
     {#if mode === 'arrivals'}
       The most common way to arrive is
     {:else if mode === 'departures'}
-      People in {vars.placeReduced} most often depart by
+      The most common way to depart in {vars.placeReduced} is
     {/if}
     <strong>{humanMode(vars.popularMode)} ({vars.popularPercentage}%)</strong>.
   {/if}

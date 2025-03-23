@@ -18,12 +18,26 @@
   const { mapData, secondaryData, tertiaryData, dataset2, lat, lng, zoom } =
     $props()
 
+  const source = getSource()
+
   let isLoaded = false
   let map = $state(null)
 
   let style = $state(
     window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   )
+  let mapLabels = $state(source.mapAreaLabelsToggleValue)
+  const setMapLabels = (value) => {
+    if (map) {
+      mapLabels = value
+      map.setLayoutProperty(
+        'sa2-labels',
+        'visibility',
+        value ? 'visible' : 'none'
+      )
+    }
+  }
+
   const styleChange = (newStyle) => {
     style = newStyle
     if (isLoaded) {
@@ -36,8 +50,6 @@
     .addEventListener('change', (event) => {
       styleChange(event.matches ? 'dark' : 'light')
     })
-
-  const source = getSource()
 
   let tooltipProps = $state({
     isComparison: false,
@@ -125,7 +137,13 @@
           source.dynamicShapeFiles.forEach((i) => (i.isLoaded = false))
         }
         let data = await Promise.all([mapData, secondaryData, tertiaryData])
-        drawMap(map, data, source.isMapAreaLabelsEnabled, style === 'dark')
+        drawMap(
+          map,
+          data,
+          source.isMapAreaLabelsEnabled,
+          mapLabels,
+          style !== 'light'
+        )
 
         // handles dynamic loading when the style changes
         map.setZoom(map.getZoom() + 0.001)
@@ -153,7 +171,7 @@
 <div id="map" class:expanded={source.brandingClass === 'ason'}>
   <div id="map-content"></div>
   <Legend />
-  <SatelliteButton {style} {styleChange} />
+  <SatelliteButton {style} {styleChange} {mapLabels} {setMapLabels} />
   <MapTooltip {...tooltipProps} />
 </div>
 
