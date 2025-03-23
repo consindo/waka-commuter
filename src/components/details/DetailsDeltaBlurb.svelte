@@ -66,7 +66,7 @@
   >
   trips to
   <span class="less-emphasis">{humanRegionName(currentRegions, 'full')}</span>
-  for {mode.join(' & ')} when compared to 2018. The number of people {mode
+  for {mode.join(' & ')} when compared to 2018. The number of people living and {mode
     .join(' & ')
     .replace('work', 'working')
     .replace('school', 'learning')} within

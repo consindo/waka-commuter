@@ -1,6 +1,12 @@
 import { getAreaFill, getLineFill, pointsFill } from './map-styles.js'
 
-export const drawMap = (map, datasets, areaLabels, isDark) => {
+export const drawMap = (
+  map,
+  datasets,
+  areaLabels,
+  areaLabelsVisibility,
+  isDark
+) => {
   const data = datasets[0]
   const secondaryData = datasets[1]
 
@@ -87,18 +93,19 @@ export const drawMap = (map, datasets, areaLabels, isDark) => {
         'text-field': `{${areaLabels}}`,
         'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
         'text-size': 11,
+        visibility: areaLabelsVisibility ? 'visible' : 'none',
       },
       paint: {
         // 'text-color': 'rgba(255,255,255,0.7)',
         'text-color': [
           'case',
           ['==', ['feature-state', 'magnitude'], null],
-          'rgba(255,255,255,0.3)',
+          isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)',
           [
             'case',
             ['<', ['feature-state', 'magnitude'], 1],
-            'rgba(255,255,255,0.3)',
-            '#fff',
+            isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)',
+            isDark ? '#fff' : '#444',
           ],
         ],
       },
