@@ -17,6 +17,7 @@ const sources = {
     initialPosition: [173, -40, 5.5],
     isModeGraphsEnabled: true,
     mapAreaLabelsToggleValue: false,
+    canMultiSelect: false,
     isMapAreaLabelsEnabled: 'name',
     segments: [
       '2023-workplace',
@@ -270,6 +271,7 @@ const sources = {
     initialPosition: [133, -25, 4],
     isModeGraphsEnabled: true,
     isMapAreaLabelsEnabled: false,
+    canMultiSelect: true,
     segments: ['2021-sa2', '2021-dzn', '2016-sa2', '2016-dzn'],
     detailsControls: ['SA2', 'DZN', 'TZ'],
     detailsSecondaryControls: ['2021', '2016'],
@@ -281,6 +283,7 @@ const sources = {
     initialPosition: [172.5, -43.53, 9.5],
     isModeGraphsEnabled: false,
     mapAreaLabelsToggleValue: true,
+    canMultiSelect: true,
     isMapAreaLabelsEnabled: 'friendlyName',
     segments: [
       '2018-am2hr',
