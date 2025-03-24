@@ -10,8 +10,11 @@
 
   import Dispatcher from '../dispatcher.js'
   import MapTooltip from './map/MapTooltip.svelte'
+  import { getSource } from '../sources.js'
 
   let { data, mode, tooltipData, isComparison } = $props()
+
+  const source = getSource()
 
   let id = $state(null)
   let loading = $state(false)
@@ -142,8 +145,8 @@
           onclick={(e) => {
             const key = e.target.dataset.key
             if (
-              e.ctrlKey ||
-              e.metaKey ||
+              (source.canMultiSelect && e.ctrlKey) ||
+              (source.canMultiSelect && e.metaKey) ||
               Dispatcher.currentRegion.includes(key)
             ) {
               Dispatcher.addRegion(key)
