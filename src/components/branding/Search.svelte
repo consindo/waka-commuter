@@ -1,5 +1,8 @@
 <script>
   import Dispatcher from '../../dispatcher.js'
+  import { getSource } from '../../sources.js'
+
+  const source = getSource()
 
   let { regionNames } = $props()
 
@@ -42,7 +45,11 @@
         )
         Dispatcher.dataDirection = 'arrivals'
       }
-      if (ctrlKey || metaKey || Dispatcher.currentRegion.includes(match.id)) {
+      if (
+        (source.canMultiSelect && ctrlKey) ||
+        (source.canMultiSelect && metaKey) ||
+        Dispatcher.currentRegion.includes(match.id)
+      ) {
         Dispatcher.addRegion(match.id)
       } else {
         Dispatcher.setRegions([match.id], true)

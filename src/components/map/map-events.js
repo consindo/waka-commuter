@@ -157,8 +157,8 @@ const bindMapboxEvents = (map, tooltipCallback) => {
     if (meshblock != null) {
       tooltipCallback({ loading: true })
       if (
-        e.originalEvent.ctrlKey ||
-        e.originalEvent.metaKey ||
+        (source.canMultiSelect && e.originalEvent.ctrlKey) ||
+        (source.canMultiSelect && e.originalEvent.metaKey) ||
         Dispatcher.currentRegion.includes(meshblock.id)
       ) {
         Dispatcher.addRegion(meshblock.id)
@@ -183,8 +183,8 @@ const bindMapboxEvents = (map, tooltipCallback) => {
     if (meshblock != null) {
       tooltipCallback({ loading: true })
       if (
-        e.originalEvent.ctrlKey ||
-        e.originalEvent.metaKey ||
+        (source.canMultiSelect && e.originalEvent.ctrlKey) ||
+        (source.canMultiSelect && e.originalEvent.metaKey) ||
         Dispatcher.currentRegion.includes(meshblock.id)
       ) {
         Dispatcher.addRegion(meshblock.id)

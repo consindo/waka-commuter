@@ -11,6 +11,9 @@
   } from 'd3'
   import Dispatcher from '../../dispatcher.js'
   import MapTooltip from '../map/MapTooltip.svelte'
+  import { getSource } from '../../sources.js'
+
+  const source = getSource()
 
   const { scale, data, tooltipData, showOnly, width, height, attribution } =
     $props()
@@ -93,7 +96,11 @@
   })
 
   const triggerClick = (d) => (e) => {
-    if (e.ctrlKey || e.metaKey || Dispatcher.currentRegion.includes(d)) {
+    if (
+      (source.canMultiSelect && e.ctrlKey) ||
+      (source.canMultiSelect && e.metaKey) ||
+      Dispatcher.currentRegion.includes(d)
+    ) {
       Dispatcher.addRegion(d)
     } else {
       Dispatcher.setRegions([d], true)

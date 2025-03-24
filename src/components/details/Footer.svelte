@@ -27,20 +27,22 @@
     </p>
   </div>
 {/if}
-<div class="desktop">
-  <p>
-    <strong>Tip:</strong> Hold down
-    <strong
-      >{#if navigator.platform === 'MacIntel'}⌘ Cmd{:else}Ctrl{/if}</strong
-    > to select multiple areas.
-  </p>
-</div>
-<div class="mobile">
-  <p>
-    <strong>Tip:</strong> Open this app on a PC to get more detailed insights, and
-    to select multiple areas.
-  </p>
-</div>
+{#if source.canMultiSelect}
+  <div class="desktop">
+    <p>
+      <strong>Tip:</strong> Hold down
+      <strong
+        >{#if navigator.platform === 'MacIntel'}⌘ Cmd{:else}Ctrl{/if}</strong
+      > to select multiple areas.
+    </p>
+  </div>
+  <div class="mobile">
+    <p>
+      <strong>Tip:</strong> Open this app on a PC to get more detailed insights,
+      and to select multiple areas.
+    </p>
+  </div>
+{/if}
 
 <style>
   div {

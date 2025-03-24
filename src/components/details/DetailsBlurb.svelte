@@ -33,7 +33,9 @@
   >
   travel {mode === 'arrivals' ? 'to' : 'from'}
   <span class="less-emphasis">{vars.place}</span>
-  for {vars.destination.length > 0 ? vars.destination.join(' & ') : ''}, while
+  for {vars.destination.length > 0
+    ? vars.destination.join(' & ').replace('school', 'school or study')
+    : ''}, while
   <strong class="wfh"
     >{vars.residentsCount.toLocaleString()}
     {vars.residentsCount === 1 ? 'person' : 'people'} ({vars.residentsPercentage}%
@@ -43,7 +45,7 @@
     ? `& ${vars.destination.join('/').replace('school', 'learn')}`
     : ''} within {vars.placeReduced}.
   {#if vars.regionCount > 0}
-    People arrive from
+    People {mode === 'arrivals' ? 'arrive from' : 'travel to'} at least
     <strong class={mode}
       >{vars.regionCount} different
       {vars.regionCount === 1 ? 'area' : 'areas'}</strong
