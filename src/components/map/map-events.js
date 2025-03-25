@@ -47,7 +47,7 @@ const bindMapboxEvents = (map, tooltipCallback) => {
         friendlyName: meshblock.properties.friendlyName,
         showOnly:
           Dispatcher.dataSegment.startsWith('2021-dzn') ||
-          Dispatcher.dataSegment.startsWith('2016-dzn')
+            Dispatcher.dataSegment.startsWith('2016-dzn')
             ? Dispatcher.dataDirection
             : null,
         populationCount: meshblock.properties.populationCount,
@@ -459,9 +459,9 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         departData,
         mode: ['work', 'study'],
       }
-      if (segment === 'workplace') {
+      if (segment.includes('workplace')) {
         tooltipData.mode = ['work']
-      } else if (segment === 'education') {
+      } else if (segment.includes('education')) {
         tooltipData.mode = ['study']
       }
       tooltipCallback({
