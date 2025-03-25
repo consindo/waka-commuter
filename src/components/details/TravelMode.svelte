@@ -100,8 +100,6 @@
         if (buckets[category][finalCategory][row] === undefined) {
           buckets[category][finalCategory][row] = 0
         }
-        // don't care about the totals
-        if (row === 'Total') return
         buckets[category][finalCategory][row] += data[category][row]
       })
     })
@@ -116,6 +114,7 @@
         total: 0,
       }
       keys.forEach((i) => {
+        if (i === 'Total') return
         overall[i] = data[category][i] || 0
         overall.total += overall[i]
         total += overall[i]
@@ -124,6 +123,10 @@
       return overall
     })
     rows.sort((a, b) => a.total - b.total)
+    // the Total in the dataset is more accurate than the sum
+    if (data.Other.Total > 0) {
+      total = data.Other.Total
+    }
     return [rows, total]
   }
 
@@ -233,13 +236,14 @@
         <g fill={getColor(bar.key)}>
           {#each bar as segment}
             {@const dataValue = segment.data[bar.key]}
-            {#if dataValue !== 0}
+            {@const width = x(segment[1]) - x(segment[0])}
+            {#if dataValue !== 0 && !isNaN(width)}
               <rect
                 data-name={bar.key}
                 data-value={dataValue}
                 x={x(segment[0])}
                 y={y(segment.data.category)}
-                width={x(segment[1]) - x(segment[0])}
+                {width}
                 height={y.bandwidth() - 3}
               />
             {/if}
