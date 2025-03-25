@@ -23,6 +23,7 @@
 
   // takes 30 hottest results
   const graphData = data
+    .filter((i) => i.key !== 'Total')
     .slice()
     .sort((a, b) => {
       return Math.abs(a.value) < Math.abs(b.value) ? 1 : -1
@@ -83,7 +84,10 @@
 
   const x = $derived(
     scaleLinear()
-      .domain([Math.min(graphData.slice(-1)[0].value, 0), graphData[0].value])
+      .domain([
+        Math.min((graphData.slice(-1)[0] || {}).value, 0),
+        (graphData[0] || {}).value,
+      ])
       .range([0, width])
       .nice()
   )

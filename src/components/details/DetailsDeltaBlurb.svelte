@@ -23,8 +23,17 @@
   }
 
   const actualArrivals = $derived(
-    arrivals.filter((i) => !currentRegions.includes(i.key))
+    arrivals
+      .filter((i) => i.key === 'Total' || currentRegions.includes(i.key))
+      .map((i) => {
+        if (i.key === 'Total') {
+          return i
+        } else {
+          return { ...i, value: i.value * -1, baseline: i.baseline * -1 }
+        }
+      })
   )
+
   const totalArrivals = $derived(getSum(actualArrivals))
   const totalArrivalsPercentage = $derived(getPercentage(actualArrivals))
 
@@ -35,7 +44,15 @@
   const totalResidentsPercentage = $derived(getPercentage(actualResidents))
 
   const actualDepartures = $derived(
-    departures.filter((i) => !currentRegions.includes(i.key))
+    departures
+      .filter((i) => i.key === 'Total' || currentRegions.includes(i.key))
+      .map((i) => {
+        if (i.key === 'Total') {
+          return i
+        } else {
+          return { ...i, value: i.value * -1, baseline: i.baseline * -1 }
+        }
+      })
   )
   const totalDepartures = $derived(getSum(actualDepartures))
   const totalDeparturesPercentage = $derived(getPercentage(actualDepartures))
