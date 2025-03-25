@@ -97,6 +97,11 @@ export const transformData = (features, dataSources, category) => {
     })
   })
 
+  // if there is a total in the data, we use that as it's more accurate than summing
+  if (combinedSource['Total']) {
+    totalCount = combinedSource['Total']
+  }
+
   return Object.keys(combinedSource).map((i) => {
     const coords = getLocation(features, i)
     return {

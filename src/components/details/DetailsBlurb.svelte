@@ -28,8 +28,11 @@
 <p>
   <strong class={mode}
     >{vars.travellersCount.toLocaleString()}
-    {vars.travellersCount === 1 ? 'person' : 'people'} ({vars.travellersPercentage}%
-    of {mode})</strong
+    {vars.travellersCount === 1 ? 'person' : 'people'} ({isNaN(
+      vars.travellersPercentage
+    )
+      ? 0
+      : vars.travellersPercentage}% of {mode})</strong
   >
   travel {mode === 'arrivals' ? 'to' : 'from'}
   <span class="less-emphasis">{vars.place}</span>

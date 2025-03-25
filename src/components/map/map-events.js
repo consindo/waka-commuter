@@ -459,9 +459,9 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         departData,
         mode: ['work', 'study'],
       }
-      if (segment === 'workplace') {
+      if (segment.includes('workplace')) {
         tooltipData.mode = ['work']
-      } else if (segment === 'education') {
+      } else if (segment.includes('education')) {
         tooltipData.mode = ['study']
       }
       tooltipCallback({

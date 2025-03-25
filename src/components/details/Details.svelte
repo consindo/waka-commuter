@@ -199,25 +199,25 @@
                     if (departureModes) {
                       data.departureModes = {
                         [name]: departureModes[name],
-                        Total: departureModes[name],
+                        Total: departureModes.Total,
                       }
                     }
                     if (departureModesBaseline) {
                       data['departureModes-baseline'] = {
                         [name]: departureModesBaseline[name],
-                        Total: departureModesBaseline[name],
+                        Total: departureModesBaseline.Total,
                       }
                     }
                     if (arrivalModes) {
                       data.arrivalModes = {
                         [name]: arrivalModes[name],
-                        Total: arrivalModes[name],
+                        Total: arrivalModes.Total,
                       }
                     }
                     if (arrivalModesBaseline) {
                       data['arrivalModes-baseline'] = {
                         [name]: arrivalModesBaseline[name],
-                        Total: arrivalModesBaseline[name],
+                        Total: arrivalModesBaseline.Total,
                       }
                     }
                     return data
@@ -402,19 +402,13 @@
             departData: departDataFriendly,
             mode: ['work', 'study'],
           }
-          if (segment === 'workplace') {
+          if (segment.includes('workplace')) {
             tooltipData.mode = ['work']
-          } else if (segment === 'education') {
+          } else if (segment.includes('education')) {
             tooltipData.mode = ['study']
           }
 
-          if (segment.includes('-education-mode-')) {
-            populationLabel = 'Filtered Students:'
-          } else if (segment.includes('-workplace-mode-')) {
-            populationLabel = 'Filtered Workers:'
-          } else if (segment.includes('-all-mode-')) {
-            populationLabel = 'Filtered Population:'
-          } else if (segment.endsWith('-all')) {
+          if (segment.endsWith('-all')) {
             populationLabel = 'Resident Workers & Students:'
           } else if (segment.endsWith('-workplace')) {
             populationLabel = 'Resident Workers:'

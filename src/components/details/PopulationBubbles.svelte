@@ -37,7 +37,7 @@
   const parsedData = $derived(
     data
       // don't show bubble if there's less than one trip to it
-      .filter((i) => i.value >= 1)
+      .filter((i) => i.value >= 1 && i.key !== 'Total')
       .sort((a, b) => b.percentage - a.percentage)
       .slice(0, 30)
       .map((i) => {

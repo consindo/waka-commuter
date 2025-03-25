@@ -28,7 +28,7 @@
   )
   let mapLabels = $state(source.mapAreaLabelsToggleValue)
   const setMapLabels = (value) => {
-    if (map) {
+    if (map && value !== mapLabels) {
       mapLabels = value
       map.setLayoutProperty(
         'sa2-labels',
