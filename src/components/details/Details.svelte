@@ -30,6 +30,7 @@
   let firstRegion = $state('')
   let populationLabel = $state('')
   let populationCount = $state('')
+  let populationLink = $state(null)
 
   let hideArrivals = $state(false)
   let hideDepartures = $state(false)
@@ -276,6 +277,10 @@
               })
               .flat()
 
+            const regionCode = Array.from(
+              new Set(data.map((i) => i.code))
+            ).join('%2B')
+
             const arriveData = transformData(
               features,
               dataSources,
@@ -327,6 +332,7 @@
 
             Dispatcher.trigger('update-blocks', {
               regionName,
+              regionCode,
               direction,
               segment,
               arriveData,
@@ -346,6 +352,7 @@
         'update-blocks',
         ({
           regionName,
+          regionCode,
           arriveData,
           departData,
           arriveModeData,
@@ -494,6 +501,10 @@
             populationCount = pop
           }
 
+          if (source.brandingClass === 'statsnz') {
+            populationLink = `https://explore.data.stats.govt.nz/vis?pg=0&snb=9&df%5Bds%5D=ds-nsiws-disseminate&df%5Bid%5D=CEN23_TBT_008&df%5Bag%5D=STATSNZ&df%5Bvs%5D=1.0&dq=twu001%2Btwu003%2Btwu004%2Btwu005%2Btwu006%2Btwu007%2Btwu009%2Btwu010%2Btwu012%2Btwu016%2BtwuTS%2Btwu999%2Bteu001%2Bteu002%2Bteu003%2Bteu004%2Bteu005%2Bteu006%2Bteu007%2Bteu008%2Bteu009%2Bteu010%2BteuTS%2Bteu999%2BteuTotal%2BtwuTotal.${regionCode}.2018%2B2023&ly%5Brw%5D=CEN23_TBT_IND_003&ly%5Bcl%5D=CEN23_YEAR_001&to%5BTIME%5D=false&fs%5B0%5D=2023%20Census%2C0%7CTransport%23CAT_TRANSPORT%23&fc=2023%20Census&bp=true`
+          }
+
           dataSegment = segment
         }
       )
@@ -506,7 +517,7 @@
 <svelte:head>
   <title
     >{documentTitle ? `${documentTitle} - ` : ''}{source.title ||
-      'Commuter - Waka'}</title
+      'Commuter Waka'}</title
   >
 </svelte:head>
 
@@ -515,7 +526,7 @@
     title={detailsTitle}
     {firstRegion}
     {populationLabel}
-    populationLink={source.brandingClass === 'statsnz'}
+    {populationLink}
     {populationCount}
   />
   <div class="arrive-from warning" class:hidden={!invalidArrival}>

@@ -17,7 +17,15 @@
   }
 
   const label = $derived(style === 'satellite' ? 'Street Map' : 'Satellite Map')
+
+  const triggerShortcut = (e) => {
+    if (e.target.tagName !== 'INPUT' && e.key === 'l') {
+      checked = !checked
+    }
+  }
 </script>
+
+<svelte:window onkeydown={triggerShortcut} />
 
 <button class="style" onclick={toggleVisible} title={label} aria-label={label}>
 </button>

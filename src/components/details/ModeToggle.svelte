@@ -62,9 +62,27 @@
       'mode-18',
     ]
   }
+
+  let overlayBtn = $state()
+
+  const triggerShortcut = (e) => {
+    if (
+      !(e.target.tagName === 'INPUT' && e.target.type === 'text') &&
+      e.key === 'f'
+    ) {
+      toggleFilter()
+      overlayBtn.focus()
+    }
+  }
 </script>
 
-<button onclick={toggleFilter} title="Filter Mode" class:active={overlayVisible}
+<svelte:window onkeydown={triggerShortcut} />
+
+<button
+  onclick={toggleFilter}
+  title="Filter Mode"
+  class:active={overlayVisible}
+  bind:this={overlayBtn}
   >Filter by mode <img src={filterIcon} alt="Filter" /></button
 >
 <div class="overlay" class:visible={overlayVisible}>

@@ -59,12 +59,24 @@
   }
 
   const onFocus = (e) => (e.currentTarget.value = '')
+
+  let input = $state()
+
+  const triggerShortcut = (e) => {
+    if (e.key === '/' && e.target.tagName !== 'INPUT') {
+      e.preventDefault()
+      input.focus()
+    }
+  }
 </script>
+
+<svelte:window onkeydown={triggerShortcut} />
 
 {#await regionNames}
   <input placeholder="Loading..." />
 {:then regions}
   <input
+    bind:this={input}
     bind:value={inputValue}
     list="search-choice"
     placeholder="Search areas..."

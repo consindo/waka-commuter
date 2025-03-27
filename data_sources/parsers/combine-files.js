@@ -2,6 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url';
 
+import sa2 from '../originals/sa2-2023.json' with { type: 'json' }
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -14,8 +16,11 @@ const combineFile = (filename, subkey, subkey2) => {
 
   Object.keys(data).forEach((key) => {
     if (finalResult[key] === undefined) {
+      const region = sa2.features.find(i => i.properties.SA22023__1 === key)
+      let code = region?.properties.SA22023_V1
       finalResult[key] = {
         id: key,
+        code,
       }
     }
 

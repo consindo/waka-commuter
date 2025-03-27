@@ -166,10 +166,19 @@
   $effect(() => {
     document.body.className = style !== 'light' ? 'dark' : 'light'
   })
+
+  let mapContent = $state()
+  const triggerShortcut = (e) => {
+    if (e.target.tagName !== 'INPUT' && e.key === 'm') {
+      mapContent.querySelector('canvas').focus()
+    }
+  }
 </script>
 
+<svelte:window onkeydown={triggerShortcut} />
+
 <div id="map" class:expanded={source.brandingClass === 'ason'}>
-  <div id="map-content"></div>
+  <div id="map-content" bind:this={mapContent}></div>
   <Legend />
   <SatelliteButton {style} {styleChange} {mapLabels} {setMapLabels} />
   <MapTooltip {...tooltipProps} />
