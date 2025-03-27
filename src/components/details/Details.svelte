@@ -506,7 +506,7 @@
 <svelte:head>
   <title
     >{documentTitle ? `${documentTitle} - ` : ''}{source.title ||
-      'Commuter - Waka'}</title
+      'Commuter Waka'}</title
   >
 </svelte:head>
 

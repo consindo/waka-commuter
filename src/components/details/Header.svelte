@@ -85,7 +85,29 @@
   $effect(() => {
     setSegmentWithMode(Dispatcher.dataSegment, selection)
   })
+
+  const triggerShortcut = (e) => {
+    if (e.target.tagName !== 'INPUT') {
+      if (e.key === '1' || e.key === '2' || e.key === '3') {
+        const index = parseInt(e.key) - 1
+        triggerSecondarySegment(source.detailsSecondaryControls[index])(e)
+      } else if (e.key === 'w') {
+        triggerSegment(source.detailsControls[0])(e)
+      } else if (e.key === 'e') {
+        triggerSegment(source.detailsControls[1])(e)
+      } else if (
+        e.key === 'Escape' &&
+        document.activeElement === document.body
+      ) {
+        triggerClose()
+      } else if (e.key === 'Escape') {
+        e.target.blur()
+      }
+    }
+  }
 </script>
+
+<svelte:window onkeydown={triggerShortcut} />
 
 <div class="nav-header" class:ason={source.brandingClass === 'ason'}>
   {#if source.brandingClass === 'ason'}
