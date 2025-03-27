@@ -6,9 +6,9 @@
     visualisations.
   </p>
   <p>
-    We’ve also updated the app to be more accessible with light/dark mode,
-    optional map labels, keyboard shortcuts, improved loading speeds, and
-    optimized the experience on mobile devices.
+    We’ve also made the app more accessible with light/dark mode, optional map
+    labels, keyboard shortcuts, improved loading speeds, and optimized the
+    experience on mobile devices.
   </p>
   <details>
     <summary>Keyboard Shortcuts</summary>
