@@ -1,15 +1,11 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import expand from '/static/expand.svg'
   import ason from '/static/css/ason.avif?url'
-  import { transformFilename } from '../../data.js'
   import Dispatcher from '../../dispatcher.js'
   import { getSource } from '../../sources.js'
   import ModeToggle from './ModeToggle.svelte'
 
-  let { title, firstRegion, populationLabel, populationLink, populationCount } =
-    $props()
+  let { title, populationLabel, populationLink, populationCount } = $props()
 
   const source = getSource()
 
@@ -76,12 +72,6 @@
     }
     Dispatcher.setSegment(finalSegment)
   }
-  // removes the macrons for the stats nz link
-  const path = $derived(
-    transformFilename(firstRegion)
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-  )
   $effect(() => {
     setSegmentWithMode(Dispatcher.dataSegment, selection)
   })
@@ -184,7 +174,7 @@
       {#if populationLink}
         <a
           class="population-link"
-          href="https://tools.summaries.stats.govt.nz/places/SA2/{path}"
+          href={populationLink}
           target="_blank"
           rel="noopener noreferrer"
         >
