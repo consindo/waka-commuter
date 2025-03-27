@@ -30,7 +30,21 @@
     }
   }
   Dispatcher.bind('load-blocks', loadBlocks)
+
+  const triggerShortcut = (e) => {
+    if (e.target.tagName !== 'INPUT') {
+      if (e.key === 'a') {
+        triggerClick('all')(e)
+      } else if (e.key === 's') {
+        triggerClick('arrivals')(e)
+      } else if (e.key === 'd') {
+        triggerClick('departures')(e)
+      }
+    }
+  }
 </script>
+
+<svelte:window onkeydown={triggerShortcut} />
 
 <div class="wrapper" {style}>
   <div class={brandingClass} class:branding={true}>
