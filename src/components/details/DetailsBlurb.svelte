@@ -42,7 +42,7 @@
   <strong class="wfh"
     >{vars.residentsCount.toLocaleString()}
     {vars.residentsCount === 1 ? 'person' : 'people'} ({vars.residentsPercentage}%
-    of arrivals)</strong
+    of {mode})</strong
   >
   {vars.travellersCount > 0 ? 'also' : ''} live {vars.destination.length > 0
     ? `& ${vars.destination.join('/').replace('school', 'learn')}`
@@ -57,6 +57,16 @@
       >{humanRegionName([vars.topRegion], 'full')} ({vars.topRegionCount} people—{vars.topRegionPercentage}%
       of {mode})</strong
     >.
+  {:else if mode === 'arrivals'}
+    The origin areas of people travelling from outside of <span
+      class="less-emphasis">{vars.place}</span
+    >
+    are not shown because fewer than 6 people travel from each external origin.
+  {:else}
+    The destination areas of people travelling outside of <span
+      class="less-emphasis">{vars.place}</span
+    >
+    are not shown because fewer than 6 people travel to each external destination.
   {/if}
   {#if !isNaN(vars.popularPercentage) && vars.popularPercentage >= 0}
     {#if mode === 'arrivals'}

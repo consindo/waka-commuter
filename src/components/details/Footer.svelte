@@ -18,6 +18,13 @@
       >
       is used for the modes of travel, and resident population.
     </p>
+    <p>
+      The Commuter View dataset excludes SA2-SA2 flows of fewer than 6 journeys
+      to reduce the size of the dataset. Because of this, there may be people
+      arriving from or departing to more SA2s than stated and travel mode data
+      from Aotearoa Data Explorer may count more people than the SA2-SA2 flows.
+      Percentages have been calculated using all SA2-SA2 flows.
+    </p>
   </div>
 {:else if source.brandingClass === 'wsp'}
   <div>
