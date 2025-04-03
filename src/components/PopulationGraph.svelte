@@ -181,6 +181,11 @@
         </g>
       </g>
     </svg>
+    {#if source.brandingClass === 'statsnz'}
+      <p class="disclaimer">
+        Only journeys made by 6 or more people are shown.
+      </p>
+    {/if}
   </details>
 {/if}
 
@@ -237,5 +242,12 @@
   }
   rect:hover {
     opacity: 0.8;
+  }
+  .disclaimer {
+    text-align: left;
+    font-size: 13px;
+    padding: 0 var(--sidebar-padding) 1rem;
+    color: var(--surface-text-subtle);
+    margin-top: 0;
   }
 </style>

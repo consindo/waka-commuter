@@ -571,6 +571,11 @@
               height="400"
             />
           </div>
+          {#if source.brandingClass === 'statsnz'}
+            <p class="disclaimer">
+              Only journeys made by 6 or more people are shown.
+            </p>
+          {/if}
         {/if}
         <div class="location-graph">
           {#key arrivals}
@@ -654,6 +659,11 @@
               height="400"
             />
           </div>
+          {#if source.brandingClass === 'statsnz'}
+            <p class="disclaimer">
+              Only journeys made by 6 or more people are shown.
+            </p>
+          {/if}
         {/if}
         <div class="location-graph">
           {#key departures}
@@ -756,13 +766,19 @@
     border-radius: 0 10px 10px 0;
     border: var(--border);
     border-left: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
     @media (max-width: 1650px) {
       border-radius: 0;
       border-right: 0;
-      margin-bottom: 1rem;
     }
+  }
+
+  .disclaimer {
+    font-size: 13px;
+    padding: 0 var(--sidebar-padding) 1rem;
+    color: var(--surface-text-subtle);
+    margin-top: 0;
   }
 
   .mode-container {
