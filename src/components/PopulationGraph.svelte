@@ -23,7 +23,7 @@
 
   // takes 30 hottest results
   const graphData = data
-    .filter((i) => i.key !== 'Total')
+    .filter((i) => i.key !== 'Total' && i.key !== 'Total-NonResidents')
     .slice()
     .sort((a, b) => {
       return Math.abs(a.value) < Math.abs(b.value) ? 1 : -1

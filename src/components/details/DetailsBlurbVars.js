@@ -20,6 +20,7 @@ export const getVars = ({
   let topRegionPercentage = 0
   destinationData.forEach((row) => {
     if (row.key === 'Total') return
+    if (row.key === 'Total-NonResidents') return
     if (currentRegions.includes(row.key)) {
       residentsCount += row.value
       residentsPercentage += row.percentage
@@ -40,7 +41,11 @@ export const getVars = ({
   })
 
   const total = destinationData.find((i) => i.key === 'Total')
-  if (total) {
+  const totalNonResidents = destinationData.find((i) => i.key === 'Total-NonResidents')
+  if (totalNonResidents) {
+    travellersCount = totalNonResidents.value
+    travellersPercentage = totalNonResidents.percentage
+  } else if (total) {
     travellersCount = total.value - residentsCount
     travellersPercentage = total.percentage - residentsPercentage
   }
