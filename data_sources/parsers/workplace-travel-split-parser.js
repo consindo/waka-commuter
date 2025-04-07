@@ -10,35 +10,68 @@ const __dirname = path.dirname(__filename)
 const filenames = [
   {
     input: 'commute.csv'
+  },
+  {
+    input: 'education-totals.csv'
+  },
+  {
+    input: 'workplace-totals.csv'
   }
 ]
 
+const results = {
+  "2018-education": {},
+  "2018-workplace": {},
+  "2018-all": {},
+  "2023-education": {},
+  "2023-workplace": {},
+  "2023-all": {},
+}
+
 // our parser
 const parse = (inputFilename, outputFilename) => {
-  const results = {
-    "2018-education": {},
-    "2018-workplace": {},
-    "2018-all": {},
-    "2023-education": {},
-    "2023-workplace": {},
-    "2023-all": {},
-  }
   fs.createReadStream(inputFilename)
     .pipe(stripBom())
     .pipe(csv())
     .on('data', (data) => {
       // doing a big aggregate
-      const areaKey = data['Area'].trim()
+      const areaKey = (data['Area'] || data['SA22023_V1_00_NAME']).trim()
       if (results["2018-education"][areaKey] === undefined) {
-        results["2018-education"][areaKey] = { departureModes: {}, arrivalModes: {} },
-          results["2018-workplace"][areaKey] = { departureModes: {}, arrivalModes: {} },
-          results["2018-all"][areaKey] = { departureModes: {}, arrivalModes: {} },
-          results["2023-education"][areaKey] = { departureModes: {}, arrivalModes: {} },
-          results["2023-workplace"][areaKey] = { departureModes: {}, arrivalModes: {} },
-          results["2023-all"][areaKey] = { departureModes: {}, arrivalModes: {} }
+        results["2018-education"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} },
+          results["2018-workplace"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} },
+          results["2018-all"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} },
+          results["2023-education"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} },
+          results["2023-workplace"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} },
+          results["2023-all"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} }
       }
 
+      // this parses our workplace-total & education-total files
+      if (data['leave_SA2'] === '1') {
+        if (data['edu_address_18']) {
+          const edu_address_18 = parseInt(data['edu_address_18'])
+          if (edu_address_18 >= 0) results[`2018-education`][areaKey].arriveFrom['Total-NonResidents'] = edu_address_18
+          const ur_address_18 = parseInt(data['ur_address_18'])
+          if (ur_address_18 >= 0) results[`2018-education`][areaKey].departTo['Total-NonResidents'] = ur_address_18
+          const edu_address_23 = parseInt(data['edu_address_23'])
+          if (edu_address_23 >= 0) results[`2023-education`][areaKey].arriveFrom['Total-NonResidents'] = edu_address_23
+          const ur_address_23 = parseInt(data['ur_address_23'])
+          if (ur_address_23 >= 0) results[`2023-education`][areaKey].departTo['Total-NonResidents'] = ur_address_23
+        } else if (data['wp_address_18']) {
+          const wp_address_18 = parseInt(data['wp_address_18'])
+          if (wp_address_18 >= 0) results[`2018-workplace`][areaKey].arriveFrom['Total-NonResidents'] = wp_address_18
+          const ur_address_18 = parseInt(data['ur_address_18'])
+          if (ur_address_18 >= 0) results[`2018-workplace`][areaKey].departTo['Total-NonResidents'] = ur_address_18
+          const wp_address_23 = parseInt(data['wp_address_23'])
+          if (wp_address_23 >= 0) results[`2023-workplace`][areaKey].arriveFrom['Total-NonResidents'] = wp_address_23
+          const ur_address_23 = parseInt(data['ur_address_23'])
+          if (ur_address_23 >= 0) results[`2023-workplace`][areaKey].departTo['Total-NonResidents'] = ur_address_23
+        }
+        return
+      }
+
+      // this parses commute.csv
       let key = data['Variable codes']
+      if (key === undefined) return
 
       // because in the data set it's "Total stated - main means of travel to education/work"
       if (key.toLowerCase().includes('total')) {

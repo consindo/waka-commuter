@@ -8,8 +8,8 @@
     <p>
       The
       <a
-        href="https://datafinder.stats.govt.nz/data/category/census/2023/commuter-view/"
-        >Commuter View dataset</a
+        href="https://datafinder.stats.govt.nz/data/category/census/2023/commuter-dataset/"
+        >Commuter dataset</a
       >
       is used for the map & bubble visualisations, while the
       <a

@@ -37,7 +37,10 @@
   const parsedData = $derived(
     data
       // don't show bubble if there's less than one trip to it
-      .filter((i) => i.value >= 1 && i.key !== 'Total')
+      .filter(
+        (i) =>
+          i.value >= 1 && i.key !== 'Total' && i.key !== 'Total-NonResidents'
+      )
       .sort((a, b) => b.percentage - a.percentage)
       .slice(0, 30)
       .map((i) => {
@@ -119,14 +122,14 @@
 <svg {width} {height} viewBox="0 0 {width} {height}">
   {#if attribution}
     <a
-      href="https://datafinder.stats.govt.nz/data/category/census/2023/commuter-view/"
+      href="https://datafinder.stats.govt.nz/data/category/census/2023/commuter-dataset/"
     >
       <text
         y={height - 12}
-        x={width - 95}
+        x={width - 105}
         style="fill: var(--surface-text-subtle); font-size: 12px;"
       >
-        Commuter View
+        Commuter Dataset
       </text>
     </a>
   {/if}
