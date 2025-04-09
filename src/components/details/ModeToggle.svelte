@@ -6,9 +6,11 @@
   import { modes } from './ModeMap'
 
   const source = getSource()
+  const allModes = modes.map((i) => i.id)
 
   let { selection = $bindable([]) } = $props()
-  let internalSelection = $state(modes.map((i) => i.id))
+  let selectionType = $state('checkbox')
+  let internalSelection = $state(allModes)
   run(() => {
     let newValue = []
     if (internalSelection.length !== modes.length) {
@@ -25,7 +27,7 @@
     if (internalSelection.length === modes.length) {
       internalSelection = []
     } else {
-      internalSelection = modes.map((i) => i.id)
+      internalSelection = allModes
     }
   }
 
@@ -48,19 +50,8 @@
       'mode-14',
     ]
   } else if (source.brandingClass === 'statsnz') {
-    internalSelection = [
-      'mode-1',
-      'mode-2',
-      'mode-3',
-      'mode-6',
-      'mode-7',
-      'mode-10',
-      'mode-11',
-      'mode-12',
-      'mode-13',
-      'mode-17',
-      'mode-18',
-    ]
+    selectionType = 'radio'
+    internalSelection = allModes
   }
 
   let overlayBtn = $state()
@@ -89,21 +80,30 @@
   <ul>
     <li>
       <label
-        ><span>All Modes</span><input
-          type="checkbox"
-          checked={internalSelection.length === modes.length}
-          onclick={toggleAll}
-        /></label
+        ><span>All Modes</span>{#if selectionType === 'checkbox'}<input
+            type="checkbox"
+            checked={internalSelection.length === modes.length}
+            onclick={toggleAll}
+          />{:else}<input
+            type="radio"
+            value={allModes}
+            bind:group={internalSelection}
+          />{/if}</label
       >
     </li>
     {#each modes as mode}
       <li>
         <label
-          ><span>{mode.icon} {mode.name}</span><input
-            type="checkbox"
-            bind:group={internalSelection}
-            value={mode.id}
-          /></label
+          ><span>{mode.icon} {mode.name}</span
+          >{#if selectionType === 'checkbox'}<input
+              type="checkbox"
+              bind:group={internalSelection}
+              value={mode.id}
+            />{:else}<input
+              type="radio"
+              bind:group={internalSelection}
+              value={[mode.id]}
+            />{/if}</label
         >
       </li>
     {/each}
