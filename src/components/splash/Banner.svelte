@@ -5,7 +5,7 @@
 
 <div class="splash-bg" style={`background-image: ${background}`}>
   <div class="splash-content">
-    <h2>Explore how we travel</h2>
+    <h2>Commuter Waka – Explore how we travel</h2>
     <p class="mobile">
       Discover how we get around, using travel data from the {dataSource}.
     </p>
@@ -43,6 +43,7 @@
     height: 315px;
     padding: 4rem 1.25rem;
     box-sizing: border-box;
+    align-items: center;
 
     @media (max-width: 1020px) {
       background-image:
@@ -76,8 +77,8 @@
   }
 
   h2 {
-    font-size: 2.25rem;
-    margin: 12.5rem 0 0;
+    font-size: 1.75rem;
+    margin: 13.5rem 0 0;
   }
   p {
     margin: 0 1.25rem 1rem;
@@ -128,7 +129,7 @@
     }
     h2 {
       margin: 0.25rem 0 0.25rem;
-      font-size: 1.5rem;
+      font-size: 1.125rem;
     }
     p {
       display: none;
@@ -148,6 +149,9 @@
   @media (max-width: 800px) {
     .splash-controls {
       display: block;
+    }
+    h2 {
+      font-size: 1rem;
     }
   }
 </style>
