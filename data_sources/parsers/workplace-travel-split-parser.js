@@ -3,6 +3,9 @@ import path from 'path'
 import csv from 'csv-parser'
 import stripBom from 'strip-bom-stream'
 import { fileURLToPath } from 'url';
+import sa2 from '../originals/sa2-2023.json' with { type: 'json' }
+
+const sa2Ids = sa2.features.map(i => i.properties.SA22023_V1)
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -36,6 +39,11 @@ const parse = (inputFilename, outputFilename) => {
     .on('data', (data) => {
       // doing a big aggregate
       const areaKey = (data['Area'] || data['SA22023_V1_00_NAME']).trim()
+
+      // skips all the codes that aren't sa2s
+      if (data['CEN23_TBT_GEO_006'] && !sa2Ids.includes(data['CEN23_TBT_GEO_006'])) {
+        return
+      }
       if (results["2018-education"][areaKey] === undefined) {
         results["2018-education"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} },
           results["2018-workplace"][areaKey] = { departureModes: {}, arrivalModes: {}, departTo: {}, arriveFrom: {} },
