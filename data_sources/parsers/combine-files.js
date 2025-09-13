@@ -3,6 +3,7 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 
 import sa2 from '../originals/sa2-2023.json' with { type: 'json' }
+import sa3 from '../originals/sa3-2023.json' with { type: 'json' }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -18,6 +19,10 @@ const combineFile = (filename, subkey, subkey2) => {
     if (finalResult[key] === undefined) {
       const region = sa2.features.find(i => i.properties.SA22023__1 === key)
       let code = region?.properties.SA22023_V1
+      if (!code) {
+        const region = sa3.features.find(i => i.properties.SA32023__1 === key)
+        code = region?.properties.SA32023_V1
+      }
       finalResult[key] = {
         id: key,
         code,
