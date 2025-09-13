@@ -41,7 +41,9 @@ export const getVars = ({
   })
 
   const total = destinationData.find((i) => i.key === 'Total')
-  const totalNonResidents = destinationData.find((i) => i.key === 'Total-NonResidents')
+  const totalNonResidents = destinationData.find(
+    (i) => i.key === 'Total-NonResidents'
+  )
   if (totalNonResidents) {
     travellersCount = totalNonResidents.value
     travellersPercentage = totalNonResidents.percentage

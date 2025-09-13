@@ -3,6 +3,7 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 
 import sa2 from '../originals/sa2-2023.json' with { type: 'json' }
+import sa3 from '../originals/sa3-2023.json' with { type: 'json' }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -18,6 +19,10 @@ const combineFile = (filename, subkey, subkey2) => {
     if (finalResult[key] === undefined) {
       const region = sa2.features.find(i => i.properties.SA22023__1 === key)
       let code = region?.properties.SA22023_V1
+      if (!code) {
+        const region = sa3.features.find(i => i.properties.SA32023__1 === key)
+        code = region?.properties.SA32023_V1
+      }
       finalResult[key] = {
         id: key,
         code,
@@ -76,6 +81,18 @@ combineFile('2018-education-mode-12-area-to-area.json', '2018-education-mode-12'
 combineFile('2018-education-mode-13-area-to-area.json', '2018-education-mode-13')
 combineFile('2018-education-mode-18-area-to-area.json', '2018-education-mode-18')
 
+combineFile('sa3-2018-education-area-to-area.json', '2018-education')
+combineFile('sa3-2018-education-mode-1-area-to-area.json', '2018-education-mode-1')
+combineFile('sa3-2018-education-mode-2-area-to-area.json', '2018-education-mode-2')
+combineFile('sa3-2018-education-mode-3-area-to-area.json', '2018-education-mode-3')
+combineFile('sa3-2018-education-mode-6-area-to-area.json', '2018-education-mode-6')
+combineFile('sa3-2018-education-mode-7-area-to-area.json', '2018-education-mode-7')
+combineFile('sa3-2018-education-mode-10-area-to-area.json', '2018-education-mode-10')
+combineFile('sa3-2018-education-mode-11-area-to-area.json', '2018-education-mode-11')
+combineFile('sa3-2018-education-mode-12-area-to-area.json', '2018-education-mode-12')
+combineFile('sa3-2018-education-mode-13-area-to-area.json', '2018-education-mode-13')
+combineFile('sa3-2018-education-mode-18-area-to-area.json', '2018-education-mode-18')
+
 // 2018 workplace
 combineFile('2018-workplace-area-to-area.json', '2018-workplace')
 combineFile('2018-workplace-mode-1-area-to-area.json', '2018-workplace-mode-1')
@@ -88,6 +105,18 @@ combineFile('2018-workplace-mode-11-area-to-area.json', '2018-workplace-mode-11'
 combineFile('2018-workplace-mode-12-area-to-area.json', '2018-workplace-mode-12')
 combineFile('2018-workplace-mode-13-area-to-area.json', '2018-workplace-mode-13')
 combineFile('2018-workplace-mode-17-area-to-area.json', '2018-workplace-mode-17')
+
+combineFile('sa3-2018-workplace-area-to-area.json', '2018-workplace')
+combineFile('sa3-2018-workplace-mode-1-area-to-area.json', '2018-workplace-mode-1')
+combineFile('sa3-2018-workplace-mode-2-area-to-area.json', '2018-workplace-mode-2')
+combineFile('sa3-2018-workplace-mode-3-area-to-area.json', '2018-workplace-mode-3')
+combineFile('sa3-2018-workplace-mode-6-area-to-area.json', '2018-workplace-mode-6')
+combineFile('sa3-2018-workplace-mode-7-area-to-area.json', '2018-workplace-mode-7')
+combineFile('sa3-2018-workplace-mode-10-area-to-area.json', '2018-workplace-mode-10')
+combineFile('sa3-2018-workplace-mode-11-area-to-area.json', '2018-workplace-mode-11')
+combineFile('sa3-2018-workplace-mode-12-area-to-area.json', '2018-workplace-mode-12')
+combineFile('sa3-2018-workplace-mode-13-area-to-area.json', '2018-workplace-mode-13')
+combineFile('sa3-2018-workplace-mode-17-area-to-area.json', '2018-workplace-mode-17')
 
 // 2018 commute
 combineFile('2018-education-commute.json', '2018-education')
@@ -106,6 +135,18 @@ combineFile('2023-education-mode-12-area-to-area.json', '2023-education-mode-12'
 combineFile('2023-education-mode-13-area-to-area.json', '2023-education-mode-13')
 combineFile('2023-education-mode-18-area-to-area.json', '2023-education-mode-18')
 
+combineFile('sa3-2023-education-area-to-area.json', '2023-education')
+combineFile('sa3-2023-education-mode-1-area-to-area.json', '2023-education-mode-1')
+combineFile('sa3-2023-education-mode-2-area-to-area.json', '2023-education-mode-2')
+combineFile('sa3-2023-education-mode-3-area-to-area.json', '2023-education-mode-3')
+combineFile('sa3-2023-education-mode-6-area-to-area.json', '2023-education-mode-6')
+combineFile('sa3-2023-education-mode-7-area-to-area.json', '2023-education-mode-7')
+combineFile('sa3-2023-education-mode-10-area-to-area.json', '2023-education-mode-10')
+combineFile('sa3-2023-education-mode-11-area-to-area.json', '2023-education-mode-11')
+combineFile('sa3-2023-education-mode-12-area-to-area.json', '2023-education-mode-12')
+combineFile('sa3-2023-education-mode-13-area-to-area.json', '2023-education-mode-13')
+combineFile('sa3-2023-education-mode-18-area-to-area.json', '2023-education-mode-18')
+
 // 2023 workplace
 combineFile('2023-workplace-area-to-area.json', '2023-workplace')
 combineFile('2023-workplace-mode-1-area-to-area.json', '2023-workplace-mode-1')
@@ -118,6 +159,18 @@ combineFile('2023-workplace-mode-11-area-to-area.json', '2023-workplace-mode-11'
 combineFile('2023-workplace-mode-12-area-to-area.json', '2023-workplace-mode-12')
 combineFile('2023-workplace-mode-13-area-to-area.json', '2023-workplace-mode-13')
 combineFile('2023-workplace-mode-17-area-to-area.json', '2023-workplace-mode-17')
+
+combineFile('sa3-2023-workplace-area-to-area.json', '2023-workplace')
+combineFile('sa3-2023-workplace-mode-1-area-to-area.json', '2023-workplace-mode-1')
+combineFile('sa3-2023-workplace-mode-2-area-to-area.json', '2023-workplace-mode-2')
+combineFile('sa3-2023-workplace-mode-3-area-to-area.json', '2023-workplace-mode-3')
+combineFile('sa3-2023-workplace-mode-6-area-to-area.json', '2023-workplace-mode-6')
+combineFile('sa3-2023-workplace-mode-7-area-to-area.json', '2023-workplace-mode-7')
+combineFile('sa3-2023-workplace-mode-10-area-to-area.json', '2023-workplace-mode-10')
+combineFile('sa3-2023-workplace-mode-11-area-to-area.json', '2023-workplace-mode-11')
+combineFile('sa3-2023-workplace-mode-12-area-to-area.json', '2023-workplace-mode-12')
+combineFile('sa3-2023-workplace-mode-13-area-to-area.json', '2023-workplace-mode-13')
+combineFile('sa3-2023-workplace-mode-17-area-to-area.json', '2023-workplace-mode-17')
 
 // 2023 commute
 combineFile('2023-education-commute.json', '2023-education')

@@ -228,6 +228,226 @@ const filenames = [
     output: '2023-education-mode-13-area-to-area.json',
     field: '2023_Study_at_home',
   },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-area-to-area.json',
+    field: '2018_Total_stated',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-1-area-to-area.json',
+    field: '2018_Train',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-2-area-to-area.json',
+    field: '2018_Public_bus',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-3-area-to-area.json',
+    field: '2018_Ferry',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-17-area-to-area.json',
+    field: '2018_Drive_a_company_car_truck_or_van',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-6-area-to-area.json',
+    field: '2018_Drive_a_private_car_truck_or_van',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-7-area-to-area.json',
+    field: '2018_Passenger_in_a_car_truck_van_or_company_bus',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-10-area-to-area.json',
+    field: '2018_Bicycle',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-11-area-to-area.json',
+    field: '2018_Other',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-12-area-to-area.json',
+    field: '2018_Walk_or_jog',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2018-workplace-mode-13-area-to-area.json',
+    field: '2018_Work_at_home',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-area-to-area.json',
+    field: '2018_Total_stated',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-1-area-to-area.json',
+    field: '2018_Train',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-2-area-to-area.json',
+    field: '2018_Public_bus',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-18-area-to-area.json',
+    field: '2018_School_bus',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-3-area-to-area.json',
+    field: '2018_Ferry',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-6-area-to-area.json',
+    field: '2018_Drive_a_car_truck_or_van',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-7-area-to-area.json',
+    field: '2018_Passenger_in_a_car_truck_or_van',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-10-area-to-area.json',
+    field: '2018_Bicycle',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-11-area-to-area.json',
+    field: '2018_Other',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-12-area-to-area.json',
+    field: '2018_Walk_or_jog',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2018-education-mode-13-area-to-area.json',
+    field: '2018_Study_at_home',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-area-to-area.json',
+    field: '2023_Total_stated',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-1-area-to-area.json',
+    field: '2023_Train',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-2-area-to-area.json',
+    field: '2023_Public_bus',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-3-area-to-area.json',
+    field: '2023_Ferry',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-17-area-to-area.json',
+    field: '2023_Drive_a_company_car_truck_or_van',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-6-area-to-area.json',
+    field: '2023_Drive_a_private_car_truck_or_van',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-7-area-to-area.json',
+    field: '2023_Passenger_in_a_car_truck_van_or_company_bus',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-10-area-to-area.json',
+    field: '2023_Bicycle',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-11-area-to-area.json',
+    field: '2023_Other',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-12-area-to-area.json',
+    field: '2023_Walk_or_jog',
+  },
+  {
+    input: 'sa3-workplace-area-to-area.csv',
+    output: 'sa3-2023-workplace-mode-13-area-to-area.json',
+    field: '2023_Work_at_home',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-area-to-area.json',
+    field: '2023_Total_stated',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-1-area-to-area.json',
+    field: '2023_Train',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-2-area-to-area.json',
+    field: '2023_Public_bus',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-18-area-to-area.json',
+    field: '2023_School_bus',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-3-area-to-area.json',
+    field: '2023_Ferry',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-6-area-to-area.json',
+    field: '2023_Drive_a_car_truck_or_van',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-7-area-to-area.json',
+    field: '2023_Passenger_in_a_car_truck_or_van',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-10-area-to-area.json',
+    field: '2023_Bicycle',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-11-area-to-area.json',
+    field: '2023_Other',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-12-area-to-area.json',
+    field: '2023_Walk_or_jog',
+  },
+  {
+    input: 'sa3-education-area-to-area.csv',
+    output: 'sa3-2023-education-mode-13-area-to-area.json',
+    field: '2023_Study_at_home',
+  },
 ]
 
 // our parser
@@ -237,10 +457,15 @@ const parse = (inputFilename, outputFilename, field) => {
     .pipe(stripBom())
     .pipe(csv())
     .on('data', (data) => {
-      const homeAddress = data['SA22023_V1_00_NAME_usual_residence_address'].trim()
+      const homeAddress = (
+        data['SA22023_V1_00_NAME_usual_residence_address'] ||
+        data['SA32023_V1_00_NAME_usual_residence_address']
+      ).trim()
       const workAddress = (
         data['SA22023_V1_00_NAME_workplace_address'] ||
-        data['SA22023_V1_00_NAME_educational_institution_address']
+        data['SA22023_V1_00_NAME_educational_institution_address'] ||
+        data['SA32023_V1_00_NAME_workplace_address'] ||
+        data['SA32023_V1_00_NAME_educational_institution_address']
       ).trim()
       const total = parseInt(data[field], 10)
       if (total < 0) return

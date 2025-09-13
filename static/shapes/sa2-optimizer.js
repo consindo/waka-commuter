@@ -1,5 +1,5 @@
 import fs from 'fs'
-const geojson = JSON.parse(fs.readFileSync('./sa2-2023.json'))
+const geojson = JSON.parse(fs.readFileSync('./sa3-2023-small.json'))
 
 const transformFilename = (name) => {
   return name
@@ -26,7 +26,7 @@ geojson.features = geojson.features
         ...i.geometry,
         coordinates: i.geometry['coordinates'].map(truncator),
       },
-      properties: { name: i.properties.SA22023__1 },
+      properties: { name: i.properties.SA32023__1 },
     }
   })
   .filter((i) => {
@@ -42,10 +42,10 @@ geojson.features = geojson.features
       return true
     }
     const isEmpty = !(
-      data['2023-education'].departTo ||
-      data['2023-education'].arriveFrom ||
-      data['2023-workplace'].departTo ||
-      data['2023-workplace'].arriveFrom
+      Object.keys(data['2023-education'].departTo).length > 0 ||
+      Object.keys(data['2023-education'].arriveFrom).length > 0 ||
+      Object.keys(data['2023-workplace'].departTo).length > 0 ||
+      Object.keys(data['2023-workplace'].arriveFrom).length > 0
     )
     const isWater =
       i.properties.name.includes('Oceanic') ||
@@ -57,8 +57,11 @@ geojson.features = geojson.features
     if (isEmpty && !isWater) {
       console.log(i.properties.name, 'is empty and not water!')
     }
+    if (isWater) {
+      console.log(i.properties.name, 'is water', isEmpty)
+    }
     return !(isEmpty && isWater)
   })
 
-fs.writeFileSync('./sa2-2023-optimized.json', JSON.stringify(geojson))
+fs.writeFileSync('./sa3-2023-small-optimized.json', JSON.stringify(geojson))
 console.log('Processed!')
