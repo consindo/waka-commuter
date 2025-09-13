@@ -1,12 +1,16 @@
 import sa22023 from '../static/shapes/sa2-2023-optimized.json?url'
 import sa22023small from '../static/shapes/sa2-2023-small-optimized.json?url'
+import sa32023 from '../static/shapes/sa3-2023-optimized.json?url'
+import sa32023small from '../static/shapes/sa3-2023-small-optimized.json?url'
+
+const useSa3 = window.location.search === '?mode=sa3'
 
 const sources = {
   commuterview: {
-    shapeFile: sa22023small,
+    shapeFile: useSa3 ? sa32023small : sa22023small,
     dynamicShapeFiles: [
       {
-        url: sa22023,
+        url: useSa3 ? sa32023 : sa22023,
         bbox: [
           [161, -48],
           [186, -32],
