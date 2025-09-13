@@ -68,6 +68,16 @@
       input.focus()
     }
   }
+
+  let placeholder = $state('Search areas...')
+  if (source.brandingClass === 'statsnz') {
+    const useSa3 = window.location.search === '?mode=sa3'
+    if (useSa3) {
+      placeholder = 'Search SA3 areas...'
+    } else {
+      placeholder = 'Search SA2 areas...'
+    }
+  }
 </script>
 
 <svelte:window onkeydown={triggerShortcut} />
@@ -79,7 +89,7 @@
     bind:this={input}
     bind:value={inputValue}
     list="search-choice"
-    placeholder="Search areas..."
+    {placeholder}
     onselect={onSearch}
     onchange={onSearch}
     onkeydown={onKeyPress}
