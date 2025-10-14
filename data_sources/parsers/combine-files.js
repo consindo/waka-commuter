@@ -16,24 +16,28 @@ const combineFile = (filename, subkey, subkey2) => {
   )
 
   Object.keys(data).forEach((key) => {
-    if (finalResult[key] === undefined) {
+    let keyName = key
+    if (filename.includes('sa3-')) {
+      keyName = `sa3-${key}`
+    }
+    if (finalResult[keyName] === undefined) {
       const region = sa2.features.find(i => i.properties.SA22023__1 === key)
       let code = region?.properties.SA22023_V1
-      if (!code) {
+      if (filename.includes('sa3-')) {
         const region = sa3.features.find(i => i.properties.SA32023__1 === key)
         code = region?.properties.SA32023_V1
       }
-      finalResult[key] = {
+      finalResult[keyName] = {
         id: key,
         code,
       }
     }
 
     // if we want everything in a subkey, set that up
-    let targetObject = finalResult[key]
+    let targetObject = finalResult[keyName]
     if (subkey != null) {
       // don't overwrite the object
-      if (finalResult[key][subkey] === undefined) {
+      if (finalResult[keyName][subkey] === undefined) {
         targetObject[subkey] = {}
       }
       // new target object
@@ -43,7 +47,7 @@ const combineFile = (filename, subkey, subkey2) => {
     // basically the same as above, but can't be bothered with a loop
     if (subkey2 != null) {
       // don't overwrite the object
-      if (finalResult[key][subkey][subkey2] === undefined) {
+      if (finalResult[keyName][subkey][subkey2] === undefined) {
         targetObject[subkey2] = {}
       }
       targetObject = targetObject[subkey2]
