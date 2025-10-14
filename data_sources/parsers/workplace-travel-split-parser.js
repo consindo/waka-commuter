@@ -46,7 +46,10 @@ const parse = (inputFilename, outputFilename) => {
     .pipe(csv())
     .on('data', (data) => {
       // doing a big aggregate
-      const areaKey = (data['Area'] || data['SA22023_V1_00_NAME'] || data['SA32023_V1_00_NAME']).trim()
+      let areaKey = (data['Area'] || data['SA22023_V1_00_NAME'] || data['SA32023_V1_00_NAME']).trim()
+      if (data['SA32023_V1_00_NAME'] || sa3Ids.includes(data['CEN23_TBT_GEO_006'])) {
+        areaKey = `sa3-${areaKey}`
+      }
 
       // skips all the codes that aren't sa2s or sa3s
       if (data['CEN23_TBT_GEO_006'] && !sa2Ids.includes(data['CEN23_TBT_GEO_006']) && !sa3Ids.includes(data['CEN23_TBT_GEO_006'])) {
@@ -62,7 +65,7 @@ const parse = (inputFilename, outputFilename) => {
       }
 
       // this parses our workplace-total & education-total files
-      if (data['leave_SA2'] === '1') {
+      if (data['leave_SA2'] === '1' || data['leave_SA3'] === '1') {
         if (data['edu_address_18']) {
           const edu_address_18 = parseInt(data['edu_address_18'])
           if (edu_address_18 >= 0) results[`2018-education`][areaKey].arriveFrom['Total-NonResidents'] = edu_address_18
