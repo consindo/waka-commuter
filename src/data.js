@@ -1,5 +1,7 @@
 import polylabel from 'polylabel'
 
+const useSa3 = window.location.search === '?mode=sa3'
+
 export const transformFilename = (name) =>
   name
     .trim()
@@ -43,7 +45,7 @@ let locationCache = {}
 export const getData = (locations) =>
   Promise.all(
     locations.map((location) => {
-      const url = `/data/regions/${transformFilename(location)}.json`
+      const url = `/data/regions/${useSa3 ? 'sa3-' : ''}${transformFilename(location)}.json`
       if (locationCache[url] === undefined) {
         return fetch(url)
           .then((res) => res.json())
