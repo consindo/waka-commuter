@@ -5,3 +5,4 @@ dist/
 public/data/
 public/shapes/
 .DS_Store
+.env

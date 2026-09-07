@@ -101,7 +101,7 @@
   </p>
 </div>
 <footer>
-  &copy; 2025 Turbomaps &middot; <a href="https://turbomaps.io">turbomaps.io</a>
+  &copy; 2026 Turbomaps &middot; <a href="https://turbomaps.io">turbomaps.io</a>
 </footer>
 
 <style>
