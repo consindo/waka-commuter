@@ -11,13 +11,13 @@
   --surface-gridlines: #ccc;
 
   --sidebar-padding: 1.25rem;
-  --border: 1px solid rgba(0,0,0,0.1);
+  --border: 1px solid rgba(0, 0, 0, 0.1);
   --real-height: 100vh;
 
   /* we redeclare until we get better browser support for this function */
   --surface-bg: light-dark(#fafafa, #111);
   --surface-bg-subtle: light-dark(#f4f4f5, #222);
-  --border: 1px solid light-dark(rgba(0,0,0,0.1), #000);
+  --border: 1px solid light-dark(rgba(0, 0, 0, 0.1), #000);
 
   --surface-gridlines: light-dark(#ccc, #444);
 
@@ -93,6 +93,10 @@ noscript p {
   display: block;
 }
 
+#svelte-app .mapboxgl-ctrl-group button {
+  width: 29px;
+  height: 29px;
+}
 
 .map-legend.arrivals .map-legend-colors {
   background-image: linear-gradient(-90deg, #1d4ed8, #3b82f6, #93c5fd);
