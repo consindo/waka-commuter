@@ -39,7 +39,7 @@
 
 <svelte:window onkeydown={triggerShortcut} />
 
-{#if source.brandingClass === 'statsnz'}
+{#if source.brandingClass === 'statsnz' || source.brandingClass === 'aucklandcouncil'}
   <button
     class="mode"
     class:sa3={useSa3}

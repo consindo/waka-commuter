@@ -281,6 +281,20 @@ const sources = {
     detailsSecondaryControls: ['2021', '2016'],
     brandingClass: 'ason',
   },
+  aucklandcouncil: {
+    shapeFile: useSa3
+      ? '/shapes/akl-sa3-2023-optimized.json'
+      : '/shapes/akl-sa2-2023-optimized.json',
+    initialPosition: [174.77, -36.85, 8],
+    isModeGraphsEnabled: false,
+    mapAreaLabelsToggleValue: false,
+    canMultiSelect: true,
+    isMapAreaLabelsEnabled: 'name',
+    segments: useSa3 ? ['2018-sa3'] : ['2018-sa2'],
+    detailsControls: [],
+    detailsSecondaryControls: [],
+    brandingClass: 'aucklandcouncil',
+  },
   wsp: {
     title: 'WSP Commuter',
     shapeFile: '/shapes/wsp-zones-optimized.json',

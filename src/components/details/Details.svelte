@@ -529,215 +529,234 @@
     {populationLink}
     {populationCount}
   />
-  <div class="arrive-from warning" class:hidden={!invalidArrival}>
-    <p>
-      A SA2 is selected. Select individual DZNs or switch to SA2 mode to see
-      arrivals.
-    </p>
-  </div>
-  {#if isComparison}
-    <h3>Comparison</h3>
-    <DetailsDeltaBlurb
-      {currentRegions}
-      segment={dataSegment}
-      {arrivals}
-      {departures}
-      arrivalModeData={arriveMode}
-      departureModeData={departureMode}
-    />
-  {/if}
-  <div class:hidden={hideArrivals || invalidArrival}>
-    <h3>Arrivals</h3>
-    {#if currentRegions && !isComparison}
-      <DetailsBlurb
-        mode="arrivals"
+  {#if source.brandingClass === 'aucklandcouncil'}
+    <div class="pre-flex">
+      <div>
+        <strong>arrive from:</strong>
+        <pre>{(arrivals || [])
+            .toSorted((a, b) => b.value - a.value)
+            .map((i) => `${i.key}: ${i.value}`)
+            .join('\n')}</pre>
+      </div>
+      <div>
+        <strong>depart to:</strong>
+        <pre>{(departures || [])
+            .toSorted((a, b) => b.value - a.value)
+            .map((i) => `${i.key}: ${i.value}`)
+            .join('\n')}</pre>
+      </div>
+    </div>
+  {:else}
+    <div class="arrive-from warning" class:hidden={!invalidArrival}>
+      <p>
+        A SA2 is selected. Select individual DZNs or switch to SA2 mode to see
+        arrivals.
+      </p>
+    </div>
+    {#if isComparison}
+      <h3>Comparison</h3>
+      <DetailsDeltaBlurb
         {currentRegions}
         segment={dataSegment}
-        destinationData={arrivals}
-        modeData={arriveMode[0]}
+        {arrivals}
+        {departures}
+        arrivalModeData={arriveMode}
+        departureModeData={departureMode}
       />
     {/if}
-    <div class="arrive-from graph-container">
-      <div class="location-container">
-        {#if initialLocation && !isComparison}
-          <div class="location-inner">
-            <PopulationBubbles
-              scale={initialLocation}
-              data={arrivals}
-              tooltipData={tooltip}
-              showOnly="arrivals"
-              attribution={source.brandingClass === 'statsnz'}
-              width="580"
-              height="400"
-            />
-          </div>
-          {#if source.brandingClass === 'statsnz'}
-            <p class="disclaimer">
-              Only journeys made by 6 or more people are shown.
-            </p>
-          {/if}
-        {/if}
-        <div class="location-graph">
-          {#key arrivals}
-            {#if arrivals !== null && arrivals.length > 0}
-              <PopulationGraph
+    <div class:hidden={hideArrivals || invalidArrival}>
+      <h3>Arrivals</h3>
+      {#if currentRegions && !isComparison}
+        <DetailsBlurb
+          mode="arrivals"
+          {currentRegions}
+          segment={dataSegment}
+          destinationData={arrivals}
+          modeData={arriveMode[0]}
+        />
+      {/if}
+      <div class="arrive-from graph-container">
+        <div class="location-container">
+          {#if initialLocation && !isComparison}
+            <div class="location-inner">
+              <PopulationBubbles
+                scale={initialLocation}
                 data={arrivals}
-                mode="arrivals"
                 tooltipData={tooltip}
-                isComparison={dataSegment.includes('comparison')}
+                showOnly="arrivals"
+                attribution={source.brandingClass === 'statsnz'}
+                width="580"
+                height="400"
               />
-            {/if}
-          {/key}
-        </div>
-        <div class="hidden-trips">
-          <ul>
-            {#each hiddenArrivals as i}
-              <li>
-                <strong>{i.key}</strong>: {i.value} people ({(
-                  i.percentage * 100
-                ).toFixed(2)}%)
-              </li>
-            {/each}
-          </ul>
-        </div>
-      </div>
-      <div class="mode-container">
-        <div class="mode-inner">
-          <h4>
-            {dataSegment && dataSegment.includes('comparison')
-              ? 'Change in '
-              : ''}Arrival Modes
+            </div>
             {#if source.brandingClass === 'statsnz'}
-              <small
-                ><a
-                  href="https://explore.data.stats.govt.nz/vis?pg=0&snb=9&df%5Bds%5D=ds-nsiws-disseminate&df%5Bid%5D=CEN23_TBT_008&df%5Bag%5D=STATSNZ&df%5Bvs%5D=1.0&dq=twu001%2Btwu003%2Btwu004%2Btwu005%2Btwu006%2Btwu007%2Btwu009%2Btwu010%2Btwu012%2Btwu016%2BtwuTS%2Btwu999%2Btww001%2Btww003%2Btww004%2Btww005%2Btww006%2Btww007%2Btww009%2Btww010%2Btww012%2Btww016%2BtwwTS%2Btww999%2Btee001%2Btee002%2Btee003%2Btee004%2Btee005%2Btee006%2Btee007%2Btee008%2Btee009%2Btee010%2BteeTS%2Btee999%2Bteu001%2Bteu002%2Bteu003%2Bteu004%2Bteu005%2Bteu006%2Bteu007%2Bteu008%2Bteu009%2Bteu010%2BteuTS%2Bteu999%2BteuTotal%2BteeTotal%2BtwuTotal%2BtwwTotal.SA2Total.2018%2B2023&ly%5Brw%5D=CEN23_TBT_IND_003&ly%5Bcl%5D=CEN23_YEAR_001&to%5BTIME%5D=false&fs%5B0%5D=2023%20Census%2C0%7CTransport%23CAT_TRANSPORT%23&fc=2023%20Census&bp=true"
-                  >(Aotearoa Data Explorer)</a
-                ></small
-              >
+              <p class="disclaimer">
+                Only journeys made by 6 or more people are shown.
+              </p>
             {/if}
-          </h4>
-          {#if arriveMode}
-            <TravelMode
-              data={arriveMode[0].Total}
-              baseline={arriveMode[1].Total}
-              isComparison={dataSegment.includes('comparison')}
-            />
           {/if}
-          <div class="mode"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="depart-to warning" class:hidden={!invalidDeparture}>
-    <p>
-      There is no departure data for individual DZNs. Select a SA2 or switch to
-      arrivals to continue.
-    </p>
-  </div>
-  <div class:hidden={hideDepartures || invalidDeparture}>
-    <h3>Departures</h3>
-    {#if currentRegions && !isComparison}
-      <DetailsBlurb
-        mode="departures"
-        {currentRegions}
-        segment={dataSegment}
-        destinationData={departures}
-        modeData={departureMode[0]}
-      />
-    {/if}
-    <div class="depart-to graph-container">
-      <div class="location-container">
-        {#if initialLocation && !isComparison}
-          <div class="location-inner">
-            <PopulationBubbles
-              scale={initialLocation}
-              data={departures}
-              tooltipData={tooltip}
-              showOnly="departures"
-              attribution={source.brandingClass === 'statsnz'}
-              width="580"
-              height="400"
-            />
+          <div class="location-graph">
+            {#key arrivals}
+              {#if arrivals !== null && arrivals.length > 0}
+                <PopulationGraph
+                  data={arrivals}
+                  mode="arrivals"
+                  tooltipData={tooltip}
+                  isComparison={dataSegment.includes('comparison')}
+                />
+              {/if}
+            {/key}
           </div>
-          {#if source.brandingClass === 'statsnz'}
-            <p class="disclaimer">
-              Only journeys made by 6 or more people are shown.
-            </p>
-          {/if}
-        {/if}
-        <div class="location-graph">
-          {#key departures}
-            {#if departures !== null && departures.length > 0}
-              <PopulationGraph
-                data={departures}
-                mode="departures"
+          <div class="hidden-trips">
+            <ul>
+              {#each hiddenArrivals as i}
+                <li>
+                  <strong>{i.key}</strong>: {i.value} people ({(
+                    i.percentage * 100
+                  ).toFixed(2)}%)
+                </li>
+              {/each}
+            </ul>
+          </div>
+        </div>
+        <div class="mode-container">
+          <div class="mode-inner">
+            <h4>
+              {dataSegment && dataSegment.includes('comparison')
+                ? 'Change in '
+                : ''}Arrival Modes
+              {#if source.brandingClass === 'statsnz'}
+                <small
+                  ><a
+                    href="https://explore.data.stats.govt.nz/vis?pg=0&snb=9&df%5Bds%5D=ds-nsiws-disseminate&df%5Bid%5D=CEN23_TBT_008&df%5Bag%5D=STATSNZ&df%5Bvs%5D=1.0&dq=twu001%2Btwu003%2Btwu004%2Btwu005%2Btwu006%2Btwu007%2Btwu009%2Btwu010%2Btwu012%2Btwu016%2BtwuTS%2Btwu999%2Btww001%2Btww003%2Btww004%2Btww005%2Btww006%2Btww007%2Btww009%2Btww010%2Btww012%2Btww016%2BtwwTS%2Btww999%2Btee001%2Btee002%2Btee003%2Btee004%2Btee005%2Btee006%2Btee007%2Btee008%2Btee009%2Btee010%2BteeTS%2Btee999%2Bteu001%2Bteu002%2Bteu003%2Bteu004%2Bteu005%2Bteu006%2Bteu007%2Bteu008%2Bteu009%2Bteu010%2BteuTS%2Bteu999%2BteuTotal%2BteeTotal%2BtwuTotal%2BtwwTotal.SA2Total.2018%2B2023&ly%5Brw%5D=CEN23_TBT_IND_003&ly%5Bcl%5D=CEN23_YEAR_001&to%5BTIME%5D=false&fs%5B0%5D=2023%20Census%2C0%7CTransport%23CAT_TRANSPORT%23&fc=2023%20Census&bp=true"
+                    >(Aotearoa Data Explorer)</a
+                  ></small
+                >
+              {/if}
+            </h4>
+            {#if arriveMode}
+              <TravelMode
+                data={arriveMode[0].Total}
+                baseline={arriveMode[1].Total}
                 isComparison={dataSegment.includes('comparison')}
-                tooltipData={tooltip}
               />
             {/if}
-          {/key}
-        </div>
-        <div class="hidden-trips">
-          <ul>
-            {#each hiddenDepartures as i}
-              <li>
-                <strong>{i.key}</strong>: {i.value} people ({(
-                  i.percentage * 100
-                ).toFixed(2)}%)
-              </li>
-            {/each}
-          </ul>
-        </div>
-      </div>
-      <div class="mode-container">
-        <div class="mode-inner">
-          <h4>
-            {dataSegment && dataSegment.includes('comparison')
-              ? 'Change in '
-              : ''}Departure Modes
-            {#if source.brandingClass === 'statsnz'}
-              <small
-                ><a
-                  href="https://explore.data.stats.govt.nz/vis?pg=0&snb=9&df%5Bds%5D=ds-nsiws-disseminate&df%5Bid%5D=CEN23_TBT_008&df%5Bag%5D=STATSNZ&df%5Bvs%5D=1.0&dq=twu001%2Btwu003%2Btwu004%2Btwu005%2Btwu006%2Btwu007%2Btwu009%2Btwu010%2Btwu012%2Btwu016%2BtwuTS%2Btwu999%2Btww001%2Btww003%2Btww004%2Btww005%2Btww006%2Btww007%2Btww009%2Btww010%2Btww012%2Btww016%2BtwwTS%2Btww999%2Btee001%2Btee002%2Btee003%2Btee004%2Btee005%2Btee006%2Btee007%2Btee008%2Btee009%2Btee010%2BteeTS%2Btee999%2Bteu001%2Bteu002%2Bteu003%2Bteu004%2Bteu005%2Bteu006%2Bteu007%2Bteu008%2Bteu009%2Bteu010%2BteuTS%2Bteu999%2BteuTotal%2BteeTotal%2BtwuTotal%2BtwwTotal.SA2Total.2018%2B2023&ly%5Brw%5D=CEN23_TBT_IND_003&ly%5Bcl%5D=CEN23_YEAR_001&to%5BTIME%5D=false&fs%5B0%5D=2023%20Census%2C0%7CTransport%23CAT_TRANSPORT%23&fc=2023%20Census&bp=true"
-                  >(Aotearoa Data Explorer)</a
-                ></small
-              >
-            {/if}
-          </h4>
-          {#if departureMode}
-            <TravelMode
-              data={departureMode[0].Total}
-              baseline={departureMode[1].Total}
-              isComparison={dataSegment.includes('comparison')}
-            />
-          {/if}
-          <div class="mode"></div>
+            <div class="mode"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  {#if Object.keys(populationPredictions).length > 0 && !invalidDeparture && !invalidArrival}
-    {#key populationPredictions}
-      <div>
-        <h3>NSW Population Projections</h3>
-        <PopulationPredictions
-          population={populationPredictions}
-          rowFilter={['ERP_', 'POPD_', 'PNPD_', 'SPD_', 'OPD_']}
+    <div class="depart-to warning" class:hidden={!invalidDeparture}>
+      <p>
+        There is no departure data for individual DZNs. Select a SA2 or switch
+        to arrivals to continue.
+      </p>
+    </div>
+    <div class:hidden={hideDepartures || invalidDeparture}>
+      <h3>Departures</h3>
+      {#if currentRegions && !isComparison}
+        <DetailsBlurb
+          mode="departures"
+          {currentRegions}
+          segment={dataSegment}
+          destinationData={departures}
+          modeData={departureMode[0]}
         />
+      {/if}
+      <div class="depart-to graph-container">
+        <div class="location-container">
+          {#if initialLocation && !isComparison}
+            <div class="location-inner">
+              <PopulationBubbles
+                scale={initialLocation}
+                data={departures}
+                tooltipData={tooltip}
+                showOnly="departures"
+                attribution={source.brandingClass === 'statsnz'}
+                width="580"
+                height="400"
+              />
+            </div>
+            {#if source.brandingClass === 'statsnz'}
+              <p class="disclaimer">
+                Only journeys made by 6 or more people are shown.
+              </p>
+            {/if}
+          {/if}
+          <div class="location-graph">
+            {#key departures}
+              {#if departures !== null && departures.length > 0}
+                <PopulationGraph
+                  data={departures}
+                  mode="departures"
+                  isComparison={dataSegment.includes('comparison')}
+                  tooltipData={tooltip}
+                />
+              {/if}
+            {/key}
+          </div>
+          <div class="hidden-trips">
+            <ul>
+              {#each hiddenDepartures as i}
+                <li>
+                  <strong>{i.key}</strong>: {i.value} people ({(
+                    i.percentage * 100
+                  ).toFixed(2)}%)
+                </li>
+              {/each}
+            </ul>
+          </div>
+        </div>
+        <div class="mode-container">
+          <div class="mode-inner">
+            <h4>
+              {dataSegment && dataSegment.includes('comparison')
+                ? 'Change in '
+                : ''}Departure Modes
+              {#if source.brandingClass === 'statsnz'}
+                <small
+                  ><a
+                    href="https://explore.data.stats.govt.nz/vis?pg=0&snb=9&df%5Bds%5D=ds-nsiws-disseminate&df%5Bid%5D=CEN23_TBT_008&df%5Bag%5D=STATSNZ&df%5Bvs%5D=1.0&dq=twu001%2Btwu003%2Btwu004%2Btwu005%2Btwu006%2Btwu007%2Btwu009%2Btwu010%2Btwu012%2Btwu016%2BtwuTS%2Btwu999%2Btww001%2Btww003%2Btww004%2Btww005%2Btww006%2Btww007%2Btww009%2Btww010%2Btww012%2Btww016%2BtwwTS%2Btww999%2Btee001%2Btee002%2Btee003%2Btee004%2Btee005%2Btee006%2Btee007%2Btee008%2Btee009%2Btee010%2BteeTS%2Btee999%2Bteu001%2Bteu002%2Bteu003%2Bteu004%2Bteu005%2Bteu006%2Bteu007%2Bteu008%2Bteu009%2Bteu010%2BteuTS%2Bteu999%2BteuTotal%2BteeTotal%2BtwuTotal%2BtwwTotal.SA2Total.2018%2B2023&ly%5Brw%5D=CEN23_TBT_IND_003&ly%5Bcl%5D=CEN23_YEAR_001&to%5BTIME%5D=false&fs%5B0%5D=2023%20Census%2C0%7CTransport%23CAT_TRANSPORT%23&fc=2023%20Census&bp=true"
+                    >(Aotearoa Data Explorer)</a
+                  ></small
+                >
+              {/if}
+            </h4>
+            {#if departureMode}
+              <TravelMode
+                data={departureMode[0].Total}
+                baseline={departureMode[1].Total}
+                isComparison={dataSegment.includes('comparison')}
+              />
+            {/if}
+            <div class="mode"></div>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3>NSW Workforce & Employment Projections</h3>
-        <PopulationPredictions
-          population={populationPredictions}
-          rowFilter={[
-            'Emp_Wkf_POPD_15+yrs_',
-            'Not_in_Wkf_POPD_15+yrs_',
-            'UnEmp_Wkf_POPD_15+yrs_',
-            'EMP_',
-          ]}
-        />
-      </div>
-    {/key}
+    </div>
+    {#if Object.keys(populationPredictions).length > 0 && !invalidDeparture && !invalidArrival}
+      {#key populationPredictions}
+        <div>
+          <h3>NSW Population Projections</h3>
+          <PopulationPredictions
+            population={populationPredictions}
+            rowFilter={['ERP_', 'POPD_', 'PNPD_', 'SPD_', 'OPD_']}
+          />
+        </div>
+        <div>
+          <h3>NSW Workforce & Employment Projections</h3>
+          <PopulationPredictions
+            population={populationPredictions}
+            rowFilter={[
+              'Emp_Wkf_POPD_15+yrs_',
+              'Not_in_Wkf_POPD_15+yrs_',
+              'UnEmp_Wkf_POPD_15+yrs_',
+              'EMP_',
+            ]}
+          />
+        </div>
+      {/key}
+    {/if}
   {/if}
   <Footer />
 </div>
@@ -812,5 +831,9 @@
   }
   .mode-container h4 a:hover {
     text-decoration: underline;
+  }
+  .pre-flex {
+    display: flex;
+    gap: 1rem;
   }
 </style>

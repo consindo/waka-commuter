@@ -7,6 +7,7 @@
   "scripts": {
     "build": "npm run process && npm run build:js",
     "build:ason": "npm run process:ason && npm run shapes:ason && npm run build:js",
+    "build:aucklandcouncil": "npm run process:aucklandcouncil && npm run shapes:aucklandcouncil && npm run build:js",
     "build:wsp": "npm run process:wsp && npm run shapes:wsp && npm run build:js",
     "build:js": "vite build",
     "process": "npm run process:area && npm run process:travel && npm run process:combine && npm run process:copy",
@@ -27,11 +28,16 @@
     "process:ason:shapes-dzn": "node commuterview-extras/shapes/australia-optimizer-dzn.js",
     "process:ason:shapes-dzn-2016": "node commuterview-extras/shapes/australia-optimizer-dzn-2016.js",
     "process:ason:shapes-tz": "node commuterview-extras/shapes/australia-optimizer-tz.js",
+    "process:aucklandcouncil": "npm run process:aucklandcouncil:area && npm run process:aucklandcouncil:combine && npm run process:aucklandcouncil:copy",
+    "process:aucklandcouncil:area": "node commuterview-extras/data_sources/parsers/aucklandcouncil/area-to-area-parser.js",
+    "process:aucklandcouncil:combine": "node commuterview-extras/data_sources/parsers/aucklandcouncil/combine-files.js",
+    "process:aucklandcouncil:copy": "node data_sources/parsers/split-regions.js commuterview-extras/data_sources/outputs/aucklandcouncil",
     "process:wsp": "npm run process:wsp:area && npm run process:wsp:combine && npm run process:wsp:copy",
     "process:wsp:area": "node commuterview-extras/data_sources/parsers/wsp/area-to-area-parser.js",
     "process:wsp:combine": "node commuterview-extras/data_sources/parsers/wsp/combine-files.js",
     "process:wsp:copy": "node data_sources/parsers/split-regions.js commuterview-extras/data_sources/outputs/wsp",
     "shapes:ason": "cp -r commuterview-extras/shapes/australia-sa2-2021-*.json public/shapes && cp -r commuterview-extras/shapes/australia-sa2-2016-*.json public/shapes && cp -r commuterview-extras/shapes/australia-dzn-2021-*.json public/shapes && cp -r commuterview-extras/shapes/australia-dzn-2016-*.json public/shapes && cp -r commuterview-extras/shapes/australia-tz-2016-nsw.json public/shapes",
+    "shapes:aucklandcouncil": "node commuterview-extras/shapes/auckland-optimizer.js",
     "shapes:wsp": "cp commuterview-extras/shapes/wsp-zones-optimized.json public/shapes/wsp-zones-optimized.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev --host",
@@ -47,9 +53,11 @@
     "polylabel": "^2.1.0"
   },
   "devDependencies": {
+    "@turf/turf": "^7.4.0",
     "csv-parser": "^3.2.1",
     "prettier": "^3.9.6",
     "prettier-plugin-svelte": "^4.1.1",
+    "proj4": "^2.22.0",
     "strip-bom-stream": "^5.0.0",
     "svelte": "^5.57.0",
     "vite": "^8.2.2"
