@@ -50,8 +50,9 @@
     />
     <DataSourcesAu />
   {:else if source.brandingClass === 'aucklandcouncil'}
-    <Banner dataSource="2018 MATSim" />
-    <p>This uses 2018 MATSim travel model, with <strong>trips unfiltered</strong>. This means each area captures trips made within the area, and return trips (i.e a person going to work and returning home later will be counted in the arrivals and the departures). While the visualisation is functional, it is confusing because of data being unfiltered!</p>
+    <Banner dataSource="2018 & 2023 MATSim" />
+    <p>This uses the 2018 & 2023 MATSim travel model, with <strong>trips to home filtered out</strong>. This means each area captures trips made within the area, and subsequent trips (i.e a person going to work, and then making another trip for leisure, will be counted twice in the arrivals and the departures). While the visualisation is functional, it is confusing because of limited data filtering!</p>
+    <p>The 2018 model uses a 10% sample, while the 2023 model uses a 1% sample. Because of this sampling, the 2023 model looks a little sparse (especially with SA2).</p>
     <p>We can map trips to any geometries we want - this version of the app allows you to switch between SA2 & SA3. You can also use Ctrl+Click to select multiple areas.</p>
   {:else}
     <Banner dataSource="2023 & 2018 Census" />

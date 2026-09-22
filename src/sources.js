@@ -290,9 +290,9 @@ const sources = {
     mapAreaLabelsToggleValue: false,
     canMultiSelect: true,
     isMapAreaLabelsEnabled: 'name',
-    segments: useSa3 ? ['2018-sa3'] : ['2018-sa2'],
+    segments: useSa3 ? ['2018-sa3', '2023-sa3'] : ['2018-sa2', '2023-sa2'],
     detailsControls: [],
-    detailsSecondaryControls: [],
+    detailsSecondaryControls: ['2023', '2018'],
     brandingClass: 'aucklandcouncil',
   },
   wsp: {
