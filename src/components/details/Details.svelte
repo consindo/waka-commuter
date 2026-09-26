@@ -118,8 +118,6 @@
                   arriveFrom: {},
                 }
 
-                // this is probably a better condition but doesn't capture the single mode
-                // if (segment.split('|').length > 1) {
                 if (segment.split('-mode-').length > 1) {
                   const combinedSegments = segment.split('|').map((key) => {
                     const data = structuredClone(defaultSource)
@@ -253,6 +251,9 @@
                     )
                   })
                   return delta
+                } else if (segment.includes("|")) {
+                  const result = segment.split('|').map(i => dataSource[i]).filter(i => i != null)
+                  return result
                 } else if (dataSource[segment] != null) {
                   return [dataSource[segment]]
                 } else {

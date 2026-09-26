@@ -66,6 +66,11 @@
 
   let selection = $state([])
   const setSegmentWithMode = (segment, selectedModes) => {
+    if (source.brandingClass === 'aucklandcouncil') {
+      // todo: need to handle modes better
+      return
+    }
+
     let finalSegment = segment.split('-').slice(0, 2).join('-')
     if (selectedModes.length > 0) {
       finalSegment = selectedModes.map((i) => `${finalSegment}-${i}`).join('|')
@@ -94,6 +99,38 @@
         e.target.blur()
       }
     }
+  }
+
+  const triggerAucklandSegment = (index, name, isRadio = false) => () => {
+    // build a set of what the current segments are
+    let segmentSet = [
+      new Set(), // year
+      new Set(), // shape
+      new Set(), // start_activity_type
+      new Set(), // end_activity_type
+      new Set(), // mode
+    ]
+    currentSegment.split('|').forEach(i => i.split('-').forEach((j, k) => segmentSet[k].add(j)))
+
+    if (isRadio) {
+      segmentSet[index] = new Set()
+    }
+
+    // toggle the segment
+    if (segmentSet[index].has(name)) {
+      segmentSet[index].delete(name)
+    } else {
+      segmentSet[index].add(name)
+    }
+
+    // rebuild the segments
+    const newSegments = segmentSet.reduce(
+      (acc, cur) =>
+        acc.flatMap(prefix => Array.from(cur).map(item => [...prefix, item])),
+      [[]]
+    ).map(combo => combo.join("-"))
+
+    Dispatcher.setSegment(newSegments.join('|'))
   }
 </script>
 
@@ -133,6 +170,31 @@
       </button>
     </nav>
   </div>
+  {#if source.brandingClass === 'aucklandcouncil'}
+    {@const aucklandLocations = ['home', 'work', 'leisure', 'education', 'shop', 'other']}
+    {@const years = currentSegment.split('|').map(i => i.split('-')[0])}
+    {@const fromLocations = currentSegment.split('|').map(i => i.split('-')[2])}
+    {@const toLocations = currentSegment.split('|').map(i => i.split('-')[3])}
+    {@const modes = currentSegment.split('|').map(i => i.split('-')[4])}
+    <nav class="auckland-controls">
+      <p><strong>year:</strong></p>
+      {#each ['2018', '2023'] as year (year)}
+        <label><input onclick={triggerAucklandSegment(0, year, true)} type="radio" checked={years.includes(year)}>{year}</label>
+      {/each}
+      <p><strong>start activity:</strong></p>
+      {#each aucklandLocations as location (location)}
+        <label><input onclick={triggerAucklandSegment(2, location)} type="checkbox" disabled={fromLocations.every(i => i === location)} checked={fromLocations.includes(location)}>{location}</label>
+      {/each}
+      <p><strong>end activity:</strong></p>
+      {#each aucklandLocations as location (location)}
+        <label><input onclick={triggerAucklandSegment(3, location)} type="checkbox" disabled={toLocations.every(i => i === location)} checked={toLocations.includes(location)}>{location}</label>
+      {/each}
+      <p><strong>modes:</strong></p>
+      {#each ['car', 'ride', 'walk', 'pt', 'bike'] as mode (mode)}
+        <label><input onclick={triggerAucklandSegment(4, mode)} type="checkbox" disabled={modes.every(i => i === mode)} checked={modes.includes(mode)}>{mode}</label>
+      {/each}
+    </nav>
+  {/if}
   <div class="nav-header-grid">
     <div class="title">
       {#if source.detailsSecondaryControls}
@@ -382,5 +444,9 @@
     h2 {
       font-size: 1.5rem;
     }
+  }
+
+  .auckland-controls p {
+    margin: 0.5em 0 0.125em;
   }
 </style>
