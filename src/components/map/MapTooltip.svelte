@@ -27,7 +27,7 @@
       acc[cur.key] = [cur.value, cur.percentage]
       return acc
     }, {}),
-    internalTrips: data.internalTrips
+    internalTrips: data.internalTrips,
   })
   const departData = $derived(parsedData.departData[id] || [])
   const arriveData = $derived(parsedData.arriveData[id] || [])
@@ -67,11 +67,22 @@
     leftAlign ? `calc(${position[0] - 10}px - 100%)` : `${position[0] + 20}px`
   )
 
-  const totalTrips = $derived(parsedData.currentRegions.map(i => parsedData.departData[i][0]).reduce((acc, cur) => acc+cur, 0))
-  const internalTrips = $derived(parsedData.internalTrips.find(i => i.key === id)?.value || 0)
-  const otherInternalTrips = $derived(parsedData.internalTrips.reduce((acc, cur) => acc+cur.value, 0) - internalTrips)
+  const totalTrips = $derived(
+    parsedData.currentRegions
+      .map((i) => parsedData.departData[i][0])
+      .reduce((acc, cur) => acc + cur, 0)
+  )
+  const internalTrips = $derived(
+    parsedData.internalTrips.find((i) => i.key === id)?.value || 0
+  )
+  const otherInternalTrips = $derived(
+    parsedData.internalTrips.reduce((acc, cur) => acc + cur.value, 0) -
+      internalTrips
+  )
 
-  const selectedAreaText = $derived(`${parsedData.currentRegions.length - 1} other selected ${parsedData.currentRegions.length - 1 === 1 ? 'area' : 'areas'}`)
+  const selectedAreaText = $derived(
+    `${parsedData.currentRegions.length - 1} other selected ${parsedData.currentRegions.length - 1 === 1 ? 'area' : 'areas'}`
+  )
 </script>
 
 <div
@@ -88,11 +99,13 @@
   {#if parsedData.currentRegions.length !== 0 && !loading && !(friendlyName || '').startsWith('TZ')}
     {#if regions === humanId}
       <strong class="wfh">
-        {isComparison && departCount >= 0 ? '+' : ''}{departCount}&nbsp;{#if source.brandingClass === 'aucklandcouncil'}trips within{:else}live & {mode.join(
-          '/'
-        )}{/if}
+        {isComparison && departCount >= 0
+          ? '+'
+          : ''}{departCount}&nbsp;{#if source.brandingClass === 'aucklandcouncil'}trips
+          within{:else}live & {mode.join('/')}{/if}
       </strong>
-      {#if source.brandingClass !== 'aucklandcouncil'}in{/if} {humanId}
+      {#if source.brandingClass !== 'aucklandcouncil'}in{/if}
+      {humanId}
       {#if percentage}
         <br />
         <small>
@@ -144,11 +157,26 @@
         {#if parsedData.currentRegions.length > 1 && parsedData.currentRegions.includes(id)}
           <br />
           <!-- should add up to the same whether it's arrivals or departures -->
-          <strong class="wfh">{totalTrips.toLocaleString()} trips</strong> within these {parsedData.currentRegions.length} areas<br />
-          <strong class="wfh">{internalTrips.toLocaleString()} trips within</strong>{formatPercentage(internalTrips/totalTrips, false)} {id}<br /><br />
-          <strong class="arrivals">{departCount - internalTrips} arrivals</strong>{formatPercentage((departCount - internalTrips)/totalTrips, false)} &larr; from {selectedAreaText}<br />
-          <strong class="departures">{arrivalCount - internalTrips} departures</strong>{formatPercentage((arrivalCount - internalTrips)/totalTrips, false)} &rarr; to {selectedAreaText}<br />
-          <strong class="wfh">{otherInternalTrips.toLocaleString()} trips within</strong>{formatPercentage((otherInternalTrips)/totalTrips, false)} {selectedAreaText}
+          <strong class="wfh">{totalTrips.toLocaleString()} trips</strong>
+          within these {parsedData.currentRegions.length} areas<br />
+          <strong class="wfh"
+            >{internalTrips.toLocaleString()} trips within</strong
+          >{formatPercentage(internalTrips / totalTrips, false)}
+          {id}<br /><br />
+          <strong class="arrivals"
+            >{departCount - internalTrips} arrivals</strong
+          >{formatPercentage((departCount - internalTrips) / totalTrips, false)} &larr;
+          from {selectedAreaText}<br />
+          <strong class="departures"
+            >{arrivalCount - internalTrips} departures</strong
+          >{formatPercentage(
+            (arrivalCount - internalTrips) / totalTrips,
+            false
+          )} &rarr; to {selectedAreaText}<br />
+          <strong class="wfh"
+            >{otherInternalTrips.toLocaleString()} trips within</strong
+          >{formatPercentage(otherInternalTrips / totalTrips, false)}
+          {selectedAreaText}
         {/if}
       {/if}
     {/if}

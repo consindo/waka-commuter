@@ -110,157 +110,159 @@
 
           getData(regionName).then((data) => {
             // depending on the toggle, filter out workspace or education data
-            const unflatDataSources = data
-              .map((dataSource) => {
-                // retuns the matching segment
-                const defaultSource = {
-                  departTo: {},
-                  arriveFrom: {},
-                }
+            const unflatDataSources = data.map((dataSource) => {
+              // retuns the matching segment
+              const defaultSource = {
+                departTo: {},
+                arriveFrom: {},
+              }
 
-                if (segment.split('-mode-').length > 1) {
-                  const combinedSegments = segment.split('|').map((key) => {
-                    const data = structuredClone(defaultSource)
+              if (segment.split('-mode-').length > 1) {
+                const combinedSegments = segment.split('|').map((key) => {
+                  const data = structuredClone(defaultSource)
 
-                    let departureModes = null
-                    let arrivalModes = null
-                    let departureModesBaseline = null
-                    let arrivalModesBaseline = null
+                  let departureModes = null
+                  let arrivalModes = null
+                  let departureModesBaseline = null
+                  let arrivalModesBaseline = null
 
-                    const rootPortion = segment.split('-').slice(0, 2).join('-')
-                    if (rootPortion.includes('comparison')) {
-                      const rootSegment1 =
-                        dataSource[rootPortion.replace('comparison', '2023')] ||
-                        defaultSource
-                      const rootSegment2 =
-                        dataSource[rootPortion.replace('comparison', '2018')] ||
-                        defaultSource
-                      const specificSegment1 =
-                        dataSource[key.replace('comparison', '2023')] ||
-                        defaultSource
-                      const specificSegment2 =
-                        dataSource[key.replace('comparison', '2018')] ||
-                        defaultSource
+                  const rootPortion = segment.split('-').slice(0, 2).join('-')
+                  if (rootPortion.includes('comparison')) {
+                    const rootSegment1 =
+                      dataSource[rootPortion.replace('comparison', '2023')] ||
+                      defaultSource
+                    const rootSegment2 =
+                      dataSource[rootPortion.replace('comparison', '2018')] ||
+                      defaultSource
+                    const specificSegment1 =
+                      dataSource[key.replace('comparison', '2023')] ||
+                      defaultSource
+                    const specificSegment2 =
+                      dataSource[key.replace('comparison', '2018')] ||
+                      defaultSource
 
-                      departureModes = objectDelta(
-                        {},
-                        rootSegment1?.departureModes || {},
-                        rootSegment2?.departureModes || {}
-                      )
-                      departureModesBaseline = objectBaseline(
-                        {},
-                        rootSegment1?.departureModes || {},
-                        rootSegment2?.departureModes || {}
-                      )
-                      arrivalModes = objectDelta(
-                        {},
-                        rootSegment1?.arrivalModes || {},
-                        rootSegment2?.arrivalModes || {}
-                      )
-                      arrivalModesBaseline = objectBaseline(
-                        {},
-                        rootSegment1?.arrivalModes || {},
-                        rootSegment2?.arrivalModes || {}
-                      )
-                      data.arriveFrom = objectDelta(
-                        {},
-                        specificSegment1.arriveFrom,
-                        specificSegment2.arriveFrom
-                      )
-                      data['arriveFrom-baseline'] = objectBaseline(
-                        {},
-                        specificSegment1.arriveFrom,
-                        specificSegment2.arriveFrom
-                      )
-                      data.departTo = objectDelta(
-                        {},
-                        specificSegment1.departTo,
-                        specificSegment2.departTo
-                      )
-                      data['departTo-baseline'] = objectBaseline(
-                        {},
-                        specificSegment1.departTo,
-                        specificSegment2.departTo
-                      )
-                    } else {
-                      if (dataSource[key]) {
-                        data.departTo = dataSource[key]?.departTo
-                        data.arriveFrom = dataSource[key]?.arriveFrom
-                      }
-                      departureModes = dataSource[rootPortion]?.departureModes
-                      arrivalModes = dataSource[rootPortion]?.arrivalModes
-                    }
-
-                    const name = modes.find(
-                      (i) => i.id === `mode-${key.split('mode-')[1]}`
-                    ).name
-
-                    if (departureModes) {
-                      data.departureModes = {
-                        [name]: departureModes[name],
-                        Total: departureModes.Total,
-                      }
-                    }
-                    if (departureModesBaseline) {
-                      data['departureModes-baseline'] = {
-                        [name]: departureModesBaseline[name],
-                        Total: departureModesBaseline.Total,
-                      }
-                    }
-                    if (arrivalModes) {
-                      data.arrivalModes = {
-                        [name]: arrivalModes[name],
-                        Total: arrivalModes.Total,
-                      }
-                    }
-                    if (arrivalModesBaseline) {
-                      data['arrivalModes-baseline'] = {
-                        [name]: arrivalModesBaseline[name],
-                        Total: arrivalModesBaseline.Total,
-                      }
-                    }
-                    return data
-                  })
-                  return [
-                    combinedSegments.reduce((acc, cur) => {
-                      Object.keys(cur).forEach((key) => {
-                        acc[key] = acc[key] || {}
-                        Object.keys(cur[key]).forEach((valueKey) => {
-                          acc[key][valueKey] = acc[key][valueKey] || 0
-                          acc[key][valueKey] += cur[key][valueKey] || 0
-                        })
-                      })
-                      return acc
-                    }, {}),
-                  ]
-                } else if (segment.includes('comparison')) {
-                  const segment1 =
-                    dataSource[segment.replace('comparison', '2023')]
-                  const segment2 =
-                    dataSource[segment.replace('comparison', '2018')]
-
-                  const delta = {}
-                  Object.keys(segment1).forEach((i) => {
-                    delta[i] = delta[i] || {}
-                    delta[`${i}-baseline`] = delta[`${i}-baseline`] || {}
-                    objectDelta(delta[i], segment1[i], segment2[i])
-                    objectBaseline(
-                      delta[`${i}-baseline`],
-                      segment1[i],
-                      segment2[i]
+                    departureModes = objectDelta(
+                      {},
+                      rootSegment1?.departureModes || {},
+                      rootSegment2?.departureModes || {}
                     )
-                  })
-                  return delta
-                } else if (segment.includes("|")) {
-                  const result = segment.split('|').map(i => dataSource[i]).filter(i => i != null)
-                  return result
-                } else if (dataSource[segment] != null) {
-                  return [dataSource[segment]]
-                } else {
-                  console.warn('Could not find segment', segment)
-                  return defaultSource
-                }
-              })
+                    departureModesBaseline = objectBaseline(
+                      {},
+                      rootSegment1?.departureModes || {},
+                      rootSegment2?.departureModes || {}
+                    )
+                    arrivalModes = objectDelta(
+                      {},
+                      rootSegment1?.arrivalModes || {},
+                      rootSegment2?.arrivalModes || {}
+                    )
+                    arrivalModesBaseline = objectBaseline(
+                      {},
+                      rootSegment1?.arrivalModes || {},
+                      rootSegment2?.arrivalModes || {}
+                    )
+                    data.arriveFrom = objectDelta(
+                      {},
+                      specificSegment1.arriveFrom,
+                      specificSegment2.arriveFrom
+                    )
+                    data['arriveFrom-baseline'] = objectBaseline(
+                      {},
+                      specificSegment1.arriveFrom,
+                      specificSegment2.arriveFrom
+                    )
+                    data.departTo = objectDelta(
+                      {},
+                      specificSegment1.departTo,
+                      specificSegment2.departTo
+                    )
+                    data['departTo-baseline'] = objectBaseline(
+                      {},
+                      specificSegment1.departTo,
+                      specificSegment2.departTo
+                    )
+                  } else {
+                    if (dataSource[key]) {
+                      data.departTo = dataSource[key]?.departTo
+                      data.arriveFrom = dataSource[key]?.arriveFrom
+                    }
+                    departureModes = dataSource[rootPortion]?.departureModes
+                    arrivalModes = dataSource[rootPortion]?.arrivalModes
+                  }
+
+                  const name = modes.find(
+                    (i) => i.id === `mode-${key.split('mode-')[1]}`
+                  ).name
+
+                  if (departureModes) {
+                    data.departureModes = {
+                      [name]: departureModes[name],
+                      Total: departureModes.Total,
+                    }
+                  }
+                  if (departureModesBaseline) {
+                    data['departureModes-baseline'] = {
+                      [name]: departureModesBaseline[name],
+                      Total: departureModesBaseline.Total,
+                    }
+                  }
+                  if (arrivalModes) {
+                    data.arrivalModes = {
+                      [name]: arrivalModes[name],
+                      Total: arrivalModes.Total,
+                    }
+                  }
+                  if (arrivalModesBaseline) {
+                    data['arrivalModes-baseline'] = {
+                      [name]: arrivalModesBaseline[name],
+                      Total: arrivalModesBaseline.Total,
+                    }
+                  }
+                  return data
+                })
+                return [
+                  combinedSegments.reduce((acc, cur) => {
+                    Object.keys(cur).forEach((key) => {
+                      acc[key] = acc[key] || {}
+                      Object.keys(cur[key]).forEach((valueKey) => {
+                        acc[key][valueKey] = acc[key][valueKey] || 0
+                        acc[key][valueKey] += cur[key][valueKey] || 0
+                      })
+                    })
+                    return acc
+                  }, {}),
+                ]
+              } else if (segment.includes('comparison')) {
+                const segment1 =
+                  dataSource[segment.replace('comparison', '2023')]
+                const segment2 =
+                  dataSource[segment.replace('comparison', '2018')]
+
+                const delta = {}
+                Object.keys(segment1).forEach((i) => {
+                  delta[i] = delta[i] || {}
+                  delta[`${i}-baseline`] = delta[`${i}-baseline`] || {}
+                  objectDelta(delta[i], segment1[i], segment2[i])
+                  objectBaseline(
+                    delta[`${i}-baseline`],
+                    segment1[i],
+                    segment2[i]
+                  )
+                })
+                return delta
+              } else if (segment.includes('|')) {
+                const result = segment
+                  .split('|')
+                  .map((i) => dataSource[i])
+                  .filter((i) => i != null)
+                return result
+              } else if (dataSource[segment] != null) {
+                return [dataSource[segment]]
+              } else {
+                console.warn('Could not find segment', segment)
+                return defaultSource
+              }
+            })
             const dataSources = unflatDataSources.flat()
 
             const concordance = data.reduce((acc, cur) => {
@@ -334,7 +336,10 @@
             const internalTrips = regionName.map((i, k) => {
               return {
                 key: i,
-                value: unflatDataSources[k].reduce((acc, cur) => acc + (cur.departTo[i] || 0), 0)
+                value: unflatDataSources[k].reduce(
+                  (acc, cur) => acc + (cur.departTo[i] || 0),
+                  0
+                ),
               }
             })
 

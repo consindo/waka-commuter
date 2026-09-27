@@ -13,8 +13,8 @@
   <details>
     <summary>Keyboard Shortcuts</summary>
     <p>
-      Use the <kbd>Tab</kbd> key to navigate between elements in the app, or use
-      the following keyboard shortcuts to quickly filter.
+      Use the <kbd>Tab</kbd> key to navigate between elements in the app, or use the
+      following keyboard shortcuts to quickly filter.
     </p>
     <ul>
       <li><kbd>/</kbd><span><strong>Search Regions</strong></span></li>
