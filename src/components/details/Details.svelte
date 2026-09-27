@@ -110,7 +110,7 @@
 
           getData(regionName).then((data) => {
             // depending on the toggle, filter out workspace or education data
-            const dataSources = data
+            const unflatDataSources = data
               .map((dataSource) => {
                 // retuns the matching segment
                 const defaultSource = {
@@ -261,7 +261,7 @@
                   return defaultSource
                 }
               })
-              .flat()
+            const dataSources = unflatDataSources.flat()
 
             const concordance = data.reduce((acc, cur) => {
               if (cur.concordance) {
@@ -331,6 +331,13 @@
               return acc
             }, {})
 
+            const internalTrips = regionName.map((i, k) => {
+              return {
+                key: i,
+                value: unflatDataSources[k].reduce((acc, cur) => acc + (cur.departTo[i] || 0), 0)
+              }
+            })
+
             Dispatcher.trigger('update-blocks', {
               regionName,
               regionCode,
@@ -343,6 +350,7 @@
               animate,
               arriveModeBaseline,
               departureModeBaseline,
+              internalTrips,
             })
           })
         }
@@ -362,6 +370,7 @@
           animate,
           arriveModeBaseline,
           departureModeBaseline,
+          internalTrips,
         }) => {
           // map to friendly names
           const friendlyMapper = (i) => ({
@@ -408,6 +417,7 @@
             currentRegions,
             arriveData: arriveDataFriendly,
             departData: departDataFriendly,
+            internalTrips,
             mode: ['work', 'study'],
           }
           if (segment.includes('workplace')) {
