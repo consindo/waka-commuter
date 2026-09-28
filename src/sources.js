@@ -283,8 +283,8 @@ const sources = {
   },
   aucklandcouncil: {
     shapeFile: useSa3
-      ? '/shapes/akl-sa3-2023-optimized.json'
-      : '/shapes/akl-sa2-2023-optimized.json',
+      ? '/shapes/akl-sa3-2026-optimized.json'
+      : '/shapes/akl-sa2-2026-optimized.json',
     initialPosition: [174.77, -36.85, 8],
     isModeGraphsEnabled: false,
     mapAreaLabelsToggleValue: false,
