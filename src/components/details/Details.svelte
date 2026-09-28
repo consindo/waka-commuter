@@ -334,6 +334,10 @@
             }, {})
 
             const internalTrips = regionName.map((i, k) => {
+              // comparison not supported, yet
+              if (segment.includes('comparison')) {
+                return {}
+              }
               return {
                 key: i,
                 value: unflatDataSources[k].reduce(
@@ -431,11 +435,11 @@
             tooltipData.mode = ['study']
           }
 
-          if (segment.endsWith('-all')) {
+          if (segment.includes('-all')) {
             populationLabel = 'Resident Workers & Students:'
-          } else if (segment.endsWith('-workplace')) {
+          } else if (segment.includes('-workplace')) {
             populationLabel = 'Resident Workers:'
-          } else if (segment.endsWith('-education')) {
+          } else if (segment.includes('-education')) {
             populationLabel = 'Resident Students:'
           } else if (
             segment.startsWith('2021-sa2') ||
