@@ -436,6 +436,7 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         mode: [],
         arriveData: [],
         departData: [],
+        internalTrips: [],
       },
     })
   })
@@ -450,6 +451,7 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
       departData,
       segment,
       animate,
+      internalTrips,
     }) => {
       document.querySelector('.map-legend').classList.remove('hidden')
 
@@ -458,6 +460,7 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         arriveData,
         departData,
         mode: ['work', 'study'],
+        internalTrips,
       }
       if (segment.includes('workplace')) {
         tooltipData.mode = ['work']

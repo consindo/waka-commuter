@@ -45,8 +45,8 @@
   </div>
   <div class="mobile">
     <p>
-      <strong>Tip:</strong> Open this app on a PC to get more detailed insights,
-      and to select multiple areas.
+      <strong>Tip:</strong> Open this app on a PC to get more detailed insights, and
+      to select multiple areas.
     </p>
   </div>
 {/if}

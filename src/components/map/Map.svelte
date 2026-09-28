@@ -61,6 +61,7 @@
       mode: [],
       arriveData: [],
       departData: [],
+      internalTrips: [],
     },
   })
   const tooltipCallback = (props) => {
