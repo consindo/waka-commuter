@@ -72,8 +72,10 @@ export const getLocation = (features, name) => {
   const center = polylabel(
     geometry.type === 'MultiPolygon'
       ? geometry.coordinates[0]
-      : geometry.coordinates
+      : geometry.coordinates,
+    0.000001
   )
+
   return { lng: center[0], lat: center[1] }
 }
 
