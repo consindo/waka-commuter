@@ -5,6 +5,7 @@
   let { style, styleChange, mapLabels, setMapLabels } = $props()
 
   let visible = $state(false)
+  let geometryvisible = $state(false)
   let checked = $state(mapLabels)
   $effect(() => {
     setMapLabels(checked)
@@ -12,6 +13,10 @@
 
   function toggleVisible() {
     visible = !visible
+  }
+
+  function toggleGeometryVisible() {
+    geometryvisible = !geometryvisible
   }
 
   const handleClick = (newStyle) => () => {
@@ -27,7 +32,9 @@
     }
   }
 
+  const useSa1 = window.location.search === '?mode=sa1'
   const useSa3 = window.location.search === '?mode=sa3'
+  const useTa = window.location.search === '?mode=ta'
   const triggerSwitchMode = () => {
     if (useSa3) {
       window.location.replace('/')
@@ -39,7 +46,7 @@
 
 <svelte:window onkeydown={triggerShortcut} />
 
-{#if source.brandingClass === 'statsnz' || source.brandingClass === 'aucklandcouncil'}
+{#if source.brandingClass === 'statsnz'}
   <button
     class="mode"
     class:sa3={useSa3}
@@ -49,6 +56,25 @@
   >
     {useSa3 ? 'SA3' : 'SA2'}
   </button>
+{:else if source.brandingClass === 'aucklandcouncil'}
+  <button
+    class="mode"
+    class:sa3={useSa3}
+    onclick={toggleGeometryVisible}
+    title="Switch Geometry"
+    aria-label="Switch Geometry"
+  >
+    {useSa3 ? 'SA3' : useSa1 ? 'SA1' : useTa ? 'LB' : 'SA2'}
+  </button>
+  <div class="options geometry" class:visible={geometryvisible}>
+    <h4>Map Geometry</h4>
+    <button onclick={() => window.location.replace('/?mode=sa1')}>SA1</button>
+    <button onclick={() => window.location.replace('/')}>SA2</button>
+    <button onclick={() => window.location.replace('/?mode=sa3')}>SA3</button>
+    <button onclick={() => window.location.replace('/?mode=ta')}
+      >Local Board</button
+    >
+  </div>
 {/if}
 <button class="style" onclick={toggleVisible} title={label} aria-label={label}>
 </button>
@@ -118,6 +144,9 @@
     border-radius: 5px;
     box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
     display: none;
+  }
+  .options.geometry {
+    bottom: 182px;
   }
   .options.visible {
     display: flex;

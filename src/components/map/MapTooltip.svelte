@@ -101,7 +101,7 @@
       <strong class="wfh">
         {isComparison && departCount >= 0
           ? '+'
-          : ''}{departCount}&nbsp;{#if source.brandingClass === 'aucklandcouncil'}trips
+          : ''}{departCount.toLocaleString()}&nbsp;{#if source.brandingClass === 'aucklandcouncil'}trips
           within{:else}live & {mode.join('/')}{/if}
       </strong>
       {#if source.brandingClass !== 'aucklandcouncil'}in{/if}
@@ -131,7 +131,9 @@
     {:else}
       {#if showOnly !== 'departures'}
         <strong class="arrivals">
-          {isComparison && arrivalCount >= 0 ? '+' : ''}{arrivalCount} arrivals
+          {isComparison && arrivalCount >= 0
+            ? '+'
+            : ''}{arrivalCount.toLocaleString()} arrivals
         </strong>
         {#if percentage}
           {formatPercentage(arrivalPercentage, isComparison)}
@@ -143,7 +145,9 @@
       {/if}
       {#if showOnly !== 'arrivals'}
         <strong class="departures">
-          {isComparison && departCount >= 0 ? '+' : ''}{departCount} departures
+          {isComparison && departCount >= 0
+            ? '+'
+            : ''}{departCount.toLocaleString()} departures
         </strong>
         {#if percentage}
           {formatPercentage(departPercentage, isComparison)}
@@ -164,11 +168,11 @@
           >{formatPercentage(internalTrips / totalTrips, false)}
           {id}<br /><br />
           <strong class="arrivals"
-            >{departCount - internalTrips} arrivals</strong
+            >{(departCount - internalTrips).toLocaleString()} arrivals</strong
           >{formatPercentage((departCount - internalTrips) / totalTrips, false)} &larr;
           from {selectedAreaText}<br />
           <strong class="departures"
-            >{arrivalCount - internalTrips} departures</strong
+            >{(arrivalCount - internalTrips).toLocaleString()} departures</strong
           >{formatPercentage(
             (arrivalCount - internalTrips) / totalTrips,
             false

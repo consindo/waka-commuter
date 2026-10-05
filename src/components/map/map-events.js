@@ -348,7 +348,9 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         const feature = data.features.find(
           (i) => i.properties.name === regionName[0]
         )
-        const options = { center: polylabel(feature.geometry.coordinates) }
+        const options = {
+          center: polylabel(feature.geometry.coordinates, 0.000001),
+        }
         // will zoom the user in a bit if they are too far out
         if (map.getZoom() < 10) {
           options.zoom = 10
