@@ -56,7 +56,7 @@
       mode is customizable, but trips back home are filtered out by default.
     </p>
     <p>
-      The 2018 model uses a 10% sample, while the 2023 model uses a 1% sample.
+      The 2018 model uses a 5% sample, while the 2023 model uses a 1% sample.
       Because of this sampling, the 2023 model looks a little sparse (especially
       with SA2).
     </p>
