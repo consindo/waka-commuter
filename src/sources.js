@@ -294,6 +294,7 @@ const sources = {
         : useTa
           ? '/shapes/akl-ta-2026-optimized.json'
           : '/shapes/akl-sa2-2026-optimized.json',
+    secondaryShapeFile: '/shapes/2018-network.json',
     initialPosition: [174.77, -36.85, 8],
     isModeGraphsEnabled: false,
     mapAreaLabelsToggleValue: false,

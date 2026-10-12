@@ -187,3 +187,71 @@ export const pointsFill = {
   'circle-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0, 8, 1],
   'circle-stroke-width': ['case', ['<', ['get', 'magnitude'], 1], 0, 1],
 }
+
+export const getNetworkFill = (isDark, property) => {
+  let color = isDark ? '#773581' : '#001930'
+  let step0 = 5
+  let step1 = 50
+  let step2 = 5000
+  if (property === 'volpt') {
+    color = '#0073BD'
+    step1 = 25
+    step2 = 1000
+  } else if (property === 'volbike') {
+    color = '#95C11F'
+    step1 = 15
+    step2 = 75
+  }
+  return {
+    'line-color': color,
+    'line-width': [
+      'interpolate',
+      ['linear'],
+      ['zoom'],
+      9,
+      [
+        'interpolate',
+        ['linear'],
+        ['get', property],
+        0,
+        0,
+        step0,
+        0,
+        step1,
+        0,
+        step2,
+        10,
+      ],
+      13,
+      [
+        'interpolate',
+        ['linear'],
+        ['get', property],
+        0,
+        0,
+        step0,
+        1,
+        step1,
+        2,
+        step2,
+        30,
+      ],
+    ],
+    'line-opacity':
+      property === 'volbike'
+        ? 1
+        : [
+            'interpolate',
+            ['linear'],
+            ['get', property],
+            0,
+            0,
+            step0,
+            0.2,
+            step1,
+            0.3,
+            step2,
+            0.5,
+          ],
+  }
+}

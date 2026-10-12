@@ -1,4 +1,12 @@
-import { getAreaFill, getLineFill, pointsFill } from './map-styles.js'
+import { getSource } from '../../sources.js'
+import {
+  getAreaFill,
+  getLineFill,
+  pointsFill,
+  getNetworkFill,
+} from './map-styles.js'
+
+const source = getSource()
 
 export const drawMap = (
   map,
@@ -8,10 +16,18 @@ export const drawMap = (
   isDark
 ) => {
   const data = datasets[0]
-  const secondaryData = datasets[1]
+  const secondaryData =
+    datasets[1] && source.brandingClass === 'ason' ? datasets[1] : undefined
+  const networkData =
+    datasets[1] && source.brandingClass === 'aucklandcouncil'
+      ? datasets[1]
+      : undefined
 
   const lineFill = getLineFill(isDark)
   const areaFill = getAreaFill(isDark)
+  const networkCarFill = getNetworkFill(isDark, 'volcar')
+  const networkBikeFill = getNetworkFill(isDark, 'volbike')
+  const networkPtFill = getNetworkFill(isDark, 'volpt')
 
   map.addSource('sa2', {
     type: 'geojson',
@@ -32,6 +48,13 @@ export const drawMap = (
       type: 'geojson',
       data: secondaryData,
       promoteId: 'name',
+    })
+  }
+
+  if (networkData) {
+    map.addSource('network', {
+      type: 'geojson',
+      data: networkData,
     })
   }
 
@@ -76,6 +99,34 @@ export const drawMap = (
     },
     paint: lineFill,
   })
+
+  if (networkData) {
+    const networkLayout = {
+      'line-join': 'round',
+      'line-cap': 'round',
+    }
+    map.addLayer({
+      id: 'network-car-lines',
+      type: 'line',
+      source: 'network',
+      layout: networkLayout,
+      paint: networkCarFill,
+    })
+    map.addLayer({
+      id: 'network-pt-lines',
+      type: 'line',
+      source: 'network',
+      layout: networkLayout,
+      paint: networkPtFill,
+    })
+    map.addLayer({
+      id: 'network-bike-lines',
+      type: 'line',
+      source: 'network',
+      layout: networkLayout,
+      paint: networkBikeFill,
+    })
+  }
 
   map.addLayer({
     id: 'points',
