@@ -190,17 +190,17 @@ export const pointsFill = {
 
 export const getNetworkFill = (isDark, property) => {
   let color = isDark ? '#773581' : '#001930'
-  let step0 = 5
-  let step1 = 50
-  let step2 = 5000
+  let step0 = 25
+  let step1 = 500
+  let step2 = 50000
   if (property === 'volpt') {
     color = '#0073BD'
-    step1 = 25
-    step2 = 1000
+    step1 = 50
+    step2 = 750
   } else if (property === 'volbike') {
     color = '#95C11F'
-    step1 = 15
-    step2 = 75
+    step1 = 150
+    step2 = 500
   }
   return {
     'line-color': color,

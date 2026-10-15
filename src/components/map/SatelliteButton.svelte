@@ -6,10 +6,27 @@
 
   let visible = $state(false)
   let geometryvisible = $state(false)
-  let checked = $state(mapLabels)
+  let labelsChecked = $state(mapLabels)
   $effect(() => {
-    setMapLabels(checked)
+    setMapLabels(labelsChecked)
   })
+
+  const searchParams = new URLSearchParams(window.location.search)
+  const aklHeatmapVisible = searchParams.get('network') === 'true'
+
+  function changeView(geometry, network) {
+    if (geometry === '') {
+      searchParams.delete('mode')
+    } else if (geometry) {
+      searchParams.set('mode', geometry)
+    }
+    if (network) {
+      searchParams.set('network', 'true')
+    } else {
+      searchParams.delete('network')
+    }
+    window.location.replace('/?' + searchParams.toString())
+  }
 
   function toggleVisible() {
     visible = !visible
@@ -68,12 +85,17 @@
   </button>
   <div class="options geometry" class:visible={geometryvisible}>
     <h4>Map Geometry</h4>
-    <button onclick={() => window.location.replace('/?mode=sa1')}>SA1</button>
-    <button onclick={() => window.location.replace('/')}>SA2</button>
-    <button onclick={() => window.location.replace('/?mode=sa3')}>SA3</button>
-    <button onclick={() => window.location.replace('/?mode=ta')}
+    <button onclick={() => changeView('sa1')}>SA1</button>
+    <button onclick={() => changeView('')}>SA2</button>
+    <button onclick={() => changeView('sa3')}>SA3</button>
+    <button onclick={() => changeView('ta')}
       >Local Board</button
     >
+    <h4>Network</h4>
+    <label>
+      <input type="checkbox" checked={aklHeatmapVisible} onchange={() => changeView(undefined, !aklHeatmapVisible)} />
+      Show Heatmap
+    </label>
   </div>
 {/if}
 <button class="style" onclick={toggleVisible} title={label} aria-label={label}>
@@ -85,7 +107,7 @@
   <button onclick={handleClick('satellite')}>Satellite</button>
   {#if mapLabels !== undefined}
     <label>
-      <input type="checkbox" bind:checked />
+      <input type="checkbox" bind:checked={labelsChecked} />
       Area Labels
     </label>
   {/if}

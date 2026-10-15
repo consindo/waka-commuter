@@ -3,6 +3,10 @@ import Dispatcher from '../../dispatcher.js'
 import { getSource } from '../../sources.js'
 
 const source = getSource()
+const searchParams = new URLSearchParams(window.location.search)
+const aklHeatmapVisible =
+  searchParams.get('network') === 'true' &&
+  source.brandingClass === 'aucklandcouncil'
 
 const datasets = {}
 
@@ -312,7 +316,7 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
           magnitude: null,
         }
       )
-      if (source.secondaryShapeFile) {
+      if (source.secondaryShapeFile && source.brandingClass === 'ason') {
         map.setFeatureState(
           {
             source: 'dzn',
@@ -395,7 +399,7 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
           magnitude: combinedObject[i].magnitude,
         }
       )
-      if (source.secondaryShapeFile) {
+      if (source.secondaryShapeFile && source.brandingClass === 'ason') {
         map.setFeatureState(
           {
             source: 'dzn',
@@ -491,6 +495,25 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
       ) {
         map.setLayoutProperty('dzn-lines', 'visibility', 'none')
         map.setLayoutProperty('dzn-fill', 'visibility', 'none')
+      }
+
+      // AKL COUNCIL SPECIFIC CODE
+      if (aklHeatmapVisible) {
+        if (segment.startsWith('2018-')) {
+          map.setLayoutProperty('network2-car-lines', 'visibility', 'none')
+          map.setLayoutProperty('network2-pt-lines', 'visibility', 'none')
+          // map.setLayoutProperty('network2-bike-lines', 'visibility', 'none')
+          map.setLayoutProperty('network-car-lines', 'visibility', 'visible')
+          map.setLayoutProperty('network-pt-lines', 'visibility', 'visible')
+          // map.setLayoutProperty('network-bike-lines', 'visibility', 'visible')
+        } else if (segment.startsWith('2023-')) {
+          map.setLayoutProperty('network-car-lines', 'visibility', 'none')
+          map.setLayoutProperty('network-pt-lines', 'visibility', 'none')
+          // map.setLayoutProperty('network-bike-lines', 'visibility', 'none')
+          map.setLayoutProperty('network2-car-lines', 'visibility', 'visible')
+          map.setLayoutProperty('network2-pt-lines', 'visibility', 'visible')
+          // map.setLayoutProperty('network2-bike-lines', 'visibility', 'visible')
+        }
       }
 
       // todo: could probably optimize this a little by only calling it if there is a change

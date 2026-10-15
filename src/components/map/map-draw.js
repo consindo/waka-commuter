@@ -8,6 +8,11 @@ import {
 
 const source = getSource()
 
+const searchParams = new URLSearchParams(window.location.search)
+const aklHeatmapVisible =
+  searchParams.get('network') === 'true' &&
+  source.brandingClass === 'aucklandcouncil'
+
 export const drawMap = (
   map,
   datasets,
@@ -18,10 +23,6 @@ export const drawMap = (
   const data = datasets[0]
   const secondaryData =
     datasets[1] && source.brandingClass === 'ason' ? datasets[1] : undefined
-  const networkData =
-    datasets[1] && source.brandingClass === 'aucklandcouncil'
-      ? datasets[1]
-      : undefined
 
   const lineFill = getLineFill(isDark)
   const areaFill = getAreaFill(isDark)
@@ -51,10 +52,14 @@ export const drawMap = (
     })
   }
 
-  if (networkData) {
+  if (aklHeatmapVisible) {
     map.addSource('network', {
       type: 'geojson',
-      data: networkData,
+      data: '/shapes/2018-network.json',
+    })
+    map.addSource('network2', {
+      type: 'geojson',
+      data: '/shapes/2023-network.json',
     })
   }
 
@@ -100,10 +105,15 @@ export const drawMap = (
     paint: lineFill,
   })
 
-  if (networkData) {
+  if (aklHeatmapVisible) {
     const networkLayout = {
       'line-join': 'round',
       'line-cap': 'round',
+    }
+    const invisibleNetwork = {
+      'line-join': 'round',
+      'line-cap': 'round',
+      visibility: 'none',
     }
     map.addLayer({
       id: 'network-car-lines',
@@ -119,13 +129,36 @@ export const drawMap = (
       layout: networkLayout,
       paint: networkPtFill,
     })
+    // disabled temporarily
+    // map.addLayer({
+    //   id: 'network-bike-lines',
+    //   type: 'line',
+    //   source: 'network',
+    //   layout: networkLayout,
+    //   paint: networkBikeFill,
+    // })
     map.addLayer({
-      id: 'network-bike-lines',
+      id: 'network2-car-lines',
       type: 'line',
-      source: 'network',
-      layout: networkLayout,
-      paint: networkBikeFill,
+      source: 'network2',
+      layout: invisibleNetwork,
+      paint: networkCarFill,
     })
+    map.addLayer({
+      id: 'network2-pt-lines',
+      type: 'line',
+      source: 'network2',
+      layout: invisibleNetwork,
+      paint: networkPtFill,
+    })
+    // disabled temporarily
+    // map.addLayer({
+    //   id: 'network2-bike-lines',
+    //   type: 'line',
+    //   source: 'network2',
+    //   layout: invisibleNetwork,
+    //   paint: networkBikeFill,
+    // })
   }
 
   map.addLayer({
