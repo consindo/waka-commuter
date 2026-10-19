@@ -21,7 +21,7 @@ try {
 } catch (err) {
   // folder doesn't exist
 }
-fs.mkdirSync(outputPath)
+fs.mkdirSync(outputPath, { recursive: true })
 
 const splitRegions = (filename) => {
   const file = fs.readFileSync(filename)
@@ -32,13 +32,6 @@ const splitRegions = (filename) => {
     fileString = file.toString()
   }
   const data = JSON.parse(fileString)
-
-  const dataPath = path.join(__dirname, '../../public/data')
-  try {
-    fs.mkdirSync(dataPath)
-  } catch (err) {
-    // folder doesn't exist
-  }
 
   Object.keys(data).forEach((key) => {
     const filename = transformFilename(key)
