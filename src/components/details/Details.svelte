@@ -555,6 +555,7 @@
         <strong>arrive from:</strong>
         <pre>{(arrivals || [])
             .toSorted((a, b) => b.value - a.value)
+            .slice(0, 100)
             .map((i) => `${i.key}: ${i.value}`)
             .join('\n')}</pre>
       </div>
@@ -562,6 +563,7 @@
         <strong>depart to:</strong>
         <pre>{(departures || [])
             .toSorted((a, b) => b.value - a.value)
+            .slice(0, 100)
             .map((i) => `${i.key}: ${i.value}`)
             .join('\n')}</pre>
       </div>
