@@ -276,14 +276,24 @@
         {/each}
       </ul>
     </nav>
-    <p class="population-wrapper" class:hidden={isControlsHidden}>
-      {#if populationLink}
-        <a
-          class="population-link"
-          href={populationLink}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+    {#if populationCount !== ''}
+      <p class="population-wrapper" class:hidden={isControlsHidden}>
+        {#if populationLink}
+          <a
+            class="population-link"
+            href={populationLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong class="population-label">{populationLabel}</strong>
+            <span class="population-count"
+              >{currentSegment.includes('comparison') &&
+              parseInt(populationCount) >= 0
+                ? '+'
+                : undefined}{populationCount}</span
+            >
+          </a>
+        {:else}
           <strong class="population-label">{populationLabel}</strong>
           <span class="population-count"
             >{currentSegment.includes('comparison') &&
@@ -291,17 +301,9 @@
               ? '+'
               : undefined}{populationCount}</span
           >
-        </a>
-      {:else}
-        <strong class="population-label">{populationLabel}</strong>
-        <span class="population-count"
-          >{currentSegment.includes('comparison') &&
-          parseInt(populationCount) >= 0
-            ? '+'
-            : undefined}{populationCount}</span
-        >
-      {/if}
-    </p>
+        {/if}
+      </p>
+    {/if}
     {#if source.brandingClass === 'ason' || source.brandingClass === 'statsnz'}
       <div class="mode-wrapper" class:hidden={isControlsHidden}>
         <ModeToggle bind:selection />

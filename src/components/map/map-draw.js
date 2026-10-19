@@ -1,4 +1,17 @@
-import { getAreaFill, getLineFill, pointsFill } from './map-styles.js'
+import { getSource } from '../../sources.js'
+import {
+  getAreaFill,
+  getLineFill,
+  pointsFill,
+  getNetworkFill,
+} from './map-styles.js'
+
+const source = getSource()
+
+const searchParams = new URLSearchParams(window.location.search)
+const aklHeatmapVisible =
+  searchParams.get('network') === 'true' &&
+  source.brandingClass === 'aucklandcouncil'
 
 export const drawMap = (
   map,
@@ -8,10 +21,14 @@ export const drawMap = (
   isDark
 ) => {
   const data = datasets[0]
-  const secondaryData = datasets[1]
+  const secondaryData =
+    datasets[1] && source.brandingClass === 'ason' ? datasets[1] : undefined
 
   const lineFill = getLineFill(isDark)
   const areaFill = getAreaFill(isDark)
+  const networkCarFill = getNetworkFill(isDark, 'volcar')
+  const networkBikeFill = getNetworkFill(isDark, 'volbike')
+  const networkPtFill = getNetworkFill(isDark, 'volpt')
 
   map.addSource('sa2', {
     type: 'geojson',
@@ -32,6 +49,17 @@ export const drawMap = (
       type: 'geojson',
       data: secondaryData,
       promoteId: 'name',
+    })
+  }
+
+  if (aklHeatmapVisible) {
+    map.addSource('network', {
+      type: 'geojson',
+      data: '/shapes/2018-network.json',
+    })
+    map.addSource('network2', {
+      type: 'geojson',
+      data: '/shapes/2023-network.json',
     })
   }
 
@@ -76,6 +104,62 @@ export const drawMap = (
     },
     paint: lineFill,
   })
+
+  if (aklHeatmapVisible) {
+    const networkLayout = {
+      'line-join': 'round',
+      'line-cap': 'round',
+    }
+    const invisibleNetwork = {
+      'line-join': 'round',
+      'line-cap': 'round',
+      visibility: 'none',
+    }
+    map.addLayer({
+      id: 'network-car-lines',
+      type: 'line',
+      source: 'network',
+      layout: networkLayout,
+      paint: networkCarFill,
+    })
+    map.addLayer({
+      id: 'network-pt-lines',
+      type: 'line',
+      source: 'network',
+      layout: networkLayout,
+      paint: networkPtFill,
+    })
+    // disabled temporarily
+    // map.addLayer({
+    //   id: 'network-bike-lines',
+    //   type: 'line',
+    //   source: 'network',
+    //   layout: networkLayout,
+    //   paint: networkBikeFill,
+    // })
+    map.addLayer({
+      id: 'network2-car-lines',
+      type: 'line',
+      source: 'network2',
+      layout: invisibleNetwork,
+      paint: networkCarFill,
+    })
+    map.addLayer({
+      id: 'network2-pt-lines',
+      type: 'line',
+      source: 'network2',
+      layout: invisibleNetwork,
+      paint: networkPtFill,
+    })
+    // disabled temporarily
+    // map.addLayer({
+    //   id: 'network2-bike-lines',
+    //   type: 'line',
+    //   source: 'network2',
+    //   layout: invisibleNetwork,
+    //   paint: networkBikeFill,
+    // })
+  }
 
   map.addLayer({
     id: 'points',

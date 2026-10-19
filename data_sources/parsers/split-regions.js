@@ -1,11 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
+import { gunzipSync } from 'node:zlib'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-const finalResult = {}
 
 const transformFilename = (name) => {
   return name
@@ -15,30 +14,24 @@ const transformFilename = (name) => {
     .replace(/[()\/]/g, '')
 }
 
-const splitRegions = () => {
-  const data = JSON.parse(
-    fs
-      .readFileSync(
-        path.join(__dirname, '../../', process.argv[2], 'combined-output.json')
-      )
-      .toString()
-  )
+const outputPath = path.join(__dirname, '../../public/data/regions')
 
-  const dataPath = path.join(__dirname, '../../public/data')
-  try {
-    fs.mkdirSync(dataPath)
-  } catch (err) {
-    // folder doesn't exist
+try {
+  fs.rmSync(outputPath, { recursive: true })
+} catch (err) {
+  // folder doesn't exist
+}
+fs.mkdirSync(outputPath, { recursive: true })
+
+const splitRegions = (filename) => {
+  const file = fs.readFileSync(filename)
+  let fileString = ''
+  if (filename.endsWith('.gz')) {
+    fileString = gunzipSync(file)
+  } else {
+    fileString = file.toString()
   }
-
-  const outputPath = path.join(__dirname, '../../public/data/regions')
-
-  try {
-    fs.rmSync(outputPath, { recursive: true })
-  } catch (err) {
-    // folder doesn't exist
-  }
-  fs.mkdirSync(outputPath)
+  const data = JSON.parse(fileString)
 
   Object.keys(data).forEach((key) => {
     const filename = transformFilename(key)
@@ -51,6 +44,15 @@ const splitRegions = () => {
       }
     )
   })
+  console.log('wrote', Object.keys(data).length, 'files')
 }
 
-splitRegions()
+const files = fs.readdirSync(path.join(__dirname, '../../', process.argv[2]))
+
+files
+  .filter(
+    (file) => file.endsWith('-output.json.gz') || file.endsWith('-output.json')
+  )
+  .forEach((file) => {
+    splitRegions(path.join(__dirname, '../../', process.argv[2], file))
+  })
