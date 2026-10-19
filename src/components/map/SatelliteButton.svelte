@@ -88,12 +88,14 @@
     <button onclick={() => changeView('sa1')}>SA1</button>
     <button onclick={() => changeView('')}>SA2</button>
     <button onclick={() => changeView('sa3')}>SA3</button>
-    <button onclick={() => changeView('ta')}
-      >Local Board</button
-    >
+    <button onclick={() => changeView('ta')}>Local Board</button>
     <h4>Network</h4>
     <label>
-      <input type="checkbox" checked={aklHeatmapVisible} onchange={() => changeView(undefined, !aklHeatmapVisible)} />
+      <input
+        type="checkbox"
+        checked={aklHeatmapVisible}
+        onchange={() => changeView(undefined, !aklHeatmapVisible)}
+      />
       Show Heatmap
     </label>
   </div>
