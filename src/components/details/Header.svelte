@@ -4,6 +4,7 @@
   import Dispatcher from '../../dispatcher.js'
   import { getSource } from '../../sources.js'
   import ModeToggle from './ModeToggle.svelte'
+    import MultiRangeSlider from './MultiRangeSlider.svelte'
 
   let { title, populationLabel, populationLink, populationCount } = $props()
 
@@ -111,6 +112,7 @@
         new Set(), // start_activity_type
         new Set(), // end_activity_type
         new Set(), // mode
+        new Set(), // time
       ]
       currentSegment
         .split('|')
@@ -120,11 +122,15 @@
         segmentSet[index] = new Set()
       }
 
-      // toggle the segment
-      if (segmentSet[index].has(name)) {
-        segmentSet[index].delete(name)
+      if (Array.isArray(name)) {
+        segmentSet[index] = new Set(name)
       } else {
-        segmentSet[index].add(name)
+        // toggle the segment
+        if (segmentSet[index].has(name)) {
+          segmentSet[index].delete(name)
+        } else {
+          segmentSet[index].add(name)
+        }
       }
 
       // rebuild the segments
@@ -140,6 +146,14 @@
 
       Dispatcher.setSegment(newSegments.join('|'))
     }
+
+  let timeOptions = []
+  for (let i = 5; i < 24; i++) {
+    timeOptions.push(`${i.toString().padStart(2, '0')}:00`)
+    timeOptions.push(`${i.toString().padStart(2, '0')}:30`)
+  }
+  // presentation only
+  timeOptions.push('00:00')
 </script>
 
 <svelte:window onkeydown={triggerShortcut} />
@@ -193,6 +207,7 @@
       .map((i) => i.split('-')[2])}
     {@const toLocations = currentSegment.split('|').map((i) => i.split('-')[3])}
     {@const modes = currentSegment.split('|').map((i) => i.split('-')[4])}
+    {@const times = Array.from(new Set(currentSegment.split('|').map((i) => i.split('-')[5])))}
     <nav class="auckland-controls">
       <p><strong>year:</strong></p>
       {#each ['2018', '2023'] as year (year)}
@@ -237,6 +252,12 @@
           />{mode}</label
         >
       {/each}
+      <p><strong>time:</strong></p>
+      {times[0]} to {timeOptions[timeOptions.indexOf(times.slice(-1)[0]) + 1]}
+      <MultiRangeSlider min={0} max={timeOptions.length -1} onChange={(a, b) => {
+        if (a === b) return;
+        triggerAucklandSegment(5, timeOptions.slice(a, b))()
+      }} />
     </nav>
   {/if}
   <div class="nav-header-grid">
