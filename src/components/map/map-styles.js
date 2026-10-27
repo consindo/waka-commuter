@@ -189,21 +189,40 @@ export const pointsFill = {
 }
 
 export const getNetworkFill = (isDark, property) => {
-  let color = isDark ? '#773581' : '#001930'
+  let noColor = '#ffffff'
+  let color0 = isDark ? '#1E0D20' : '#BFC6CB'
+  let color1 = isDark ? '#592861' : '#405364'
+  let color2 = isDark ? '#773581' : '#001930'
   let step0 = 25
   let step1 = 500
   let step2 = 50000
   if (property === 'volpt') {
-    color = '#0073BD'
+    color0 = isDark ? '#001D2F' : '#BFDCEF'
+    color1 = isDark ? '#00568E' : '#4096CE'
+    color2 = '#0073BD'
     step1 = 50
     step2 = 750
   } else if (property === 'volbike') {
-    color = '#95C11F'
+    color0 = isDark ? '#253008' : '#E5F0C7'
+    color1 = isDark ? '#709117' : '#B0D157'
+    color2 = '#95C11F'
     step1 = 150
     step2 = 500
   }
   return {
-    'line-color': color,
+    'line-color': [
+      'interpolate',
+      ['linear'],
+      ['get', property],
+      0,
+      noColor,
+      step0,
+      color0,
+      step1,
+      color1,
+      step2,
+      color2,
+    ],
     'line-width': [
       'interpolate',
       ['linear'],
@@ -237,21 +256,6 @@ export const getNetworkFill = (isDark, property) => {
         30,
       ],
     ],
-    'line-opacity':
-      property === 'volbike'
-        ? 1
-        : [
-            'interpolate',
-            ['linear'],
-            ['get', property],
-            0,
-            0,
-            step0,
-            0.2,
-            step1,
-            0.3,
-            step2,
-            0.5,
-          ],
+    'line-opacity': 1,
   }
 }
