@@ -7,8 +7,24 @@ const useSa1 = window.location.search === '?mode=sa1'
 const useSa3 = window.location.search === '?mode=sa3'
 const useTa = window.location.search === '?mode=ta'
 
-const aklBaseSegment =
-  '2018-XXX-home-work-walk|2018-XXX-home-work-ride|2018-XXX-home-work-car|2018-XXX-home-work-pt|2018-XXX-home-work-bike|2018-XXX-home-leisure-walk|2018-XXX-home-leisure-ride|2018-XXX-home-leisure-car|2018-XXX-home-leisure-pt|2018-XXX-home-leisure-bike|2018-XXX-home-education-walk|2018-XXX-home-education-ride|2018-XXX-home-education-car|2018-XXX-home-education-pt|2018-XXX-home-education-bike|2018-XXX-home-shop-walk|2018-XXX-home-shop-ride|2018-XXX-home-shop-car|2018-XXX-home-shop-pt|2018-XXX-home-shop-bike|2018-XXX-home-other-walk|2018-XXX-home-other-ride|2018-XXX-home-other-car|2018-XXX-home-other-pt|2018-XXX-home-other-bike|2018-XXX-work-work-walk|2018-XXX-work-work-ride|2018-XXX-work-work-car|2018-XXX-work-work-pt|2018-XXX-work-work-bike|2018-XXX-work-leisure-walk|2018-XXX-work-leisure-ride|2018-XXX-work-leisure-car|2018-XXX-work-leisure-pt|2018-XXX-work-leisure-bike|2018-XXX-work-education-walk|2018-XXX-work-education-ride|2018-XXX-work-education-car|2018-XXX-work-education-pt|2018-XXX-work-education-bike|2018-XXX-work-shop-walk|2018-XXX-work-shop-ride|2018-XXX-work-shop-car|2018-XXX-work-shop-pt|2018-XXX-work-shop-bike|2018-XXX-work-other-walk|2018-XXX-work-other-ride|2018-XXX-work-other-car|2018-XXX-work-other-pt|2018-XXX-work-other-bike|2018-XXX-education-work-walk|2018-XXX-education-work-ride|2018-XXX-education-work-car|2018-XXX-education-work-pt|2018-XXX-education-work-bike|2018-XXX-education-leisure-walk|2018-XXX-education-leisure-ride|2018-XXX-education-leisure-car|2018-XXX-education-leisure-pt|2018-XXX-education-leisure-bike|2018-XXX-education-education-walk|2018-XXX-education-education-ride|2018-XXX-education-education-car|2018-XXX-education-education-pt|2018-XXX-education-education-bike|2018-XXX-education-shop-walk|2018-XXX-education-shop-ride|2018-XXX-education-shop-car|2018-XXX-education-shop-pt|2018-XXX-education-shop-bike|2018-XXX-education-other-walk|2018-XXX-education-other-ride|2018-XXX-education-other-car|2018-XXX-education-other-pt|2018-XXX-education-other-bike|2018-XXX-leisure-work-walk|2018-XXX-leisure-work-ride|2018-XXX-leisure-work-car|2018-XXX-leisure-work-pt|2018-XXX-leisure-work-bike|2018-XXX-leisure-leisure-walk|2018-XXX-leisure-leisure-ride|2018-XXX-leisure-leisure-car|2018-XXX-leisure-leisure-pt|2018-XXX-leisure-leisure-bike|2018-XXX-leisure-education-walk|2018-XXX-leisure-education-ride|2018-XXX-leisure-education-car|2018-XXX-leisure-education-pt|2018-XXX-leisure-education-bike|2018-XXX-leisure-shop-walk|2018-XXX-leisure-shop-ride|2018-XXX-leisure-shop-car|2018-XXX-leisure-shop-pt|2018-XXX-leisure-shop-bike|2018-XXX-leisure-other-walk|2018-XXX-leisure-other-ride|2018-XXX-leisure-other-car|2018-XXX-leisure-other-pt|2018-XXX-leisure-other-bike|2018-XXX-shop-work-walk|2018-XXX-shop-work-ride|2018-XXX-shop-work-car|2018-XXX-shop-work-pt|2018-XXX-shop-work-bike|2018-XXX-shop-leisure-walk|2018-XXX-shop-leisure-ride|2018-XXX-shop-leisure-car|2018-XXX-shop-leisure-pt|2018-XXX-shop-leisure-bike|2018-XXX-shop-education-walk|2018-XXX-shop-education-ride|2018-XXX-shop-education-car|2018-XXX-shop-education-pt|2018-XXX-shop-education-bike|2018-XXX-shop-shop-walk|2018-XXX-shop-shop-ride|2018-XXX-shop-shop-car|2018-XXX-shop-shop-pt|2018-XXX-shop-shop-bike|2018-XXX-shop-other-walk|2018-XXX-shop-other-ride|2018-XXX-shop-other-car|2018-XXX-shop-other-pt|2018-XXX-shop-other-bike|2018-XXX-other-work-walk|2018-XXX-other-work-ride|2018-XXX-other-work-car|2018-XXX-other-work-pt|2018-XXX-other-work-bike|2018-XXX-other-leisure-walk|2018-XXX-other-leisure-ride|2018-XXX-other-leisure-car|2018-XXX-other-leisure-pt|2018-XXX-other-leisure-bike|2018-XXX-other-education-walk|2018-XXX-other-education-ride|2018-XXX-other-education-car|2018-XXX-other-education-pt|2018-XXX-other-education-bike|2018-XXX-other-shop-walk|2018-XXX-other-shop-ride|2018-XXX-other-shop-car|2018-XXX-other-shop-pt|2018-XXX-other-shop-bike|2018-XXX-other-other-walk|2018-XXX-other-other-ride|2018-XXX-other-other-car|2018-XXX-other-other-pt|2018-XXX-other-other-bike'
+const origins = ['home', 'work', 'education', 'leisure', 'shop', 'other']
+const destinations = origins.filter((i) => i !== 'home')
+const modes = ['walk', 'ride', 'car', 'pt', 'bike']
+let times = []
+for (let i = 5; i < 24; i++) {
+  times.push(`${i.toString().padStart(2, '0')}:00`)
+  times.push(`${i.toString().padStart(2, '0')}:30`)
+}
+
+const aklBaseSegment = origins
+  .flatMap((origin) =>
+    destinations.flatMap((dest) =>
+      modes.flatMap((mode) =>
+        times.flatMap((time) => `2018-XXX-${origin}-${dest}-${mode}-${time}`)
+      )
+    )
+  )
+  .join('|')
 
 const sources = {
   commuterview: {
