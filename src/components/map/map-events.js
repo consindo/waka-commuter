@@ -502,17 +502,17 @@ const bindDispatcherEvents = (map, tooltipCallback) => {
         if (segment.startsWith('2018-')) {
           map.setLayoutProperty('network2-car-lines', 'visibility', 'none')
           map.setLayoutProperty('network2-pt-lines', 'visibility', 'none')
-          // map.setLayoutProperty('network2-bike-lines', 'visibility', 'none')
+          map.setLayoutProperty('network2-bike-lines', 'visibility', 'none')
           map.setLayoutProperty('network-car-lines', 'visibility', 'visible')
           map.setLayoutProperty('network-pt-lines', 'visibility', 'visible')
-          // map.setLayoutProperty('network-bike-lines', 'visibility', 'visible')
+          map.setLayoutProperty('network-bike-lines', 'visibility', 'visible')
         } else if (segment.startsWith('2023-')) {
           map.setLayoutProperty('network-car-lines', 'visibility', 'none')
           map.setLayoutProperty('network-pt-lines', 'visibility', 'none')
-          // map.setLayoutProperty('network-bike-lines', 'visibility', 'none')
+          map.setLayoutProperty('network-bike-lines', 'visibility', 'none')
           map.setLayoutProperty('network2-car-lines', 'visibility', 'visible')
           map.setLayoutProperty('network2-pt-lines', 'visibility', 'visible')
-          // map.setLayoutProperty('network2-bike-lines', 'visibility', 'visible')
+          map.setLayoutProperty('network2-bike-lines', 'visibility', 'visible')
         }
       }
 

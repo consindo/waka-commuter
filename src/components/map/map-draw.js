@@ -129,14 +129,13 @@ export const drawMap = (
       layout: networkLayout,
       paint: networkPtFill,
     })
-    // disabled temporarily
-    // map.addLayer({
-    //   id: 'network-bike-lines',
-    //   type: 'line',
-    //   source: 'network',
-    //   layout: networkLayout,
-    //   paint: networkBikeFill,
-    // })
+    map.addLayer({
+      id: 'network-bike-lines',
+      type: 'line',
+      source: 'network',
+      layout: networkLayout,
+      paint: networkBikeFill,
+    })
     map.addLayer({
       id: 'network2-car-lines',
       type: 'line',
@@ -151,14 +150,13 @@ export const drawMap = (
       layout: invisibleNetwork,
       paint: networkPtFill,
     })
-    // disabled temporarily
-    // map.addLayer({
-    //   id: 'network2-bike-lines',
-    //   type: 'line',
-    //   source: 'network2',
-    //   layout: invisibleNetwork,
-    //   paint: networkBikeFill,
-    // })
+    map.addLayer({
+      id: 'network2-bike-lines',
+      type: 'line',
+      source: 'network2',
+      layout: invisibleNetwork,
+      paint: networkBikeFill,
+    })
   }
 
   map.addLayer({

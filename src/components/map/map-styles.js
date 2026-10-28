@@ -207,7 +207,7 @@ export const getNetworkFill = (isDark, property) => {
     color1 = isDark ? '#709117' : '#B0D157'
     color2 = '#95C11F'
     step1 = 150
-    step2 = 500
+    step2 = 2000
   }
   return {
     'line-color': [

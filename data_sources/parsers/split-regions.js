@@ -35,13 +35,9 @@ const splitRegions = (filename) => {
 
   Object.keys(data).forEach((key) => {
     const filename = transformFilename(key)
-    fs.writeFile(
+    fs.writeFileSync(
       path.join(outputPath, `${filename}.json`),
-      JSON.stringify(data[key], '', 2),
-      (err) => {
-        if (err) throw err
-        // console.log(`written ${filename}.json`)
-      }
+      JSON.stringify(data[key], '', 2)
     )
   })
   console.log('wrote', Object.keys(data).length, 'files')
