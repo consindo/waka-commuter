@@ -102,24 +102,27 @@
     }
   }
 
+  // build a set of what the current segments are
+  let segmentSet = [
+    new Set(), // year
+    new Set(), // shape
+    new Set(), // start_activity_type
+    new Set(), // end_activity_type
+    new Set(), // mode
+    new Set(), // time
+  ]
+  // need to fill up the set for the first time...
+  currentSegment
+    .split('|')
+    .forEach((i) => i.split('-').forEach((j, k) => segmentSet[k].add(j)))
+
   const triggerAucklandSegment =
     (index, name, isRadio = false) =>
     () => {
-      // build a set of what the current segments are
-      let segmentSet = [
-        new Set(), // year
-        new Set(), // shape
-        new Set(), // start_activity_type
-        new Set(), // end_activity_type
-        new Set(), // mode
-        new Set(), // time
-      ]
-      currentSegment
-        .split('|')
-        .forEach((i) => i.split('-').forEach((j, k) => segmentSet[k].add(j)))
-
       if (isRadio) {
         segmentSet[index] = new Set()
+
+
       }
 
       if (Array.isArray(name)) {
@@ -143,6 +146,10 @@
           [[]]
         )
         .map((combo) => combo.join('-'))
+
+      if (newSegments.length === 0) {
+        return
+      }
 
       Dispatcher.setSegment(newSegments.join('|'))
     }
@@ -215,6 +222,7 @@
           ><input
             onclick={triggerAucklandSegment(0, year, true)}
             type="radio"
+            name="year"
             checked={years.includes(year)}
           />{year}</label
         >
@@ -225,7 +233,6 @@
           ><input
             onclick={triggerAucklandSegment(2, location)}
             type="checkbox"
-            disabled={fromLocations.every((i) => i === location)}
             checked={fromLocations.includes(location)}
           />{location}</label
         >
@@ -236,7 +243,6 @@
           ><input
             onclick={triggerAucklandSegment(3, location)}
             type="checkbox"
-            disabled={toLocations.every((i) => i === location)}
             checked={toLocations.includes(location)}
           />{location}</label
         >
@@ -247,7 +253,6 @@
           ><input
             onclick={triggerAucklandSegment(4, mode)}
             type="checkbox"
-            disabled={modes.every((i) => i === mode)}
             checked={modes.includes(mode)}
           />{mode}</label
         >
