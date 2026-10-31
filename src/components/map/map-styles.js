@@ -164,7 +164,13 @@ export const getAreaFill = (isDark) => ({
 })
 
 export const getLineFill = (isDark) => ({
-  'line-color': isDark ? '#777' : '#ccc',
+  'line-color': isDark
+    ? useSa1
+      ? 'rgba(255,255,255,0.075)'
+      : '#666'
+    : useSa1
+      ? 'rgba(0,0,0,0.075)'
+      : '#ccc',
   'line-width': 1,
 })
 
