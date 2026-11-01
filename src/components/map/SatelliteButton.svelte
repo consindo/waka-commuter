@@ -138,6 +138,7 @@
             const newValue = e.currentTarget.checked ? 'none' : 'visible'
             map.setLayoutProperty('sa2-lines', 'visibility', newValue)
             map.setLayoutProperty('sa2-fill', 'visibility', newValue)
+            map.setLayoutProperty('points', 'visibility', newValue)
           }}
         />
         Hide Areas
