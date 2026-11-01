@@ -217,7 +217,7 @@
     )}
     <nav class="auckland-controls">
       <div class="auckland-full-width">
-        {#each ['2018', '2023'] as year (year)}
+        {#each ['2023', '2018'] as year (year)}
           <label
             ><input
               onclick={triggerAucklandSegment(0, year, true)}
@@ -226,7 +226,7 @@
               checked={years.includes(year)}
             />{year}</label
           >
-          {#if year !== '2023'}
+          {#if year !== '2018'}
           &middot;&nbsp;
           {/if}
         {/each}

@@ -20,7 +20,7 @@ const aklBaseSegment = origins
   .flatMap((origin) =>
     destinations.flatMap((dest) =>
       modes.flatMap((mode) =>
-        times.flatMap((time) => `2018-XXX-${origin}-${dest}-${mode}-${time}`)
+        times.flatMap((time) => `2023-XXX-${origin}-${dest}-${mode}-${time}`)
       )
     )
   )
