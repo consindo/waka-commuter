@@ -38,8 +38,7 @@
       : vars.travellersPercentage}% of {mode})</strong
   >
   travel {mode === 'arrivals' ? 'to' : 'from'}
-  <span class="less-emphasis">{vars.place}</span>{#if source.brandingClass !== 'aucklandcouncil'}&nbsp;
-  for {vars.destination.length > 0
+  <span class="less-emphasis">{vars.place}</span>{#if source.brandingClass !== 'aucklandcouncil'}&nbsp;for {vars.destination.length > 0
     ? vars.destination.join(' & ').replace('school', 'school or study')
     : ''}{/if}, while
   <strong class="wfh"
