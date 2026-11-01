@@ -493,8 +493,12 @@
           arrivals = arriveDataFriendly
           departures = departDataFriendly
 
-          arriveMode = [arriveModeData, arriveModeBaseline]
-          departureMode = [departureModeData, departureModeBaseline]
+          if (arriveModeData !== null) {
+            arriveMode = [arriveModeData, arriveModeBaseline]
+          }
+          if (departureModeData !== null) {
+            departureMode = [departureModeData, departureModeBaseline]
+          }
 
           tooltip = tooltipData
 
@@ -549,98 +553,79 @@
     {populationLink}
     {populationCount}
   />
-  {#if source.brandingClass === 'aucklandcouncil'}
-    <div class="pre-flex">
-      <div>
-        <strong>arrive from:</strong>
-        <pre>{(arrivals || [])
-            .toSorted((a, b) => b.value - a.value)
-            .slice(0, 100)
-            .map((i) => `${i.key}: ${i.value}`)
-            .join('\n')}</pre>
-      </div>
-      <div>
-        <strong>depart to:</strong>
-        <pre>{(departures || [])
-            .toSorted((a, b) => b.value - a.value)
-            .slice(0, 100)
-            .map((i) => `${i.key}: ${i.value}`)
-            .join('\n')}</pre>
-      </div>
-    </div>
-  {:else}
-    <div class="arrive-from warning" class:hidden={!invalidArrival}>
-      <p>
-        A SA2 is selected. Select individual DZNs or switch to SA2 mode to see
-        arrivals.
-      </p>
-    </div>
-    {#if isComparison}
-      <h3>Comparison</h3>
-      <DetailsDeltaBlurb
+  <div class="arrive-from warning" class:hidden={!invalidArrival}>
+    <p>
+      A SA2 is selected. Select individual DZNs or switch to SA2 mode to see
+      arrivals.
+    </p>
+  </div>
+  {#if isComparison}
+    <h3>Comparison</h3>
+    <DetailsDeltaBlurb
+      {currentRegions}
+      segment={dataSegment}
+      {arrivals}
+      {departures}
+      arrivalModeData={arriveMode}
+      departureModeData={departureMode}
+    />
+  {/if}
+  <div class:hidden={hideArrivals || invalidArrival}>
+    <h3>Arrivals</h3>
+    {#if currentRegions && !isComparison}
+      <DetailsBlurb
+        mode="arrivals"
         {currentRegions}
         segment={dataSegment}
-        {arrivals}
-        {departures}
-        arrivalModeData={arriveMode}
-        departureModeData={departureMode}
+        destinationData={arrivals}
+        modeData={arriveMode?.[0]}
       />
     {/if}
-    <div class:hidden={hideArrivals || invalidArrival}>
-      <h3>Arrivals</h3>
-      {#if currentRegions && !isComparison}
-        <DetailsBlurb
-          mode="arrivals"
-          {currentRegions}
-          segment={dataSegment}
-          destinationData={arrivals}
-          modeData={arriveMode[0]}
-        />
-      {/if}
-      <div class="arrive-from graph-container">
-        <div class="location-container">
-          {#if initialLocation && !isComparison}
-            <div class="location-inner">
-              <PopulationBubbles
-                scale={initialLocation}
-                data={arrivals}
-                tooltipData={tooltip}
-                showOnly="arrivals"
-                attribution={source.brandingClass === 'statsnz'}
-                width="580"
-                height="400"
-              />
-            </div>
-            {#if source.brandingClass === 'statsnz'}
-              <p class="disclaimer">
-                Only journeys made by 6 or more people are shown.
-              </p>
-            {/if}
+    <div class="arrive-from graph-container">
+      <div class="location-container">
+        {#if initialLocation && !isComparison}
+          <div class="location-inner">
+            <PopulationBubbles
+              scale={initialLocation}
+              data={arrivals}
+              tooltipData={tooltip}
+              showOnly="arrivals"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          </div>
+          {#if source.brandingClass === 'statsnz'}
+            <p class="disclaimer">
+              Only journeys made by 6 or more people are shown.
+            </p>
           {/if}
-          <div class="location-graph">
-            {#key arrivals}
-              {#if arrivals !== null && arrivals.length > 0}
-                <PopulationGraph
-                  data={arrivals}
-                  mode="arrivals"
-                  tooltipData={tooltip}
-                  isComparison={dataSegment.includes('comparison')}
-                />
-              {/if}
-            {/key}
-          </div>
-          <div class="hidden-trips">
-            <ul>
-              {#each hiddenArrivals as i}
-                <li>
-                  <strong>{i.key}</strong>: {i.value} people ({(
-                    i.percentage * 100
-                  ).toFixed(2)}%)
-                </li>
-              {/each}
-            </ul>
-          </div>
+        {/if}
+        <div class="location-graph">
+          {#key arrivals}
+            {#if arrivals !== null && arrivals.length > 0}
+              <PopulationGraph
+                data={arrivals}
+                mode="arrivals"
+                tooltipData={tooltip}
+                isComparison={dataSegment.includes('comparison')}
+              />
+            {/if}
+          {/key}
         </div>
+        <div class="hidden-trips">
+          <ul>
+            {#each hiddenArrivals as i}
+              <li>
+                <strong>{i.key}</strong>: {i.value} people ({(
+                  i.percentage * 100
+                ).toFixed(2)}%)
+              </li>
+            {/each}
+          </ul>
+        </div>
+      </div>
+      {#if arriveMode}
         <div class="mode-container">
           <div class="mode-inner">
             <h4>
@@ -656,79 +641,79 @@
                 >
               {/if}
             </h4>
-            {#if arriveMode}
-              <TravelMode
-                data={arriveMode[0].Total}
-                baseline={arriveMode[1].Total}
-                isComparison={dataSegment.includes('comparison')}
-              />
-            {/if}
+            <TravelMode
+              data={arriveMode[0].Total}
+              baseline={arriveMode[1].Total}
+              isComparison={dataSegment.includes('comparison')}
+            />
             <div class="mode"></div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="depart-to warning" class:hidden={!invalidDeparture}>
-      <p>
-        There is no departure data for individual DZNs. Select a SA2 or switch
-        to arrivals to continue.
-      </p>
-    </div>
-    <div class:hidden={hideDepartures || invalidDeparture}>
-      <h3>Departures</h3>
-      {#if currentRegions && !isComparison}
-        <DetailsBlurb
-          mode="departures"
-          {currentRegions}
-          segment={dataSegment}
-          destinationData={departures}
-          modeData={departureMode[0]}
-        />
       {/if}
-      <div class="depart-to graph-container">
-        <div class="location-container">
-          {#if initialLocation && !isComparison}
-            <div class="location-inner">
-              <PopulationBubbles
-                scale={initialLocation}
-                data={departures}
-                tooltipData={tooltip}
-                showOnly="departures"
-                attribution={source.brandingClass === 'statsnz'}
-                width="580"
-                height="400"
-              />
-            </div>
-            {#if source.brandingClass === 'statsnz'}
-              <p class="disclaimer">
-                Only journeys made by 6 or more people are shown.
-              </p>
-            {/if}
+    </div>
+  </div>
+  <div class="depart-to warning" class:hidden={!invalidDeparture}>
+    <p>
+      There is no departure data for individual DZNs. Select a SA2 or switch to
+      arrivals to continue.
+    </p>
+  </div>
+  <div class:hidden={hideDepartures || invalidDeparture}>
+    <h3>Departures</h3>
+    {#if currentRegions && !isComparison}
+      <DetailsBlurb
+        mode="departures"
+        {currentRegions}
+        segment={dataSegment}
+        destinationData={departures}
+        modeData={departureMode?.[0]}
+      />
+    {/if}
+    <div class="depart-to graph-container">
+      <div class="location-container">
+        {#if initialLocation && !isComparison}
+          <div class="location-inner">
+            <PopulationBubbles
+              scale={initialLocation}
+              data={departures}
+              tooltipData={tooltip}
+              showOnly="departures"
+              attribution={source.brandingClass === 'statsnz'}
+              width="580"
+              height="400"
+            />
+          </div>
+          {#if source.brandingClass === 'statsnz'}
+            <p class="disclaimer">
+              Only journeys made by 6 or more people are shown.
+            </p>
           {/if}
-          <div class="location-graph">
-            {#key departures}
-              {#if departures !== null && departures.length > 0}
-                <PopulationGraph
-                  data={departures}
-                  mode="departures"
-                  isComparison={dataSegment.includes('comparison')}
-                  tooltipData={tooltip}
-                />
-              {/if}
-            {/key}
-          </div>
-          <div class="hidden-trips">
-            <ul>
-              {#each hiddenDepartures as i}
-                <li>
-                  <strong>{i.key}</strong>: {i.value} people ({(
-                    i.percentage * 100
-                  ).toFixed(2)}%)
-                </li>
-              {/each}
-            </ul>
-          </div>
+        {/if}
+        <div class="location-graph">
+          {#key departures}
+            {#if departures !== null && departures.length > 0}
+              <PopulationGraph
+                data={departures}
+                mode="departures"
+                isComparison={dataSegment.includes('comparison')}
+                tooltipData={tooltip}
+              />
+            {/if}
+          {/key}
         </div>
+        <div class="hidden-trips">
+          <ul>
+            {#each hiddenDepartures as i}
+              <li>
+                <strong>{i.key}</strong>: {i.value} people ({(
+                  i.percentage * 100
+                ).toFixed(2)}%)
+              </li>
+            {/each}
+          </ul>
+        </div>
+      </div>
+      {#if departureMode}
         <div class="mode-container">
           <div class="mode-inner">
             <h4>
@@ -744,42 +729,41 @@
                 >
               {/if}
             </h4>
-            {#if departureMode}
-              <TravelMode
-                data={departureMode[0].Total}
-                baseline={departureMode[1].Total}
-                isComparison={dataSegment.includes('comparison')}
-              />
-            {/if}
+            <TravelMode
+              data={departureMode[0].Total}
+              baseline={departureMode[1].Total}
+              isComparison={dataSegment.includes('comparison')}
+            />
             <div class="mode"></div>
           </div>
         </div>
-      </div>
+      {/if}
     </div>
-    {#if Object.keys(populationPredictions).length > 0 && !invalidDeparture && !invalidArrival}
-      {#key populationPredictions}
-        <div>
-          <h3>NSW Population Projections</h3>
-          <PopulationPredictions
-            population={populationPredictions}
-            rowFilter={['ERP_', 'POPD_', 'PNPD_', 'SPD_', 'OPD_']}
-          />
-        </div>
-        <div>
-          <h3>NSW Workforce & Employment Projections</h3>
-          <PopulationPredictions
-            population={populationPredictions}
-            rowFilter={[
-              'Emp_Wkf_POPD_15+yrs_',
-              'Not_in_Wkf_POPD_15+yrs_',
-              'UnEmp_Wkf_POPD_15+yrs_',
-              'EMP_',
-            ]}
-          />
-        </div>
-      {/key}
-    {/if}
+  </div>
+  {#if Object.keys(populationPredictions).length > 0 && !invalidDeparture && !invalidArrival}
+    {#key populationPredictions}
+      <div>
+        <h3>NSW Population Projections</h3>
+        <PopulationPredictions
+          population={populationPredictions}
+          rowFilter={['ERP_', 'POPD_', 'PNPD_', 'SPD_', 'OPD_']}
+        />
+      </div>
+      <div>
+        <h3>NSW Workforce & Employment Projections</h3>
+        <PopulationPredictions
+          population={populationPredictions}
+          rowFilter={[
+            'Emp_Wkf_POPD_15+yrs_',
+            'Not_in_Wkf_POPD_15+yrs_',
+            'UnEmp_Wkf_POPD_15+yrs_',
+            'EMP_',
+          ]}
+        />
+      </div>
+    {/key}
   {/if}
+
   <Footer />
 </div>
 

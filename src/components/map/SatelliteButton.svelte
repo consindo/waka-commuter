@@ -105,43 +105,43 @@
       Show Heatmap
     </label>
     {#if aklHeatmapVisible}
-    <div class="heatmap-options">
+      <div class="heatmap-options">
+        <label>
+          <input
+            type="checkbox"
+            defaultchecked={aklHeatmapVisible}
+            onchange={toggleHeatmap('bike')}
+          />
+          Cycling
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            defaultchecked={aklHeatmapVisible}
+            onchange={toggleHeatmap('pt')}
+          />
+          Public Transport
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            defaultchecked={aklHeatmapVisible}
+            onchange={toggleHeatmap('car')}
+          />
+          Drive
+        </label>
+      </div>
       <label>
         <input
           type="checkbox"
-          defaultchecked={aklHeatmapVisible}
-          onchange={toggleHeatmap('bike')}
+          onchange={(e) => {
+            const newValue = e.currentTarget.checked ? 'none' : 'visible'
+            map.setLayoutProperty('sa2-lines', 'visibility', newValue)
+            map.setLayoutProperty('sa2-fill', 'visibility', newValue)
+          }}
         />
-        Cycling
+        Hide Areas
       </label>
-      <label>
-        <input
-          type="checkbox"
-          defaultchecked={aklHeatmapVisible}
-          onchange={toggleHeatmap('pt')}
-        />
-        Public Transport
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          defaultchecked={aklHeatmapVisible}
-          onchange={toggleHeatmap('car')}
-        />
-        Drive
-      </label>
-    </div>
-    <label>
-      <input
-        type="checkbox"
-        onchange={(e) => {
-          const newValue = e.currentTarget.checked ?  'none' : 'visible'
-          map.setLayoutProperty('sa2-lines', 'visibility', newValue)
-          map.setLayoutProperty('sa2-fill', 'visibility', newValue)
-        }}
-      />
-      Hide Areas
-    </label>
     {/if}
   </div>
 {/if}
