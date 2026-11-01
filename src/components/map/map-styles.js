@@ -1,6 +1,6 @@
-const useSa1 = window.location.search === '?mode=sa1'
-const useSa3 = window.location.search === '?mode=sa3'
-const useTa = window.location.search === '?mode=ta'
+const useSa1 = window.location.search.includes('mode=sa1')
+const useSa3 = window.location.search.includes('mode=sa3')
+const useTa = window.location.search.includes('mode=ta')
 
 const SCALE_FACTOR = useSa1 ? 0.5 : useTa ? 100 : useSa3 ? 4 : 1
 

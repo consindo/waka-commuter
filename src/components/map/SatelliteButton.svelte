@@ -49,9 +49,9 @@
     }
   }
 
-  const useSa1 = window.location.search === '?mode=sa1'
-  const useSa3 = window.location.search === '?mode=sa3'
-  const useTa = window.location.search === '?mode=ta'
+  const useSa1 = window.location.search.includes('mode=sa1')
+  const useSa3 = window.location.search.includes('mode=sa3')
+  const useTa = window.location.search.includes('mode=ta')
   const triggerSwitchMode = () => {
     if (useSa3) {
       window.location.replace('/')
@@ -105,29 +105,42 @@
       Show Heatmap
     </label>
     {#if aklHeatmapVisible}
+    <div class="heatmap-options">
+      <label>
+        <input
+          type="checkbox"
+          defaultchecked={aklHeatmapVisible}
+          onchange={toggleHeatmap('bike')}
+        />
+        Cycling
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          defaultchecked={aklHeatmapVisible}
+          onchange={toggleHeatmap('pt')}
+        />
+        Public Transport
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          defaultchecked={aklHeatmapVisible}
+          onchange={toggleHeatmap('car')}
+        />
+        Drive
+      </label>
+    </div>
     <label>
       <input
         type="checkbox"
-        defaultchecked={aklHeatmapVisible}
-        onchange={toggleHeatmap('bike')}
+        onchange={(e) => {
+          const newValue = e.currentTarget.checked ?  'none' : 'visible'
+          map.setLayoutProperty('sa2-lines', 'visibility', newValue)
+          map.setLayoutProperty('sa2-fill', 'visibility', newValue)
+        }}
       />
-      Cycling
-    </label>
-    <label>
-      <input
-        type="checkbox"
-        checked={aklHeatmapVisible}
-        onchange={toggleHeatmap('pt')}
-      />
-      Public Transport
-    </label>
-    <label>
-      <input
-        type="checkbox"
-        checked={aklHeatmapVisible}
-        onchange={toggleHeatmap('car')}
-      />
-      Drive
+      Hide Areas
     </label>
     {/if}
   </div>
@@ -225,5 +238,8 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
+  }
+  .heatmap-options {
+    margin-left: 0.5rem;
   }
 </style>
