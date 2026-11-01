@@ -216,59 +216,71 @@
       new Set(currentSegment.split('|').map((i) => i.split('-')[5]))
     )}
     <nav class="auckland-controls">
-      <p><strong>year:</strong></p>
-      {#each ['2018', '2023'] as year (year)}
-        <label
-          ><input
-            onclick={triggerAucklandSegment(0, year, true)}
-            type="radio"
-            name="year"
-            checked={years.includes(year)}
-          />{year}</label
-        >
-      {/each}
-      <p><strong>start activity:</strong></p>
-      {#each aucklandLocations as location (location)}
-        <label
-          ><input
-            onclick={triggerAucklandSegment(2, location)}
-            type="checkbox"
-            checked={fromLocations.includes(location)}
-          />{location}</label
-        >
-      {/each}
-      <p><strong>end activity:</strong></p>
-      {#each aucklandLocations as location (location)}
-        <label
-          ><input
-            onclick={triggerAucklandSegment(3, location)}
-            type="checkbox"
-            checked={toLocations.includes(location)}
-          />{location}</label
-        >
-      {/each}
-      <p><strong>modes:</strong></p>
-      {#each ['car', 'ride', 'walk', 'pt', 'bike'] as mode (mode)}
-        <label
-          ><input
-            onclick={triggerAucklandSegment(4, mode)}
-            type="checkbox"
-            checked={modes.includes(mode)}
-          />{mode}</label
-        >
-      {/each}
-      <p><strong>time:</strong></p>
-      {times[0]} to {timeOptions[timeOptions.indexOf(times.slice(-1)[0]) + 1]}
-      <MultiRangeSlider
-        min={0}
-        max={timeOptions.length - 1}
-        onChange={(a, b) => {
-          if (a === b) return
-          triggerAucklandSegment(5, timeOptions.slice(a, b))()
-        }}
-      />
+      <div class="auckland-full-width">
+        {#each ['2018', '2023'] as year (year)}
+          <label
+            ><input
+              onclick={triggerAucklandSegment(0, year, true)}
+              type="radio"
+              name="year"
+              checked={years.includes(year)}
+            />{year}</label
+          >
+          {#if year !== '2023'}
+          &middot;&nbsp;
+          {/if}
+        {/each}
+      </div>
+      <div>
+        <p><strong>Start Activity</strong></p>
+        {#each aucklandLocations as location (location)}
+          <label
+            ><input
+              onclick={triggerAucklandSegment(2, location)}
+              type="checkbox"
+              checked={fromLocations.includes(location)}
+            />{location[0].toUpperCase() + location.slice(1)}</label
+          >
+        {/each}
+      </div>
+      <div>
+        <p><strong>Modes</strong></p>
+        {#each ['car', 'ride', 'walk', 'pt', 'bike'] as mode (mode)}
+          <label
+            ><input
+              onclick={triggerAucklandSegment(4, mode)}
+              type="checkbox"
+              checked={modes.includes(mode)}
+            />{mode === 'pt' ? 'PT' : mode[0].toUpperCase() + mode.slice(1)}</label
+          >
+        {/each}
+      </div>
+      <div>
+        <p><strong>End Activity</strong></p>
+        {#each aucklandLocations as location (location)}
+          <label
+            ><input
+              onclick={triggerAucklandSegment(3, location)}
+              type="checkbox"
+              checked={toLocations.includes(location)}
+            />{location[0].toUpperCase() + location.slice(1)}</label
+          >
+        {/each}
+      </div>
+      <div>
+        <p><strong>Time</strong></p>
+        <MultiRangeSlider
+          min={0}
+          max={timeOptions.length - 1}
+          onChange={(a, b) => {
+            if (a === b) return
+            triggerAucklandSegment(5, timeOptions.slice(a, b))()
+          }}
+        />
+        <small>{times[0]} to {timeOptions[timeOptions.indexOf(times.slice(-1)[0]) + 1]}</small>
+      </div>
     </nav>
-  {/if}
+  {:else}
   <div class="nav-header-grid">
     <div class="title">
       {#if source.detailsSecondaryControls}
@@ -340,6 +352,7 @@
       </div>
     {/if}
   </div>
+  {/if}
 </div>
 
 <style>
@@ -522,7 +535,56 @@
     }
   }
 
-  .auckland-controls p {
-    margin: 0.5em 0 0.125em;
+  .auckland-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+
+    .auckland-full-width {
+      grid-column: span 2;
+    }
+
+    @media (800px < width <= 1020px), (width <= 550px) {
+      grid-template-columns: 1fr;
+
+      .auckland-full-width {
+        grid-column: 1;
+      }
+    }
+
+    p {
+      margin: 1em 0 0.25em;
+    }
+
+
+    label {
+      display: inline-block;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+    input[type="checkbox"] {
+      margin-right: 0.25rem;
+      margin-left: 0;
+      accent-color: #0073bd;
+      cursor: pointer;
+    }
+    label:has(input[type="checkbox"]) {
+      margin-right: 0.5rem;
+      font-size: 0.9em;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    label:has(input[type="radio"]):hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    label:has(input[type="radio"]:checked) {
+      font-weight: bold;
+    }
   }
 </style>

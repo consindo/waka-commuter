@@ -62,7 +62,8 @@
     overflow: hidden;
     position: relative;
     width: var(--width);
-    background: linear-gradient(0deg, #ccc var(--h), transparent 0);
+    background: linear-gradient(0deg, #88888888 var(--h), transparent 0);
+    border-radius: 4px;
   }
   .wrap::before,
   .wrap::after {
@@ -70,6 +71,7 @@
     grid-row: 3;
     background: #0073bd;
     content: '';
+    border-radius: 5px;
   }
   .wrap::before {
     margin-left: calc(
@@ -107,7 +109,19 @@
     height: 100%;
     background: none;
   }
-  input[type='range']::-webkit-slider-thumb,
+  input[type='range']::-webkit-slider-thumb {
+    border: none;
+    /* get rid of Firefox thumb border */
+    width: calc(var(--r) * 2);
+    height: var(--h);
+    border-radius: 0;
+    background: radial-gradient(
+      circle,
+      var(--col) calc(var(--r) - 1px),
+      transparent var(--r)
+    );
+    pointer-events: auto;
+  }
   input[type='range']::-moz-range-thumb {
     border: none;
     /* get rid of Firefox thumb border */
