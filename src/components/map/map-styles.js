@@ -1,6 +1,6 @@
-const useSa1 = window.location.search === '?mode=sa1'
-const useSa3 = window.location.search === '?mode=sa3'
-const useTa = window.location.search === '?mode=ta'
+const useSa1 = window.location.search.includes('mode=sa1')
+const useSa3 = window.location.search.includes('mode=sa3')
+const useTa = window.location.search.includes('mode=ta')
 
 const SCALE_FACTOR = useSa1 ? 0.5 : useTa ? 100 : useSa3 ? 4 : 1
 
@@ -164,7 +164,13 @@ export const getAreaFill = (isDark) => ({
 })
 
 export const getLineFill = (isDark) => ({
-  'line-color': isDark ? '#777' : '#ccc',
+  'line-color': isDark
+    ? useSa1
+      ? 'rgba(255,255,255,0.075)'
+      : '#666'
+    : useSa1
+      ? 'rgba(0,0,0,0.075)'
+      : '#ccc',
   'line-width': 1,
 })
 

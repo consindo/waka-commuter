@@ -67,7 +67,7 @@ export const drawMap = (
     id: 'sa2-fill',
     type: 'fill',
     source: 'sa2',
-    paint: areaFill,
+    paint: { ...areaFill, ...lineFill },
   })
 
   if (secondaryData) {

@@ -3,9 +3,9 @@ import sa22023small from '../static/shapes/sa2-2023-small-optimized.json?url'
 import sa32023 from '../static/shapes/sa3-2023-optimized.json?url'
 import sa32023small from '../static/shapes/sa3-2023-small-optimized.json?url'
 
-const useSa1 = window.location.search === '?mode=sa1'
-const useSa3 = window.location.search === '?mode=sa3'
-const useTa = window.location.search === '?mode=ta'
+const useSa1 = window.location.search.includes('mode=sa1')
+const useSa3 = window.location.search.includes('mode=sa3')
+const useTa = window.location.search.includes('mode=ta')
 
 const origins = ['home', 'work', 'education', 'leisure', 'shop', 'other']
 const destinations = origins.filter((i) => i !== 'home')
@@ -20,7 +20,7 @@ const aklBaseSegment = origins
   .flatMap((origin) =>
     destinations.flatMap((dest) =>
       modes.flatMap((mode) =>
-        times.flatMap((time) => `2018-XXX-${origin}-${dest}-${mode}-${time}`)
+        times.flatMap((time) => `2023-XXX-${origin}-${dest}-${mode}-${time}`)
       )
     )
   )

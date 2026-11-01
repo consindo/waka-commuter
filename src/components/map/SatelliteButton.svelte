@@ -2,7 +2,7 @@
   import { getSource } from '../../sources.js'
 
   const source = getSource()
-  let { style, styleChange, mapLabels, setMapLabels } = $props()
+  let { style, styleChange, mapLabels, setMapLabels, map } = $props()
 
   let visible = $state(false)
   let geometryvisible = $state(false)
@@ -49,15 +49,21 @@
     }
   }
 
-  const useSa1 = window.location.search === '?mode=sa1'
-  const useSa3 = window.location.search === '?mode=sa3'
-  const useTa = window.location.search === '?mode=ta'
+  const useSa1 = window.location.search.includes('mode=sa1')
+  const useSa3 = window.location.search.includes('mode=sa3')
+  const useTa = window.location.search.includes('mode=ta')
   const triggerSwitchMode = () => {
     if (useSa3) {
       window.location.replace('/')
     } else {
       window.location.replace('/?mode=sa3')
     }
+  }
+
+  const toggleHeatmap = (layer) => (e) => {
+    const newValue = e.currentTarget.checked ? 1 : 0
+    map.setPaintProperty(`network-${layer}-lines`, 'line-opacity', newValue)
+    map.setPaintProperty(`network2-${layer}-lines`, 'line-opacity', newValue)
   }
 </script>
 
@@ -98,6 +104,46 @@
       />
       Show Heatmap
     </label>
+    {#if aklHeatmapVisible}
+      <div class="heatmap-options">
+        <label>
+          <input
+            type="checkbox"
+            defaultchecked={aklHeatmapVisible}
+            onchange={toggleHeatmap('bike')}
+          />
+          Cycling
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            defaultchecked={aklHeatmapVisible}
+            onchange={toggleHeatmap('pt')}
+          />
+          Public Transport
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            defaultchecked={aklHeatmapVisible}
+            onchange={toggleHeatmap('car')}
+          />
+          Drive
+        </label>
+      </div>
+      <label>
+        <input
+          type="checkbox"
+          onchange={(e) => {
+            const newValue = e.currentTarget.checked ? 'none' : 'visible'
+            map.setLayoutProperty('sa2-lines', 'visibility', newValue)
+            map.setLayoutProperty('sa2-fill', 'visibility', newValue)
+            map.setLayoutProperty('points', 'visibility', newValue)
+          }}
+        />
+        Hide Areas
+      </label>
+    {/if}
   </div>
 {/if}
 <button class="style" onclick={toggleVisible} title={label} aria-label={label}>
@@ -193,5 +239,8 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
+  }
+  .heatmap-options {
+    margin-left: 0.5rem;
   }
 </style>

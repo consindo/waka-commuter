@@ -1,6 +1,9 @@
 <script>
   import { getVars } from './DetailsBlurbVars.js'
   import { humanRegionName } from '../../data.js'
+  import { getSource } from '../../sources.js';
+
+  const source = getSource()
 
   const { currentRegions, segment, destinationData, modeData, mode } = $props()
   const vars = $derived(
@@ -35,18 +38,17 @@
       : vars.travellersPercentage}% of {mode})</strong
   >
   travel {mode === 'arrivals' ? 'to' : 'from'}
-  <span class="less-emphasis">{vars.place}</span>
-  for {vars.destination.length > 0
+  <span class="less-emphasis">{vars.place}</span>{#if source.brandingClass !== 'aucklandcouncil'}&nbsp;for {vars.destination.length > 0
     ? vars.destination.join(' & ').replace('school', 'school or study')
-    : ''}, while
+    : ''}{/if}, while
   <strong class="wfh"
     >{vars.residentsCount.toLocaleString()}
     {vars.residentsCount === 1 ? 'person' : 'people'} ({vars.residentsPercentage}%
     of {mode})</strong
   >
-  {vars.travellersCount > 0 ? 'also' : ''} live {vars.destination.length > 0
+  {vars.travellersCount > 0 ? 'also' : ''} {#if source.brandingClass === 'aucklandcouncil'}travel{:else}live {vars.destination.length > 0
     ? `& ${vars.destination.join('/').replace('school', 'learn')}`
-    : ''} within {vars.placeReduced}.
+    : ''}{/if} within {vars.placeReduced}.
   {#if vars.regionCount > 0}
     People {mode === 'arrivals' ? 'arrive from' : 'travel to'} at least
     <strong class={mode}

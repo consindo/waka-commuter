@@ -11,7 +11,7 @@
   const source = getSource()
 
   const getImageUrl = (name) =>
-    new URL(`/static/css/${name}.avif`, import.meta.url).href
+    new URL(`/static/css/${name}`, import.meta.url).href
 </script>
 
 <div class="details-splash">
@@ -22,7 +22,7 @@
         120deg,
         rgba(10, 0, 20, 0.8) 50%,
         rgba(10, 0, 20, 0.4)
-      ), url({getImageUrl('splash-2')})"
+      ), url({getImageUrl('splash-2.avif')})"
     />
     <Regions {setLocation} enabledRegions={['nz-chc']} />
   {:else if source.brandingClass === 'ason'}
@@ -32,7 +32,7 @@
         120deg,
         rgba(10, 0, 20, 0.75) 50%,
         rgba(10, 0, 20, 0.3)
-      ), url({getImageUrl('splash-3')})"
+      ), url({getImageUrl('splash-3.avif')})"
     />
     <Regions
       {setLocation}
@@ -50,7 +50,7 @@
     />
     <DataSourcesAu />
   {:else if source.brandingClass === 'aucklandcouncil'}
-    <Banner dataSource="2018 & 2023 MATSim" />
+    <Banner title="Explore how we travel" dataSource="2018 & 2023 MATSim" branding="aucklandcouncil" />
     <p>
       This uses the full 2018 & 2023 MATSim travel model. Trips back home are
       filtered out by default.
@@ -76,6 +76,7 @@
 
 <style>
   p {
-    padding: 0 1.25rem;
+    padding: 0 var(--sidebar-padding);
+    line-height: 1.35;
   }
 </style>
