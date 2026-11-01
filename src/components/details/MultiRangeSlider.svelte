@@ -53,9 +53,9 @@
 <style>
   .wrap {
     --dif: calc(var(--max) - var(--min));
-    --width: 25rem;
+    --width: 18rem;
     --r: 0.5rem;
-    --h: 2rem;
+    --h: 1.75rem;
     --uw: calc(var(--width) - var(--r) - var(--r));
     display: grid;
     grid-template: repeat(2, max-content) var(--h) / 1fr 1fr;

@@ -1,11 +1,11 @@
 <script>
   import expand from '/static/expand.svg'
-  let { dataSource, background } = $props()
+  let { dataSource, background, branding, title = 'Commuter Waka – Explore how we travel' } = $props()
 </script>
 
-<div class="splash-bg" style={`background-image: ${background}`}>
+<div class="splash-bg" class:aucklandcouncil={branding === 'aucklandcouncil'} style={`background: ${background}`}>
   <div class="splash-content">
-    <h2>Commuter Waka – Explore how we travel</h2>
+    <h2>{title}</h2>
     <p class="mobile">
       Discover how we get around, using travel data from the {dataSource}.
     </p>
@@ -73,6 +73,47 @@
 
     @media (min-width: 1651px) {
       background-position: 50% 45%;
+    }
+  }
+
+  .aucklandcouncil.splash-bg {
+    background: url('/static/css/aucklandcouncil.svg') no-repeat 100% 0%/103px, linear-gradient(
+      180deg,
+      transparent,
+      transparent 10%,
+      #12243E66 85%
+    ), url(/static/css/splash-4.avif) 50% / cover;
+    color: #fff;
+    
+    h2 {
+      margin-top: 13rem;
+    }
+
+    + p {
+      margin-top: 1rem;
+    }
+
+    @media (width <= 1020px) {
+      h2 {
+        margin: 0.5rem 0 0;
+      }
+      h2, p {
+        max-width: 200px;
+      }
+    }
+
+    @media (width <= 800px) {
+      background: url('/static/css/aucklandcouncil.svg') no-repeat 0% 0%/103px, linear-gradient(
+        180deg,
+        transparent,
+        transparent 10%,
+        #12243E66 85%
+      ), url(/static/css/splash-4.avif) 50% / cover;
+
+      h2, p {
+        max-width: 400px;
+        margin-left: 103px;
+      }
     }
   }
 
