@@ -2,7 +2,7 @@
   import { getSource } from '../../sources.js'
 
   const source = getSource()
-  let { style, styleChange, mapLabels, setMapLabels } = $props()
+  let { style, styleChange, mapLabels, setMapLabels, map } = $props()
 
   let visible = $state(false)
   let geometryvisible = $state(false)
@@ -59,6 +59,12 @@
       window.location.replace('/?mode=sa3')
     }
   }
+
+  const toggleHeatmap = (layer) => (e) => {
+    const newValue = e.currentTarget.checked ? 1 : 0
+    map.setPaintProperty(`network-${layer}-lines`, 'line-opacity', newValue)
+    map.setPaintProperty(`network2-${layer}-lines`, 'line-opacity', newValue)
+  }
 </script>
 
 <svelte:window onkeydown={triggerShortcut} />
@@ -98,6 +104,32 @@
       />
       Show Heatmap
     </label>
+    {#if aklHeatmapVisible}
+    <label>
+      <input
+        type="checkbox"
+        defaultchecked={aklHeatmapVisible}
+        onchange={toggleHeatmap('bike')}
+      />
+      Cycling
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        checked={aklHeatmapVisible}
+        onchange={toggleHeatmap('pt')}
+      />
+      Public Transport
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        checked={aklHeatmapVisible}
+        onchange={toggleHeatmap('car')}
+      />
+      Drive
+    </label>
+    {/if}
   </div>
 {/if}
 <button class="style" onclick={toggleVisible} title={label} aria-label={label}>

@@ -181,7 +181,7 @@
 <div id="map" class:expanded={source.brandingClass === 'ason'}>
   <div id="map-content" bind:this={mapContent}></div>
   <Legend />
-  <SatelliteButton {style} {styleChange} {mapLabels} {setMapLabels} />
+  <SatelliteButton {style} {styleChange} {mapLabels} {setMapLabels} {map} />
   <MapTooltip {...tooltipProps} />
 </div>
 
